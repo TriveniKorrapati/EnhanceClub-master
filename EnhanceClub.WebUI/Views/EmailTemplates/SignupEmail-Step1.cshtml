@@ -1,0 +1,124 @@
+﻿@using System.Linq
+@using System.Security.AccessControl
+@using System.Web.DynamicData
+@using System.Web.UI.WebControls
+@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.HtmlHelpers
+@using EnhanceClub.WebUI.Infrastructure.Utility
+
+<html>
+<head>
+    <title>EnhanceClub Email</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <style type="text/css">
+        Body {
+            font-size: 9pt;
+            font-family: arial,sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            color: #3F3F3F;
+        }
+
+        p {
+            font-size: 9pt;
+            font-family: arial,sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            color: #3F3F3F;
+        }
+
+        td {
+            font-size: 9pt;
+            font-family: arial,sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            color: #3F3F3F;
+        }
+      
+    </style>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" alink="2F435E" vlink="61B7E6">
+    <div align="center">
+        <table bgcolor="#FFFFFF" width="688" cellpadding="0" cellspacing="0">
+            <tr>
+                <td bgcolor="#ffffff">
+                    <table border="0" cellpadding="4" cellspacing="0" width="100%" align="center">
+                        <tr>
+                            <td colspan="3" align="center">
+                                <a href="https://@SiteConfigurationsWc.StorefrontUrl" target="_blank">
+                                    <img src="https://@SiteConfigurationsWc.StorefrontUrl/content/images/email/@SiteConfigurationsWc.StorefrontEmailHeader" title="Enhance Club" />
+                                </a>
+                            </td>
+                        </tr>
+                    </table><br />
+                    <table border="4" style="border:4px solid;border-color:#f0efe9;">
+                        <tr>
+                            <td>
+                                <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
+                                    <tr>
+                                        <td align="center">
+                                            <p style="font-family: Arial, Helvetica, sans-serif; font-size: 28px; text-decoration: none; line-height: 34px; color: #1b9cfc; margin-top: 10px; margin-bottom: 0px; padding: 0;">
+                                                Welcome to Enhance Club
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" valign="top">
+                                            <p style="font-family:Arial, Helvetica, sans-serif;font-size:12px;text-decoration:none;line-height:14px;letter-spacing:2px;color:#f0efe9;margin-top:0px;margin-bottom:12px;padding:0;">----------------------------------------------------------------------------------------------</p>
+                                        </td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td align="left">
+                                            <p>
+                                                <b>Dear @Model.CustomerFirstName,</b><br /><br />
+                                                Welcome to EnhanceClub,
+                                                <br /><br />
+                                                We’ll take this opportunity to say thanks for signing up with EnhanceClub.
+                                                <br /> <br />
+                                                We recommend that you add <b>info@EnhanceClub.com</b> to your address book so that you’re able to receive our confirmation emails.
+                                                <br /> <br />
+                                                Here is your customer number for your account:
+                                                <br />
+                                                <b> @Model.CustomerId</b>
+                                                <br />
+
+                                            </p>
+                                            <p>
+                                                Please <a href="https://@SiteConfigurationsWc.StorefrontUrl">Click here</a> to complete the sign up process.
+                                            </p>
+                                            <p>
+                                                Now that you have registered with Enhance Club, you have a pair of options for ordering with us:
+                                                <br />
+                                                <ul>
+                                                    <li>
+                                                        Order over the phone toll free through our friendly customer service representatives at @SiteConfigurationsWc.StorefrontContact and they will take your order over the phone, plus answer any questions that you may have.
+                                                    </li>
+                                                    <li>
+                                                        Visit us at our website at <a href="https://@SiteConfigurationsWc.StorefrontUrl">@SiteConfigurationsWc.StorefrontUrl</a> and conveniently place your order online.
+                                                    </li>
+                                                </ul>
+                                            </p>
+                                            <p>
+                                                We’re happy to have you on board!
+                                                <br /> <br />
+                                                Sincerely,
+                                                <br /> <br />
+                                                EnhanceClub
+                                            </p>
+                                            <br />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table> <br />
+
+                </td>
+            </tr>
+        </table>
+    </div>
+   
+
+</body>
+</html>

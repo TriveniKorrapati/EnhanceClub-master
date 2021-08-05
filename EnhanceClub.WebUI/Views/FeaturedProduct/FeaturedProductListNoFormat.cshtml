@@ -1,0 +1,25 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.Domain.Entities
+@model IEnumerable<EnhanceClub.Domain.Entities.FeaturedProduct>
+<ul>
+    @foreach (var product in Model)
+    {
+        FeaturedProduct featuredProductObj = (FeaturedProduct) product;
+
+        string urlAction = "";
+        if (System.Configuration.ConfigurationManager.AppSettings["Environment"].ToLower() == "live")
+        {
+            urlAction = "https://" + HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;
+        }
+        else
+        {
+
+            urlAction = "http://" + HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;
+        }
+        
+      
+        <li>
+            <a href=@urlAction> @featuredProductObj.FeaturedProductName </a>
+        </li>
+    }
+</ul>

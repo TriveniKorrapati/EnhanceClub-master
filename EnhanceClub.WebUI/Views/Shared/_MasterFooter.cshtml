@@ -1,0 +1,123 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+@model dynamic
+
+<!-- Footer -->
+<footer class="footer w-100 footer-position">
+    <div class="container">
+        <div class="footer-content">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 mb-4 col-lg-3">
+                    <h3>@SiteConfigurationsWc.StorefrontName</h3>
+                    <ul class="list-unstyled list-links list-single">
+                        <li>
+                            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "" })
+                        </li>
+
+                        <li>
+                            @Html.ActionLink("About us", "about", "Home", null, new { @class = "" })
+
+                        </li>
+
+                        <li>
+                            @Html.ActionLink("How it Works", "how-it-works", "Home", null, new { @class = "" })
+
+                        </li>
+
+                        <li>
+                            @Html.ActionLink("Learn", "Index", "Blog", null, new { @class = "" })
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 col-md-3 mb-4 col-lg-3">
+                    <h3>Products</h3>
+                    @Html.Partial("_productLinks")
+
+                </div>
+                <div class="col-sm-6 col-md-3 mb-4 col-lg-4">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 mb-4">
+                            <h3>Need help?</h3>
+                            <ul class="list-unstyled list-links list-single">
+                                <li>
+                                    @Html.ActionLink("Get in Touch", "get-in-touch", "Home", null, new { @class = "" })
+                                </li>
+                                <li>
+                                    @Html.ActionLink("FAQs", "Faq", "Home", null, new { @class = "" })
+                                </li>
+                                <li>
+                                    <a href="tel:@SiteConfigurationsWc.StorefrontContact" class="no-break">
+                                        @SiteConfigurationsWc.StorefrontContact
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <div class="badges-colour text-center">
+                                <img class="badges-colour__icon d-block my-2 mx-auto mx-sm-0" src="/Content/images/icon__satisfaction--colour.svg" alt="">
+                                <img class="badges-colour__icon d-block my-2 mx-auto mx-sm-0" src="/Content/images/icon__ssl--colour.svg" alt="">
+                                <img class="badges-colour__icon d-block my-2 mx-auto mx-sm-0" src="/Content/images/icon__free-shipping--colour.svg" alt="">
+                                <img class="badges-colour__icon d-block my-2 mx-auto mx-sm-0" src="/Content/images/icon__safe-checkout--colour.svg" alt="">
+                                <a class="badges-colour__icon d-block my-2 mx-auto mx-sm-0" href="https://www.trustpilot.com/evaluate/www.enhanceclub.com?utm_medium=trustbox&utm_source=TrustBoxReviewCollector">
+                                    <img class="w-100" src="/Content/images/icon__trustpilot.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @Html.Partial("_socialLinks" , new SocialLinksViewModel
+                {
+                    LinkWrap = "li"
+                })
+              
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="row align-items-end text-md-left text-center">
+                <div class="col-lg-7 col-md-6 order-md-3">
+                    <ul class="list-unstyled mb-0 d-md-flex justify-content-center justify-content-lg-between">
+                        <li>
+                            @Html.ActionLink("Shipping & Returns", "shipping-and-returns", "Home", null, new { @class = "" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Terms & Conditions", "terms-and-conditions", "Home", null, new { @class = "" })
+
+                        </li>
+                        <li>
+                            @Html.ActionLink("Telehealth Informed Consent", "telehealth-consent", "Home", null, new { @class = "" })
+
+                        </li>
+                        <li>
+                            @Html.ActionLink("Privacy Policy", "privacy-policy", "Home", null, new { @class = "" })
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 my-md-0 my-4">
+                    <img src="/content/images/footerlogo.svg" class="img-fluid footer-logo" alt="logo">
+
+                    <div class="text-center d-sm-none mt-4">
+                        <a id="back-to-top" href="#wrapper"><img src="/content/images/backtotop.svg" alt="icon"></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                    <div style="display: flex; align-items: center;justify-content: center;">
+                        <p style="margin-right: 1rem;" class="mt-0">All Rights Reserved © @DateTime.Now.Year</p>
+                        @if (SiteConfigurationsWc.StoreFrontCountryId == 36)
+                        {
+                            @Html.Partial("_flagCanada")
+                        }
+                        else
+                        {
+                            @Html.Partial("_flagUS")
+                        }                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- /Footer -->
+
+
+

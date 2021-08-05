@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘EC Instagram Account’ from 'Follow Us' on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Instagram' logo
+
+Then: It opens the ‘EC' Instagram account page on 'Instagram’</description>
+   <name>EC Instagram Account from Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>3f94bcd3-a5dd-4fd9-9882-a952e44c3f0e</testCaseGuid>
+</TestCaseEntity>

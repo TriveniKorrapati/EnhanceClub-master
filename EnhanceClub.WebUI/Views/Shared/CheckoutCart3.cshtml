@@ -1,0 +1,91 @@
+﻿@using EnhanceClub.Domain.Entities
+@model EnhanceClub.WebUI.Models.CheckoutViewModel
+@foreach (var tmp in "1")
+{
+ if (@Model.Cart.CartItems.Any())
+ {
+         <table class="table table-striped">
+             <thead>
+             <tr>
+                 <th class="cart-qty">Qty</th>
+                 <th class="cart-item">Item</th>
+                 <th class="cart-unit">Price</th>
+                 <th class="cart-unit">Total</th>
+             </tr>
+             </thead>
+
+             <tbody>
+
+                 @{
+                     var loopvar = 0;
+                 }
+             @foreach (var cartItem in @Model.Cart.CartItems)
+             {
+
+                 <tr>
+
+                     <td class="cart-qty">
+                         <input type="hidden" name="[@loopvar].CartProductSizeFk" value="@cartItem.ProductCart.ProductSizeId"/>
+                         @cartItem.Quantity
+                     </td>
+
+                     <td class="cart-item" style="word-break: break-all;">
+
+                         @if (cartItem.ProductCart.ProductSizeGeneric)
+                         {
+                             <text>
+                                 Generic
+                             </text>
+                         }
+                         @cartItem.ProductCart.ProductStoreFrontName
+
+                         @cartItem.ProductCart.ProductSizeStrength
+
+                         @cartItem.ProductCart.ProductSizeQuantity.ToString("0.##")
+
+                         @cartItem.ProductCart.ProductUnitNamePk
+
+
+                         @if (cartItem.ProductCart.ProductTypeFk == 2)
+                         {
+                             <span class="rx-required"><img src="~/Content/images/rx.gif" alt="Prescription required"  /></span>
+
+                             <br>
+                             <font size="1">
+                                 for
+                                 <b>
+
+                                     @{
+                             var firstOrDefault = Model.ProfileList.FirstOrDefault(p => p.PatientProfileId == cartItem.CartProfileFk);
+                                     }
+                                     @if (firstOrDefault != null)
+                                     {
+                                         @firstOrDefault.PatientName
+                                     }
+                                 </b>
+                             </font>
+                         }
+
+                     </td>
+
+
+
+                     <td class="cart-unit">
+                         @cartItem.ProductCart.ProductSizeStoreFrontPrice.ToString("c")
+                         
+                     </td>
+
+                     <td class="cart-unit">
+                         @cartItem.CartLineTotal.ToString("c")
+                        
+                     </td>
+
+                 </tr>
+
+                 loopvar = loopvar + 1;
+             }
+             </tbody>
+
+         </table>
+    }
+}

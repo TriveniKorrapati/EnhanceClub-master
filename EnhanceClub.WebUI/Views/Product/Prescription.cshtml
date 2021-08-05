@@ -1,0 +1,77 @@
+﻿@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.SearchLetterViewModel
+<div class="content-container home-content">
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>
+                    Prescription Drugs
+                </h1>
+            </div>
+        </div>
+
+        @*---Search Box ---*@
+        <div class="row">
+            @*<div class="col-md-3 search-product">
+                    <p>
+                        Search for a product:
+                    </p>
+                </div>*@
+            <div class="col-md-6">
+                <div class="prescription-search">
+                    @Html.Partial("ProductSearch", new SearchBarViewModel { SearchType = "rx", SearchBarLocation = "inner" })
+                </div>
+            </div>
+        </div>
+
+        @*---Alphabetic product search ---*@
+
+        <div class="row">
+            <div class="col-md-12">
+                <p style="padding: 10px 0; margin-bottom: 0;">
+                    Browse Product Alphabetically
+                </p>
+                <div class="letter-container">
+                    @Html.Partial("AlphabetLinks")
+                </div>
+                <div class="alert alert-danger alert-thin hidden pull-right msg-box">
+                    Sorry, No product available under this category.
+                </div>
+            </div>
+        </div>
+
+
+
+        @*--- Show popular prescriptions---*@
+        @*Commented Popular Prescription Medications for now: April 17, 2020*@
+        @*<div class="row">
+            <div class="col-md-12">
+                <h2>
+                    Popular Prescription Medications
+                </h2>
+                <div id="btn-buy-group" class="text-align-left">
+
+                    @Html.Action("FeaturedProductList", "FeaturedProduct")
+
+                </div>
+            </div>
+        </div>*@
+
+        @*--- Show What storefront sells ---*@
+        @Html.Partial("StoreFrontSells")
+
+    </div>
+
+
+    @*--- Show Side bar with refer friend and free shipping link ---*@
+
+    <div class="col-md-3 cta-group">
+        @Html.Partial("ReferNFreeShipping")
+    </div>
+
+    @*--- Show How to Order Prescriptions ---*@
+    <div class="col-md-12 instructions">
+        @Html.Partial("HowToOrderPrescriptions", Model.AffiliateInfo)
+    </div>
+</div>

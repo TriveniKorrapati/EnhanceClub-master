@@ -1,0 +1,58 @@
+﻿@model EnhanceClub.WebUI.Models.SocialLinksViewModel
+
+@switch (@Model.LinkWrap.ToLower())
+{
+    case "li":
+        @*<li><a href="https://www.facebook.com/enhanceclubnow" target="_blank"><img src="/content/images/facebook-icon.svg" alt="icon" /></a></li>*@
+        @*<li><a href="http://twitter.com/enhanceclub" target="_blank"><img src="/content/images/twitter-icon.svg" alt="icon" /></a></li>
+            <li><a href="https://www.youtube.com/channel/UCEUd47AnJTV_5K9gaTB2LwA" target="_blank"><img src="/content/images/youtube-icon.svg" alt="icon" /></a></li>*@
+        @*<li><a href="http://instagram.com/enhanceclub" target="_blank"><img src="/content/images/instagram-icon.svg" alt="icon" /></a></li>*@
+
+
+<div class="col-sm-6 col-md-3 mb-4 col-lg-2">
+    <div class="d-flex flex-column justify-content-between">
+        <div class="footer__social">
+            <h3>Follow Us</h3>
+            <ul class="list-unstyled social-media d-flex justify-content-sm-start justify-content-center">
+                <li><a href="https://www.facebook.com/enhanceclubnow" target="_blank"><img src="/content/images/facebook-icon--grey.svg" alt="icon" /></a></li>
+                <li><a href="http://instagram.com/enhanceclub" target="_blank"><img src="/content/images/instagram-icon--grey.svg" alt="icon" /></a></li>
+                <li><a href="http://twitter.com/enhanceclub" target="_blank"><img src="/content/images/twitter-icon--grey.svg" alt="icon" /></a></li>
+            </ul>
+        </div>
+        <div class="footer__payment-methods">
+            <p>Accepted Payment Methods</p>
+            <div class="d-xl-flex justify-content-center justify-content-sm-start">
+                <img class="mr-3" src="/Content/images/icon__visa--grey.svg" alt="">
+                <img class="mr-3" src="/Content/images/icon__mastercard--grey.svg" alt="">
+                <img class="mr-3" src="/Content/images/icon__discover--grey.svg" alt="">
+            </div>
+        </div>
+    </div>
+
+
+    @*<div class="row">
+            <div class="col-md-12">
+                <p class="mt-0">
+                    All Enhanceclub.com products are dispensed from Pharmasave 1000 in Surrey, B.C: <br><br>
+                    PHARMASAVE HEALTH CENTRE #1000<br>
+                    101 - 1688 152 St Surrey, BC<br>V4A 4N2 CANADA<br><br>
+                    Phone: (604) 538-6334<br>
+                    Fax: (604) 538-6389<br>
+                    College of Pharmacists of BC Licence Number: 15037 Pharmacy Manager: Jason Chan
+                </p>
+            </div>
+        </div>*@
+</div>
+        break;
+
+    case "empty":
+        <a href="https://www.facebook.com/enhanceclubnow" target="_blank"><img src="/content/images/facebook-yl.svg" alt="icon" /></a>
+        @*<a href="http://twitter.com/enhanceclub" target="_blank"><img src="/content/images/twitter-yl.svg" alt="icon" /></a>
+            <a href="https://www.youtube.com/channel/UCEUd47AnJTV_5K9gaTB2LwA" target="_blank"><img src="/content/images/youtube-yl.svg" alt="icon" /></a>*@
+        <a href="http://instagram.com/enhanceclub" target="_blank"><img src="/content/images/instagram-yl.svg" alt="icon" /></a>
+
+        break;
+
+}
+
+

@@ -1,0 +1,33 @@
+﻿<ul class="breadcrumbs">
+    <li>
+
+        @Html.MvcSiteMap().SiteMapPath()
+        @*@Html.MvcSiteMap().SiteMap.GetAncestors(@Html.MvcSiteMap().SiteMap.CurrentNode).FirstOrDefault().Url*@
+    </li>
+</ul>
+@{ 
+    var rootNode = @Html.MvcSiteMap().SiteMap.CurrentNode.RootNode.Title;
+    var level2Url = "https://www.enhanceclub.com" + @Html.MvcSiteMap().SiteMap.GetAncestors(@Html.MvcSiteMap().SiteMap.CurrentNode).FirstOrDefault().ResolvedUrl;
+    var listItemName = @Html.MvcSiteMap().SiteMap.CurrentNode.Title;
+}
+<script type="application/ld+json">
+    {
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [{
+    "@@type": "ListItem",
+    "position": 1,
+    "name": "@rootNode",
+    "item": "https://www.enhanceclub.com"
+    },{
+    "@@type": "ListItem",
+    "position": 2,
+    "name": "@Html.MvcSiteMap().SiteMap.GetAncestors(@Html.MvcSiteMap().SiteMap.CurrentNode).FirstOrDefault().Title",
+    "item": "@level2Url"
+    },{
+    "@@type": "ListItem",
+    "position": 3,
+    "name": "@listItemName "
+    }]
+    }
+</script>

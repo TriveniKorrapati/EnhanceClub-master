@@ -1,0 +1,34 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Infrastructure.Utility
+
+
+    <h1>How To Order</h1>
+    <div class="row">
+        <div class="col-md-12">
+
+            <p>There are two ways to place an order with @SiteConfigurationsWc.StorefrontUrl. You may choose to place the order online, or call our toll free customer service phone line. </p>
+
+            <h4>Order Online</h4>
+            <ol class="list">
+                @*comment pet section temporarily 23 april 2020*@ 
+                @*<li>Make a selection from our wide variety of @Html.ActionLink("Prescription", "prescription", "Product", null, null), @Html.ActionLink("Over-The-Counter", "otc", "Product", null, null) and @Html.ActionLink("Pet Products", "pet", "Product", null, null) and add your desired products to your cart.</li>*@
+                <li>Make a selection from our wide variety of @Html.ActionLink("Prescription", "prescription", "Product", null, null), @Html.ActionLink("Over-The-Counter", "otc", "Product", null, null)  and add your desired products to your cart.</li>
+
+                  <li>Once you have added all of your desired products to your cart, click on the checkout button to place the order.</li>
+                <li>Email your prescriptions to prescriptions@EnhanceClub or Fax your prescription to <b>@Model.StoreFrontFax</b>. Be sure to include your order number on the prescription.</li>
+                <li>Please don’t forget to mail your original prescription(s) to us: EnhanceClub, PO BOX 520, 800-15355 24th Ave, Surrey, BC, V4A 2H9.</li>
+                <li>Delivery. A member of our customer service team will call you in the following days to collect payment.</li>
+            </ol>
+            <h4>By Phone</h4>
+            <p>
+                Our customer service agents are ready to help you by phone from 8:00am - Midnight (EST), every day of the week. Just call our toll-free number: <strong>@Model.StorefrontContact</strong>
+            </p>
+        </div>
+    </div>
+
+
+@*--- Show more info links ---*@
+@section moreinfo {
+    @*@Html.Partial("ReferNFreeShipping")*@
+    @Html.Partial("MoreInfoLinks", "how-to-order")
+}

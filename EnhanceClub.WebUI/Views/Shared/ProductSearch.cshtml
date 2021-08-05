@@ -1,0 +1,60 @@
+﻿@model EnhanceClub.WebUI.Models.SearchBarViewModel
+@*<form role="search" method="get" action="#" class="ld-search-form">
+        <input type="search" placeholder="Start searching" value="" name="s">
+        <span role="search" class="input-icon" data-ld-toggle="true" data-toggle="collapse" data-target="#search-1"
+              aria-controls="search-1" aria-expanded="false"><i class="icon-ld-search"></i></span>
+    </form>*@
+@using (Html.BeginForm("SearchProduct", "Product", null, FormMethod.Post, new { @class = "ld-search-form", id = "SearchProduct" }))
+{
+    @*<span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>*@
+    <input type="search"
+           class="ui-autocomplete-input"
+           placeholder="Search Medications"
+           name="productNameFilter"
+           id="@(Model.SearchBarLocation == "inner" ? "productNameFilterInner" : "productNameFilter")"
+           required>
+
+    switch (@Model.SearchType)
+    {
+        case "all":
+            @Html.Hidden("productType", 0)
+            break;
+        case "rx":
+        @Html.Hidden("productType", 0)
+            // currently the lower search box is searching all products, if we want to limit it to type based on main menu option selected we can uncomment below line
+            @*@Html.Hidden("productType",2)*@
+            break;
+        case "otc":
+        @Html.Hidden("productType", 0)
+            // currently the lower search box is searching all products, if we want to limit it to type based on main menu option selected we can uncomment below line
+            @*@Html.Hidden("productType",1)*@
+            break;
+
+        case "pet":
+        @Html.Hidden("productType", 0)
+            // currently the lower search box is searching all products, if we want to limit it to type based on main menu option selected we can uncomment below line
+            @*@Html.Hidden("productType",)*@
+            break;
+        default:
+        @Html.Hidden("productType", 0)
+            break;
+    }
+    if (@Model.SearchType == "all")
+    {
+
+    }
+    @*<span role="search" class="input-icon" data-ld-toggle="true" data-toggle="collapse" data-target="#search-1"
+        aria-controls="search-1" aria-expanded="false"><i class="icon-ld-search"></i></span>*@
+    @*<span role="search" class="input-icon" data-ld-toggle="true" data-toggle="collapse" data-target="#search-1"
+        aria-controls="search-1" aria-expanded="false"><i class="icon-ld-search"></i></span>*@
+    @*<button class="@(Model.SearchBarLocation == "inner" ? "input-icon btn-product-search-inner" : " input-icon btn-product-search")"><i class="icon-ld-search"></i></button>
+        <input id="productType" name="productType" type="hidden" value="0" />*@ @*<button class="btn-product-search">
+                <i class="las la-search"></i>
+            </button>*@
+
+
+        <button role="search" class="input-icon btn-product-search"
+                aria-controls="search-1" aria-expanded="false">
+            <i class="icon-ld-search"></i>
+        </button>
+}

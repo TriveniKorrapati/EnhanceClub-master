@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘Shipping &amp; Returns’ from 'Need help' on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Shipping &amp; Returns'
+
+Then: It opens the 'Shipping &amp; Returns' page</description>
+   <name>Shipping and Returns from Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>8c76b660-e67b-48f4-8088-298a8e67eda1</testCaseGuid>
+</TestCaseEntity>

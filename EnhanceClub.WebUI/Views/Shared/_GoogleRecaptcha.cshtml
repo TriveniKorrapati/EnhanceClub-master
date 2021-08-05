@@ -1,0 +1,39 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.GetInTouchViewModel
+<style>
+        .grecaptcha-badge {
+            /*visibility: hidden;*/
+            /*bottom:10% !important;*/
+            width: 70px !important;
+            overflow: hidden !important;
+            transition: all 0.3s ease !important;
+            left: 4px !important;
+        }
+        .grecaptcha-badge:hover {
+          width: 256px !important;
+        }
+    </style>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=ReCaptchaCallbackV3&render=@SiteConfigurationsWc.RecaptchaSiteKey"></script>
+<script type="text/javascript">
+    var ReCaptchaCallbackV3 = function () {
+        grecaptcha.ready(function () {
+            grecaptcha.execute("@Model.CaptchaSiteKey", { action: 'getintouch' }).then(function (token) {
+                $("#CaptchaToken").val(token);
+                console.log("v3 Token: " + token);
+            });
+        });
+    };
+</script>
+
+@*<script src="https://www.google.com/recaptcha/api.js?onload=ReCaptchaCallbackV3&render=6LdbQvkaAAAAAF7Rz5ZvWdc4Y6pRzdHe9j4OenCy"></script>
+<script type="text/javascript">
+    var ReCaptchaCallbackV3 = function () {
+        grecaptcha.ready(function () {
+            grecaptcha.execute("6LdbQvkaAAAAAF7Rz5ZvWdc4Y6pRzdHe9j4OenCy").then(function (token) {
+                $("#CaptchaToken").val(token);
+                console.log("v3 Token: " + token);
+            });
+        });
+    };
+</script>*@

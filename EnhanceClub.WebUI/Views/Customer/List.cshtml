@@ -1,0 +1,17 @@
+﻿@using EnhanceClub.Domain.Entities
+
+@model IEnumerable<EnhanceClub.Domain.Entities.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+}
+
+@foreach(var cus in Model)
+{
+    <div>
+        <h3>
+           @cus.CustomerFirstName
+        </h3>
+        <h4>@cus.CustomerEmail</h4>
+    </div>
+}

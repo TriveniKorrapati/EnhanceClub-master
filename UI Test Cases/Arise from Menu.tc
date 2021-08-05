@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘Arise’ from products on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Arise'
+
+Then: It opens the 'Arise' product page</description>
+   <name>Arise from Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>e762d8d5-12d8-45b5-8ad2-641b64889f1e</testCaseGuid>
+</TestCaseEntity>

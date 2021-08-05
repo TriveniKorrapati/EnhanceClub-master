@@ -1,0 +1,21 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.DrugStructureViewModel
+
+<script type="application/ld+json">
+    {
+    "@@context": "http://schema.org",
+    "@@type": "Drug",
+    "dosageForm": [
+    "tablets"
+    ],
+    "legalStatus": [{
+    "@@type": "DrugLegalStatus",
+    "applicableLocation": "@SiteConfigurationsWc.ApplicableLocation",
+    "name": "prescription drug"}],
+    "manufacturer": [{
+    "@@type": "Organization",
+    "name": "@Model.ManufacturerNamePk"}],
+    "name": "@Model.ProductName", 
+    "prescriptionStatus": "http://schema.org/PrescriptionOnly"
+    }
+</script>

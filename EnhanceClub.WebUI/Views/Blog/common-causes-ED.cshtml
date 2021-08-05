@@ -1,0 +1,134 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+                                <p>
+                                    It can be a hard choice sometimes to do something about your struggles with erectile dysfunction. Many men just hope it will go away or feel too embarrassed to speak to someone about it. So, we’ll look at a good starting point to help understand why could be happening and what you can do about it.
+                                </p>
+                                <p>
+
+                                    When you first take a look at your ED and the issues around it, the most common causes for erectile dysfunction can fall into 3 <a href="https://www.mayoclinic.org/diseases-conditions/erectile-dysfunction/symptoms-causes/syc-20355776">main</a> categories.
+                                <p />
+
+
+                                <ul class="list">
+                                    <li>Are you struggling to have an erection?</li>
+                                    <li>Are you struggling to maintain your erection?</li>
+                                    <li>
+                                        Are you increasingly disinterested in sex?
+                                        (Another thing to look at is - do you think of things or see things in your day no longer arouse an erection?)
+                                    </li>
+                                </ul>
+                                <p>
+                                    From these starting points, both you and a doctor can start to understand what the underlying causes may be and what can be done about it. You’re never without options, regardless of the circumstance you’re in. It just takes understanding to know what the next steps should be and what you can do about it. Most times, there are core health issues that is a driving force behind many causes of erectile dysfunction.
+                                </p>
+
+                                <h5>
+                                    HEALTHY OUTLOOK
+                                </h5>
+                                <p>
+                                    Erectile dysfunction is most often linked to a series of common health conditions. Many of which are some of the most common causes of erectile dysfunction. They include:
+                                </p>
+                                <ul class="list">
+                                    <li>Diabetes</li>
+                                    <li>Heart disease</li>
+                                    <li>High Blood Pressure</li>
+                                    <li>Low Testosterone (the male hormone)</li>
+                                </ul>
+
+                                <br>
+                                <p>Many of these conditions are some of the most common health problems men have, especially as they get older. It is worth noting that each decade of a man’s life equals the same percentage with issues around erectile dysfunction. For men in their 30’s – around 30% have issues with ED. Men in their 40’s, it jumps to 40%, 50’s it’s 50%, and so on and so on. It is a common part of aging which is why there is no shame or stigma around it. Most men will deal with causes of erectile dysfunction at some point in life.</p>
+                                <h5>
+                                    A SEVERE BLOW
+                                </h5>
+                                <p>
+                                    Another condition that could be an underlying cause for erectile dysfunction could also be one you may have forgotten about years ago. Peyronie's disease refers to the build-up of scar tissue in the penis. As a result, it can make erections both painful and mishappen. In some case, it may prevent men from achieving an erection.
+
+                                    Peyronie’s disease often results from things like major sports injuries, where the person has taken a severe blow to the groin. Or possibly multiple injuries. Another cause could be scar tissue resulting from surgery. Either way, the results can have a devastating impact on a man’s ability to achieve and maintain an erection sufficient for sexual intercourse.
+                                </p>
+
+                                @Html.Partial("_blogButton")
+                                <h5>
+                                    WEIGHING YOU DOWN
+                                </h5>
+                                <p>
+                                    Around two-thirds of North American’s are over-weight. Obesity and weight related issues can be a major cause for erectile dysfunction. While being heavy puts added strain on the heart and cardiovascular system – it also impacts things like hormone levels in the body. Hormones which can impact a man’s ability to achieve and maintain an erection.
+
+                                    <br><br>Issues related to being overweight are often the central causes for ED. Obesity leads to problems like diabetes and heart disease, which also contributes to ED.  Being overweight puts a lot of physical stress on the body. At some point, things start to breakdown from the pressure, and your sex life can be one of them.
+                                </p>
+                                <h5>
+                                    IT COULD BE IN YOUR HEAD
+                                </h5>
+                                <p>
+                                    Common causes of erectile dysfunction in men don’t just stem from physical conditions. A person's mental health can also play a big factor with issues around ED in men. One of the most often overlooked parts of a man's health is their mental wellbeing. Stress and depression impact millions of lives every day. Many may be struggling with its effects and not even know it. More and more men are becoming comfortable talking about mental health and understanding it is something that impacts everyone.
+
+                                    <br><br>No one is immune to the pressures and stresses of normal life. But when these things build up over time, without being addressed, it can show up in our bodies in ways we might not expect, like erectile dysfunction. That’s why self-diagnosing what are the most common causes of erectile dysfunction never reveals the complete picture. Professional advice can help take the pressure off and increase you pleasure again.
+                                </p>
+                                <h5>
+                                    ASK A PROFESSIONAL
+                                </h5>
+                                <p>Seeking medical advice is always a good idea, even if you are sure your condition requires it. Sometimes issues around erectile dysfunction may be hard to notice, other times it can seem obvious. What matters most is knowing you aren’t alone to find the answers and there are lots of solutions, resources, and treatments available. Millions of men deal with this every year as a normal part of life.</p>
+
+                                <h5>
+                                    IS THERE A PATTERN?
+                                </h5>
+
+                                <p>One of the first things to consider are the most common causes of erectile dysfunction and if you think any of these might apply to you go get some good advice to help you navigate the next steps. Just because you’re dealing with ED now, doesn’t mean you have to keep struggling needlessly. There are lots of options available. You just have to discover the one that works best for you.                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

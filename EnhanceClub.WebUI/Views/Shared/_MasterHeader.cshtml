@@ -1,0 +1,85 @@
+﻿
+<nav class="navbar-main navbar fixed-top navbar-expand-md">
+    <button class="btn btn-menu btn-reset"><img src="/content/images/menu-icon.png" alt="menu" /></button>
+    <a class="navbar-brand" href="/">
+        <img src="/content/images/logo-active.svg" class="default" alt="white" /><img src="/content/images/logo-active.svg" class="active" alt="black" />
+    </a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button> -->
+    @*Start: ---mobile view of cart--*@
+    <span class="nav-link nav-link-mobile cart-open d-md-none">
+
+        @*Cart <span class="badge badge-count">0</span>*@
+
+        <span class="badge badge-count">@Html.Action("Summary", "Cart") </span>
+
+
+    </span>
+    @*End---:mobile view of cart--*@
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Action("Products", "Product")">Shop</a>
+            </li>
+
+            @if (Request.IsAuthenticated)
+            {
+                <li class="nav-item">
+
+                    <a class="nav-link" href="@Url.Action("dashboard", "customer")">
+                        <i class="fa fa-user"></i> Dashboard
+                    </a>
+                </li>
+
+
+                <li>
+                    <a class="nav-link" href="@Url.Action("Logout","Customer")">
+                        Sign Out
+                    </a>
+
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+
+                    <a class="nav-link" href="@Url.Action("Login","Customer")">
+                        Login
+                    </a>
+                </li>
+
+            }
+
+            <li class="nav-item dropdown">
+
+                @*Start: ---desktop view of cart--*@
+                <span class="nav-link cart-open">
+                    @*Cart <span class="badge badge-count"> 0 </span>*@
+
+                    Cart <span class="badge badge-count">@Html.Action("Summary", "Cart") </span>
+
+                </span>
+                @*End: ---desktop view of cart--*@
+
+                <!-- check with sandy how this menu activates-->
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+@*---Start : this section load on hamburger shape menu click  ---*@
+
+@Html.Partial("_HamBurgerMenu")
+
+@*--- End this section load on hamburger shape menu click  ---*@
+
+<!-- /.popup-navbar -->

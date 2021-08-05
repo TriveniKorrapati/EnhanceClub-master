@@ -1,0 +1,69 @@
+﻿@using EnhanceClub.Domain.Entities
+@model  IEnumerable<EnhanceClub.Domain.Entities.CreditTransaction>
+
+    <div class="container container-standard">
+
+    <div class="row">
+        <div class="col-md-12">
+            
+            @Html.Partial("AccountOptions", "credit")
+
+            <div class="account">
+                 @if (Model != null)
+
+                 {
+                   <h5>Your Credit Balance</h5>
+                   <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Order #</th>
+                            <th>Comments</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+
+                    
+                    <tbody>
+                        @foreach (var tran in Model)
+                            {
+                                <tr>
+                                    <td>@String.Format("{0:MMM-dd-yyyy HH:mm}", @tran.CreditTransactionDate)</td>
+
+                                    <td>@tran.CreditTransactionOrder</td>
+
+                                    <td>
+                                        @if (@tran.CreditTransactionUserAdmin > 0)
+                                        {
+                                            @Html.Raw("Applied Credit")
+                                        }
+                                        else
+                                        {
+                                            @tran.CreditTransactionComments
+                                        }
+
+                                    </td>
+
+                                    <td>
+                                        @tran.CreditTransactionAmount.ToString("c")
+                                    </td>
+                                </tr>
+                            }
+                        
+                    </tbody>
+
+                </table>
+                <h5> You currently have a credit of <span class="highlight">@Model.Sum(x => x.CreditTransactionAmount).ToString("c") </span> </h5>
+                 }
+                 else
+                 {
+                     <h5> You currently have a credit of <span class="highlight">$0.00 </span> </h5>
+                 }
+             
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

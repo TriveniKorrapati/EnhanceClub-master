@@ -1,0 +1,72 @@
+﻿@model EnhanceClub.WebUI.Models.DocumentIdUploadViewModel
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@{
+    string cls = "";
+    string pageController = @ViewContext.RouteData.Values["Controller"].ToString();
+
+}
+@{
+    if (pageController.ToUpper() == "ORDER")
+    {
+        cls = "";
+    }
+    else
+    {
+        cls = "d-none";
+    }
+}
+
+
+<li class="form-group upload-documents">
+
+    <div class="non-overview-item">
+        <h3 style="margin-bottom: 30px; margin-top: 80px;" class="fs-field-label fs-anim-upper" for="q1">Upload back side of your document</h3>
+    </div>
+    <div class="fs-anim-lower">
+        <p class="small-text fs-anim-lower">We make sure your information shared with us is secured and protected</p>
+        <div class="row">
+
+            @Html.Hidden("returnUrl",
+                                "/prescription/upload/" + Model.OrderId)
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 order-2 order-lg-1">
+
+                <h6 style="margin-top: 30px;">Upload your documents</h6>
+                <p style="font-size:14px;color:#000;margin-bottom: 20px">To legally prescribe you medication, your @SiteConfigurationsWc.TermForPractitioner will need a photo of your driver’s license or passport.</p>
+                <p style="font-size:14px;font-weight:bold;color:#000;margin-bottom: 30px">Add a picture of a government issued ID.</p>
+
+                <span class="file-wrapper" style="font-size: 20px;color:#000">
+                    <input type="file" name="imgInpStep2" id="imgInpStep2" class="uploader custom-uploadid backSideImg" />
+                    <span class="btn upload-btn" style="margin-bottom: 20px">Upload back side</span>
+                </span>
+
+                <p style="font-size: 12px;color:#000">Having issues uploading images?</p>
+
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 order-1 order-lg-2 text-center">
+                <img id="img-uploadedStep2" src="~/content/images/placeholder_350.png" 
+                     alt="your image" style="width: 350px;height: auto; margin-top:40px;" class="image-upload">
+            </div>
+
+        </div>
+        <div class="success-msg" id="status" style="font-size: 12px">
+
+        </div>
+        <div class="error-msg" id="statusErr" style="font-size: 12px">
+        </div>
+
+    </div>
+    @if (!Model.IsMobileDevice)
+    {
+        <span class="upload-form-nav fs-anim-lower @cls" id="button-next">
+            <ul>
+                <li class="btnEnabledId next-btn">
+                    <div class="btn btn__yellow btn--rounded" id="1stbutton">Next Step <img src="/Content/images/arrow-right.svg" /></div>
+                </li>
+                <li class="btnDisabledId disabled">
+                    <div class="btn btn__yellow btn--rounded">Next Step <img src="/Content/images/arrow-right.svg" /></div>
+                </li>
+
+            </ul>
+        </span>
+    }
+    </li>

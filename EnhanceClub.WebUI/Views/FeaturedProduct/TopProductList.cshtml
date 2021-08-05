@@ -1,0 +1,45 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.Domain.Entities
+@model IEnumerable<EnhanceClub.Domain.Entities.FeaturedProduct>
+
+@foreach (var product in Model)
+{
+    FeaturedProduct featuredProductObj = (FeaturedProduct)product;
+              
+    string urlAction;
+
+    if (System.Configuration.ConfigurationManager.AppSettings["Environment"].ToLower() == "live")
+    {
+        urlAction = "https://" + HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;
+    }
+    else
+    {
+
+        urlAction = "http://" +  HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;
+    }
+
+    // string urlAction = "http://" + HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;   
+    <li>
+        <a href=@urlAction role="button" class="">
+
+       
+            @{
+                var maxLen = @featuredProductObj.FeaturedProductName.IndexOf("(", StringComparison.InvariantCulture);
+            }
+
+            @if (maxLen > 0)
+            {
+                if  (@ViewBag.HideBuy ==0) { <text> Buy </text>}
+                <text>    @featuredProductObj.FeaturedProductName.Substring(0, maxLen-1) </text>
+            }
+            else
+            {
+                if  (@ViewBag.HideBuy ==0) { <text> Buy </text>}
+                <text> @featuredProductObj.FeaturedProductName </text>
+            }
+        </a>
+    </li>   
+       
+
+}
+     

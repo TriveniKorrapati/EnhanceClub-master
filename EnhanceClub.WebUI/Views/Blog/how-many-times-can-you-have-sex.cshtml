@@ -1,0 +1,167 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="https://www.enhanceclub.com/blog/@Model.BlogLink" />
+
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+
+            <meta itemprop="url" content=" https://www.enhanceclub.com/content/images/logo-active.svg">
+
+            <meta itemprop="width" content="800">
+
+            <meta itemprop="height" content="60">
+
+        </div>
+
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+
+
+    </div>
+
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+
+        <meta itemprop="url" content="https://www.enhanceclub.com/content/images/@Model.BlogMainImage" />
+
+        <meta itemprop="height" content="120">
+
+        <meta itemprop="width" content="120">
+
+    </div>
+
+    <div class="blog-post">
+
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+
+        </div>
+
+        <div class="post-main-section">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <div class="post-content-section">
+
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+
+                            @Html.Partial("_breadcrumb")
+
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+
+                                <p>
+                                    Sexual chemistry between you and your partner can be an undeniable factor in how long you spend in the bedroom together. For some individuals, they have a naturally high libido and capability of lasting longer in bed. Others will certainly feel an increase in their sex drive. Whatever it may be, there’s only so much stamina that individuals may have for one night. In this post we’ll dive a bit deeper into sex and just how many sex rounds a man can last for in a night.
+
+                                    <br><br>On average, a man can come between one and five times in a session. Some people might be able to ejaculate more often than others, especially younger men with higher stamina levels.
+
+                                    <br><br> When a man ejaculates, semen is released from the testes and exits the end of the penis. Once a man ejaculates, he then instantly begins producing more semen. During this “down time” better known as a “refractory period” the penis won’t get hard or readily have semen available for ejaculation. It is however possible to orgasm without ejaculation.
+                                </p>
+
+
+
+                                <h5>WAYS TO LAST LONGER IN BED</h5>
+
+                                <p>
+                                    For starters if you’re like most men, you’ll want to last longer in bed. If you are somebody that reaches climax or orgasms early during foreplay or intercourse, then consider <a href="https://www.enhanceclub.com/products/cialis">Cialis</a> or <a href="https://www.enhanceclub.com/products/viagra">Viagra</a> to help you last longer in bed. These medications are designed to help increase sex drive and help men get a stronger erection by increasing blood flow to the penis.
+
+                                    <br><br> Cialis and Viagra are also great for men who have erectile dysfunction and difficulty getting or maintaining an erection. Taking either of these just thirty minutes before sexual activity can help you to last longer in bed by almost two hours.
+                                </p>
+
+                                <div class="cta-box mb-3">
+
+                                    <div class="cta-image">
+
+                                        <img src="/content/images/products/product-item-generic-13412.png" alt="">
+
+                                    </div>
+
+                                    <div class="cta-text">
+
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+
+                                        <a href="/products" class="btn btn__secondary btn--rounded ">Visit our online store</a>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <h5>HOW TO HAVE MULTIPLE SEX ROUNDS </h5>
+
+                                <p>
+                                    Masturbate less. Okay, hold on, hear us out. If you want to have many rounds in a night, then you will need to reduce how often you masturbate. When you masturbate often, you are less sensitive during intercourse. If you hold off on it before your next trip down to pound town, you’ll have worked up more sexual tension.
+
+                                    <br><br> Another method is known as “edging”. Edging is when you stop what you’re doing when you get close to orgasm and hit the brakes before orgasming. When you resume the sexual activity, you will notice the feeling has passed. Edging multiple times will increase your likelihood of having multiple orgasms. The stop and start method also increase overall stamina which will allow you to have control over when you have your orgasm.
+                                </p>
+
+
+
+                                <h5> DIET AND EXERCISE </h5>
+
+                                <p> Lifestyle, diet, and exercise play a key role in a person’s overall fitness as well. If you find yourself tired, depressed, eating poorly and having an overall low self-esteem then these may factor into how you perform in the bedroom. <a href="https://www.medicalnewstoday.com/articles/323918">Managing your anxiety levels</a> through good food, exercise, and talking to a therapist about any problems you may be facing in your daily life can increase your overall happiness which will transfer through your relationships and certainly in the bedroom as well. It will help strengthen your bond with your partner and give you the confidence everyone dreams about having to not only last longer in bed, but also pleasure their partner to the fullest.</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+
+                        <h2>@ViewBag.NextBlogTitle </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

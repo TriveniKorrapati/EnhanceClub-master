@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘Learn’ From Menu
+
+Given: User is on Menu Page
+
+When: User clicks on ‘Learn' 
+
+Then: It opens the ‘learn’ Page</description>
+   <name>Learn from Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>f2fdad6f-cff9-4ae9-9409-4ca81c65424d</testCaseGuid>
+</TestCaseEntity>

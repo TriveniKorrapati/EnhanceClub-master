@@ -1,0 +1,70 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.QuestionGroupSideBarModel
+@*<div class="col-12 col-lg-3">*@
+
+<li class="side-nav1" data="0" parent="0">
+    <a @if (@Model.ActiveMenu == "upload-doc") { <text> class="active" </text>  } else { <text> class="disabled" </text> }>
+        <span class="counter">1</span>
+        <p>
+            Upload Your Documents
+        </p>
+    </a>
+
+</li>
+<li parent="1">
+    <a @if (@Model.ActiveMenu == "upload-doc") { <text> </text>  } else { <text> class="disabled" </text> }>
+        <span class="counter">2</span>
+        <p>
+            Health Questionnaire
+        </p>
+    </a>
+    <ul style="list-style: none;padding-top: 15px;">
+        @{
+            int firstGroup = 0;
+            int firstcount = Model.ItemCount + 1;
+            int prevAdd = 0;
+            string grpText = "";
+        }
+        @foreach (var questionnaireGroupList in @Model.QuestionnaireGroupList)
+        {
+
+            if (firstGroup != Model.ItemCount + 1)
+            {
+
+                firstGroup = Model.ItemCount + prevAdd + 1;
+
+            }
+            prevAdd += questionnaireGroupList.GroupCount;
+
+            if (grpText.ToLower() != @questionnaireGroupList.QuestionnaireGroupText.ToLower())
+            {
+                <li class="side-nav1" data="@firstGroup" >
+                    <a id="@questionnaireGroupList.QuestionnaireGroupId-@questionnaireGroupList.QuestionnaireGroupText.Replace(" ", "")" @if (@Model.ActiveMenu == "upload-doc") { <text> class="" </text>  } else { <text> class="disabled" </text> }>
+                        <p>
+
+                            @questionnaireGroupList.QuestionnaireGroupText
+                        </p>
+                    </a>
+                </li>
+            }
+            firstGroup++;
+            grpText = @questionnaireGroupList.QuestionnaireGroupText;
+
+        }
+
+
+
+    </ul>
+</li>
+<li>
+    <a @if (@Model.ActiveMenu == "review") { <text> class="active" </text>  } else { <text> class="disabled" </text> }>
+        <span class="counter">3</span>
+        <p>
+            Review and Submit
+        </p>
+    </a>
+</li>
+
+
+@*</div>*@

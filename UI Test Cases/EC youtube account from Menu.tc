@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘EC Youtube Account’ from 'Follow Us' on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Youtube' logo
+
+Then: It opens the ‘EC' Youtube account page on 'Youtube’</description>
+   <name>EC youtube account from Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>a8b5db8e-8e90-434a-afe0-e2512419c323</testCaseGuid>
+</TestCaseEntity>

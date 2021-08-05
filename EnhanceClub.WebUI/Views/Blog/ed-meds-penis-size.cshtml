@@ -1,0 +1,136 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+                            <h1 itemprop="headline">@Html.Raw(@Model.BlogHeadline)</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articleBody">
+                                <h5> It’s My First Time Taking Erectile Dysfunction Medication - What Can I Expect?</h5>
+                                <p>
+                                    Sometimes having too much of a good thing can be overwhelming. Which is why, when it comes to the size of your penis, you really can’t get hung up on how you’re hung. When you’re taking <a href="@Url.Action("ProductDetail",
+                                                                                                                                                                                                                                 "Product" ,
+                                                                                                                                                                                                                                 new {searchTerm="viagra" })" class="">
+                                        Viagra
+
+                                    </a> and  <a href="@Url.Action("ProductDetail",
+                                             "Product" ,
+                                             new {searchTerm="cialis" })" class="">
+                                        Cialis
+
+                                    </a> or a similar medication, it’s natural to wonder if your erection will be bigger than normal, a.k.a. the fantasy of fantasies!
+                                </p>
+
+                                <h5> What the Medication Won’t Do</h5>
+                                <p>
+                                    Will taking erectile dysfunction medications increase the size of your penis? I’ll lay it out straight for you right off the top – nope. What you have to bring to the game is the same equipment you and your teammates are going to be playing with. We don’t assign the tools; we’re just here to help keep them in tip-top shape, literally. ;)
+                                </p>
+                                @Html.Partial("_blogButton")
+                                <h5> What the Medication Will Do</h5>
+                                <p>
+                                    One thing that does affect the size of an erection is blood flow. Ultimately, the erection size you’ve got when you’re at full size will remain what it is. Some hard-ons can feel stronger than others. But the amount of space inside the soft tissue that becomes engorged when you’re erect stays the same. That’s a bonus!
+                                </p>
+                                <p>
+                                    One of the things <a href="@Url.Action("ProductDetail",
+                                                     "Product" ,
+                                                     new {searchTerm="viagra" })" class="">
+                                        Viagra
+
+                                    </a> and  <a href="@Url.Action("ProductDetail",
+                                             "Product" ,
+                                             new {searchTerm="cialis" })" class="">
+                                        Cialis
+
+                                    </a> can do is help maximize what you’re packing to sexy playtime. When you allow a full rush of blood to your penis, you can really feel the full effects of your sexual experience.
+                                </p>
+                                <h5> From Personal Experience</h5>
+                                <p>
+                                    When I first took ED meds to help with my erection, I had no idea what to expect. Well, apart from what I was hoping I could expect. But, quite frankly, what I really wanted to make sure of, was that my dick wouldn’t blow up from being overfilled, as it were. I’m proud to say that was not a problem.
+                                </p>
+                                <p>
+                                    It feels good to have an erection when taking ED meds. It also feels good to have an erection, pretty much always. So, again, no need to worry there, at least for me. Everybody is different. But I must admit, when I was packing my super-rod, it didn’t have to be bigger for me to feel like I was slinging dick like a Scotsman tossing telephone poles. And that’s what it’s about.
+                                </p>
+                                <h5> We’re Here to Help</h5>
+                                <p>
+                                    Taking things to the next level, and being the best version of yourself, begins with striving to be more than average. Being and feeling more than average isn’t exclusive to some and not others. You’re not bound by limitations of who you are or where you live. It’s about how you want to feel. It’s about having an <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1831645/"> increased self-confidence</a> to take control of your sexual nature and become the best version of who you are along with what you offer, in the bedroom, for you and your partner.
+                                </p>
+                                <p>
+                                    Enhance Club is about giving every guy the chance to do more than what they have done before. It is about giving men a way to move forward and providing a solution to problems that many of us will face in our lives.
+                                </p>
+                                <p>
+                                    There is a wild sexual synergy between making yourself into the intense man your partner desires – and how in turn it can fuel your desires to never stop being this man we know we can be.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="post-content-section d-flex align-items-center">
+                        <div class="blog-share-title">
+                            Share
+                        </div>
+                        <div class="blog-sharing">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <svg width="15" height="28" viewBox="0 0 15 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.6676 4.65434H14.2735V0.214219C13.8239 0.153714 12.2777 0.0175781 10.477 0.0175781C6.71986 0.0175781 4.1461 2.32956 4.1461 6.57886V10.4896H0V15.4533H4.1461V27.9429H9.22941V15.4544H13.2078L13.8394 10.4907H9.22822V7.07104C9.22941 5.63638 9.62427 4.65434 11.6676 4.65434Z" fill="#170000" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M29.4955 3.03762C28.4098 3.50805 27.2529 3.81987 26.0468 3.97128C27.2876 3.23949 28.2347 2.08954 28.6799 0.703466C27.523 1.38479 26.2457 1.86604 24.8844 2.1346C23.786 0.979238 22.2203 0.263672 20.5124 0.263672C17.1987 0.263672 14.5309 2.92046 14.5309 6.17746C14.5309 6.64609 14.571 7.0967 14.6696 7.52568C9.69353 7.28595 5.29045 4.93017 2.33256 1.34153C1.81616 2.22652 1.51325 3.23949 1.51325 4.32996C1.51325 6.37753 2.58072 8.19258 4.17189 9.2434C3.21025 9.22537 2.26687 8.9496 1.46763 8.51521C1.46763 8.53324 1.46763 8.55667 1.46763 8.5801C1.46763 11.4532 3.54236 13.8396 6.26303 14.3893C5.77583 14.5209 5.24483 14.584 4.69376 14.584C4.31057 14.584 3.92373 14.5624 3.5606 14.4831C4.33612 16.8244 6.53675 18.5458 9.15341 18.6016C7.11701 20.1752 4.53136 21.1232 1.73222 21.1232C1.24137 21.1232 0.770586 21.1016 0.299805 21.0421C2.95114 22.731 6.09333 23.6953 9.48186 23.6953C20.496 23.6953 26.5176 14.6831 26.5176 6.87139C26.5176 6.61004 26.5085 6.3577 26.4957 6.10716C27.6836 5.27444 28.6817 4.23443 29.4955 3.03762Z" fill="#170000" />
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

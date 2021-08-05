@@ -1,0 +1,148 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+
+<div class="dashboard-page order-page">
+    <!-- Start of the Top Clip Path -->
+    <div class="top-clip">
+        <div class="dash-top-clip">
+        </div>
+    </div>
+    <!-- End of the Top Clip Path -->
+
+    <div class="section top-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 hidden-md">
+                    <h1 class="heading text-uppercase">Refill Products</h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- Start of Sidebar -->
+                @Html.Partial("AccountOptions", "refill-products")
+                <!-- End of Sidebar -->
+                <!-- Start of Main Section -->
+                <div class="col-12 col-md-12 col-lg-9 col-xl-9 order-2 order-lg-1">
+                    @{var noRefills = Model.AutoFillProductsList != null ? false : true; }
+                    <div class="row">
+
+                        <div class="col-12 col-md-12 col-lg-9 col-xs-9">
+                            <h1 class="heading visible-md text-uppercase">Refill Products</h1>
+                            @if (noRefills)
+                            {
+                                <h5>You have not subscribed any products yet. <br />Once you subscribe you will see subscription details listed here.</h5>
+                            }
+                            else
+                            {
+                                <h5>
+                                    We only want to give you the Enhancements you’re looking for. Just check down below and make sure you’re happy with everything you see.
+                                    If you want to make changes, no problem
+                                </h5>
+                            }
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 col-xs-3">
+                            <!-- Blank Space -->
+                        </div>
+                    </div>
+
+                    <!-- Start of Filter Section -->
+                    @if (!noRefills)
+                    {
+                        <div class="row filter-section align-items-center">
+                            @*@Html.Partial("_SortingFilter")*@
+                            <div class="col-12 col-md-7 col-xl-7 col-xl-7 order-md-1">
+
+                            </div>
+                        </div>
+                        <!-- End of Filter Section -->
+                        <!-- Start Subscribed products section-->
+                        foreach (var refillProd in Model.AutoFillProductsList)
+                        {
+                            var productType = string.Empty;
+                            var pendingDays = @SiteConfigurationsWc.SubscriptionInterval - @refillProd.SubscriptionDaysToExpire;
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-box status">
+                                        <div class="upper-card mb-2">
+                                            <div class="row align-items-end">
+                                                <div class="col-6">
+                                                    <h4 class="text-uppercase">@refillProd.ProductName</h4>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <span class="view-invoice">
+                                                        <a href="@Url.Action("UnsubscribeSubscription", "Customer", new { SubscriptionId = @refillProd.CustomerSubscriptionId })" class="">Unsubscribe</a>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="lower-card">
+                                            <div class="row">
+                                                <div class="col-6 col-md-6 product-items">
+                                                    <p>
+                                                        @if (refillProd.ProductSizeGeneric)
+                                                        {
+                                                            productType = "Generic";
+                                                        }
+                                                        else
+                                                        {
+                                                            productType = "Brand";
+                                                        }
+
+                                                        @productType * @refillProd.SubscriptionQuantity
+
+                                                        @refillProd.ProductSizeStrength @refillProd.ProducSizeQuantity
+                                                    </p>
+                                                </div>
+                                                <div class="col-6 col-md-3 order-2 order-md-1 product-details">
+                                                    <p>@refillProd.SubscriptionSignUpDate.ToString("MMMM, dd yyyy")</p>
+
+                                                </div>
+                                                <div class="col-6 col-md-3 order-2 order-md-1 product-details">
+                                                    <p><strong> Days to Expire</strong></p>
+                                                    <p> @pendingDays Days</p>
+
+                                                </div>
+                                                @*<div class="col-6 col-md-2 order-1 order-md-2 text-right product-status">
+                                        <p><strong>Unsubscribe</strong></p>
+                                        <p class="text-capitalize">paid</p>
+                                    </div>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                        <!-- End Subscribed products section-->
+                    }
+
+                </div>
+                <!-- End of Main Section -->
+
+            </div>
+        </div>
+
+        <!-- Start of Pagination -->
+
+        @*<div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="pagination">
+                        @Html.PageLinks(Model.PagingInfo, x => Url.Action("myaccount", new { page = x, sortOrder = @Model.SortOrder }))
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+        <!-- End of Pagination -->
+        <!-- Start of the Bottom Clip Path commented for Russel on 04 Nov -->
+        @*<div class="bottom-clip">
+                <div class="dash-bottom-clip">
+                </div>
+            </div>*@
+        <!-- End of Bottom Clip path -->
+    </div>
+
+
+</div>

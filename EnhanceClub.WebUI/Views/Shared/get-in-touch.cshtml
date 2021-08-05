@@ -1,0 +1,224 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.GetInTouchViewModel
+@section PageScripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).keydown(
+                function (e) {
+                    if (e.which === 13) {
+                        e.preventDefault();
+                        return false;
+
+                        //event.preventDefault();
+                    }
+
+                });
+            $('#questionNext').hide();
+            $('#nameNext').hide();
+            $('#emailNext').hide();
+            $('#phoneNext').hide();
+
+
+            $("#submitform").click(function () {
+                const email = $(".customerEmail").val();
+                const phone = $(".customerPhone").val();
+                var query = $(".queryPosted").val();
+                var name = $(".customerName").val();
+
+                if (SiteConfigurationsWc.IsZendeskActive == 1) {
+                    var selectedCategory = $("#ddlCategory option:selected").val();
+
+                    if (selectedCategory === "Select a Category") {
+                        alert('Select a Category');
+                        return false;
+                    }
+                }
+
+
+                if (validateEmail(email)) {
+                    // return true;
+
+                } else {
+                    alert('Email is invalid');
+                    return false;
+                }
+                //alert(1);
+                var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+                if ((phone.match(phoneno))) {
+                    // alert(2);
+                    //return true;
+                }
+                else {
+                    //alert(3);
+                    alert("Phone is invalid");
+                    return false;
+                }
+                if (query.length < 3) {
+                    alert('Please enter valid question');
+                    return false;
+                }
+                if (name.length < 3) {
+                    alert('Please enter valid name');
+                    return false;
+                }
+                return true;
+            });
+            function validateEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(email);
+            }
+
+            $('#questionNextDisabled').click(function (e) {
+
+                //alert('test');
+                var query = $(".queryPosted").val();
+
+                if (query.length < 3) {
+                    alert('Please enter valid Query');
+
+                }
+                else {
+                    $("#questionNext").click();
+                    //$('#questionNextDisabled').hide();
+                    //$('#questionNext').show();
+                }
+
+
+            });
+            $('#emailNextDisabled').click(function (e) {
+                const email = $(".customerEmail").val();
+                if (validateEmail(email)) {
+                    $("#emailNext").click();
+                    //$('#emailNextDisabled').hide();
+                    //$('#emailNext').show();
+
+                } else {
+                    alert('Email is invalid');
+                    //$('#emailNextDisabled').hide();
+                    //$('#emailNext').show();
+                }
+
+
+
+            });
+            $('#nameNextDisabled').click(function (e) {
+                var name = $(".customerName").val();
+                if (name.length < 3) {
+                    alert('Please enter valid Name');
+
+                }
+                else {
+                    $("#nameNext").click();
+                    //$('#nameNextDisabled').hide();
+                    //$('#nameNext').show();
+
+                }
+
+            });
+            $('#phoneNextDisabled').click(function (e) {
+                const phone = $(".customerPhone").val();
+                var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+                if ((phone.match(phoneno))) {
+
+                    $("#phoneNext").click();
+                }
+                else {
+
+                    alert('Phone is invalid');
+
+                }
+
+            });
+
+        });
+
+    </script>
+
+}
+
+
+<div class="section get-in-touch-container" id="step1">
+    <div id="get-in-touch-clip" class="clip"></div>
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+                @if (@SiteConfigurationsWc.EnableCaptcha == 1)
+                {
+                    <div class="googlecaptchaerror">
+                        <span>@ViewBag.GoogleCaptchaMessage</span><span class="text-nowrap">@ViewBag.GoogleCaptchaSupportNumber</span>
+                    </div>
+                }
+                @if (@SiteConfigurationsWc.IsZendeskActive == 1)
+                {
+                    <div class="googlecaptchaerror">
+                        <span>@ViewBag.ZendeskMessage</span><span class="text-nowrap">@ViewBag.ZendeskMessage</span>
+                    </div>
+                }
+
+                <div class="form-container">
+                    <div class="fs-form-wrap fs-form-review" id="fs-form-wrap">
+                        @using (Html.BeginForm("AddGeneralEnquiry", "Customer", null, FormMethod.Post,
+                            new { @class = "fs-form fs-form-full", @role = "form", @id = "frm_get_in_touch", @name = "frm_get_in_touch" }))
+                        {
+                            @*<div class="overview-item">
+                                    <h2 class="fs-field-label fs-anim-upper" for="queryPosted">Review answers</h2>
+                                </div>*@
+
+                            <div class="fs-fields">
+                                <div class="form-group">
+                                    <div class="non-overview-item">
+                                        <h4 style="margin-bottom: 4rem;" class="fs-field-label fs-anim-upper" for="q1">Get in touch with us</h4>
+                                    </div>
+                                    @if (SiteConfigurationsWc.IsZendeskActive == 1 && Model.custom_field_options != null)
+                                    {
+                                        <h6 class="fs-field-label fs-anim-upper" for="category">Category</h6>
+                                        <select name="ddlCategory" id="ddlCategory" style="color: black;">
+                                            <option selected>Select a Category</option>
+                                            @foreach (var item in Model.custom_field_options)
+                                            {
+                                                <option style="color: black;" value="@item.value">@item.raw_name</option>
+                                            }
+                                        </select>
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <h6 class="fs-field-label fs-anim-upper overview-item" for="queryPosted">Ask question</h6>
+                                    <input class="fs-anim-lower queryPosted" id="q1" name="queryPosted" type="text" placeholder="Type your question" required />
+                                </div>
+                                <div class="form-group">
+                                    <h6 class="fs-field-label fs-anim-upper" for="customerName">Your name</h6>
+                                    <input class="fs-anim-lower customerName" id="customerName" name="customerName" type="text"
+                                           placeholder="First name and last name"  pattern="^[-\w\s]+$" required title="Numbers , alphabets hypen (-), underscor(_) only"/>
+                                </div>
+                                <div class="form-group">
+                                    <h6 class="fs-field-label fs-anim-upper" for="customerEmail">Email address</h6>
+                                    <input class="fs-anim-lower customerEmail" id="customerEmail" name="customerEmail" type="email" placeholder="Eg. johndoe@email.com" required />
+                                </div>
+                                <div class="form-group">
+                                    <h6 class="fs-field-label fs-anim-upper" for="customerPhone">Phone number</h6>
+                                    <input class="fs-anim-lower customerPhone" id="customerPhone" name="customerPhone" type="text" 
+                                            placeholder="Eg. 000-000-0000" required maxlength=12   pattern = "\d{3}-\d{3}-\d{4}" />
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="CaptchaToken" name="CaptchaToken" />
+                            <input type="hidden" id="CaptchaSiteKey" name="CaptchaSiteKey" value="@Model.CaptchaSiteKey" />
+                            <button class="btn" name="submitform" id="submitform" type="submit">Submit answers</button>
+                            <!-- /fs-form -->
+                        }
+                    </div><!-- /fs-form-wrap -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (SiteConfigurationsWc.EnableCaptcha == 1)
+{
+    @Html.Partial("_GoogleRecaptcha")
+}

@@ -1,0 +1,98 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="https://www.enhanceclub.com/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content=" https://www.enhanceclub.com/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="https://www.enhanceclub.com/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+
+
+                                <p>So, you want the little blue pill for your big night. We’re guessing things aren’t looking up for you lately. Well, that’s normal because you’re not alone. More men face <a href="https://www.enhanceclub.com/blog/common-causes-ED">erectile dysfunction</a> than they can openly admit. Stigmas surrounding the topic of ED are so ubiquitous that often men tend to snub the remotest possibility of them having it leave alone getting treated for it. For the more woke strata of the population like you, several treatments can get your sex life back on track. <a href="https://www.enhanceclub.com/products">Viagra</a> , Generic Sildenafil, are easy to procure prescription medications that have been popular as effective treatment for erectile dysfunction. However, all meds for erectile dysfunction come with their share of side effects, varying in severity from mild to potentially dangerous, depending on the individual. So no, they are not your regular over the counter pills. You cannot just stroll into a Walmart or buy ED drugs over the counter anywhere in the US, unless you have a prescription from a licensed medical practitioner. </p>
+
+                                <h5>WHY DO I NEED A PRESCRIPTION? </h5>
+                                <p> Viagra (sildenafil), Cialis (tadalafil), Levitra (vardenafil), and Stendra (avanafil) all belong to a family of drugs called PDE-5 inhibitors. PDE-5 is a type of enzyme found in blood vessel walls, including blood vessels in the penis. Consuming these drugs improves the blood flow to the penis resulting in harder, more sustained erections. When you buy ED drugs over the counter, even their generic versions, they might not blend well with certain medications for blood pressure or heart conditions. So, before your doctor prescribes them, they need to ensure that you can consume them safely. We recommend you always inform your healthcare provider of all your medical conditions, medications you currently take, as well as medications/products you have tried in the past, for your ED.  </p>
+
+
+                                <div class="cta-box mb-3">
+                                    <div class="cta-image">
+                                        <img src="/content/images/products/product-item-generic-13412.png" alt="">
+                                    </div>
+                                    <div class="cta-text">
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+                                        <a href="/products" class="btn btn__secondary btn--rounded">Visit our online store</a>
+                                    </div>
+                                </div>
+
+
+                                <h5> BRAND VIAGRA VS GENERIC VIAGRA – WHICH CAN I BUY EASILY?  </h5>
+                                <p>
+                                    Viagra ®, marketed by Pfizer to brand its version of the sildenafil citrate, has been the longest FDA-approved treatment for erectile dysfunction in men yet still not considered safe to be purchased as over the counter ED medication. Its relatively recent, nonbranded counterpart, the Generic Sildenafil, is not very different in terms of the active ingredients or the efficacy. Both these treatments are available as easily unless you decide to buy ED drugs over the counter. The only point of differentiation, when it comes to making a choice, could be the price. The Generic Viagra is cheaper than the branded version.
+
+                                    <br><br> Choosing Sildenafil (Generic Viagra) is one of the best options for men. It helps men take command of their sexual performance. Sildenafil (Generic Viagra) is a prescription pill you swallow. It boosts blood flow to the penis, and together with stimulation, it helps men get and maintain an erection.
+                                </p>
+
+                                <h5> WHAT’S THE RIGHT DOSAGE?  </h5>
+                                <p>
+                                    That’s a question only your healthcare practitioner can best answer. While the ideal recommended dose of Viagra for erectile dysfunction runs somewhere between 25mg to 100mg, a licensed medical professional should recommend the correct dosage for you based on your current and past medical history. A common <a href="https://www.enhanceclub.com/blog/overdose-on-viagra">mistake</a> people make is increasing the dosage on their own, thinking it will increase its effectiveness. That’s not the appropriate way at all. Again, discuss this with your healthcare provider to avoid any future potential hazards to your health.
+
+                                    <br><br>Even though you can’t buy ED drugs over the counter, telehealth platforms in the US and Canada, like <a href="https://www.enhanceclub.com/">Enhance Club</a>, can make ordering your meds online easier and hassle-free. You can simply select a product, fill out a medical questionnaire, get in touch with a licensed clinician and get your meds delivered in a discreet packaging. You might also get a better treatment recommended for you, at no additional cost. Plus, it’s a lot safer and less awkward than shopping for over the counter ED pills.
+
+                                    <br><br> Both the Generic Sildenafil and the branded Viagra work best when consumed an hour before any sexual activity. It’s recommended that you consume it with a light meal to make sure the sword is up when you need it the most. You can do your part by ditching the sedentary lifestyle, indulging in a more active one, and limiting your consumption of alcohol and smoking, factors that often play a prominent role in causing ED.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

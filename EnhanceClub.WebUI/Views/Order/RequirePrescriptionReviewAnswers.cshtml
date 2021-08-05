@@ -1,0 +1,404 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.RequirePrescriptionReviewViewModel
+
+
+
+@section PageScripts
+{
+    <script type="text/javascript">
+
+        $(window).resize(function () {
+            if ($(this).width() >= 992) {
+                $("#mobile-layout").remove();
+                $('input[name="deviceType"]').val(0);
+            } else {
+                $("#web-layout").remove();
+                $('input[name="deviceType"]').val(1);
+            }
+        });
+
+        function BPQuestionnaireSelection() {
+
+            var flag = false;
+            if ($('#57').is(':checked')) {
+                for (var i = 59; i <= 63; i++) {
+                    if ($('#' + i).is(':checked')) {
+                        flag = true;
+                        break;
+                    }
+                }
+
+                if (flag === false) {
+                    alert("Please select the valid blood pressure from the list.")
+
+                    return flag;
+                }
+                else {
+                    flag = false;
+                    for (var i = 64; i <= 68; i++) {
+                        if ($('#' + i).is(':checked')) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (flag === false) {
+                    alert("Please select the valid blood pressure from the list.")
+                    return flag;
+                }
+
+                return flag;
+            }
+            else if ($('#58').is(':checked')) {
+                if ($('#106').is(':checked')) {
+                    flag = true;
+                }
+
+                if (flag === false) {
+                    alert("Please select the valid blood pressure from the list.")
+
+                    return flag;
+                }
+
+                flag = false
+                if ($('#107').is(':checked')) {
+                    flag = true;
+                }
+
+                if (flag === false) {
+                    alert("Please select the valid blood pressure from the list.")
+                    return flag;
+                }
+
+                return flag;
+            }
+            else {
+                return true;
+            }
+        }
+
+        function checkAgeCheckBox() {
+
+            if (@SiteConfigurationsWc.IsBPKnownLogic == 1) {
+                if (BPQuestionnaireSelection() === false) {
+                    return false;
+                }
+                else {
+                    if ($('.age-confirmation-checkbox').is(':checked')) {
+                        $('.submit-button').prop('disabled', true);
+                        $('#myform').submit();
+                        return true;
+
+                    }
+                    else {
+                        alert("Please Select Age Confirmation checkbox");
+                        return false;
+                    }
+
+                    return false;
+                }
+            }
+            else {
+                if ($('.age-confirmation-checkbox').is(':checked')) {
+                    $('.submit-button').prop('disabled', true);
+                    $('#myform').submit();
+                    return true;
+
+                }
+                else {
+                    alert("Please Select Age Confirmation checkbox");
+                    return false;
+                }
+
+                return false;
+            }
+        }
+
+        function TrackCustomerQuestionnaireResponse(questionnaireFk,customerOrderId) {
+
+                if (@SiteConfigurationsWc.TrackCustomerQuestionnaireResponse == 1) {
+
+                    var deviceType = document.myform.elements['deviceType'].value;
+
+                    $.ajax({
+                        url: '@Url.Action("TrackCustomerQuestionnaireResponse", "Order")',
+                        data: { questionnaireFk: questionnaireFk, orderId: customerOrderId, deviceType: deviceType },
+                        type: "POST",
+                        success: function (data) {
+                            return true;
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            return true;
+                        },
+                    });
+                }
+        }
+
+        $(document).ready(function () {
+
+            if ($(this).width() >= 992) {
+                $("#mobile-layout").remove();
+                $('input[name="deviceType"]').val(0);
+            } else {
+                $("#web-layout").remove();
+                $('input[name="deviceType"]').val(1);
+            }
+
+            if (@SiteConfigurationsWc.IsBPKnownLogic == 1) {
+                if ($('#58').is(':checked')) {
+                    $('input[name=36]').attr("disabled", true);
+                    $('input[name=37]').attr("disabled", true);
+
+                    $('input[id=106]').attr("disabled", false);
+                    $('input[id=107]').attr("disabled", false);
+
+                    $("#106").prop('checked', true);
+                    $("#107").prop('checked', true);
+
+                    for (var i = 58; i <= 69; i++) {
+
+                        var elementId = "[" + i.toString() + "].isSelected";
+
+                        if (i === 63 || i === 69) {
+                            $('input[name="' + elementId + '"]').val("true");
+                        }
+                        else {
+                            $('input[name="' + elementId + '"]').val("false");
+                        }
+                    }
+                }
+                else if ($('#57').is(':checked')) {
+                    $('input[name=36]').attr("disabled", false);
+                    $('input[name=37]').attr("disabled", false);
+
+                    $('input[id=106]').attr("disabled", true);
+                    $('input[id=107]').attr("disabled", true);
+                }
+             }
+
+            //applyChanges()
+            $('.explainFurtherTextBox1').hide();
+
+            $(".radd").on("change", function () {
+
+                var v = $(this).val();
+                var arr = v.split('-');
+                $('.ques-' + arr[0]).val("false");
+                $('.quesopt-' + arr[1]).val("true");
+                // var questionRequiredMoreInfo = $(event.currentTarget).closest('.radio-item').find('.optionText').text();
+                var optionSelected = $(event.currentTarget).closest('.radio-item').find('.needMoreExplanation').val();
+
+                var selectedQuestionnaireId = parseInt($(this).attr('id'));
+       
+                if (@SiteConfigurationsWc.IsBPKnownLogic == 1) {
+
+                    if (selectedQuestionnaireId != 106 && selectedQuestionnaireId != 107 && (selectedQuestionnaireId === 57 || selectedQuestionnaireId === 58)) {
+                        for (var i = 59; i <= 68; i++) {
+                            $("#" + i).prop('checked', false);
+                        }
+
+                        $("#106").prop('checked', false);
+                        $("#107").prop('checked', false);
+                    }
+
+                    if (selectedQuestionnaireId === 57 || selectedQuestionnaireId === 58) {
+
+                        if ($('#58').is(':checked')) {
+                            $('input[name=36]').attr("disabled", true);
+                            $('input[name=37]').attr("disabled", true);
+
+                            $('input[id=106]').attr("disabled", false);
+                            $('input[id=107]').attr("disabled", false);
+                        }
+                        else if ($('#57').is(':checked')) {
+                            $('input[name=36]').attr("disabled", false);
+                            $('input[name=37]').attr("disabled", false);
+
+                            $('input[id=106]').attr("disabled", true);
+                            $('input[id=107]').attr("disabled", true);
+                        }
+
+                        if (selectedQuestionnaireId === 58) {
+                            alert("The clinician may contact you to take your blood pressure reading.");
+                            
+                            $("#106").prop('checked', true);
+                            $("#107").prop('checked', true);
+
+                            for (var i = 58; i <= 69; i++) {
+
+                                var elementId = "[" + i.toString() + "].isSelected";
+                               
+                                if (i === 63 || i === 69) {  
+                                    $('input[name="' + elementId + '"]').val("true");
+                                }
+                                else {
+                                    $('input[name="' + elementId + '"]').val("false");
+                                } 
+                            }
+
+                        }
+                    }
+
+                   
+                }
+
+                /*Track Customer Questionnaire Response*/
+                if (@SiteConfigurationsWc.TrackCustomerQuestionnaireResponse == 1) {
+
+                    var questionnaireFkId = $(this).attr('name');
+                    var customerOrderId = document.myform.elements['orderId'].value;
+                    TrackCustomerQuestionnaireResponse(questionnaireFkId, customerOrderId);
+                }
+
+                if (optionSelected == 1) {
+                    //var optionSelected = $(event.currentTarget).closest('.radio-item').find('.needMoreExplanationOption').val();
+                    //if (optionSelected == 1) {
+
+                    //    //$(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+                    //    //$(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').show();
+                    //   $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox1').show();
+                    $(event.currentTarget).closest('.radio-item').find('.explainFurtherTextBox').show();
+                    $(event.currentTarget).closest('.radio-item').find('.explainFurtherTextBox').prop('required', true);
+
+                }
+                else {
+                    // $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox1').hide();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').hide();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').prop('required', false);
+                }
+            });
+            $(".chkbxe").on("change", function () {
+
+                var checkResponseText = $(event.currentTarget).closest('.custom-check').find('.checkResponseText').text();
+
+                 /*Track Customer Questionnaire Response*/
+                if (@SiteConfigurationsWc.TrackCustomerQuestionnaireResponse == 1) {
+
+                        var questionnaireElement = $(this).attr('name');
+
+                        if (questionnaireElement !== undefined) {
+                            var elementName = questionnaireElement.split(".")[0] + ".QuestionnaireId";
+
+                            var QuestionnaireFkId = document.myform.elements[elementName].value;
+                            var customerOrderId = document.myform.elements['orderId'].value;
+                            TrackCustomerQuestionnaireResponse(QuestionnaireFkId, customerOrderId);
+                        }
+                }
+
+
+                var f = $(event.currentTarget).closest('.checkbox-group').find('.quesval').val();
+                if ($(this).is(':checked')) {
+
+                    var questionRequiredMoreInfo = $(event.currentTarget).closest('.custom-check').find('.needMoreExplanation').val();
+                    if (questionRequiredMoreInfo == 1) {
+
+                        $('.changeprop-' + f).prop('required', false);
+                        //var optionSelected = $(event.currentTarget).closest('.radio-item').find('.needMoreExplanationOption').val();
+                        //if (optionSelected == 1) {
+                        //checkbox - group
+                        //    //$(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+                        //    //$(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').show();
+                        //   $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox1').show();
+                        $(event.currentTarget).closest('.custom-check').find('.explainFurtherTextBox').show();
+                        $(event.currentTarget).closest('.custom-check').find('.explainFurtherTextBox').prop('required', true);
+                        $(event.currentTarget).closest('.checkbox-group').find('.noneCheckBox').prop('checked', false).checkboxradio('refresh');
+                    }
+                    else {
+
+
+                        $('.changeprop-' + f).prop('required', false);
+                        if (checkResponseText.match("^No")) {
+                            //$(event.currentTarget).closest('.health-questionnaire').find('.otherCheckBox:checked').remove().checkboxradio('refresh');
+                            // $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox1').prop('required', false);
+                            $(event.currentTarget).closest('.custom-check').find('.explainFurtherTextBox').prop('required', false);
+                            $(event.currentTarget).closest('.custom-check').find('.explainFurtherTextBox').hide();
+                            // $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox1').hide();
+                            $(event.currentTarget).closest('.checkbox-group').find('.otherCheckBox').prop('checked', false).checkboxradio('refresh');
+
+                            //$('#ch1, #ch3').prop('checked', true).checkboxradio('refresh');
+                        }
+                        else {
+                            $(event.currentTarget).closest('.health-questionnaire').find('.noneCheckBox').prop('checked', false).checkboxradio('refresh');
+                        }
+
+                    }
+                }
+                else {
+
+
+                    var questionRequiredMoreInfo = $(event.currentTarget).closest('.custom-check').find('.needMoreExplanation').val();
+                    if (questionRequiredMoreInfo == 1) {
+
+                        //if (($(event.currentTarget).closest('.health-questionnaire').find('.otherTextCheckBox:checked').length == 0)) {
+
+                        // $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox1').hide();
+                        $(event.currentTarget).closest('.custom-check').find('.explainFurtherTextBox').hide();
+                        $(event.currentTarget).closest('.custom-check').find('.explainFurtherTextBox').prop('required', false);
+                        //   $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox1').prop('required', false);
+                        // }
+                    }
+                    var f = $(event.currentTarget).closest('.checkbox-group').find('.quesval').val();
+
+                    if (($(event.currentTarget).closest('.checkbox-group').find('.changeprop-' + f + ':checked').length == 0)) {
+
+                        $('.changeprop-' + f).prop('required', true);
+                    }
+                }
+
+
+            });
+
+            $(".age-confirmation-checkbox").on("change", function () {
+                if ($(this).is(':checked')) {
+
+                    $('.submit-button').removeAttr('disabled');
+                    //$('.submit-button').show();
+                }
+                else {
+                    $('.submit-button').prop('disabled', true);
+                    // $('.submit-button').hide();
+                }
+            });
+
+        });
+    </script>
+}<!-- End of Order Confirmed -->
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-3">
+            <div class="documents-section-steps d-none d-lg-block">
+                <div class="section">
+                    <ul class="steps dark" id="myPartialViewContainer">
+                        @Html.Partial("UploadDocLeftMenuDynamic", new QuestionGroupSideBarModel { QuestionnaireGroupList = Model.QuestionnaireGroupList, ActiveMenu = "review", ItemCount = 0 })
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-9">
+            <div class="documents-section">
+                <div class="section" id="step1">
+                    <div id="get-in-touch-clip" class="clip"></div>
+                    <div class="container mt-lg-0">
+                        <div class="row d-none d-lg-flex" id="web-layout">
+                            <div class="col-12">
+                                @Html.Partial("_DocumentsAndQuestionnaireFormContainer", Model)
+                            </div>
+                        </div>
+
+                        <div class="row d-block d-lg-none" id="mobile-layout">
+                            <div class="col-12">
+                                @Html.Partial("_DocumentsAndQuestionnaireFormContainer", Model)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

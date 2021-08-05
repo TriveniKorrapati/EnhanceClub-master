@@ -1,0 +1,184 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+
+<div class="container container-standard">
+   
+    <div class="row">
+        <div class="col-md-12 ed-compare" id="ed-compare">
+            <h2>Compare Erectile Dysfunction Treatments</h2>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <td></td>
+                        <td>
+                            <h4 class="ed-drug text-center">
+                                @Html.ActionLink("Viagra", "viagra", "products")
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 class="ed-drug text-center">
+                                @Html.ActionLink("Cialis", "cialis", "products")
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 class="ed-drug text-center">
+                                @Html.ActionLink("Levitra", "levitra", "products")
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 class="ed-drug text-center">
+                                @Html.ActionLink("Stendra", "stendra", "products")
+                            </h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="ed-bold">Active Ingredient</td>
+                        <td>Sildenafil Citrate</td>
+                        <td>Tadalafil</td>
+                        <td>Vardenafil</td>
+                        <td>Avanafil</td>
+                    </tr>
+                    <tr>
+                        <td class="ed-bold">Time to take effect</td>
+                        <td>30-60 mins</td>
+                        <td>15-60 mins</td>
+                        <td>30-60 mins</td>
+                        <td>15-30 mins</td>
+                    </tr>
+                    <tr>
+                        <td class="ed-bold">Duration of effect</td>
+                        <td>4-6 hours</td>
+                        <td>Up to 36 hours</td>
+                        <td>4-6 hours</td>
+                        <td>Up to 4 hours</td>
+                    </tr>
+                    <tr>
+                        <td class="ed-bold">Distinguishing features</td>
+                        <td>Most well-known</td>
+                        <td>Longest Lasting</td>
+                        <td>Recommended for diabetics</td>
+                        <td>First ED FDA-approved product</td>
+                    </tr>
+                    <tr>
+                        <td class="ed-bold">Price per unit</td>
+                        <td class="text-center">From <span class="ed-price">$1.50</span></td>
+                        <td class="text-center">From <span class="ed-price">$1.10</span></td>
+                        <td class="text-center">From <span class="ed-price">$8.32</span></td>
+                        <td class="text-center">From <span class="ed-price">$6.00</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="ed-scroll">
+                                Scroll right to <br>view all products ->
+                            </p>
+                        </td>
+                        <td align="center">
+                            @Html.ActionLink("View", "viagra", "products", null,new { @class = "ed-link btn" })
+                            
+                        </td>
+                        <td align="center">
+                            @Html.ActionLink("View", "cialis", "products",null, new { @class = "ed-link btn" })
+                            
+                        </td>
+                        <td align="center">
+                            @Html.ActionLink("View", "levitra", "products", null, new { @class = "ed-link btn" })
+                            
+                        </td>
+                        <td align="center">
+                            @Html.ActionLink("View", "stendra", "products", null, new { @class = "ed-link btn" })
+                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7">
+            <h2>125% Price Match Guarantee</h2>
+            <div class="col-md-4">
+                <img src="~/content/images/price-match.jpg" alt="125% Price Match Guarantee" class="ed-price-match img-responsive">
+            </div>
+            <div class="col-md-8">
+                <p>
+                    We guarantee the lowest price on all of our prescription products. If you find your medications cheaper at any other recognized licensed mail order pharmacy, we will not only match their price, we will beat it by 25% of the difference. It is our 125% price match guarantee!
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-md-12 ed-space"><strong>Example:</strong> If you find a product on @SiteConfigurationsWc.StorefrontName for $50.00 and find the same product for $40.00 at another mail order pharmacy, we will provide you with a $12.50 discount, bringing your total to $37.50.</div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <h4 class="ed-border">How To Order</h4>
+            <table>
+                <tr>
+                    <td class="ed-bold ed-number">1</td>
+                    <td>
+                        <p>
+                            Compare ED meds,  select a product and click the <strong>View</strong> button.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ed-bold ed-number">2</td>
+                    <td>
+                        <p>
+                            Once you have added all of your desired products to your cart, click on the checkout button to place the order.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ed-bold ed-number">3</td>
+                    <td>
+                        <p>
+                            Fax your prescription to 1-800-859-5270. Be sure to include your order number in the prescription.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <a href="howtoorder">More Information ></a>
+            <ul class="list-inline">
+                <li><a href="https://www.cipa.com/check-online-pharmacy-real-fake-certified-rogue/?url=EnhanceClub#verify-pharmacy-main-section" target="_blank"><img src="~/content/images/email/cipa-100x50.png" alt="CIPA Seal" style=" width: 90%;"></a></li>
+                <li><a href="https://smarticon.geotrust.com/smarticonprofile?Referer=https://@SiteConfigurationsWc.StorefrontUrl" target="_blank"><img src="~/Content/images/email/gt-secured-seal.png" alt="GeoTrust Secured Seal" style=" width: 90%;" /></a></li>
+                <li><img src="~/Content/images/email/guaranteedseal.gif" alt="Norton Shopping Guarantee" style=" width: 50%;" /></li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>About Erectile Dysfunction</h2>
+            <p>A majority of men will experience erectile dysfunction (ED) at some point in their life, whether it is a single instance or a reoccurring problem. This is a natural part of the aging process and nothing to be alarmed about.</p>
+            <p>There are a number of reasons why ED occurs, such as:</p>
+            <ul>
+                <li>Stress</li>
+                <li>Reduced blood flow</li>
+                <li>Side effect of other medications</li>
+                <li>Alcohol</li>
+                <li>Naturally caused by aging</li>
+            </ul>
+            <p>
+                In most cases, it is due to the reduced blood flow to the penis when aroused. Luckily, there are some medications (<a href="erectile-dysfunction#ed-compare">as listed above</a>) that are designed to help resolve this issue for you.
+            </p>
+            <p>
+                It is important to note that these ED treatments require a prescription, so you should consult your physician to get a prescription before purchasing the products above.  Your physician will explain in greater detail about the health symptoms of ED and make sure that there are not any more serious underlying health conditions.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>How ED Treatments Work</h2>
+            <p>
+                To increase the flow of blood to the penis, erectile dysfunction treatments work by relaxing the arteries. This increases blood supply. With an increased flow of blood you are able to have a harder erection for a longer period of time.
+            </p>
+        </div>
+    </div>
+</div>
+
+@*--- Show Side bar with refer friend and free shipping link ---*@
+@section left {
+    @Html.Partial("ReferNFreeShipping")
+    @*@Html.Partial("infoLinks")*@
+}

@@ -1,0 +1,56 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Infrastructure.Utility
+
+    <h1>Customer Care Policy</h1>
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <p>Our Customer Care Policy is an integral part of how we combine quality, affordability and convenience of an online pharmacy in Canada with the best in customer satisfaction. </p>
+
+            <h4>Exceptional Customer Service </h4>
+            <p>Have any question about our pharmacy, our products, or anything else related to an order you’d like to place? Please call us toll-free at <strong>@Model.StorefrontContact</strong> or contact us via email at  <a href="mailto:@Model.StoreFrontEnquiry"><strong>@Model.StoreFrontEnquiry</strong></a>. </p>
+
+            <h4>Top Safety and Quality Standards </h4>
+            <p>Any reputable and highest-quality online pharmacy is going to have dedicated professionally licensed pharmacists reviewing all prescriptions and ensuring that each order is dispensed exactly as it should be to ensure the safety and overall health of customers. Of course, this applies to @SiteConfigurationsWc.StorefrontUrl </p>
+
+            <h4>Guaranteed Lowest Prices  </h4>
+           <p>
+               Every price on prescription and OTC medications and other related health products here is the lowest one you’ll find anywhere in Canada. We’ll remind you again that we have a 125% price match guarantee, which means if you find your meds less expensive elsewhere then we will match the price + beat it by 25% of the difference
+                </p>
+
+            <p style="text-decoration: underline">
+                Example 
+            </p>
+            <p>
+                You find a product here at our Canadian pharmacy that is priced at $50.00 but find the same one at another mail order pharmacy for $40.00. We will then give you a $12.50 discount to bring your total to $37.50 when your order from EnhanceClub.
+            </p>
+
+
+<p>
+                    The 125% price match offer is subject to the following terms:
+                </p>
+
+                <p>
+                    <span style="text-decoration: underline">Terms & Conditions of Program </span>
+
+                </p>
+
+                <ol>
+                    <li>The offer is valid at the time of the sale, and then up to 7 days after.</li>
+                    <li>The differences in charges for the cost of standard shipping will be included in the comparison if applicable.</li>
+                    <li>Products must be identical and in stock at the time of placing an order with a different accredited online mail order pharmacy.</li>
+                    <li>Products must be authentic in brand and size (same manufacturer, same country of manufacture, same destination of dispensing, same pack size, same strength, same quantity, etc. (Example - matching 30 tablets of Canadian Brand Name Lipitor 10mg made by Pfizer Canada Inc. to 30 tablets of Canadian Brand Name Lipitor 10mg made by Pfizer Canada Inc.)</li>
+                    <li>Compared products must be new, used or expired products are not eligible for comparison.</li>
+                    <li>We will only match the current advertised price.</li>
+                    <li>Price match can only be confirmed with our customer service team over the phone.</li>
+                </ol>
+
+        </div>
+    </div>
+
+@*--- Show more info links ---*@
+@section moreinfo {
+  
+    @Html.Partial("MoreInfoLinks", "customer-care-policy")
+}

@@ -1,0 +1,87 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model List<FeaturedProduct>
+
+
+<div id="wrapper" class="header-">
+
+    <div id="cart-popup">
+    </div>
+
+    <main class="general-products-page">
+        <div class="container-fluid general-products-banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div class="section">
+                            <h1 class="white">Products</h1>
+                            <p>
+                                Here, you can check out the type of Enhancement you’re looking for. You can find all the important details of our products and prices and begin the journey to being the best version of yourself.
+                            </p>
+                            <a href="#general-products-list">
+                                <div class="see-products">
+                                    <span>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 32 32" xml:space="preserve"><style>
+                                                                                                                                                                    .st0 {
+                                                                                                                                                                        fill: none;
+                                                                                                                                                                        stroke: #000;
+                                                                                                                                                                        stroke-width: 3;
+                                                                                                                                                                        stroke-miterlimit: 10;
+                                                                                                                                                                    }
+</style><path class="st0" d="M27 18L16 29.1 5 18M16 .8v28.3" /></svg>
+                                    </span>
+                                    <p>Take hold of what you<br> want and go get it!</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div id="general-products-list" class="row">
+                @if (Model != null)
+                {
+                    foreach (var product in Model)
+                    {
+                        FeaturedProduct featuredProductObj = (FeaturedProduct)product;
+
+                        var productImageUrl = SiteConfigurationsWc.ProductImagePath + SiteConfigurationsWc.ProductGenericImagePrefix + featuredProductObj.FeaturedProductId + ".png";
+                        <div class="col-6 col-md-3">
+                            <a href="@Url.Action("ProductDetail", "product", new { searchTerm = @featuredProductObj.ProductUrl })">
+                                <div class="product-image">
+                                    <img src="@productImageUrl" alt="">
+                                </div>
+                                <div class="btn-container">
+                                    <div class="btn btn__secondary btn--rounded">
+                                        @featuredProductObj.FeaturedProductDisplayName
+                                    </div>
+                                </div>
+                                <p>
+                                    @if (featuredProductObj.FeaturedProductName.ToLower().Contains("caverject"))
+                                    {
+                                        @featuredProductObj.FeaturedProductName
+
+
+                                    }
+                                    else
+                                    {
+
+                                        @featuredProductObj.FeaturedProductGenericName if (@SiteConfigurationsWc.ShowProductBrandNameWithGeneric == "1")
+                                        {
+                                            <text>(Generic @featuredProductObj.FeaturedProductName)</text>
+
+                                        }
+                                    }
+
+                                </p>
+                            </a>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </main>
+
+</div>

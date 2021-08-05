@@ -1,0 +1,55 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Infrastructure.Utility
+
+    <!-- Start of Main -->
+    <div class="dashboard-page order-page order-confirmation-page">
+        <!-- Start of the Top Clip Path -->
+        <!-- <div class="top-clip">
+            <div class="dash-top-clip">
+            </div>
+        </div> -->
+        <!-- End of the Top Clip Path -->
+
+        <div class="section top-section">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Start of Main Section -->
+                    <div class="col-12 col-md-12 col-lg-12">
+
+                        <!-- Start of Filter Section -->
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-7 col-xl-6 text-center text-md-right">
+                                <h4 class="white mb-4">Failed to Create Order!</h4>
+
+                                <p>
+                                    <b>Failed to Create Order at this moment.</b>
+                                </p>
+                                <div class="contact-tech">
+                                    <a href="@Url.Action("get-in-touch","home")" class="yellow">Contact tech support</a>
+                                </div>
+                                <br>
+                                <a href="@Url.Action("dashboard", "customer")">&#8592; Go To Dashboard</a>
+                            </div>
+
+                        </div>
+                        <!-- End of Filter Section -->
+
+                    </div>
+                    <!-- End of Main Section -->
+
+                </div>
+                
+            </div>
+        </div>
+
+
+    </div>
+    <!-- End of Main -->
+
+    // clear cart contents
+    @HttpContext.Current.Session["Cart"] = new Cart();
+
+
+
+

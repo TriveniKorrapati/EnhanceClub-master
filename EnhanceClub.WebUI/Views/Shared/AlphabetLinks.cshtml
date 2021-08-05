@@ -1,0 +1,55 @@
+﻿@using System.Activities.Statements
+
+@model EnhanceClub.WebUI.Models.SearchLetterViewModel
+
+<ul class="horizontal aligncenter">
+
+    @foreach (var thisLetter in @Model.ProductAlphabet)
+    {
+        if (thisLetter.ProductLetterCount > 0)
+        {
+            <li>
+                @Html.ActionLink(thisLetter.ProductLetter,
+                    @Model.AlphaLink,
+                    new { searchLetter = thisLetter.ProductLetter.ToLower() })
+
+            </li>
+        }
+        else
+        {
+            <li>
+                @Html.ActionLink(thisLetter.ProductLetter,
+                    @Model.AlphaLink,
+                    new { searchLetter = "" }, new { @class = "no-product" })
+
+            </li>
+        }
+    }
+</ul>
+
+
+@*<ul class="horizontal aligncenter">
+    @for (int i = 0; i < 26; i++)
+    {
+        <li>
+            @Html.ActionLink(Convert.ToChar(i + 65).ToString(), @Model.ToString(), new { searchLetter = Convert.ToChar(i + 65).ToString().ToLower() })
+
+        </li>
+    }
+    </ul>*@
+
+   @*--- commented technique below also works ---*@
+
+   
+       @*@{
+              IEnumerable<string> letters;
+              letters = new List<string>() {"A", "B", "C", "D", "E", "F", "G", "H"};
+       }
+
+       <ul>
+            @foreach (var letter in letters)
+            {
+                <li> @Html.ActionLink(letter, @Model, new { searchLetter = letter.ToLower() }) </li>
+            }
+       </ul>*@
+

@@ -1,0 +1,96 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model dynamic
+
+@if (!string.IsNullOrWhiteSpace(@Model.ProductStoreFrontDescription))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="border-title">Description</h4>
+        </div>
+    </div>
+    <div class="row med-desc">
+        <div class="col-sm-6">
+            <p class="updateUrl">
+                @Html.Raw(@Model.ProductStoreFrontDescription)
+            </p>
+        </div>
+        <div class="col-sm-6">
+            @if (!string.IsNullOrWhiteSpace(@Model.ProductStoreFrontDirections))
+        {
+                <p>Directions:</p>
+                <p> @Html.Raw(@Model.ProductStoreFrontDirections) </p>
+        }
+        else if (!string.IsNullOrWhiteSpace(@Model.ProductDirections))
+        {
+                <p>Directions</p>
+                <p>@Html.Raw(@Model.ProductDirections) </p>
+        }
+        </div>
+    </div>
+}
+else if (!string.IsNullOrWhiteSpace(@Model.ProductDescription))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Description</h4>
+        </div>
+    </div>
+    <div class="row med-desc">
+        <div class="col-sm-6">
+            <p class="updateUrl">
+                @Html.Raw(@Model.ProductDescription)
+            </p>
+        </div>
+        <div class="col-sm-6">
+            @if (!string.IsNullOrWhiteSpace(@Model.ProductStoreFrontDirections))
+        {
+                <p>Directions</p>
+                <p> @Html.Raw(@Model.ProductStoreFrontDirections) </p>
+        }
+        else if (!string.IsNullOrWhiteSpace(@Model.ProductDirections))
+        {
+                <p>Directions</p>
+                <p>@Html.Raw(@Model.ProductDirections) </p>
+        }
+        </div>
+    </div>
+}
+<div class="row med-desc">
+    <div class="col-md-12">
+       
+        
+        @if (!string.IsNullOrWhiteSpace(@Model.ProductStoreFrontIngredients))
+        {
+            <h4>Ingredients</h4>
+            <p> @Html.Raw(@Model.ProductStoreFrontIngredients) </p>
+        }
+        else if (!string.IsNullOrWhiteSpace(@Model.ProductIngredients))
+        {
+            <h4>Ingredients</h4>
+            <p>@Html.Raw(@Model.ProductIngredients) </p>
+        }
+        
+        @if (!string.IsNullOrWhiteSpace(@Model.ProductStoreFrontCautions))
+        {
+            <h4>Cautions</h4>
+            <p> @Html.Raw(@Model.ProductStoreFrontCautions) </p>
+        }
+        else if (!string.IsNullOrWhiteSpace(@Model.ProductCautions))
+        {
+            <h4>Cautions</h4>
+            <p>@Html.Raw(@Model.ProductCautions) </p>
+        }
+        
+        @if (!string.IsNullOrWhiteSpace(@Model.ProductStoreFrontSideEffects))
+        {
+            <h4>Side Effects</h4>
+            <p> @Html.Raw(@Model.ProductStoreFrontSideEffects) </p>
+        }
+        else if (!string.IsNullOrWhiteSpace(@Model.ProductSideEffects))
+        {
+            <h4>Side Effects</h4>
+            <p>@Html.Raw(@Model.ProductSideEffects) </p>
+        }
+
+    </div>
+</div>

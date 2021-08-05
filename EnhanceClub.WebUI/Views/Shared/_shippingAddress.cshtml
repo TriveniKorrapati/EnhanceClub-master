@@ -1,0 +1,236 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.ShippingAddressViewModel
+
+
+@foreach (var shippingAddress in Model.CustomerShippingAddress)
+{
+    var activeClass = Model.SelectedShipAddressFk == 0 && shippingAddress.CustomerDefaultAddress ? "active" :
+                               Model.SelectedShipAddressFk == @shippingAddress.CustomerAddressId ? "active" : "";
+    var checkedRadio = shippingAddress.CustomerDefaultAddress ? "checked" : "";
+
+<div class="col-md-6">
+    @if (Model.AllowEdit)
+    {
+    using (Html.BeginForm("UpdateShippingAddress", "customer", FormMethod.Post, new { @id = "formUpdateShippingInvoiceAddress", @class = "address-detail-container" }))
+    {
+
+    @*@Html.Hidden("CustomerFirstName", shippingAddress.CustomerFirstName)
+    @Html.Hidden("CustomerLastName", shippingAddress.CustomerLastName)*@
+    <input type="hidden" name="shippingAdressFk" value="@shippingAddress.CustomerAddressId" id="shipping-address-fk" />
+
+    <div class="address-detail @activeClass" data-content="Default Address" id="address-detail-@shippingAddress.CustomerAddressId">
+        <div class="d-flex justify-content-between">
+            <div class="form-group info-group pr-5">
+                @if (!string.IsNullOrEmpty(shippingAddress.CustomerAddress))
+                {
+                <span class="input-value-section">
+                    <p class="input-value">
+                        <input class="address-checkbox" id="defaultAddress-@shippingAddress.CustomerAddressId" name="defaultAddress" type="radio"
+                               @checkedRadio onclick="updateDefaultAddress(@shippingAddress.CustomerAddressId)" />
+
+                        <label for="defaultAddress-@shippingAddress.CustomerAddressId">
+                            @shippingAddress.CustomerFirstName @shippingAddress.CustomerLastName<br />
+                            @shippingAddress.CustomerAddress<br>
+                            @shippingAddress.CustomerCity, @shippingAddress.BillingProvinceName, @shippingAddress.CustomerCountryName
+                            <br>@shippingAddress.CustomerZipCode
+                        </label>
+                    </p>
+                </span>
+                }
+
+                <span class="input-wrapper extended mt-4">
+                    <label for="Address">First Name</label>
+                    @Html.TextBox("CustomerFirstName", @shippingAddress.CustomerFirstName,
+                    new
+                    {
+                    @class = "form-control",
+                    @placeholder = "First Name",
+                    required = "required",
+                    Name = "CustomerFirstName",
+                    id = "CustomerFirstName"
+                    })
+                    <label for="Address">Last Name</label>
+                    @Html.TextBox("CustomerLastName", @shippingAddress.CustomerLastName,
+                    new
+                    {
+                    @class = "form-control",
+                    @placeholder = "Last Name",
+                    required = "required",
+                    Name = "CustomerLastName",
+                    id = "CustomerLastName"
+                    })
+                    <label for="Address">Address</label>
+                    @Html.TextBox("ShippingAddress", @shippingAddress.CustomerAddress,
+                    new
+                    {
+                    @class = "form-control",
+                    @placeholder = "Address",
+                    required = "required",
+                    Name = "ShippingAddress",
+                    id = "ShippingAddress"
+                    })
+                    <label for="City">City</label>
+                    @Html.TextBox("ShippingCity", @shippingAddress.CustomerCity,
+                    new
+                    {
+                    @class = "form-control",
+                    @placeholder = "City",
+                    required = "required",
+                    Name = "ShippingCity",
+                    id = "ShippingCity"
+
+                    })
+                    <label for="Province">Province</label><span class="error-msg ml-2">(Province must be same as billing province)</span>
+                    <input type="hidden" name="ShippingProvinceId" id="ShippingProvinceId-hidden" value="@shippingAddress.ShippingProvinceId" />
+                    @Html.DropDownList("ShippingProvinceId",
+                    new
+                    SelectList(Model.ProvinceList,
+                    "ProvinceId",
+                    "ProvinceName",
+                    Model.ShippingAddressProvinceFk),
+                    new { @class = "form-control", Name = "ShippingProvinceId", id = "ShippingProvinceId", @disabled = "disabled" })
+                    <label for="Country">Country</label>
+                    <select class="form-control" name="ShippingCountryId" id="ShippingCountryId">
+                        <option value="@SiteConfigurationsWc.StoreFrontCountryId">@SiteConfigurationsWc.StorefrontCountryName</option>
+                    </select>
+                    <label for="PostalCode">Postal Code</label>
+                    @Html.TextBox("ShippingZipCode", @shippingAddress.CustomerZipCode,
+                    new
+                    {
+                    @class = "form-control",
+                    required = "required",
+                    @placeholder = "Postal Code",
+                    Name = "ShippingZipCode",
+                    id = "ShippingZipCode"
+                    })<input type="submit" value="Update" class="btn save-btn update-shipAddress" />
+                </span>
+            </div>
+            @if (Model.AllowEdit)
+            {
+            <div class="edit-btn-container">
+                <a class="edit-btn" href="#">Edit</a>
+                @if (!shippingAddress.CustomerDefaultAddress)
+                {
+                <a class="error-msg" href="/customer/deleteaddress/@shippingAddress.CustomerAddressId"
+                   onclick="if (confirm('Are you sure you want to delete this address?')) { return true; } else { return false; }">Remove</a>
+                }
+
+            </div>
+            }
+
+        </div>
+    </div>
+
+
+    }
+    }
+    else
+    {
+    <div class="address-detail-container" id="formUpdateShippingInvoiceAddress">
+        <div class="address-detail @activeClass" data-content="Default Address" id="address-detail-@shippingAddress.CustomerAddressId">
+            <div class="d-flex justify-content-between">
+                <div class="form-group info-group pr-5">
+                    @if (!string.IsNullOrEmpty(shippingAddress.CustomerAddress))
+                    {
+                    <span class="input-value-section">
+                        <p class="input-value">
+
+                            <input class="address-checkbox" id="defaultAddress-@shippingAddress.CustomerAddressId" name="defaultAddress" type="radio"
+                                   @checkedRadio />
+                            <label for="defaultAddress-@shippingAddress.CustomerAddressId">
+                                @shippingAddress.CustomerFirstName @shippingAddress.CustomerLastName<br />
+                                @shippingAddress.CustomerAddress<br>
+                                @shippingAddress.CustomerCity, @shippingAddress.BillingProvinceName, @shippingAddress.CustomerCountryName
+                                <br>@shippingAddress.CustomerZipCode
+                            </label>
+                        </p>
+                    </span>
+                    }
+
+                    <span class="input-wrapper extended mt-4">
+                        <label for="Address">First Name</label>
+                        @Html.TextBox("CustomerFirstName", @shippingAddress.CustomerFirstName,
+                        new
+                        {
+                        @class = "form-control",
+                        @placeholder = "First Name",
+                        required = "required",
+                        Name = "CustomerFirstName",
+                        id = "CustomerFirstName"
+                        })
+                        <label for="Address">Last Name</label>
+                        @Html.TextBox("CustomerLastName", @shippingAddress.CustomerLastName,
+                        new
+                        {
+                        @class = "form-control",
+                        @placeholder = "Last Name",
+                        required = "required",
+                        Name = "CustomerLastName",
+                        id = "CustomerLastName"
+                        })
+                        <label for="Address">Address</label>
+                        @Html.TextBox("ShippingAddress", @shippingAddress.CustomerAddress,
+                        new
+                        {
+                        @class = "form-control",
+                        @placeholder = "Address",
+                        required = "required",
+                        Name = "ShippingAddress",
+                        id = "ShippingAddress"
+                        })
+                        <label for="City">City</label>
+                        @Html.TextBox("ShippingCity", @shippingAddress.CustomerCity,
+                        new
+                        {
+                        @class = "form-control",
+                        @placeholder = "City",
+                        required = "required",
+                        Name = "ShippingCity",
+                        id = "ShippingCity"
+
+                        })
+                        <label for="Province">Province</label><span class="error-msg ml-2">(Province must be same as billing province)</span>
+                        <input type="hidden" name="ShippingProvinceId" id="ShippingProvinceId-hidden" value="@shippingAddress.ShippingProvinceId" />
+                        @Html.DropDownList("ShippingProvinceId",
+                        new
+                        SelectList(Model.ProvinceList,
+                        "ProvinceId",
+                        "ProvinceName",
+                        Model.ShippingAddressProvinceFk),
+                        new { @class = "form-control", Name = "ShippingProvinceId", id = "ShippingProvinceId", @disabled = "disabled" })
+                        <label for="Country">Country</label>
+                        <select class="form-control" name="ShippingCountryId" id="ShippingCountryId">
+                            <option value="@SiteConfigurationsWc.StoreFrontCountryId">@SiteConfigurationsWc.StorefrontCountryName</option>
+                        </select>
+                        <label for="PostalCode">Postal Code</label>
+                        @Html.TextBox("ShippingZipCode", @shippingAddress.CustomerZipCode,
+                        new
+                        {
+                        @class = "form-control",
+                        required = "required",
+                        @placeholder = "Postal Code",
+                        Name = "ShippingZipCode",
+                        id = "ShippingZipCode"
+                        })<input type="submit" value="Update" class="btn save-btn update-shipAddress" />
+                    </span>
+                </div>
+                @if (Model.AllowEdit)
+                {
+                <div class="edit-btn-container">
+                    <a class="edit-btn" href="#">Edit</a>
+                    @if (!shippingAddress.CustomerDefaultAddress)
+                    {
+                    <a class="error-msg" href="/customer/deleteaddress/@shippingAddress.CustomerAddressId"
+                       onclick="if (confirm('Are you sure you want to delete this address?')) { return true; } else { return false; }">Remove</a>
+                    }
+
+                </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+}

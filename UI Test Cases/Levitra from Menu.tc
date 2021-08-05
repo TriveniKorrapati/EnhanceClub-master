@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘Levitra’ from products on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Levitra'
+
+Then: It opens the 'Levitra' product page</description>
+   <name>Levitra from Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>4267e2f7-ef7b-4b43-95ee-9c99ed5a472a</testCaseGuid>
+</TestCaseEntity>

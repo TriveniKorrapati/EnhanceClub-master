@@ -1,0 +1,25 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.BreadCrumbViewModel
+
+
+<script type="application/ld+json">
+    {
+    "@@context": "https://schema.org",
+    "@@type": "BreadcrumbList",
+    "itemListElement": [{
+    "@@type": "ListItem",
+    "position": 1,
+    "name": "Home",// Variable equal to 1st link on breadcrumb
+    "item": "https://www.enhanceclub.com"// Variable equal to 1st URL on breadcrumb
+    },{
+    "@@type": "ListItem",
+    "position": 2,
+    "name": "Blog",// Variable equal to 2nd link on breadcrumb
+    "item": "https://www.enhanceclub.com/blog" // Variable equal to 2nd URL on breadcrumb
+    },{
+    "@@type": "ListItem",
+    "position": 3,
+    "name": " THE MOST COMMON CAUSES FOR ERECTILE DYSFUNCTION "// Variable equal to title of page
+    }]
+    }
+</script>

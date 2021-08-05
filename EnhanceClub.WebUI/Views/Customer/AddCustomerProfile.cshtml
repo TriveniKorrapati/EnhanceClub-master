@@ -1,0 +1,199 @@
+﻿@model EnhanceClub.WebUI.Models.CustomerProfileViewModel
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@section MyScripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$("#checkedValue").val($("input[type='radio'][name='PatientProfileConsultationConsent']").val());
+        if ($("input[type='radio'][name='PatientProfileConsultationConsent']").val() == "True") {
+            $("#PatientProfileConsultationConsentYes").prop("checked", true);
+            $("#PatientProfileConsultationConsentNo").prop("checked", false);
+            $("#consultationhours").show();
+        }
+        else {
+            $("#PatientProfileConsultationConsentNo").prop("checked", true);
+            $("#PatientProfileConsultationConsentYes").prop("checked", false);
+            $("#consultationhours").hide();
+        }
+    });
+    function SetConsentValue(val) {
+        $("#consentChanged").val(true);
+        $("#checkedValue").val(val);
+        if (val) {
+            $("#consultationhours").show();
+        }
+        else { $("#consultationhours").hide(); }
+    }
+   
+    </script>
+}
+<div class="container container-standard">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="checkout">
+                @Html.ActionLink("<< My Account", "account", "Customer", null, new { @class = "btn btn-link", @style = "padding-bottom: 0 ; padding-top: 0" })
+                <h4>Add a Patient Profile</h4>
+                @using (Html.BeginForm("AddProfile", "Customer", null, FormMethod.Post, new { @class = "form-horizontal", @role = "form", @id = "edit", @name = "edit" }))
+                {
+                    string localIp = "127.0.0.1";
+                    @Html.Hidden("CustomerLastIp", localIp)
+
+                    @Html.Hidden("returnUrl", "patient-profile")
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Patient First Name</label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("PatientProfileFirstName", @Model.PatientProfile.PatientProfileFirstName, new { @class = "form-control", required = "required", @placeholder = "Patient First Name" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Patient Last Name</label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("PatientProfileLastName", @Model.PatientProfile.PatientProfileLastName, new { @class = "form-control", required = "required", @placeholder = "Patient Last Name" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Patient's Birthdate (mm-dd-yyyy)</label>
+                        <div class="col-sm-5">
+                            @*@Html.TextBox("PatientProfileBirthDate", @Model.PatientProfile.PatientProfileBirthDate.ToString("yyyy-MM-dd"), new {@placeholder = "(yyyy-mm-dd)", @required = "required", @class = "form-control"})*@
+                            @Html.TextBox("PatientProfileBirthDate", @Model.PatientProfile.PatientProfileBirthDate != DateTime.MinValue ? (object)@Model.PatientProfile.PatientProfileBirthDate.ToString("yyyy-MM-dd") : String.Empty, new { @placeholder = "(yyyy-mm-dd)", @required = "required", @class = "form-control", @type = "date" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Sex</label>
+                        <div class="col-sm-2">
+                            @Html.DropDownList("PatientProfileSex", new SelectList(@Model.GenderList, "Value", "Text", Model.PatientProfile.PatientProfileSex), new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Allergies</label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("PatientProfileAllergy", @Model.PatientProfile.PatientProfileAllergy, new { @class = "form-control", @placeholder = "List your allergies" })
+                            <span style="color: rgba(0,0,0,0.6); font-size: 12px;">If no allergy, please enter "None"</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Medical History</label>
+                        <div class="col-sm-5">
+                            @Html.TextArea("PatientProfileMedicalHistory", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Weight (lbs.)</label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("PatientProfileWeightLb", @Model.PatientProfile.PatientProfileWeightLb != 0 ? (object)@Model.PatientProfile.PatientProfileWeightLb : string.Empty, new { @class = "form-control", required = "required", @placeholder = "Weight in Pounds", pattern = "\\d+" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">@SiteConfigurationsWc.TermForPractitioner's First Name</label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("PatientProfilePhysicianFirstName", @Model.PatientProfile.PatientProfilePhysicianFirstName, new { @placeholder = SiteConfigurationsWc.TermForPractitioner + "'s First Name", @required = "required", @class = "form-control" })
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">@SiteConfigurationsWc.TermForPractitioner's Last Name</label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("PatientProfilePhysicianLastName", @Model.PatientProfile.PatientProfilePhysicianLastName, new { @placeholder = SiteConfigurationsWc.TermForPractitioner + "'s Last Name", @required = "required", @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">@SiteConfigurationsWc.TermForPractitioner's Phone</label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("PatientProfilePhysicianPhone", @Model.PatientProfile.PatientProfilePhysicianPhone, new { @placeholder = "Phone (xxx-xxx-xxxx)", @required = "required", @class = "form-control", pattern = "[0-9]*-[0-9]*-[0-9]*" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">@SiteConfigurationsWc.TermForPractitioner's Fax</label>
+                        <div class="col-sm-5">
+                            @Html.TextBox("PatientProfilePhysicianFax", @Model.PatientProfile.PatientProfilePhysicianFax, new { @placeholder = "Fax", @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Do you want childproof caps if available</label>
+                        <div class="col-sm-3">
+                            <div class="radio">
+                                <label>
+                                    @Html.RadioButton("PatientProfileChildproofCap", "true", @Model.PatientProfile.PatientProfileChildproofCap == true, new { id = "capsYes" })
+                                    Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    @Html.RadioButton("PatientProfileChildproofCap", "false", (@Model.PatientProfile.PatientProfileChildproofCap == false), new { id = "capsNo" })
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="centered">
+                        <h5>Medication(s) that patient is currently taking.</h5>
+                        <input type="button" value="Give me more fields!" onclick="moreFields()" class="btn btn-primary">
+                        <br><br>
+                    </div>
+
+                    int loopVar = 1;
+
+                    for (var i = 0; i <= 4; i++)
+                    {
+
+                        <div class="form-group existing-med">
+                            <input type="hidden" name="[@i].PatientMedicationId" value="0" size="18" maxlength="50" placeholder="Drug Name">
+                            <label class="col-sm-3 control-label">Drug Name</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="[@i].PatientmedicationDrugname" value="" size="18" maxlength="50" placeholder="Drug Name">
+                            </div>
+                            <label class="col-sm-1 control-label">Illness</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="[@i].PatientmedicationIllness" value="" size="18" maxlength="50" placeholder="Illness">
+                            </div>
+                        </div>
+
+                    }
+
+                    //---add row after the following defaults---
+                    <span id="writeroot">
+
+                    </span>
+
+                    <div id="readroot" style="display: none" class="dynamic-added-med">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Drug Name</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="txtDrug" name="PatientmedicationDrugname" value="" size="18" maxlength="50" placeholder="Drug Name">
+                            </div>
+
+                            <label class="col-sm-1 control-label">Illness</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="txtIllness" name="PatientmedicationIllness" value="" size="18" maxlength="50" placeholder="Illness">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="centered text-center">
+                        <button type="submit" class="btn btn-primary">Add Patient Profile</button>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div> 

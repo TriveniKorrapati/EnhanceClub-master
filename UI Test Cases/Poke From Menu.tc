@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘Poke’ from products on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Poke'
+
+Then: It opens the 'Poke' product page</description>
+   <name>Poke From Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>1e3365e2-65f9-4189-8c82-a7d7aad85493</testCaseGuid>
+</TestCaseEntity>

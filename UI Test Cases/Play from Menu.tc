@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘Play’ from Products on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Play'
+
+Then: It opens the 'Play' product page</description>
+   <name>Play from Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>76152ff5-5fc2-4d48-9ad4-a8b6b37b6cf3</testCaseGuid>
+</TestCaseEntity>

@@ -1,0 +1,167 @@
+﻿@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.CustomerProfileViewModel
+@section PageScripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#PatientProfileSex").on('change', function () {
+                if ($("#PatientProfileSex").val() == 'o') {
+                    // show other text box
+                    $("#gender-other-text").removeClass("d-none");
+                    $("#PatientProfileSexOther").attr("required", true);
+                }
+                else {
+                    $("#gender-other-text").addClass("d-none");
+                    $("#PatientProfileSexOther").removeAttr("required");
+                }
+            })
+
+            //  if none is selected for social history then unselect all
+            $('input.social-history').on('change', function () {
+                if ($(this).closest('.custom-check').find('.social-history-name').val() == 'None') {
+                    $('input.social-history').not(this).prop('checked', false);
+                }
+                else {
+                    $('.noneCheckBox').prop('checked', false);
+                }
+            });
+
+            //$("#checkedValue").val('');
+            //$("#consultationhours").hide();
+        });
+
+        function SetConsentValue(val) {
+            $("#consentChanged").val(true);
+            $("#checkedValue").val(val);
+            if (val) {
+                $("#consultationhours").show();
+            }
+            else { $("#consultationhours").hide(); }
+        }
+       
+        $(".btn-default").on('click', function (event)
+        {
+
+            if (checkMinimumAge())
+            {
+                //if ($("#checkedValue").val() == "") {
+                //    alert('select any (yes/no) if you need Additional Counselling ');
+                //    return false;
+                //}
+                //else {
+
+                //    if ($("#checkedValue").val().toLowerCase() == "true") {
+                //        var checked = $("input[type=checkbox]:checked").length;
+
+                //        if (!checked) {
+                //            alert("You must select at least one best time for consulting.");
+                //            return false;
+                //        }
+
+                //    }
+                //    return true;
+                //}
+            }
+            else
+            {
+                return false;
+            }
+            checkedSocialHistory = $("input[type=checkbox]:checked").length;
+            if (!checkedSocialHistory) {
+                alert("You must check at least one Social History.");
+                return false;
+            }
+        });
+
+        $("#PatientProfileBirthDate").blur(function () {
+         
+            checkMinimumAge();
+        });
+        function checkMinimumAge(){
+            var today = new Date();
+            var PatientProfileBirthDate = new Date($("#PatientProfileBirthDate").val());
+            var age = Math.floor((today - PatientProfileBirthDate) / (365.25 * 24 * 60 * 60 * 1000));
+            if (age < 18) {
+                alert('You must be at least 18 years old!')
+                return false;
+            }
+            else
+                return true;
+        }
+
+    </script>
+
+
+}
+<div class="dashboard-page">
+    <!-- Start of the Top Clip Path -->
+    <div class="top-clip">
+        <div class="dash-top-clip">
+        </div>
+    </div>
+    <!-- End of the Top Clip Path -->
+
+    <div class="section top-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 hidden-md">
+                    <h1 class="heading text-uppercase">ADD PROFILE</h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- Start of Main Section -->
+                <div class="col-12 col-md-12 col-lg-9 col-xl-9 order-2 order-lg-1">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-9 col-xs-9">
+                            <h1 class="heading visible-md text-uppercase">ADD PROFILE</h1>
+                            @if (@Model.havePrescription)
+                            {
+                            <h5>It looks like you haven’t finished your patient profile yet. Please take a moment to complete it before continuing to our questionnaire.</h5>
+                            }
+                            else
+                            {
+                            <h5>It looks like you haven’t finished your patient profile yet. Please take a moment to complete it before continuing to our questionnaire.</h5>
+                            }
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 col-xs-3">
+                            <!-- Blank Space -->
+                        </div>
+                    </div>
+                    <div class="form-container">
+                        <div class="row">
+                            <div class="col-12 col-xl-9">
+                                @Html.ValidationSummary()
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-9">
+                                <h4 class="form-title text-capitalize mt-0 mb-4">
+                                    Patient Profile
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-9">
+                                @using (Html.BeginForm("AddProfile",
+                                            "Customer",
+                                            null,
+                                            FormMethod.Post,
+                                            new { @class = "profile-form", @id = "frm_edit-profile" }))
+                                {
+                                    var returnUrl = @ViewBag.ReturnUrl;
+                                    @Html.Hidden("CustomerLastIp", "127.0.0.1");
+                                    <input type="hidden" value="@ViewBag.ReturnUrl" name="returnUrl" />
+                                    @Html.Partial("_PatientProfile")
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Main Section -->
+            </div>
+        </div>
+    </div>
+</div>

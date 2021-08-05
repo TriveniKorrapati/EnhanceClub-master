@@ -1,0 +1,130 @@
+﻿@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.HtmlHelpers
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.ProductSearchViewModel
+
+
+
+    <div class="row">
+
+        @*--Begin: Browse By Letter --*@
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="padding: 10px 0; margin-bottom: 0;">
+                        Browse Product Alphabetically
+                    </p>
+
+                    <div class="letter-container">
+                        @Html.Partial("AlphabetLinks",new SearchLetterViewModel {
+                            ProductAlphabet = @Model.ProductAlphabet,
+                            AlphaLink = @Model.SearchUrlLink})
+                    </div>
+                    <div class="alert alert-danger alert-thin hidden pull-right msg-box">
+                        Sorry, No product available under this category.
+                    </div>
+                </div>
+            </div>
+
+        @*--End: Browse By Letter --*@
+
+        @*--Begin: Search Results Container--*@
+        <div id="search-results-wrap">
+
+            @*-- Search Results Heading & Breadcrumb --*@
+                <div class="row search-results-heading">
+                    <div class="col-md-12">
+                        <div class="results-float">
+                            <h4>Browsing Medications Beginning with "<b>@Model.SearchTermPassed</b>"</h4>
+                        </div>
+                        
+                        @if (Model.PagingInfo.TotalPages > 1)
+                        {
+                            <div class="results-float pagination-right">
+                                <ul class="pagination">
+                                    <li><a>Page:</a></li>
+                                    @Html.PageLinksLi(Model.PagingInfo,
+                                        x => Url.Action(@Model.SearchUrlLink,
+                                            new {page = x, searchLetter = @Model.SearchTermPassed}))
+                                </ul>
+                            </div>
+                        }
+                     </div>
+
+                    @*--- Quick Jump dropdown ---*@
+                    <div class="col-md-12">
+                        <div class="pagination-right quick-jump">
+
+                            @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "ddlMenu" }))
+                            {
+
+                                @*@Html.DropDownList("menu", new
+                                              SelectList(Model.ProductsAsList, "UrlAlphabet", "ProductName"), new { Name = "goto_prodpage", @size = 1 })*@
+                                @Html.DropDownList("menu", new
+                                              SelectList(Model.ProductsAsListDropDown, "UrlAlphabet", "ProductName"), new { Name = "goto_prodpage", @size = 1 })
+                                
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+          
+
+             @*End: -- Search Results Heading & Breadcrumb --*@
+
+            @*--Begin: Search Results --*@
+            
+            <div id="search-results">
+
+                @Html.Partial("ProductSearchedList", Model)
+
+            </div>
+
+            @*--End:   Search Results --*@
+        @if (Model.PagingInfo.TotalPages > 1)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="pagination-right">
+                        <ul class="pagination no-margin">
+                            <li><a>Page:</a></li>
+                            @Html.PageLinksLi(Model.PagingInfo,
+                                x => Url.Action(@Model.SearchUrlLink,
+                                    new {page = x, searchLetter = @Model.SearchTermPassed}))
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+            @*--Begin: Browse By Letter --*@
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p style="padding: 10px 0; margin-bottom: 0;">
+                            Browse Product Alphabetically
+                        </p>
+
+                        <div class="letter-container">
+                            @Html.Partial("AlphabetLinks", new SearchLetterViewModel {
+                                ProductAlphabet = Model.ProductAlphabet,
+                                AlphaLink = @Model.SearchUrlLink})
+                        </div>
+                        <div class="alert alert-danger alert-thin hidden pull-right msg-box">
+                            Sorry, No product available under this category.
+                        </div>
+                    </div>
+                </div>
+
+            @*--End: Browse By Letter --*@
+
+        </div>
+
+   </div>
+
+
+@*--- Show Side bar with refer friend and free shipping link ---*@
+@section left {
+    @Html.Partial("ReferNFreeShipping")
+    @*@Html.Partial("infoLinks")*@
+}

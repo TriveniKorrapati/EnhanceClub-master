@@ -1,0 +1,83 @@
+﻿@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.SearchLetterViewModel
+
+<div class="col-md-9 content-container">
+    <h1>
+        Non-Prescription Drugs
+    </h1>
+
+    @*---Search Box ---*@
+    <div class="row">
+        <div class="col-md-3 search-product">
+            <p>
+                Search for a product:
+            </p>
+        </div>
+        <div class="col-md-6">
+            <div class="prescription-search">
+                @Html.Partial("ProductSearch", new SearchBarViewModel { SearchType = "otc", SearchBarLocation = "inner" })
+            </div>
+        </div>
+    </div>
+
+    @*---Alphabetic product search ---*@
+
+    <div class="container container-standard m-b">
+        <div class="row">
+            <div class="col-md-12">
+                <p style="padding: 10px 0; margin-bottom: 0;">
+                    Browse Product Alphabetically
+                </p>
+                <div class="letter-container">
+                    @Html.Partial("AlphabetLinks")
+                </div>
+                <div class="alert alert-danger alert-thin hidden pull-right msg-box" >
+                    Sorry, No product available under this category.
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*--- Show popular Non-prescriptions---*@
+    @*Commented Popular Non Prescription Medications for now: April 17, 2020*@
+    @*<div class="container container-standard">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    Popular Non-Prescription Medications
+                </h2>
+                <div id="btn-buy-group" class="text-align-left">
+
+                    @Html.Action("FeaturedProductList", "FeaturedProduct", new { productType = "Otc" })
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+    @*--- Show What storefront sells ---*@
+    <div class="container container-standard">
+        @Html.Partial("StoreFrontSellsOtc")
+    </div>
+
+</div>
+
+@*--- Show Side bar with refer friend and free shipping link ---*@
+
+@*@section left {
+    @Html.Partial("ReferNFreeShipping")
+
+}*@
+
+@* --if we need to display refere and free shippoing on right uncommenet below -- *@
+<div class="col-md-3 cta-group">
+    @Html.Partial("ReferNFreeShipping")
+</div>
+
+
+@*--- Show How to Order Prescriptions ---*@
+<div class="col-md-12 instructions">
+    @Html.Partial("HowToOrderOtc", Model.AffiliateInfo)
+</div>

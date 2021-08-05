@@ -1,0 +1,103 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.ShippingAddressViewModel
+
+@section PageScripts
+    {
+    <script>
+
+
+    </script>
+
+}
+
+
+<div class="row d-none mb-5" id="add-address">
+    <div class="col-12 col-md-12">
+        @using (Html.BeginForm("AddShippingAddress", "customer"))
+        {
+
+
+            <!-- Start of the Address Detail Card-->
+            <div class="address-detail active">
+                <div class=" ">
+                    <span class="input-wrapper extended mt-4" id="span-add-ship-address">
+                        <!-- Input -->
+                        <label for="FirstName">First Name</label>
+                        @Html.TextBox("CustomerFirstName", string.Empty,
+                        new
+                        {
+                        @class = "form-control",
+                        @placeholder = "First Name",
+                        required = "required",
+
+                        })
+
+                        <label for="LastName">Last Name</label>
+                        @Html.TextBox("CustomerLastName", string.Empty,
+                        new
+                        {
+                        @class = "form-control",
+                        @placeholder = "Last Name",
+                        required = "required",
+
+                        })
+
+                        <label for="Address">Address</label>
+                        @Html.TextBox("CustomerAddress", string.Empty,
+                        new
+                        {
+                        @class = "form-control",
+                        @placeholder = "Address",
+                        required = "required",
+
+                        })
+
+                        <label for="City">City</label>
+                        @Html.TextBox("CustomerCity", string.Empty,
+                        new
+                        {
+                        @class = "form-control",
+                        @placeholder = "City",
+                        required = "required",
+
+
+                        })
+                        <label for="Province">Province</label> <span class="error-msg ml-2">(Province must be same as billing province)</span>
+
+                        <input type="hidden" name="ShippingProvinceId" value="@Model.ShippingAddressProvinceFk" />
+                        @Html.DropDownList("CustomerProvinceId",
+                        new
+                        SelectList(Model.ProvinceList,
+                        "ProvinceId",
+                        "ProvinceName", @Model.ShippingAddressProvinceFk),
+                        new { @class = "form-control", Name = "CustomerProvinceId", @disabled="disabled" })
+                        <label for="Address">Country</label>
+                        <select class="form-control" name="CustomerCountryId">
+                            <option value="@SiteConfigurationsWc.StoreFrontCountryId">@SiteConfigurationsWc.StorefrontCountryName</option>
+                        </select>
+
+                        <label for="PostalCode">Postal Code</label>
+                        @Html.TextBox("CustomerZipCode", string.Empty,
+                        new
+                        {
+                        @class = "form-control PostalCode",
+                        required = "required",
+                        @placeholder = "Postal Code"
+
+                        })
+
+                        <span class="d-flex mb-3">
+
+                            <input type="submit" value="Add" class="btn save-btn update-shipAddress" />
+                            <input type="button" value="Cancel" class="btn btn-grey ml-2" id="ship-address-cancel" />
+
+                        </span>
+
+                    </span>
+                </div>
+            </div>
+            <!-- End of the Address Detail Card-->
+
+        }
+    </div>
+</div>

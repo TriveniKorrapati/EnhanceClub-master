@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : User adds the product into the cart
+
+Given: User is on the EC product page
+
+When: User clicks on ‘Get it now’ 
+
+Then: Product adds into the cart</description>
+   <name>Adding Product into Cart</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>e8c7c1fb-48d9-4247-beb7-8891d041887d</testCaseGuid>
+</TestCaseEntity>

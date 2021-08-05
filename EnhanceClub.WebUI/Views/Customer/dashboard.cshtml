@@ -1,0 +1,265 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.HtmlHelpers
+@model EnhanceClub.WebUI.Models.AccountSectionViewModel
+
+
+@section PageScripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+
+            $("#sort-order-dropdown").val($("#selected-sort-order").val());
+            $("#sort-order-dropdown").change(function () {
+                var sortOrder = $(this).val();
+                window.location.href = "/customer/dashboard?sortOrder=" + sortOrder;
+            });
+            if (parseInt(($(".ld-module-trigger-count").html())) > 0 && ($("#fromLogin").val().toLowerCase() == "true")) {
+                showCartPopup();
+            }
+
+            var orderId = getUrlVars()["orderId"];
+            var custId = getUrlVars()["custId"];
+
+            if (typeof orderId !== "undefined" && typeof custId !== "undefined") {
+
+                if ($("#BP" + orderId).length) {
+                    GetUserBPData(orderId, custId);
+                    $("#BP" + orderId)[0].click()
+                }
+
+            }
+        });
+
+
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+        function GetUserBPData(OrderInvoiceId, CustomerFk) {
+
+            $.ajax({
+                url: "/order/GetBPQuestionnaires",
+                contentType: "application/json",
+                type: 'Get',
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    if (data.questionnaireCount > 0) {
+
+                        var topBloodPressureQuestionnaire = data.topBloodPressureQuestionnaire;
+                        var bottomBloodPressureQuestionnaire = data.bottomBloodPressureQuestionnaire;
+
+                        var orderList = "<ul style='list-style-type: none'>";
+                        $.each(topBloodPressureQuestionnaire,
+                            function (index, value) {
+                                var optionData = value.split('_');
+
+                                orderList = orderList + "<li><input type='radio' style='height: 31px;width: 5%;' id='" + optionData[0] + "' value='" + optionData[0] + "' name='" + optionData[2] + "' /> <label class='optionText' style='vertical-align: text-bottom;font-size: 1.2em;margin-left: 3%;'>" + optionData[1] + "</label></li>";
+                            })
+
+                        orderList = orderList + "</ul>";
+
+                        $("#topBloodPressure").empty();
+                        $("#topBloodPressure").append(orderList);
+
+                        orderList = "<ul style='list-style-type: none'>";
+                        $.each(bottomBloodPressureQuestionnaire, function (index, value) {
+                            var optionData = value.split('_');
+
+                            orderList = orderList + "<li><input type='radio' style='height: 31px;width: 5%;' id='" + optionData[0] + "' value='" + optionData[0] + "' name='" + optionData[2] + "' /> <label class='optionText' style='vertical-align: text-bottom;font-size: 1.2em;margin-left: 3%;'>" + optionData[1] + "</label></li>";
+                        })
+
+                        orderList = orderList + "</ul>"
+
+                        $("#bottomBloodPressure").empty();
+                        $("#bottomBloodPressure").append(orderList);
+
+                        $("#OrderInvoiceId").val(OrderInvoiceId);
+                        $("#CustomerFk").val(CustomerFk);
+                    }
+                },
+                error: function (response) {
+                    return false;
+                }
+
+            });
+        }
+
+        function UpdateUserBPData() {
+            var OrderInvoiceId = $("#OrderInvoiceId").val();
+            var CustomerFk = $("#CustomerFk").val();
+
+            var topBloodPressureSelected = 0;
+            var bottomBloodPressureSelected = 0;
+            var flag = false;
+
+            for (var i = 59; i <= 63; i++) {
+                if ($('#' + i).is(':checked')) {
+                    flag = true;
+                    topBloodPressureSelected = i;
+                    break;
+                }
+            }
+
+            if (flag === false) {
+                alert("Please select top number of your blood pressure reading question response.");
+                return flag;
+            }
+            else {
+                flag = false;
+                for (var i = 64; i <= 68; i++) {
+                    if ($('#' + i).is(':checked')) {
+                        flag = true;
+                        bottomBloodPressureSelected = i;
+                        break;
+                    }
+                }
+            }
+
+            if (flag === false) {
+                alert("Please select bottom number of your blood pressure reading question response.");
+                return flag;
+            }
+
+            $.ajax({
+                url: "/order/UpdateBPQuestionnaireResponse",
+                contentType: "application/json",
+                type: 'Get',
+                async: false,
+                dataType: 'json',
+                data: { OrderInvoiceId: OrderInvoiceId, CustomerFk: CustomerFk, topBloodPressureSelected: topBloodPressureSelected, bottomBloodPressureSelected: bottomBloodPressureSelected },
+                success: function (data) {
+                    window.location.href = "/dashboard";
+                    return false;
+                },
+                error: function (response) {
+                    return false;
+                }
+            });
+
+        }
+    </script>
+}
+
+<div class="dashboard-page order-page">
+
+    @Html.Hidden("fromLogin", Model.fromLogin)
+    <div class="section top-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 hidden-md">
+                    <h1 class="heading text-uppercase">DASHBOARD</h1>
+                </div>
+            </div>
+            @if (Model.CustomerIsPartial)
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="notify error">
+                            Please complete your <a class="" href="myaccount/account-info">profile here</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row">
+
+                <!-- Start of Sidebar -->
+                @Html.Partial("AccountOptions", "dashboard", new ViewDataDictionary { { "CustomerCreditAvaliable", ViewBag.CustomerCredit }, { "IsProfileShow", ViewBag.IsProfileShow } })
+                <!-- End of Sidebar -->
+                <!-- Start of Main Section -->
+                <div class="col-12 col-md-12 col-lg-9 col-xl-9 order-2 order-lg-1">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-9 col-xs-9">
+                            <h2 class="heading visible-md text-uppercase">DASHBOARD</h2>
+                            <div style="font-weight: bolder; font-size: 32px;">
+                                Welcome to your dashboard, @Model.LoggedCustomer.CustomerFirstName!
+                            </div>
+                            <div style="font-weight: bold; font-size: 26px;">
+                                Your Customer Id: #@Model.LoggedCustomer.CustomerId
+                            </div>
+                            <h5>This dashboard is where it all comes together! Here you can track your purchases, prescriptions, treatment plans and even upcoming @SiteConfigurationsWc.TermForPractitioner appointments. You can also update your personal details, billing information and more.</h5>
+
+                            @if (SiteConfigurationsWc.CreditAvaliableLogic == 1)
+                            {
+                                <div class="d-inline-block d-lg-none">
+                                    <div class="credits">
+                                        <div class="credits-heading">
+                                            <p class="mr-4">Club Credits Available</p>
+                                            <p class="highlight">$</p>
+                                        </div>
+                                        <div class="credits-total">
+                                            <p>
+                                                @ViewBag.CustomerCredit<span>*</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="credits-disclaimer">
+                                        *You can add / use credits on checkout
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 col-xs-3">
+                            <!-- Blank Space -->
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-12">
+                            <div class="notify info">
+                                <b>Big Tip!</b> If you didn’t receive our Enhance Club email(s), peek inside your junk/ spam/ promotions folder then add our email to your address book! Still not there? Contact us at <a href="mailto:@SiteConfigurationsWc.StorefrontEnquiry">@SiteConfigurationsWc.StorefrontEnquiry</a>.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Start of Filter Section -->
+                    @if (Model.AllOrders.Any())
+                    {
+                        <div class="row filter-section align-items-center">
+                            @Html.Partial("_SortingFilter")
+                            <div class="col-12 col-md-7 col-xl-7 col-xl-7 order-md-1">
+                                <h4>LATEST PURCHASES</h4>
+                            </div>
+                        </div>
+                        <!-- End of Filter Section -->
+                        @Html.Partial("_orderslist")
+                    }
+
+
+                </div>
+                <!-- End of Main Section -->
+
+            </div>
+        </div>
+
+        <!-- Start of Pagination -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="pagination">
+                        @Html.PageLinks(Model.PagingInfo, x => Url.Action("dashboard", new { page = x, sortOrder = @Model.SortOrder }))
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End of Pagination -->
+        <!-- Start of the Bottom Clip Path -->
+        @*<div class="bottom-clip">
+                <div class="dash-bottom-clip">
+                </div>
+            </div>*@
+        <!-- End of Bottom Clip path -->
+    </div>
+
+
+</div>

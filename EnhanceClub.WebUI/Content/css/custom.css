@@ -1,0 +1,139 @@
+﻿.validation-summary-errors  {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    text-align: center;
+}
+.validation-summary-errors ul {
+    padding-left: 0;
+    margin: 0;
+}
+.validation-summary-errors ul li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+/*hide email exists messaqge for sign up page*/
+span.email-exist-msg {
+    display: none;
+
+}
+
+span.email-exist-msg.input-error{
+    display:inline-block;
+    color:#ffc305;
+
+}
+
+/*hide confirm password message for sign up page*/
+span.password-match-msg {
+    display: none;
+
+}
+
+span.password-match-msg.input-error{
+    display:inline-block;
+    color:#ffc305;
+
+}
+
+/*hide email customer password message for sign up page*/
+span.password-valid-msg {
+    display: none;
+}
+
+    span.password-valid-msg.input-error {
+        display: inline-block;
+        color: #ffc305;
+    }
+
+/* added to set style for provice drop down on signup page*/
+.form-group select {
+    
+    border: 1px solid #fff;
+    background-color: #47043f;
+    padding: 8px 40px;
+    width: 100%;
+    color: #fff;
+
+}
+
+
+/* added to set style for provice drop down on signup page*/
+
+#CustomerEmail.input-error {
+    border: 2px solid #ffc305;
+}
+
+.form-container.input-container {
+    margin-bottom: 30px;
+}
+.product-page .product-item {
+    right: 15% !important;
+}
+.product-page .product-item .product {
+    max-width: 420px !important;
+}
+
+.product-page .product-item .action-items {
+    display: block !important;
+    /* width: auto !important; */
+    overflow: auto !important;
+    bottom: 2% !important;
+    text-align: center;
+}
+.product-page .product-item .action-items .form-control {
+    margin-right: 0 !important;
+    /* width: auto !important; */
+}
+.product-page .product-item .action-items .form-control select {
+    margin-bottom: 10px;
+}
+
+.product-page .product-item .action-items .btn {
+    width: 100% !important;
+}
+.product-page .product-item .action-items {
+    margin-left: 0 !important;
+}
+@media screen and (min-width: 1399px) {
+    .product-page .product-item .product {
+        right: 20px !important;
+    }
+}
+
+.product-page .product-item .product {
+    width: auto;
+    /* height: 60%; */
+    left: 0;
+    margin: 0 auto;
+}
+
+.product-page .product-item .product-pills {
+    width: 80%;
+    margin-top: 35px;
+    margin-right: 10px;
+}
+
+/* Start: styles specific to privacy policy page */
+ .privacy-content p {
+     /*display: inline-block;*/
+     margin-left: 20px;
+ }
+
+/* End: styles specific to privacy policy page */
+
+/*@media screen and (max-width: 1399px) {
+    .product-page .product-item .action-items {
+        margin-left: 0 !important;
+    }
+}
+@media screen and (max-width: 1680px) {
+    .product-page .product-item .action-items {
+        margin-left: 0 !important;
+    }
+}*/

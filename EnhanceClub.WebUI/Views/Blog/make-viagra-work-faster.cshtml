@@ -1,0 +1,199 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+
+@using EnhanceClub.WebUI.Models
+
+
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="https://www.enhanceclub.com/blog/@Model.BlogLink" />
+
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+
+            <meta itemprop="url" content=" https://www.enhanceclub.com/content/images/logo-active.svg">
+
+            <meta itemprop="width" content="800">
+
+            <meta itemprop="height" content="60">
+
+        </div>
+
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+
+
+    </div>
+
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+
+        <meta itemprop="url" content="https://www.enhanceclub.com/content/images/@Model.BlogMainImage" />
+
+        <meta itemprop="height" content="120">
+
+        <meta itemprop="width" content="120">
+
+    </div>
+
+    <div class="blog-post">
+
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+
+        </div>
+
+        <div class="post-main-section">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <div class="post-content-section">
+
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+
+                            @Html.Partial("_breadcrumb")
+
+
+
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+
+
+                            <div itemprop="articlebody">
+
+
+
+                                <p>
+                                    When it comes to action, we know you want to go full throttle. And you can, but like everything else, there is a way to get it right.  Contrary to popular belief, Viagra tablets or the generic sildenafil don’t work faster if placed under the <a href="https://www.healthline.com/health/does-chewing-up-viagra-work-faster">tongue</a>. Sneaking in more than the prescribed dose will not help either. On the contrary, it might inflict more harm than good. They’re one of the most prescribed <a href="https://www.enhanceclub.com/products">medications</a> for ED that are meant to be swallowed and that’s how they’re going to do their job and help you do yours.  
+
+
+
+                                    <br><br>Here are a few tips that may come in handy to amplify the effects of Viagra without ticking off the side effects, so read on.   
+                                </p>
+
+
+                                <h5>NO PRESSURE</h5>
+
+
+
+                                <p>Even Viagra cannot perform under pressure. We mean, if you want your ED meds to work faster or prove to be more effective for you when you need it the most, you have to be sexually aroused too. Your body is not a vending machine that pops out a product when you pop in the dollars. Similarly, just because you consumed a pill of Viagra or the generic sildenafil does not mean the sword will be up. It will be ready for refreshments, yes, but you must be in the mood for refreshments first to enjoy the fruits of your labor.  </p>
+
+
+
+                                <h5>TIMING IS KEY</h5>
+
+
+
+                                <p>Satisfaction at the dinner table right before the bedroom might not be a healthy routine to follow, after all. A full or heavily stuffed stomach impedes the body’s absorption of Viagra, resulting in delayed results. The best and the most effective way to consume Viagra is by combining it with a light meal. Be sure to have it 30 to 60 minutes before going into action. It is not advisable to have more than one dose in 24 hours. Keep in mind that the results last 4 hours, so relax and take it slow.  </p>
+
+
+
+
+
+                                <div class="cta-box mb-3">
+
+                                    <div class="cta-image">
+
+                                        <img src="/content/images/products/product-item-generic-13412.png" alt="">
+
+                                    </div>
+
+                                    <div class="cta-text">
+
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+
+                                        <a href="/products" class="btn btn__secondary btn--rounded ">Visit our online store</a>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <h5>BUZZKILL</h5>
+
+
+
+                                <p>Alcohol and drugs might give you the high you wanted after a long day at work, but they might be the ones that keep you from staying longer in bed. Consuming large amounts of alcohol can <a href="https://www.enhanceclub.com/blog/common-causes-ED">make it hard</a> to keep it hard. Not only because alcohol depletes the production of testosterone, but the intoxicants in alcohol and drugs also interrupt the communication from your brain to send the blood flowing to the penis. Smoking, on top of it, only embitters the situation.   </p>
+
+
+
+
+
+                                <h5>GOOD AT HEART</h5>
+
+
+
+                                <p>The most effective way to have Viagra exhibit its effect faster is to have a healthy heart. You heard it right. A <a href="https://www.getroman.com/health-guide/make-viagra-more-effective/">study</a> published in the Journal of Sexual Medicine states that men who failed to get more than 30 to 149 minutes of weekly exercise had a 40 to 60% higher probability of experiencing erectile dysfunction than men who managed to get more than 150 minutes of weekly physical activity. Keeping your bodily and cardiovascular functions in apex form can be your ultimate tool to overcoming ED, in addition to having Viagra work more effectively.  </p>
+
+
+
+                                <h5>TALK TO A PRO</h5>
+
+
+
+                                <p>You must seek medical attention if you feel the current dose prescribed isn’t a top-drawer for you despite the appropriate lifestyle changes. Chances are you might need a higher dosage or a different medication; whatever the solution is, we want you to know that you’re not alone, and so many men out there deal with erectile dysfunction. With the right guidance and proper medication, things can look up for you. </p>
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+
+                        <h2>@ViewBag.NextBlogTitle </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div> 

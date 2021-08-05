@@ -1,0 +1,484 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model ProductDetailViewModel
+
+@section PageScripts
+{
+<script type="text/javascript">
+    $(document).ready(function () {
+        var isAutoRefill =  @ViewBag.IsAutoRefill;
+        if (isAutoRefill == 1) {
+            alert("Allowed number of refills has been ordered already for this product.");
+        }            
+        var productId = $("#product-id").val();
+        var strength = $("#menu-generic-web :selected").text();
+        BindQuantityDropDown(true, productId, strength);
+
+        var win = $(window);
+        var winH = win.height(); // Get the window height.
+
+        win.on("scroll", function () {
+            if ($(this).scrollTop() > 300) {
+                $(".product-action .bg-brand").addClass("gradient");
+            } else {
+                $(".product-action .bg-brand").removeClass("gradient");
+            }
+        }).on("resize", function () { // If the user resizes the window
+            winH = $(this).height(); // you'll need the new height value
+        });
+    });
+    $("#menu-selection-mobile").on("change", function () {
+
+        var selectedType = $(this).find('option:selected').val();
+        // Commented image change on change if brand/generic dropdown, Date - Oct 8, 2020
+        // var imagePath = "/content/images/products/";
+
+        if (selectedType == "2") {
+            // Commented image change on change if brand/generic dropdown, Date - Oct 8, 2020
+            //change product image
+            //var imageName = "product-item-brand-" + $("#product-id").val() + ".png";
+            //$("#product-image").attr("src",imagePath + imageName);
+
+            // hide generic drop down and get it now button
+            $('#menu-generic-mobile').addClass('d-none');
+            $("#form-group-generic-mobile").addClass('d-none');
+            $('#get-product-generic-mobile').addClass('d-none');
+            $("#mobile-generic-quantity").addClass('d-none');
+
+            // show brand drop down and get it now button
+            $('#menu-brand-mobile').removeClass('d-none');
+            $("#form-group-brand-mobile").removeClass('d-none');
+            $('#get-product-brand-mobile').removeClass('d-none');
+            $("#mobile-brand-quantity").removeClass('d-none');
+
+            if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether != 1) {
+        var productId = $("#menu-brand-mobile option:selected").val();
+        var strength = $('#menu-brand-mobile :selected').text();
+        BindQuantityDropDown(false, productId, strength);
+    }
+
+            }
+            else {
+        // Commented image change on change if brand/generic dropdown, Date - Oct 8, 2020
+        //change product image
+        //var imageName = "product-item-generic-" + $("#product-id").val() + ".png";
+        //$("#product-image").attr("src",imagePath + imageName);
+
+        // hide brand drop down and get it now button
+        $('#menu-brand-mobile').addClass('d-none');
+        $("#form-group-brand-mobile").addClass('d-none');
+        $('#get-product-brand-mobile').addClass('d-none');
+        $("#mobile-brand-quantity").addClass('d-none');
+
+        // show generic drop down and get it now button
+        $('#menu-generic-mobile').removeClass('d-none');
+        $("#form-group-generic-mobile").removeClass('d-none');
+        $('#get-product-generic-mobile').removeClass('d-none');
+        $("#mobile-generic-quantity").removeClass('d-none');
+
+        if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether != 1) {
+            var productId = $("#menu-generic-mobile option:selected").val();
+            var strength = $('#menu-generic-mobile :selected').text();
+            BindQuantityDropDown(true, productId, strength);
+        }
+
+    }
+            // $('.container:a').attr('target', '_blank');
+
+        });
+
+
+    $("#menu-selection-web").on("change", function () {
+
+        //change the condition to check value in place of text 18 Jan 2020
+        // var selectedType = $(this).find('option:selected').text();
+
+        var selectedType = $(this).find('option:selected').val();
+        // Commented image change on change if brand/generic dropdown, Date - Oct 8, 2020
+        // var imagePath = "/content/images/products/";
+
+        if (selectedType == "2") {
+
+            // Commented image change on change if brand/generic dropdown, Date - Oct 8, 2020
+            //change product image
+            //var imageName = "product-item-brand-" + $("#product-id").val() + ".png";
+            //$("#product-image").attr("src",imagePath + imageName);
+
+            // hide generic drop down and get it now button
+            $('#web-generic-productsize').addClass('d-none');
+            $('#get-product-generic-web').addClass('d-none');
+            $("#web-generic-quantity").addClass('d-none');
+
+            // show brand drop down and get it now button
+            $('#web-brand-productsize').removeClass('d-none');
+            $('#get-product-brand-web').removeClass('d-none');
+            $("#web-brand-quantity").removeClass('d-none');
+
+            if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether != 1) {
+        var productId = $("#web-brand-productsize option:selected").val();
+        var strength = $('#web-brand-productsize :selected').text();
+        BindQuantityDropDown(false, productId, strength);
+    }
+            }
+            else {
+        // Commented image change on change if brand/generic dropdown, Date - Oct 8, 2020
+        //change product image
+        //var imageName = "product-item-generic-" + $("#product-id").val() + ".png";
+        //$("#product-image").attr("src",imagePath + imageName);
+
+        // hide brand drop down and get it now button
+        $('#web-brand-productsize').addClass('d-none');
+        $('#get-product-brand-web').addClass('d-none');
+        $("#web-brand-quantity").addClass('d-none');
+
+        // show generic drop down and get it now button
+        $('#web-generic-productsize').removeClass('d-none');
+        $('#get-product-generic-web').removeClass('d-none');
+        $("#web-generic-quantity").removeClass('d-none');
+
+        if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether != 1) {
+            var productId = $("#web-generic-productsize option:selected").val();
+            var strength = $('#web-generic-productsize :selected').text();
+            BindQuantityDropDown(true, productId, strength);
+        }
+
+    }
+            // $('.container:a').attr('target', '_blank');
+
+        });
+
+    // on change event bind quantities dropdown again
+    $(".action-items").on('change', '#menu-generic-web , #menu-generic-mobile', function () {
+
+        productId = $(this).find('option:selected').val(); //$("#menu-generic-web option:selected").val();
+        strength = $(this).find('option:selected').text();// $('#menu-generic-web :selected').text();
+
+        BindQuantityDropDown(true, productId, strength);
+    });
+
+    $(".action-items").on('change', '#menu-brand-web, #menu-brand-mobile', function () {
+        productId = $(this).find('option:selected').val(); //$("#menu-brand-web option:selected").val();
+        strength = $(this).find('option:selected').text(); //$('#menu-brand-web :selected').text();
+        BindQuantityDropDown(false, productId, strength);
+    });
+
+
+
+        //document.querySelectorAll('.container a')
+        //    .forEach(function (elem) {
+        //        elem.setAttribute('target', '_blank');
+        //    });
+</script>
+}
+
+
+@Html.Partial("_productTypeStructureData", new ProductStructureViewModel
+{
+PageUrl = @Request.Url != null ? Request.Url.AbsoluteUri : String.Empty,
+MainImageUrl = "img",
+ProductName = @Model.ProductSearch.ProductName,
+ProductId = Model.ProductSearch.ProductId.ToString(),
+ProductDescription = Model.ProductSearch.ProductDescription,
+LowPrice = Model.ProductSearch.ProductSizeList.OrderBy(x => x.ProductSizePrice).Select(x => x.ProductSizePrice).FirstOrDefault(),
+HighPrice = Model.ProductSearch.ProductSizeList.OrderByDescending(x => x.ProductSizePrice).Select(x => x.ProductSizePrice).FirstOrDefault(),
+ProductType = Model.ProductSearch.ProductTypeFk,
+PetProduct = Model.ProductSearch.PetProduct,
+BrandProductCount = Model.ProductSearch.ProductSizeList.Count(x => x.ProductSizeGeneric == false),
+GenericProductCount = Model.ProductSearch.ProductSizeList.Count(x => x.ProductSizeGeneric),
+RelatedProducts = Model.ProductSearch.RelatedProducts,
+MetaDescription = Model.ProductSearch.ProductStoreFrontMetaDescription
+})
+
+@Html.Partial("_drugTypeStructureData", new DrugStructureViewModel
+{
+DosageForm = @Model.ProductSearch.ProductUnits ?? String.Empty,
+ProductTypeFk = @Model.ProductSearch.ProductTypeFk,
+ManufacturerNamePk = Model.ProductSearch.ManufacturerNamePk,
+ProductName = @Model.ProductSearch.ProductName,
+ProductCautions = @Model.ProductSearch.ProductCautions
+})
+
+<!-- Main -->
+<main class="product-page-container @Model.ProductDisplayClass">
+
+    <!-- Product Pop Up -->
+    <div class="product-page__popup">
+        <div class="product-page__popup__exit-container">
+            <a href="#" class="product-page__popup__exit">
+                <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.36719 2L24.3672 24" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></path>
+                    <path d="M2 23.6334L24.7333 2.3667" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"></path>
+                </svg>
+            </a>
+        </div>
+        <div class="product-page__popup__info">
+            <div class="product-page__title">
+                <h1>@Model.ProductSearch.FeaturedProductDisplayName</h1>
+                <p>@Model.ProductSearch.ProductGenericName</p>
+            </div>
+            <div class="product-page__generic">
+                <p>Generic @Model.ProductSearch.ProductName</p>
+            </div>
+            <div class="product-page__popup__details">
+                <h2 class="h5">
+                    When do you take them?
+                </h2>
+
+                @Html.Raw(Model.ProductSearch.ProductStoreFrontDirections)
+
+                <h2 class="h5">
+                    Medical Information
+                </h2>
+                @if (!string.IsNullOrWhiteSpace(@Model.ProductSearch.ProductStoreFrontIngredients))
+                {
+                <p>@Html.Raw(Model.ProductSearch.ProductStoreFrontIngredients)</p>
+                }
+                <h2 class="h5">
+                    Side Effects
+                </h2>
+                @if (!string.IsNullOrWhiteSpace(@Model.ProductSearch.ProductStoreFrontSideEffects))
+                {
+                <p>@Html.Raw(Model.ProductSearch.ProductStoreFrontSideEffects)</p>
+                }
+                <h2 class="h5">
+                    What do you feel?
+                </h2>
+                @if (!string.IsNullOrWhiteSpace(@Model.ProductSearch.ProductStoreFrontCautions))
+                {
+                <p>@Html.Raw(Model.ProductSearch.ProductStoreFrontCautions)</p>
+                <div class="product-page__popup__contact">
+                    <p> Still need some answers? </p>
+
+                    @Html.ActionLink("Get in touch with us!", "get-in-touch", "Home", null, null)
+
+                </div>
+                }
+
+                <br /><br /> <br /> <br /> <br />
+            </div>
+        </div>
+    </div>
+    <!-- /Product Pop Up -->
+
+    <input type="hidden" value="@Model.ProductSearch.ProductId" id="product-id" />
+
+    @{
+    var i = 0;
+    var hideBrandListClass = "";
+    //List to categories brand and Generic projects
+    List<ProductSize>
+        brandProductSizeList = Model.ProductSearch.ProductSizeList.Where(x => !x.ProductSizeGeneric).OrderBy(x => x.ProductSizeOrder).ToList();
+        List<ProductSize>
+            genericProductSizeList = Model.ProductSearch.ProductSizeList.Where(x => x.ProductSizeGeneric).OrderBy(x => x.ProductSizeOrder).ToList();
+            var productImage = @Model.ProductGenericImage;
+
+            //FeaturedProduct featuredProductObj = (FeaturedProduct)Model.ProductSearch.RelatedProducts.Where;
+            }
+            <!-- Product Details -->
+            <div class="product-page__bg">
+                <div class="container">
+                    @Html.Partial("_breadcrumb")
+                    <br />
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="d-flex flex-column">
+                                <div class="-intro-x product-page__header-container order-1 order-md-1">
+                                    <div class="product-page__header">
+                                        <div class="product-page__title">
+                                            <h1>
+                                                @Model.ProductSearch.FeaturedProductDisplayName
+                                            </h1>
+                                            <div class="product-page__name">
+                                                <a href="#" class="product-page__popup-link d-none d-md-inline-block">
+                                                    <div class="product-page__icon">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+                                                            <path class="circle" d="M26.3 14c0 6.8-5.5 12.3-12.3 12.3-6.8 0-12.2-5.5-12.2-12.3C1.8 7.2 7.2 1.8 14 1.8c6.8 0 12.3 5.4 12.3 12.2z" fill="none" stroke="#c70039" stroke-width="3.5" />
+                                                            <path class="icon" d="M12.9 16.6h2.2l.5-6.4.1-3h-3.4l.1 3 .5 6.4zM14 22c1.2 0 2-.9 2-2.1 0-1.2-.8-2.1-2-2.1s-2 .9-2 2.1c0 1.1.8 2.1 2 2.1z" fill="#c70039" />
+                                                        </svg>
+                                                    </div>
+                                                </a>
+                                                <p>@Model.ProductSearch.ProductGenericName</p>
+                                            </div>
+                                        </div>
+                                        <div class="product-page__generic">
+                                            <p>Generic @Model.ProductSearch.ProductName</p>
+                                        </div>
+                                    </div>
+                                    <div class="product-page__image d-block d-md-none">
+                                        <img src="@productImage" />
+                                    </div>
+                                </div>
+                                <div class="-intro-x product-page__info order-3 order-md-2">
+                                    <h2 class="h5">
+                                        When do you take them?
+                                    </h2>
+
+                                    @Html.Raw(Model.ProductSearch.ProductStoreFrontDirections)
+
+                                    <div class="d-inline-block">
+                                        <a href="#" class="product-page__popup-link">
+                                            <div class="product-page__icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28">
+                                                    <path class="circle" d="M26.3 14c0 6.8-5.5 12.3-12.3 12.3-6.8 0-12.2-5.5-12.2-12.3C1.8 7.2 7.2 1.8 14 1.8c6.8 0 12.3 5.4 12.3 12.2z" fill="none" stroke="#c70039" stroke-width="3.5" />
+                                                    <path class="icon" d="M12.9 16.6h2.2l.5-6.4.1-3h-3.4l.1 3 .5 6.4zM14 22c1.2 0 2-.9 2-2.1 0-1.2-.8-2.1-2-2.1s-2 .9-2 2.1c0 1.1.8 2.1 2 2.1z" fill="#c70039" />
+                                                </svg>
+                                            </div>
+                                            <p>
+                                                Important Safety Information
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="-intro-x product-page__order order-2 order-md-3">
+                                    <div class="product-page__form">
+                                        <div class="form-group">
+                                            <select name="Productselection" class="" id="menu-selection-mobile">
+
+                                                <option value="0">Choose Product</option>
+                                                @if (genericProductSizeList.Count > 0)
+                                                {
+                                                <option value="1">Generic (@Model.ProductSearch.ProductGenericName)</option>
+                                                }
+                                                @if (brandProductSizeList.Count > 0)
+                                                {
+                                                <option value="2">Brand (@Model.ProductSearch.ProductName)</option>
+                                                }
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group-container">
+                                            @if (SiteConfigurationsWc.ShowProductStrengthUnitTogether == 1)
+                                            {
+                                            if (genericProductSizeList.Count > 0)
+                                            {
+                                            hideBrandListClass = "d-none";
+                                            <div class="form-group" id="form-group-generic-mobile">
+                                                @Html.DropDownList("menu-generic-mobile", new
+                                                SelectList(@genericProductSizeList, "DisplayValue", "DisplayTextNoBrand"), "Select Size", new { Name = "productsizeId", @class = "" })
+                                            </div>
+
+                                            }
+                                            if (brandProductSizeList.Count > 0)
+                                            {
+
+                                            <div class="form-group @hideBrandListClass" id="form-group-brand-mobile">
+                                                @Html.DropDownList("menu-brand-mobile", new
+                                                SelectList(@brandProductSizeList, "DisplayValue", "DisplayTextNoBrand"), "Select Size", new { Name = "productsizeId", @class = @hideBrandListClass })
+                                            </div>
+                                            }
+                                            }
+                                            else
+                                            {
+                                            if (genericProductSizeList.Count > 0)
+                                            {
+                                            hideBrandListClass = "d-none";
+                                            <div class="form-group" id="form-group-generic-mobile">
+                                                @Html.DropDownList("menu-generic-mobile", new
+                                                SelectList(@genericProductSizeList, "ProductFk", "ProductSizeStrength"), "Choose Strength", new { Name = "productsizeId", @class = "" })
+                                            </div>
+                                            <div class="form-group" id="mobile-generic-quantity">
+                                                @Html.DropDownList("menu-quantity", Enumerable.Empty<SelectListItem>(), "Choose Quantity", new { Name = "quantity-productsizeId", @class = "btn-rounded" })
+                                            </div>
+
+                                            }
+                                            if (brandProductSizeList.Count > 0)
+                                            {
+
+                                            <div class="@hideBrandListClass" id="form-group-brand-mobile">
+                                                @Html.DropDownList("menu-brand-mobile", new
+                                                SelectList(@brandProductSizeList, "ProductFk", "ProductSizeStrength"), "Choose Strength", new { Name = "productsizeId", @class = @hideBrandListClass })
+                                            </div>
+                                            <div class="form-group @hideBrandListClass" id="mobile-brand-quantity">
+                                                @Html.DropDownList("menu-quantity", Enumerable.Empty<SelectListItem>(), "Choose Quantity", new { Name = "quantity-productsizeId", @class = "" })
+                                            </div>
+                                            }
+                                            }
+                                        </div>
+                                        @if (SiteConfigurationsWc.ShowProductStrengthUnitTogether == 1)
+                                        {
+                                        if (genericProductSizeList.Count > 0)
+                                        {
+                                        <button class="btn btn__secondary btn--rounded " id="get-product-generic-mobile">
+                                            Buy Now
+                                        </button>
+
+                                        }
+                                        if (brandProductSizeList.Count > 0)
+                                        {
+                                        <button class="btn btn__secondary btn--rounded @hideBrandListClass" id="get-product-brand-mobile">
+                                            Buy Now
+                                        </button>
+                                        }
+                                        }
+                                        else
+                                        {
+                                        if (genericProductSizeList.Count > 0)
+                                        {
+                                        <button class="btn btn__secondary btn--rounded " id="get-product-generic-mobile">
+                                            Buy Now
+                                        </button>
+
+                                        }
+                                        if (brandProductSizeList.Count > 0)
+                                        {
+                                        <button class="btn btn__secondary btn--rounded @hideBrandListClass" id="get-product-brand-mobile">
+                                            Buy now
+                                        </button>
+                                        }
+                                        }
+                                    </div>
+                                    <div class="product-page__note">
+                                        @if (!string.IsNullOrEmpty(@Model.RecommendedDosage))
+                                        {
+                                        <p> The recommended dose is one tablet (@Model.RecommendedDosage per day) before sexual activity, as needed.</p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="-intro-x product-page__how-it-works order-4 order-md-4">
+                                    <h3 class="h5">How it works</h3>
+                                    <div class="product-page__how-it-works__details">
+                                        <div class="product-page__how-it-works__item">
+                                            <div class="product-page__how-it-works__image">
+                                                <img src="/content/images/step-1--small.png" alt="">
+                                            </div>
+                                            <p>
+                                                <b><span>Step 1</span></b>
+                                                Select your <br class="d-none d-xl-block">favourite product
+                                            </p>
+                                        </div>
+                                        <div class="product-page__how-it-works__item">
+                                            <div class="product-page__how-it-works__image">
+                                                <img src="/content/images/step-2--small.png" alt="">
+                                            </div>
+                                            <p>
+                                                <b><span>Step 2</span></b>
+                                                Get in touch with <br class="d-none d-xl-block">a Practitioner
+                                            </p>
+                                        </div>
+                                        <div class="product-page__how-it-works__item">
+                                            <div class="product-page__how-it-works__image">
+                                                <img src="/content/images/step-3--small.png" alt="">
+                                            </div>
+                                            <p>
+                                                <b><span>Step 3</span></b>
+                                                Get your package <br class="d-none d-xl-block">discreetly
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="product-page__image d-none d-md-block intro-x">
+                                <img src="@productImage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Product Details -->
+            <!-- Product Footer -->
+            @Html.Partial("_relatedProductsV2", @Model.ProductSearch.RelatedProducts)
+</main>
+<!-- /Main -->

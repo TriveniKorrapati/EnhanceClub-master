@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+
+
+
+
+
+
+
+    <title>
+        Add a Patient Profile | www.enhanceclub.com
+    </title>
+
+    <meta name="description">
+
+    <style>
+        html {
+            font-family: 'sans-serif';
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/content/css/main.css" />
+
+</head>
+
+<body>
+
+    <div id="wrapper" class="header-">
+
+        <nav class="navbar fixed-top navbar-expand-md">
+            <button class="btn btn-menu btn-reset"><img src="/content/images/menu-icon.png" alt="menu" /></button>
+            <a class="navbar-brand" href="/">
+                <img src="/content/images/logo-white.svg" class="default" alt="white" /><img
+                    src="/content/images/logo-active.svg" class="active" alt="black" />
+            </a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button> -->
+
+            <span class="nav-link cart-open d-md-none">
+
+
+
+                Cart <span class="badge badge-count">
+
+                    <div class="ld-module-cart">
+
+                        <span class="ld-module-trigger collapsed" role="button" data-ld-toggle="true"
+                            data-toggle="collapse" data-target="#shop-cart" aria-controls="shop-cart"
+                            aria-expanded="false">
+                            <span class="ld-module-trigger-icon">
+                                <i class="icon-ld-cart"></i>
+                            </span><!-- /.ld-module-trigger-icon -->
+                            <span class="ld-module-trigger-count">0</span>
+                        </span><!-- /.ld-module-trigger -->
+
+                        <!-- /.ld-module-dropdown -->
+
+                    </div><!-- /.module-cart -->
+                </span>
+
+
+            </span>
+
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/products">Shop</a>
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="/account">
+                            <i class="fa fa-user"></i> My Account
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/Customer/Logout">
+                            Sign Out
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+
+                        <span class="nav-link cart-open">
+
+
+                            Cart <span class="badge badge-count">
+
+                                <div class="ld-module-cart">
+
+                                    <span class="ld-module-trigger collapsed" role="button" data-ld-toggle="true"
+                                        data-toggle="collapse" data-target="#shop-cart" aria-controls="shop-cart"
+                                        aria-expanded="false">
+                                        <span class="ld-module-trigger-icon">
+                                            <i class="icon-ld-cart"></i>
+                                        </span><!-- /.ld-module-trigger-icon -->
+                                        <span class="ld-module-trigger-count">0</span>
+                                    </span><!-- /.ld-module-trigger -->
+
+                                    <!-- /.ld-module-dropdown -->
+
+                                </div><!-- /.module-cart -->
+                            </span>
+
+                        </span>
+
+
+                        <!-- check with sandy how this menu activates-->
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+
+        <div class="popup-navbar d-flex justify-content-center flex-column">
+            <button class="btn btn-reset btn-menu-close"><img src="/content/images/close.png" alt="icon" /></button>
+            <!-- <img src="/content/images/popup-image.png" alt="image" class="popup-image" /> -->
+            <div class="popup-menu d-flex align-items-end flex-wrap">
+                <div class="w-100 py-3">
+                    <div class="row">
+                        <div class="col-md-3 text-md-right">
+                            <h3>Enhance <br />Club</h3>
+                        </div>
+                        <!-- /.col-md-3 -->
+                        <div class="col-md-9">
+                            <ul class="list-unstyled list-links club-menu">
+                                <li>
+                                    <a class="" href="/">Home</a>
+                                </li>
+                                <li>
+                                    <a class="" href="/about">About us</a>
+
+                                </li>
+                                <li>
+                                    <a class="" href="/how-it-works">How it Works</a>
+
+                                </li>
+                                <li>
+                                    <a class="" href="/blog">Learn</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-md-9 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-3 text-md-right">
+                            <h3>Products</h3>
+                        </div>
+                        <!-- /.col-md-3 -->
+                        <div class="col-md-9">
+                            <ul class="list-unstyled list-links">
+
+                                <li>
+
+                                    <a href="/products/viagra-otc" class="">
+                                        SPIKE<span class="viagra-gradient">VIAGRA</span>
+
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="/products/cialis-otc" class="">
+                                        PLAY<span class="cialis-gradient">CIALIS</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/products/propecia-otc" class="">
+                                        ARISE <span class="finasteride-gradient">FINASTERIDE</span>
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="/products/valtrex" class="">
+                                        SPIKE<span class="valtrex-gradient">VALTREX</span>
+
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="/products/staxyn" class="">
+                                        EASE<span class="staxyn-gradient">STAXYN</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/products/levitra" class="">
+                                        LEVITRA <span class="vandernafil-gradient">VANDERNAFIL</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="/products/acyclovir" class="">
+                                        FRESH <span class="acyclovir-gradient">ACYCLOVIR</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="/products/caverject-impulse-kit" class="">
+                                        POKE <span class="caverject-gradient">CAVERJECT</span>
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-md-9 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-3 text-md-right">
+                            <h3>Need <br />help?</h3>
+                        </div>
+                        <!-- /.col-md-3 -->
+                        <div class="col-md-9">
+                            <ul class="list-unstyled list-links">
+                                <li>
+
+                                    <a class="" href="/get-in-touch">Get in Touch</a>
+
+                                </li>
+                                <li>
+
+                                    <a class="" href="/terms-and-conditions">Terms &amp; Conditions</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/shipping-and-returns">Shipping &amp; Returns</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/privacy-policy">Privacy Policy</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/faq">FAQs</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-md-9 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row popup-social">
+                        <div class="col-md-3 text-md-right">
+                            <h3>Follow us</h3>
+                        </div>
+                        <!-- /.col-md-3 -->
+                        <div class="col-md-9">
+                            <a href="https://www.facebook.com/enhanceclubnow" target="_blank"><img
+                                    src="/content/images/facebook-yl.svg" alt="icon" /></a>
+                            <a href="http://twitter.com/enhanceclub" target="_blank"><img
+                                    src="/content/images/twitter-yl.svg" alt="icon" /></a>
+                            <a href="https://www.youtube.com/channel/UCEUd47AnJTV_5K9gaTB2LwA" target="_blank"><img
+                                    src="/content/images/youtube-yl.svg" alt="icon" /></a>
+                            <a href="http://instagram.com/enhanceclub" target="_blank"><img
+                                    src="/content/images/instagram-yl.svg" alt="icon" /></a>
+
+
+
+                        </div>
+                        <!-- /.col-md-9 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.m-auto -->
+
+                <div class="popup-social w-100">
+                </div>
+                <!-- /.popup-social -->
+            </div>
+            <!-- /.popup-menu -->
+
+        </div>
+
+
+
+        <!-- /.popup-navbar -->
+
+
+
+
+        <div id="cart-popup">
+
+        </div>
+
+        <div class="patient-profile-page">
+            <!-- Start of the Top Clip Path -->
+            <div class="top-clip">
+                <div class="dash-top-clip">
+                </div>
+            </div>
+            <!-- End of the Top Clip Path -->
+
+            <div class="section top-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 hidden-md">
+                            <h1 class="heading text-uppercase">EDIT PROFILE</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <!-- Start of Main Section -->
+                        <div class="col-12 col-md-12 col-lg-9 col-xl-9 order-2 order-lg-1">
+                            <div class="row">
+                                <div class="col-12 col-md-12 col-lg-9 col-xs-9">
+                                    <h1 class="heading visible-md text-uppercase">ADD PROFILE</h1>
+                                </div>
+                                <div class="col-12 col-md-12 col-lg-3 col-xs-3">
+                                    <!-- Blank Space -->
+                                </div>
+                            </div>
+                            <div class="form-container">
+                                <div class="row">
+                                    <div class="col-12 col-xl-9">
+                                        <div class="validation-summary-valid" data-valmsg-summary="true">
+                                            <ul>
+                                                <li style="display:none"></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-xl-9">
+                                        <h4 class="form-title text-capitalize mt-0 mb-4">
+                                            Patient Profile
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-xl-9">
+                                        <form action="/Customer/AddProfile" class="profile-form" id="frm_edit-profile"
+                                            method="post"><input id="CustomerLastIp" name="CustomerLastIp" type="hidden"
+                                                value="127.0.0.1" /><input id="returnUrl" name="returnUrl" type="hidden"
+                                                value="account-info" />
+                                            <div class="form-group info-group">
+                                                <label for="customerfirstname" class="text-capitalize">First
+                                                    Name</label>
+                                                <span class="input-wrapper extended mt-4">
+                                                    <!-- Input -->
+                                                    <input class="form-control" id="PatientProfileFirstName"
+                                                        name="PatientProfileFirstName" placeholder="Patient First Name"
+                                                        required="required" type="text" value="" />
+                                                </span>
+                                            </div>
+                                            <div class="form-group info-group">
+                                                <label for="customerlastname" class="text-capitalize">Last Name</label>
+
+                                                <span class="input-wrapper extended mt-4">
+                                                    <!-- Input -->
+                                                    <input class="form-control" id="PatientProfileLastName"
+                                                        name="PatientProfileLastName" placeholder="Patient Last Name"
+                                                        required="required" type="text" value="" />
+
+                                                </span>
+                                            </div>
+                                            <div class="form-group info-group">
+                                                <label for="username" class="">Patient's Birthdate (MM/dd/yyyy)</label>
+
+                                                <span class="input-wrapper extended mt-4">
+                                                    <!-- Input -->
+                                                    <input class="form-control " id="PatientProfileBirthDate"
+                                                        name="PatientProfileBirthDate" placeholder="Date of Birth"
+                                                        type="date" value="" />
+
+                                                </span>
+                                            </div>
+                                            <div class="form-group info-group">
+                                                <label for="username" class="text-capitalize">Sex</label>
+
+                                                <span class="input-wrapper extended mt-4">
+                                                    <!-- Input -->
+                                                    <select class="form-control" id="PatientProfileSex"
+                                                        name="PatientProfileSex">
+                                                        <option value="m">Male</option>
+                                                        <option value="f">Female</option>
+                                                        <option value="u">Prefer Not To Select</option>
+                                                    </select>
+                                                </span>
+                                            </div>
+                                            <div class="form-group info-group">
+                                                <label for="customerfirstname" class="text-capitalize">Phone
+                                                    Name</label>
+                                                <span class="input-wrapper extended mt-4">
+                                                    <!-- Input -->
+                                                    <input class="form-control" id="PatientProfilePhone"
+                                                        name="PatientProfilePhone" placeholder="Patient Phone"
+                                                        required="required" type="text" value="" />
+
+                                                </span>
+                                            </div>
+                                            <div class="form-group info-group">
+                                                <label for="username" class="text-capitalize">Do you have any allergies
+                                                    to medications?
+                                                    Please list them.</label>
+
+                                                <span class="input-wrapper extended mt-4">
+                                                    <!-- Input -->
+                                                    <textarea class="form-control" cols="20" id="PatientProfileAllergy"
+                                                        name="PatientProfileAllergy" placeholder="List your allergies"
+                                                        rows="2">
+</textarea>
+                                                </span>
+                                            </div>
+                                            <div class="form-group info-group">
+                                                <label for="username" class="text-capitalize">Please list your current
+                                                    medical conditions as well as past surgeries. </label>
+
+                                                <span class="input-wrapper extended mt-4">
+                                                    <!-- Input -->
+                                                    <textarea class="form-control" cols="20"
+                                                        id="PatientProfileMedicalHistory"
+                                                        name="PatientProfileMedicalHistory" rows="2">
+</textarea>
+                                                </span>
+                                            </div>
+                                            <div class="form-group info-group">
+                                                <label for="username" class="text-capitalize">Please list your current
+                                                    medcations including and herbal supplements. </label>
+
+                                                <span class="input-wrapper extended mt-4">
+                                                    <!-- Input -->
+                                                    <textarea class="form-control" cols="20"
+                                                        id="PatientProfileMedication" name="PatientProfileMedication"
+                                                        rows="2">
+</textarea>
+                                                </span>
+                                            </div>
+                                            <div class="save-container">
+                                                <button type="submit" class="save-btn btn btn-default">Continue to
+                                                    Upload Prescription</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Main Section -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer w-100">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3 col-sm-6">
+                            <h3>Enhance Club</h3>
+                            <ul class="list-unstyled list-links">
+                                <li>
+                                    <a class="" href="/">Home</a>
+                                </li>
+
+                                <li>
+                                    <a class="" href="/about">About us</a>
+
+                                </li>
+
+                                <li>
+                                    <a class="" href="/how-it-works">How it Works</a>
+
+                                </li>
+
+                                <li>
+                                    <a class="" href="/blog">Learn</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                        <div class="col-xl-4 col-md-3 col-sm-6">
+                            <h3>Products</h3>
+                            <ul class="list-unstyled list-links">
+
+                                <li>
+
+                                    <a href="/products/viagra-otc" class="">
+                                        SPIKE<span class="viagra-gradient">VIAGRA</span>
+
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="/products/cialis-otc" class="">
+                                        PLAY<span class="cialis-gradient">CIALIS</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/products/propecia-otc" class="">
+                                        ARISE <span class="finasteride-gradient">FINASTERIDE</span>
+                                    </a>
+
+                                </li>
+
+                                <li>
+
+                                    <a href="/products/valtrex" class="">
+                                        SPIKE<span class="valtrex-gradient">VALTREX</span>
+
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="/products/staxyn" class="">
+                                        EASE<span class="staxyn-gradient">STAXYN</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/products/levitra" class="">
+                                        LEVITRA <span class="vandernafil-gradient">VANDERNAFIL</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="/products/acyclovir" class="">
+                                        FRESH <span class="acyclovir-gradient">ACYCLOVIR</span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="/products/caverject-impulse-kit" class="">
+                                        POKE <span class="caverject-gradient">CAVERJECT</span>
+                                    </a>
+
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                        <div class="col-lg-2 col-md-3 col-sm-6">
+                            <h3>Need help?</h3>
+                            <ul class="list-unstyled list-links">
+                                <li>
+                                    <a class="" href="/get-in-touch">Get in Touch</a>
+                                </li>
+                                <li>
+                                    <a class="" href="/faq">FAQs</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                        <div class="col-lg-2 ml-auto col-md-3 col-sm-6">
+                            <h4>FOLLOW US</h4>
+                            <ul
+                                class="list-unstyled social-media d-flex justify-content-sm-start justify-content-center">
+                                <li><a href="https://www.facebook.com/enhanceclubnow" target="_blank"><img
+                                            src="/content/images/facebook-icon.svg" alt="icon" /></a></li>
+                                <li><a href="http://twitter.com/enhanceclub" target="_blank"><img
+                                            src="/content/images/twitter-icon.svg" alt="icon" /></a></li>
+                                <li><a href="https://www.youtube.com/channel/UCEUd47AnJTV_5K9gaTB2LwA"
+                                        target="_blank"><img src="/content/images/youtube-icon.svg" alt="icon" /></a>
+                                </li>
+                                <li><a href="http://instagram.com/enhanceclub" target="_blank"><img
+                                            src="/content/images/instagram-icon.svg" alt="icon" /></a></li>
+
+
+
+                            </ul>
+                        </div>
+                        <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.footer-content -->
+                <div class="footer-copyright">
+                    <div class="row align-items-end text-md-left text-center">
+                        <div class="col-lg-7 col-md-6 order-md-3">
+                            <ul
+                                class="list-unstyled mb-0 d-flex justify-content-center flex-wrap justify-content-md-end">
+
+                                <li>
+
+                                    <a class="" href="/shipping-and-returns">Shipping &amp; Returns</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/terms-and-conditions">Terms &amp; Conditions</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/privacy-policy">Privacy Policy</a>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- /.col-lg-2 col-md-3 -->
+                        <div class="col-lg-2 col-md-3 my-md-0 my-4">
+                            <img src="/content/images/footerlogo.svg" class="img-fluid footer-logo" alt="logo" />
+
+                            <div class="text-center d-sm-none mt-4">
+                                <a href="#wrapper"><img src="/content/images/backtotop.svg" alt="icon" /></a>
+                            </div>
+                        </div>
+                        <!-- /.col-lg-2 col-md-3 -->
+                        <div class="col-lg-3 col-md-3" style="position: relative;top: -3px;">
+                            <p>All Rights Reserved © 2020</p>
+                        </div>
+                        <!-- /.col-lg-2 col-md-3 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.footer-copyright -->
+            </div>
+            <!-- /.container -->
+        </footer>
+
+    </div>
+    <script type="text/javascript" src="/jquery/jquery-3.4.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
+        integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classie/1.0.1/classie.min.js"
+        integrity="sha256-6O5DljdGA6AiaEVC/Zn8pNLNbQGparYTI9091fGX64k=" crossorigin="anonymous"></script>
+    <script src="/scripts/fullscreenForm.js"></script>
+    <script src="/scripts/main.js"></script>
+    <script src="/Content/vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/bundles/customJs?v=lgh5s9qP8nGteBP0zbVssOMJcmrz-9F3IzCF6eBq6pE1"></script>
+
+
+
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialogue">
+
+            <div class="modal-header">
+                <button type="button" class="modal-close-btn pull-right" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-content" style="overflow: auto">
+
+            </div>
+
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+
+            // Initialize numeric spinner input boxes
+            //$(".numeric-spinner").spinedit();
+            // Initialize modal dialog
+            // attach modal-container bootstrap attributes to links with .modal-link class.
+            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+            $('body').on('click', '.modal-link', function (e) {
+                console.log($('inside on-click'));
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+                $('div.modal-ba').addClass('modal-backdrop fade show').removeClass('modal-ba');
+            });
+            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+            $('body').on('click', '.modal-close-btn', function () {
+                $('#modal-container').modal('hide');
+                $('div.modal-backdrop').addClass('modal-ba').removeClass('modal-backdrop');
+            });
+            //clear modal cache, so that new content can be loaded
+            $('#modal-container').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+            $('#CancelModal').on('click', function () {
+                return false;
+            });
+        });
+
+        //$("#modal-container").draggable({
+        //    handle: ".modal-header"
+        //});
+    </script>
+
+
+    <!-- Visual Studio Browser Link -->
+    <script type="application/json" id="__browserLink_initializationData">
+        {
+            "appName": "Chrome",
+            "requestId": "b42977fda4d0415d8f4656ce23d51b4b"
+        }
+    </script>
+    <script type="text/javascript" src="http://localhost:50340/ec720cf15c5d453291d5c91ad5e0398b/browserLink"
+        async="async"></script>
+    <!-- End Browser Link -->
+
+</body>
+
+</html>

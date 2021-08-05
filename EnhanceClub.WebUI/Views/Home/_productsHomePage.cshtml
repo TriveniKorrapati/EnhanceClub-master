@@ -1,0 +1,228 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.HomePageViewModel
+
+@{
+    var imageFolderPath = @SiteConfigurationsWc.ProductImagePath;
+    var firstProduct = true;
+    var firstThumbnail = true;
+    var firstProductMain = true;
+    var prodCounter = 1;
+}
+<div class="products-gallery" id="shop">
+    <div class="products-gallery--controls">
+        <img class="products-gallery--controls-prev" src="/content/images/arrow-next-rounded.svg" alt="previous product"/>
+        <img class="products-gallery--controls-next" src="/content/images/arrow-next-rounded.svg" alt="next product"/>
+        <div class="products-gallery--controls-count">
+            @foreach (var prod in Model.FeaturedProducts)
+            {
+
+                // assign active class to first product
+                //var classActive = @prodCounter == 1 ? "active" : "";
+                var classActive = @prod.ProductStoreFrontDisplayOrder == 1 ? "active" : "";
+                <div class="counter @classActive">
+                    @prod.ProductStoreFrontDisplayOrder.ToString("00")<span>/  @Model.FeaturedProducts.Count.ToString("00")</span>
+                </div>
+                //prodCounter = prodCounter + 1;
+            }
+
+        </div>
+    </div>
+
+    @{
+        prodCounter = 1;
+    }
+    <div class="products-gallery--backgrounds">
+
+
+        @foreach (var prod in Model.FeaturedProducts)
+        {
+            var classActive = @prodCounter == 1 ? "active" : "";
+            <div class="products-gallery--bg @classActive" style="background-color: @prod.ProductSearch.ProductStoreFrontDisplayColor"></div>
+            prodCounter = prodCounter + 1;
+        }
+
+
+
+        @*<div class="products-gallery--bg active" style="background-color: #FFA400"></div>
+            <div class="products-gallery--bg " style="background-color: #C70039"></div>
+            <div class="products-gallery--bg " style="background-color: #5CCE37"></div>
+            <div class="products-gallery--bg " style="background-color: #006CFF"></div>
+            <div class="products-gallery--bg " style="background-color: #FF5432"></div>
+            <div class="products-gallery--bg " style="background-color: #FF5432"></div>
+            <div class="products-gallery--bg " style="background-color: #006CFF"></div>
+            <div class="products-gallery--bg " style="background-color: #803D7D"></div>*@
+    </div>
+
+
+    <div class="products-gallery--images">
+        @foreach (var prod in Model.FeaturedProducts)
+        {
+            // assign active class to first product
+            var classActive = @firstProductMain == true ? "active" : "";
+            @firstProductMain = false;
+
+            var imagePath = @imageFolderPath + "product-home-item-" + @prod.FeaturedProductId;
+            var srcImage = imagePath + ".png";
+            var srcsetImage1 = srcImage + " 1x";
+            var srcsetImage2 = imagePath + "@2x.png 2x";
+            <a href="@Url.Action("ProductDetail", "Product", new { searchTerm = @prod.ProductSearch.ProductStoreFrontSafeUrlName })">
+                <img class="products-gallery--image @classActive" srcset=" @srcsetImage1 , @srcsetImage2 " src=" @srcImage " alt="active-product"/>
+            </a>
+        }
+
+    </div>
+    <div class="products-gallery--content-wrap">
+        <div class="container">
+            <div class="products-gallery--content">
+                @{var i = 0;}
+                @foreach (var prod in Model.FeaturedProducts)
+                {
+                    // assign active class to first product
+                    var classActive = @firstProduct == true ? "active" : "";
+
+                    var hideBrandListClass = "";
+
+                    @firstProduct = false;
+
+                    <div class="products-gallery--item @classActive">
+                        <h4 class="products-gallery--item-sub-title">Products</h4>
+                        <h2>
+                            @if (@SiteConfigurationsWc.ShowProductBrandNameWithGeneric == "1")
+                            {
+                                if (@prod.ProductSearch.ProductName.ToLower().Contains("caverject"))
+                                {<a href="@Url.Action("ProductDetail", "Product", new { searchTerm = @prod.ProductSearch.ProductStoreFrontSafeUrlName })">
+
+                                        @prod.ProductSearch.ProductName 
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("ProductDetail", "Product", new { searchTerm = @prod.ProductSearch.ProductStoreFrontSafeUrlName })">
+
+                                        @prod.ProductSearch.ProductGenericName <span>(Generic @prod.ProductSearch.ProductName)  </span>
+                                    </a>
+                                }
+
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("ProductDetail", "Product", new { searchTerm = @prod.ProductSearch.ProductStoreFrontSafeUrlName })">@prod.ProductSearch.ProductName</a>
+                            }
+                        </h2>
+                        <h3 class="products-gallery--item-desc-title">When do you take them?</h3>
+                        <div class="products-gallery--item-desc">
+                            <p>
+                                @{var prodDescription = @prod.ProductSearch.ProductStoreFrontDirections.ToString().Substring(0,
+                                                             @prod.ProductSearch.ProductStoreFrontDirections.IndexOf("</p>"));}
+                                @Html.Raw(prodDescription)
+
+                                @*@Html.Raw(@prod.ProductSearch.ProductStoreFrontDirections)*@
+                            </p>
+                        </div>
+                        @{
+                                //List to categories brand and Generic projects
+                                List<ProductSize>
+                                    brandProductSizeList = prod.ProductSearch.ProductSizeList.Where(x => !x.ProductSizeGeneric).OrderBy(x => x.ProductSizeOrder).ToList();
+                                List<ProductSize>
+                                    genericProductSizeList = prod.ProductSearch.ProductSizeList.Where(x => x.ProductSizeGeneric).OrderBy(x => x.ProductSizeOrder).ToList();
+
+
+                        }
+                        <div class="buy-options form-group ">
+                            <div>
+                                <select id="menu-selection" name="menu-selection_@i" class="btn-rounded cls-@i">
+                                    <option value="0">Choose Product</option>
+                                    @if (genericProductSizeList.Count > 0)
+                                    {
+                                    <option value="1">Generic (@prod.ProductSearch.ProductGenericName)</option>
+                                    }
+                                    @if (brandProductSizeList.Count > 0)
+                                    {
+                                    <option value="2">Brand (@prod.ProductSearch.ProductName)</option>
+                                    }
+
+                                </select>
+                                <input type="hidden" id="product-id_@i" value="@prod.ProductSearch.ProductId" />
+                            </div>
+                            @if (SiteConfigurationsWc.ShowProductStrengthUnitTogether == 1)
+                            {
+                                <div>
+                                    @if (genericProductSizeList.Count > 0)
+                                    {
+                                        hideBrandListClass = "d-none";
+                                        @Html.DropDownList("menu-generic", new
+                                                           SelectList(@genericProductSizeList, "DisplayValue", "DisplayTextNoBrand"), "Select Size", new { Name = "generic-productsizeId_" + @i, @class = "btn-rounded" })
+
+                                    }
+
+                                    @if (brandProductSizeList.Count > 0)
+                                    {
+                                        var classBrand = "btn-rounded " + hideBrandListClass;
+                                        @Html.DropDownList("menu-brand", new
+                                                                SelectList(@brandProductSizeList, "DisplayValue", "DisplayTextNoBrand"), "Select Size", new { Name = "brand-productsizeId_" + @i, @class = @classBrand })
+                                    }
+
+                                </div>
+                            }
+                            else 
+                            {                                
+                                <div>
+                                    @if (genericProductSizeList.Count > 0)
+                                    {
+                                        hideBrandListClass = "d-none";
+                                        @Html.DropDownList("menu-generic", new
+                                                           SelectList(@genericProductSizeList, "ProductFk", "ProductSizeStrength"), "Choose Strength", new { Name = "generic-productsizeId_" + @i, @class = "btn-rounded" })
+
+                                    }
+
+                                    @if (brandProductSizeList.Count > 0)
+                                    {
+                                        var classBrand = "btn-rounded " + hideBrandListClass;
+                                       
+                                        @Html.DropDownList("menu-brand", new
+                                                                SelectList(@brandProductSizeList, "ProductFk", "ProductSizeStrength"), "Choose Strength", new { Name = "brand-productsizeId_" + @i, @class = @classBrand })
+                                    }
+
+                                </div>
+                                <div>
+                                    @Html.DropDownList("menu-quantity", Enumerable.Empty<SelectListItem>(), "Choose Quantity", new { Name = "quantity-productsizeId", @class = "btn-rounded" })
+                                </div>
+                            }
+                            @if ((genericProductSizeList.Count > 0)|| (brandProductSizeList.Count>0))
+                            {
+                                <div>
+                                    <a class="btn btn__secondary btn--rounded" id="get-it-now" data-src="@i">
+                                        Buy Now
+                                    </a>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                            i = i + 1;
+                }
+
+            </div>
+
+            <div class="products-gallery--thumbnails">
+                @foreach (var prod in Model.FeaturedProducts)
+                {
+                    // assign active class to first product thumbnail
+                    var classActive = @firstThumbnail == true ? "active" : "";
+                    firstThumbnail = false;
+
+                    var thumbImagePath = @imageFolderPath + "product-home-thumbnail-" + @prod.FeaturedProductId;
+                    var thumbSrcImage = thumbImagePath + ".png";
+                    var thumbSrcsetImage1 = thumbSrcImage + " 1x";
+                    var thumbSrcsetImage2 = thumbImagePath + "@2x.png 2x";
+                    <img class="products-gallery--thumbnail @classActive" id="@prod.FeaturedProductId" srcset="@thumbSrcsetImage1,
+                         @thumbSrcsetImage2 ,
+                         " src=" @thumbSrcImage " alt="thumb-@prod.FeaturedProductName"/>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

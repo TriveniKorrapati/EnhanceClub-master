@@ -1,0 +1,134 @@
+﻿@model EnhanceClub.Domain.Entities.CustomerSignUp
+
+
+@section PageScripts{
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //if ($("#CognitoSignupVerificationCode").val().length == 6) {
+        //    $("#submitform").removeAttr('disabled').css('cursor', 'pointer');
+        //}
+        //else {
+        //    $("#submitform").attr("disabled", true).css('cursor', 'default');
+        //}
+
+        $('#CognitoSignupVerificationCode').keyup(function () {
+            if ($("#CognitoSignupEmailVerificationCode").val().length == 6) {
+                $("#submitform").removeAttr('disabled').css('cursor', 'pointer');
+            }
+            else {
+                $("#submitform").attr("disabled", true).css('cursor', 'default');
+            }
+        });
+
+        $("#resend-confirmation-code").click(function (e) {
+            e.preventDefault();
+            $(".error-msg-text").html("");
+            var customerEmail = $("#CustomerEmail").val();
+            $.ajax({
+                url: "/customer/ResendConfirmationEmail",
+                contentType: "application/json",
+                data: { customerEmail: customerEmail },
+                type: 'Get',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status) {
+                        $("#resend-message").removeClass("d-none");
+                        $("#actionType").val(8); // actiontype for UserRequestedEmailResend
+                    }
+                    else {
+                        $(".validation-summary-errors").removeClass("d-none");
+                    }                    
+                },
+                error: function (response) {
+                    $(".validation-summary-errors").removeClass("d-none");
+                }
+
+            });
+        });
+    });
+
+</script>
+}
+<div class="get-started-section started-main">
+    <div class="get-started-banner1"></div>
+    <div class="person-image">
+        <img src="/content/images/hipster-grandpa-2.png" alt="Get Started">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                <h2>Almost there...</h2>
+
+                @if (!string.IsNullOrEmpty(@ViewBag.ErrorMessage))
+                {
+                    <div class="validation-summary-errors" data-valmsg-summary="true">
+                        <ul>
+                            <li>@ViewBag.ErrorMessage</li>
+                        </ul>
+                    </div>
+                    @*<h5 class="error-msg-text">@ViewBag.ErrorMessage</h5>*@
+                }
+                <h5 id="resend-message" class="d-none">We just sent a new verification code to your registered email: @Model.CustomerEmail</h5>
+                <div class="validation-summary-errors d-none" data-valmsg-summary="true">
+                    <ul>
+                        <li>Failed to verify email access code</li>
+                    </ul>
+                </div>
+
+                <h4><b>Step 1: </b>Please enter the verification code sent to your email</h4>
+
+
+                @using (Html.BeginForm("VerifyAuthenticationCode", "Customer", FormMethod.Post, new { @class = "", role = "form", @id = "sign-up-form-2", name = "signUpForm-2" }))
+                {
+                    @Html.Hidden("CustomerId", @Model.CustomerId)
+                    @Html.Hidden("CustomerEmail", @Model.CustomerEmail)
+                    @Html.Hidden("actionType", Model.CognitoActionType)
+
+                    @Html.Hidden("CustomerPassword", Model.CustomerPassword)
+
+                    <div class="form-container">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    @Html.TextBox("CognitoSignupEmailVerificationCode", @Model.CognitoSignupEmailVerificationCode,
+                                    new { @class = "verification email", required = "required", @placeholder = "Verification Code",
+                                    Name = "CognitoSignupEmailVerificationCode",
+                                    maxlength = 6})
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p class="mb-3 mb-md-0">
+                                    Haven't received it yet?
+                                    @Html.ActionLink("Resend Code", "", "", null,
+                                new {
+                                    @class = "d-none d-md-block",
+                                    id = "resend-confirmation-code",
+                                    @style = "text-decoration: underline;"
+                                })
+
+                                </p>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class="form-group align-content-center">
+                                    <div class="mobile-pb-15 mb-5">
+                                        <button class="btn btn--rounded mb-2 mb-md-0" type="submit" name="submitform" id="submitform">Confirm</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

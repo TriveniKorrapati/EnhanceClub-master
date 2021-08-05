@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Blog Post</title>
+    <style>
+      html{ font-family: 'sans-serif'; }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Blog Post">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link href="../../content/css/main.css" rel="stylesheet"></head>
+<body>
+<div id="wrapper" class="header-">      
+        <nav class="navbar fixed-top navbar-expand-md">
+          <button class="btn btn-menu btn-reset"><img src="../../content/images/menu-icon.png" alt="menu" /></button>
+          <a class="navbar-brand" href="/"><img src="../../content/images/logo-active.svg" class="default" alt="black" /><img
+              src="../../content/images/logo-active.svg" class="active" alt="black" /></a>
+          <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        		    <span class="navbar-toggler-icon"></span>
+        		  </button> -->
+          <span class="nav-link cart-open d-md-none">
+            Cart <span class="badge badge-count">0</span>
+          </span>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/#shop">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/sign-in">Login</a>
+              </li>
+              <li class="nav-item dropdown">
+                <span class="nav-link cart-open">
+                  Cart <span class="badge badge-count">0</span>
+                </span>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        
+        <div class="popup-navbar d-flex justify-content-center flex-column">
+          <button class="btn btn-reset btn-menu-close"><img src="../../content/images/close.png" alt="icon" /></button>
+          <!-- <img src="../../content/images/popup-image.png" alt="image" class="popup-image" /> -->
+        
+          <div class="popup-menu d-flex align-items-end flex-wrap">
+            <div class="w-100 py-3">
+              <div class="row">
+                <div class="col-md-3 text-md-right">
+                  <h3>Enhance <br />Club</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                  <ul class="list-unstyled list-links club-menu">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About us</a></li>
+                    <li><a href="/how-it-works">How it Works</a></li>
+                    <li><a href="/blog">Learn</a></li>
+                  </ul>
+                </div>
+                <!-- /.col-md-9 -->
+              </div>
+              <!-- /.row -->
+              <div class="row">
+                <div class="col-md-3 text-md-right">
+                  <h3>Products</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                  <ul class="list-unstyled list-links">
+                    <li><a href="/products/spike/">Spike <span class="viagra-gradient">VIAGRA</span></a></li>
+                    <li><a href="/products/play/">Play <span class="cialis-gradient">CIALIS</span></a></li>
+                    <li><a href="/products/arise/">Arise <span class="finasteride-gradient">FINASTERIDE</span></a></li>
+                  </ul>
+                </div>
+                <!-- /.col-md-9 -->
+              </div>
+              <!-- /.row -->
+              <div class="row">
+                <div class="col-md-3 text-md-right">
+                  <h3>Need <br />help?</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                  <ul class="list-unstyled list-links">            
+                    <li><a href="/get-in-touch">Get in Touch</a></li>
+                    <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                    <li><a href="/shipping-and-returns">Shipping & Returns</a></li>
+                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/faq">FAQs</a></li>
+                  </ul>
+                </div>
+                <!-- /.col-md-9 -->
+              </div>
+              <!-- /.row -->
+        
+              <div class="row popup-social">
+                <div class="col-md-3 text-md-right">
+                  <h3>Follow us</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                  <a href="#"><img src="../../content/images/facebook-yl.svg" alt="icon" /></a>
+                  <a href="#"><img src="../../content/images/twitter-yl.svg" alt="icon" /></a>
+                  <a href="#"><img src="../../content/images/youtube-yl.svg" alt="icon" /></a>
+                  <a href="#"><img src="../../content/images/instagram-yl.svg" alt="icon" /></a>
+                </div>
+                <!-- /.col-md-9 -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.m-auto -->
+        
+            <div class="popup-social w-100">      
+            </div>
+            <!-- /.popup-social -->
+          </div>
+          <!-- /.popup-menu -->
+        </div>
+        <!-- /.popup-navbar -->
+        
+        
+        <!-- Start of Cart Header -->
+        
+        <div class="popup-cart dark-cart">
+          <div class="cart-inner-box">
+            <div class="row">
+              <div class="col">
+                <h2>Your cart</h2>
+                <button class="btn btn-reset btn-cart-close">close 
+                  <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2.36719 2L24.3672 24" stroke="#FFC305" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M2 23.6334L24.7333 2.3667" stroke="#FFC305" stroke-width="3" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="cart-product-lists">
+                  <h4>You have 1 product(s) in your cart</h4>
+                  <div class="cart-card yellow">
+                    <div class="d-flex">
+                      <div class="product-thumbnail">
+                        <img src="../../content/images/cart1.png" alt="Cialis">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center product-detail-section">
+        
+                        <!-- Start of the Price and Count Box -->
+                        <div class="price-count-box d-flex justify-content-between align-items-center">
+                          <div class="price">$ 30</div>
+                          <div class="count d-flex align-items-center">
+                            <span class="decrease-count">-</span>
+                            <span class="count-value">1</span>
+                            <span class="increase-count">+</span>
+                          </div>
+                        </div>
+                        <!-- End of the Price and Count Box -->
+        
+                        <div class="product-name">
+                          Cialis
+                        </div>
+                        <div class="remove-box">
+                          <a href="#">Remove</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="offer-box">
+                  <h4>Often bought together</h4>
+                  <div class="cart-card green">
+                    <div class="d-flex">
+                      <div class="product-thumbnail">
+                        <img src="../../content/images/cart2.png" alt="Cialis">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center product-detail-section">
+        
+                        <!-- Start of the Price and Count Box -->
+                        <div class="price-count-box d-flex justify-content-between align-items-center">
+                          <div class="price">$ 30</div>
+                        </div>
+                        <!-- End of the Price and Count Box -->
+        
+                        <div class="product-name">
+                          Cialis
+                        </div>
+                        <div class="add-box">
+                          <a href="#">Add</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="total-amount-box">
+                  <h3>Subtotal</h3>
+                  <hr>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="total-cost">
+                      $ 30
+                    </div>
+                    <div class="additional-charges">
+                      <p>Free Shipping</p>
+                      <p>Taxes calculated at checkout</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row place-order-section">
+              <div class="col">
+                <button class="btn btn--rounded" id="place-order">
+                  Place order
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- End of Cart Header -->
+        
+        
+        
+        <!-- Start of Order Confirmed -->
+        
+        <div class="popup-box semi-transparent d-flex align-items-center justify-content-center place-order">
+          <div class="pop-inner-container">
+            <span class="close-popup">
+              <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.30273 2L20.4285 20.1258" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <path d="M2 19.8239L20.73 2.30225" stroke="white" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div class="top-white-box">
+              <span class="ec-icon">
+                <svg width="58" height="50" viewBox="0 0 58 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M28.9984 25L43.4992 50H58L28.9984 0L0 50H14.5008L28.9984 25Z" fill="#FFC305"/>
+                </svg>
+              </span>
+              <p>Order complete!</br> Your order <span class="yellow">#24647843</span> was received!</p>
+            </div>
+            <div class="black-box">
+              <p>Please check your order status on your account, we will let you know when you order ships and then you will be able to track your package as it makes its way to your home.</p>
+                <a href="#" class="yellow">K, thanks! 
+                  <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13.2841 13L19 7.49993L13.2841 2" stroke="#FFC305" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M18.499 7.33008L1.99995 7.33008" stroke="#FFC305" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
+                  </svg>
+                </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- End of Order Confirmed -->    
+        <div class="blog-post">
+            <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog-post-banner.jpeg')">
+            </div>
+            <div class="post-main-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="post-content-section">
+                                <ul class="breadcrumbs">
+                                  <li>
+                                      <a href="/" title="Home">Home</a>
+                                      <a href="/products" title="Products">Products</a>
+                                      Cialis
+                                  </li>
+                                </ul>
+                                <a href="/blog" class="back-to-list"> &lt; Back</a>
+                                <h1>Aliquam ac <br> elementum tellus.</h1>
+                                <p class="published-stamp">Published November 26, 2019 by A. Timofey</p>
+                                <h3>It's not too hard, really.</h3>
+                                <p>Nevertheless, upon Stubb setting the anchor-watch after his supper was concluded; and when, accordingly, Queequeg and a forecastle seaman came on deck, no small excitement was created among the sharks; for immediately suspending the cutting stages over the side, and lowering three lanterns, so that they cast long gleams of light over the turbid sea, these two mariners, darting their long whaling-spades, kept up an incessant murdering of the sharks,* by striking the keen steel deep into their skulls, seemingly their only vital part. But in the foamy confusion of their mixed and struggling hosts, the marksmen could not always hit their mark; and this brought about new revelations of the incredible ferocity of the foe. They viciously snapped, not only at each other's disembowelments, but like flexible bows, bent round, and bit their own; till those entrails seemed swallowed over and over again by the same mouth, to be oppositely voided by the gaping wound. Nor was this all. It was unsafe to meddle with the corpses and ghosts of these creatures. A sort of generic or Pantheistic vitality seemed to lurk in their very joints and bones, after what might be called the individual life had departed. Killed and hoisted on deck for the sake of his skin, one of these sharks almost took poor Queequeg's hand off, when he tried to shut down the dead lid of his murderous jaw.</p>
+                                <p>*The whaling-spade used for cutting-in is made of the very best steel; is about the bigness of a man's spread hand; and in general shape, corresponds to the garden implement after which it is named; only its sides are perfectly flat, and its upper end considerably narrower than the lower. This weapon is always kept as sharp as possible; and when being used is occasionally honed, just like a razor. In its socket, a stiff pole, from twenty to thirty feet long, is inserted for a handle.</p>
+                                <p>"Queequeg no care what god made him shark," said the savage, agonizingly lifting his hand up and down; "wedder Fejee god or Nantucket god; but de god wat made shark must be one dam Ingin."</p>
+                                <p>It was a Saturday night, and such a Sabbath as followed! Ex officio professors of Sabbath breaking are all whalemen. The ivory Pequod was turned into what seemed a shamble; every sailor a butcher. You would have thought we were offering up ten thousand red oxen to the sea gods.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-content-section d-flex align-items-center">
+                        <div class="blog-share-title">
+                            Share
+                        </div>
+                        <div class="blog-sharing">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <svg width="15" height="28" viewBox="0 0 15 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.6676 4.65434H14.2735V0.214219C13.8239 0.153714 12.2777 0.0175781 10.477 0.0175781C6.71986 0.0175781 4.1461 2.32956 4.1461 6.57886V10.4896H0V15.4533H4.1461V27.9429H9.22941V15.4544H13.2078L13.8394 10.4907H9.22822V7.07104C9.22941 5.63638 9.62427 4.65434 11.6676 4.65434Z" fill="#170000"/>
+                                        </svg>                                    
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M29.4955 3.03762C28.4098 3.50805 27.2529 3.81987 26.0468 3.97128C27.2876 3.23949 28.2347 2.08954 28.6799 0.703466C27.523 1.38479 26.2457 1.86604 24.8844 2.1346C23.786 0.979238 22.2203 0.263672 20.5124 0.263672C17.1987 0.263672 14.5309 2.92046 14.5309 6.17746C14.5309 6.64609 14.571 7.0967 14.6696 7.52568C9.69353 7.28595 5.29045 4.93017 2.33256 1.34153C1.81616 2.22652 1.51325 3.23949 1.51325 4.32996C1.51325 6.37753 2.58072 8.19258 4.17189 9.2434C3.21025 9.22537 2.26687 8.9496 1.46763 8.51521C1.46763 8.53324 1.46763 8.55667 1.46763 8.5801C1.46763 11.4532 3.54236 13.8396 6.26303 14.3893C5.77583 14.5209 5.24483 14.584 4.69376 14.584C4.31057 14.584 3.92373 14.5624 3.5606 14.4831C4.33612 16.8244 6.53675 18.5458 9.15341 18.6016C7.11701 20.1752 4.53136 21.1232 1.73222 21.1232C1.24137 21.1232 0.770586 21.1016 0.299805 21.0421C2.95114 22.731 6.09333 23.6953 9.48186 23.6953C20.496 23.6953 26.5176 14.6831 26.5176 6.87139C26.5176 6.61004 26.5085 6.3577 26.4957 6.10716C27.6836 5.27444 28.6817 4.23443 29.4955 3.03762Z" fill="#170000"/>
+                                        </svg>                                    
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="post-bottom-section" style="background-image: url('../../content/images/signIn-banner.jpeg')">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <a href="#">Read Next</a>
+                            <h2>Spending Time Together, Outside</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <footer class="footer w-100">
+          <div class="container">
+            <div class="footer-content">
+              <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                  <h3>Enhance Club</h3>
+                  <ul class="list-unstyled list-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About us</a></li>
+                    <li><a href="/how-it-works">How it Works</a></li>
+                    <li><a href="/blog">Learn</a></li>
+                  </ul>
+                </div>
+                <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                  <h3>Products</h3>
+                  <ul class="list-unstyled list-links">
+                    <li><a href="/products/spike/">Spike <span class="viagra-gradient">VIAGRA</span></a></li>
+                    <li><a href="/products/play/">Play <span class="cialis-gradient">CIALIS</span></a></li>
+                    <li><a href="/products/arise/">Arise <span class="finasteride-gradient">FINASTERIDE</span></a></li>
+                  </ul>
+                </div>
+                <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                  <h3>Need help?</h3>
+                  <ul class="list-unstyled list-links">            
+                    <li><a href="/get-in-touch">Get in Touch</a></li>
+                    <li><a href="/faq">FAQs</a></li>
+                  </ul>
+                </div>
+                <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                <div class="col-lg-2 ml-auto col-md-3 col-sm-6">
+                  <h4>FOLLOW US</h4>
+                  <ul class="list-unstyled social-media d-flex justify-content-sm-start justify-content-center">
+                    <li><a href="#"><img src="../../content/images/facebook-icon.svg" alt="icon" /></a></li>
+                    <li><a href="#"><img src="../../content/images/twitter-icon.svg" alt="icon" /></a></li>
+                    <li><a href="#"><img src="../../content/images/youtube-icon.svg" alt="icon" /></a></li>
+                    <li><a href="#"><img src="../../content/images/instagram-icon.svg" alt="icon" /></a></li>
+                  </ul>
+                </div>
+                <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.footer-content -->
+            <div class="footer-copyright">
+              <div class="row align-items-end text-md-left text-center">
+                <div class="col-lg-7 col-md-6 order-md-3">
+                  <ul class="list-unstyled mb-0 d-flex justify-content-center flex-wrap justify-content-md-end">
+                    <li><a href="/shipping-and-returns">Shipping & Returns</a></li>
+                    <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                  </ul>
+                </div>
+                <!-- /.col-lg-2 col-md-3 -->
+                <div class="col-lg-2 col-md-3 my-md-0 my-4">
+                  <img src="../../content/images/footerlogo.svg" class="img-fluid footer-logo" alt="logo" />
+        
+                  <div class="text-center d-sm-none mt-4">
+                    <a href="#wrapper"><img src="../../content/images/backtotop.svg" alt="icon" /></a>
+                  </div>
+                </div>
+                <!-- /.col-lg-2 col-md-3 -->
+                <div class="col-lg-3 col-md-3" style="position: relative;top: -3px;">
+                  <p>All Rights Reserved © 2020</p>
+                </div>
+                <!-- /.col-lg-2 col-md-3 -->
+              </div>
+              <!-- /.row -->
+            </div>
+            <!-- /.footer-copyright -->
+          </div>
+          <!-- /.container -->
+        </footer>
+        <!-- /.footer w-100 -->
+    </div>
+  <script type="text/javascript" src="../.../../content/scripts/main.9ac689959b292e329441.js"></script></body>
+</html>

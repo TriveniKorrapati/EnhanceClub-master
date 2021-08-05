@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>User enters the Url into the browser and it opens the enhanclub Website</description>
+   <name>Website Launch</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>41b0396f-846a-4125-a3f4-619738f3d328</testCaseGuid>
+</TestCaseEntity>

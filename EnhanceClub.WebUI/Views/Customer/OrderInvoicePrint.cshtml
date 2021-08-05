@@ -1,0 +1,20 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.OrderInvoiceViewModel
+
+@{ Layout = "";}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enhance Club - Invoice</title>
+    <link href="~/content/css/print.css" rel="stylesheet" />
+    @Html.Partial("_favicons")
+</head>
+<body>
+    @Html.Partial("Invoice", Model.OrderDetailList)
+</body>
+</html>

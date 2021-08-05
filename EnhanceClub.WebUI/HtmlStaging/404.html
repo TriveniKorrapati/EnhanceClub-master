@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>My Orders</title>
+	<style>
+		html {
+			font-family: 'sans-serif';
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="My Orders">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link href="../../content/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+	<div id="wrapper" class="header-">
+		<nav class="navbar fixed-top navbar-expand-md">
+			<button class="btn btn-menu btn-reset"><img src="../../content/images/menu-icon.png" alt="menu" /></button>
+			<a class="navbar-brand" href="/"><img src="../../content/images/logo-black.svg" class="default"
+					alt="black" /><img src="../../content/images/active-logo.svg" class="active" alt="black" /></a>
+			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			    <span class="navbar-toggler-icon"></span>
+    			  </button> -->
+			<span class="nav-link cart-open d-md-none">
+				Cart <span class="badge badge-count">0</span>
+			</span>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/#shop">Shop</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/sign-in">Login</a>
+					</li>
+					<li class="nav-item dropdown">
+						<span class="nav-link cart-open">
+							Cart <span class="badge badge-count">0</span>
+						</span>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="popup-navbar d-flex justify-content-center flex-column">
+			<button class="btn btn-reset btn-menu-close"><img src="../../content/images/close.png"
+					alt="icon" /></button>
+			<!-- <img src="../../content/images/popup-image.png" alt="image" class="popup-image" /> -->
+			<div class="popup-menu d-flex align-items-end flex-wrap">
+				<div class="w-100 py-3">
+					<div class="row">
+						<div class="col-md-3 text-md-right">
+							<h3>Enhance <br />Club</h3>
+						</div>
+						<!-- /.col-md-3 -->
+						<div class="col-md-9">
+							<ul class="list-unstyled list-links club-menu">
+								<li><a href="/">Home</a></li>
+								<li><a href="/about">About us</a></li>
+								<li><a href="/how-it-works">How it Works</a></li>
+								<li><a href="/blog">Learn</a></li>
+							</ul>
+						</div>
+						<!-- /.col-md-9 -->
+					</div>
+					<!-- /.row -->
+					<div class="row">
+						<div class="col-md-3 text-md-right">
+							<h3>Products</h3>
+						</div>
+						<!-- /.col-md-3 -->
+						<div class="col-md-9">
+							<ul class="list-unstyled list-links">
+								<li><a href="/products/spike/">Spike <span class="viagra-gradient">VIAGRA</span></a>
+								</li>
+								<li><a href="/products/play/">Play <span class="cialis-gradient">CIALIS</span></a></li>
+								<li><a href="/products/arise/">Arise <span
+											class="finasteride-gradient">FINASTERIDE</span></a></li>
+							</ul>
+						</div>
+						<!-- /.col-md-9 -->
+					</div>
+					<!-- /.row -->
+					<div class="row">
+						<div class="col-md-3 text-md-right">
+							<h3>Need <br />help?</h3>
+						</div>
+						<!-- /.col-md-3 -->
+						<div class="col-md-9">
+							<ul class="list-unstyled list-links">
+								<li><a href="/get-in-touch">Get in Touch</a></li>
+								<li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+								<li><a href="/shipping-and-returns">Shipping & Returns</a></li>
+								<li><a href="/privacy-policy">Privacy Policy</a></li>
+								<li><a href="/faq">FAQs</a></li>
+							</ul>
+						</div>
+						<!-- /.col-md-9 -->
+					</div>
+					<!-- /.row -->
+
+					<div class="row popup-social">
+						<div class="col-md-3 text-md-right">
+							<h3>Follow us</h3>
+						</div>
+						<!-- /.col-md-3 -->
+						<div class="col-md-9">
+							<a href="#"><img src="../../content/images/facebook-yl.svg" alt="icon" /></a>
+							<a href="#"><img src="../../content/images/twitter-yl.svg" alt="icon" /></a>
+							<a href="#"><img src="../../content/images/youtube-yl.svg" alt="icon" /></a>
+							<a href="#"><img src="../../content/images/instagram-yl.svg" alt="icon" /></a>
+						</div>
+						<!-- /.col-md-9 -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.m-auto -->
+
+				<div class="popup-social w-100">
+				</div>
+				<!-- /.popup-social -->
+			</div>
+			<!-- /.popup-menu -->
+		</div>
+		<!-- /.popup-navbar -->
+
+		<!-- Start of Main -->
+		<div class="dashboard-page order-page order-confirmation-page error-page">
+			<!-- Start of the Top Clip Path -->
+				<!-- <div class="top-clip">
+					<div class="dash-top-clip">
+					</div>
+				</div> -->
+			<!-- End of the Top Clip Path -->
+			<div class="section top-section">
+				<div class="container">
+					<div class="row">
+
+						<!-- Start of Main Section -->
+						<div class="col-12 col-md-12 col-lg-12">
+
+							<!-- Start of Filter Section -->
+							<div class="row mt-4">
+								<div class="col-12 col-md-7 col-xl-6 text-center text-md-right">
+                                    <h1 class="white mb-0">404</h1>
+                                    <h4 class="white">Page Not Found</h4>
+                                    <p>
+                                       Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+									</p>
+									<a href="#">&#8592; Go To Dashboard</a>
+                                </div>
+							</div>
+							<!-- End of Filter Section -->
+
+						</div>
+						<!-- End of Main Section -->
+
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<!-- End of Main -->
+
+		<footer class="footer w-100">
+			<div class="container">
+				<div class="footer-content">
+					<div class="row">
+						<div class="col-lg-2 col-md-3 col-sm-6">
+							<h3>Enhance Club</h3>
+							<ul class="list-unstyled list-links">
+								<li><a href="/">Home</a></li>
+								<li><a href="/about">About us</a></li>
+								<li><a href="/how-it-works">How it Works</a></li>
+								<li><a href="/blog">Learn</a></li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 col-sm-6 -->
+						<div class="col-lg-2 col-md-3 col-sm-6">
+							<h3>Products</h3>
+							<ul class="list-unstyled list-links">
+								<li><a href="/products/spike/">Spike <span class="viagra-gradient">VIAGRA</span></a>
+								</li>
+								<li><a href="/products/play/">Play <span class="cialis-gradient">CIALIS</span></a></li>
+								<li><a href="/products/arise/">Arise <span
+											class="finasteride-gradient">FINASTERIDE</span></a></li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 col-sm-6 -->
+						<div class="col-lg-2 col-md-3 col-sm-6">
+							<h3>Need help?</h3>
+							<ul class="list-unstyled list-links">
+								<li><a href="/get-in-touch">Get in Touch</a></li>
+								<li><a href="/faq">FAQs</a></li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 col-sm-6 -->
+						<div class="col-lg-2 ml-auto col-md-3 col-sm-6">
+							<h4>FOLLOW US</h4>
+							<ul
+								class="list-unstyled social-media d-flex justify-content-sm-start justify-content-center">
+								<li><a href="#"><img src="../../content/images/facebook-icon.svg" alt="icon" /></a></li>
+								<li><a href="#"><img src="../../content/images/twitter-icon.svg" alt="icon" /></a></li>
+								<li><a href="#"><img src="../../content/images/youtube-icon.svg" alt="icon" /></a></li>
+								<li><a href="#"><img src="../../content/images/instagram-icon.svg" alt="icon" /></a>
+								</li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 col-sm-6 -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.footer-content -->
+				<div class="footer-copyright">
+					<div class="row align-items-end text-md-left text-center">
+						<div class="col-lg-7 col-md-6 order-md-3">
+							<ul
+								class="list-unstyled mb-0 d-flex justify-content-center flex-wrap justify-content-md-end">
+								<li><a href="/shipping-and-returns">Shipping & Returns</a></li>
+								<li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+								<li><a href="/privacy-policy">Privacy Policy</a></li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 -->
+						<div class="col-lg-2 col-md-3 my-md-0 my-4">
+							<img src="../../content/images/footerlogo.svg" class="img-fluid footer-logo" alt="logo" />
+
+							<div class="text-center d-sm-none mt-4">
+								<a href="#wrapper"><img src="../../content/images/backtotop.svg" alt="icon" /></a>
+							</div>
+						</div>
+						<!-- /.col-lg-2 col-md-3 -->
+						<div class="col-lg-3 col-md-3" style="position: relative;top: -3px;">
+							<p>All Rights Reserved © 2020</p>
+						</div>
+						<!-- /.col-lg-2 col-md-3 -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.footer-copyright -->
+			</div>
+			<!-- /.container -->
+		</footer>
+		<!-- /.footer w-100 -->
+	</div>
+    <script type="text/javascript" src="../.././assets/scripts/main.9ac689959b292e329441.js"></script>
+    <script
+		src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+		crossorigin="anonymous">
+	</script>
+    <script>
+		$(".edit-address").on("click", function (e) {
+			$(this).toggleClass("active");
+			$(this).parent().parent().next().next(".address-form").slideToggle();
+			// $(this).parent().parent().find(".input-wrapper input").focus();
+			if ($(this).hasClass("active")) {
+				$(this).text("Cancel");
+			} else {
+				$(this).text("Edit Address");
+			}
+			e.preventDefault();
+		})
+		$(".update-address").on("click", function(e) {
+			$(this).parent().parent().parent().parent().parent().hide();
+			$(this).parent().parent().parent().parent().parent().parent().find(".edit-address").removeClass("active").text("Edit Address")
+			e.preventDefault();
+		});
+		$(".billing-address").on("click", function(e) {
+			if($(this).is(":not(:checked)")){
+				$(this).parent().parent().parent().parent().next(".address-form").slideDown();
+			} else {
+				$(this).parent().parent().parent().parent().next(".address-form").slideUp();
+			}
+		})
+	</script>
+</body>
+
+</html>

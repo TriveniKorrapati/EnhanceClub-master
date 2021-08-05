@@ -1,0 +1,570 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.CustomerInfoViewModel
+
+@section PageScripts
+    {
+    <script>
+        var previousProvince = $("#CustomerProvinceId").val();;
+        var previousText = '';
+        $("#CustomerProvinceId").on('focus', function () {
+            // Store the current value on focus and on change
+            previousProvince = this.value;
+            previousText = $("#CustomerProvinceId option:selected").text();
+            
+        })
+    @*.change(function () {
+            if (@SiteConfigurationsWc.ShowMultipleShippingAddress == 1) {
+                if (this.value != previousProvince) {
+                    var selectedProvince = $("#CustomerProvinceId").val();
+                    alert("All addresses will be deleted with previous province and a default new shipping address will be created.")
+                    // Make sure the previous value is updated
+                    //previousProvince = this.value;
+
+
+                    // Do something with the previous value after the change
+                    $.ajax({
+                        url: "/customer/GetCustomerOpenOrder",
+                        contentType: "application/json",
+                        type: 'Get',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.orderCount > 0) {
+                                alert("Orders with invoice Id :" + data.orderInvoiceId + " will be shipped to previously selected address");
+                            }
+                        },
+                        error: function (response) {
+
+                        }
+
+                    });
+                }
+            }
+
+        });*@
+
+        @*$("#btnSignIn").on('click', function (e) {
+            if (@SiteConfigurationsWc.ShowMultipleShippingAddress == 1) {
+                if (this.value != previousProvince) {
+                    var selectedProvince = $("#CustomerProvinceId").val();
+                    var selectedProvineText = $("#CustomerProvinceId option:selected").text();
+
+                    // Make sure the previous value is updated
+                    //previousProvince = this.value;
+
+                    var confirmText = "It looks like you’ve moved to a new province." +
+                        " For future orders, you’ll no longer be able to use any shipping addresses in [" + previousText +
+                        "], and your shipping address will now be set to match your new billing address in [" + selectedProvineText +"].";
+                    // Do something with the previous value after the change
+                    $.ajax({
+                        url: "/customer/GetCustomerOpenOrder",
+                        contentType: "application/json",
+                        type: 'Get',
+                        async:false,
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.orderCount > 0) {
+
+                                var orderIdList = data.orderInvoiceId;
+                                //var orderList = "<ul>";
+                                //$.each(orderIdList, function (index, value) {
+                                //    orderList = orderList + "<li>" + value + "</li>";
+                                //})
+                                //orderList = orderList + "</ul>"
+                                //orderList = $.parseHTML(orderList);
+                                confirmText = confirmText + "\n\r Important! The below orders will still ship to previous address. "
+                                    + orderIdList  + "\n\r If you’d like to discuss how to send an active order to your new address in [" + selectedProvineText + "], please contact our support team via the Get in Touch page at enhanceclub.com, or call us at 1-844-836-2582.";
+
+                                console.log(confirmText);
+                                //console.log($.parseHTML(confirmText));
+                                //console.log($.parseHTML(confirmText)[0].innerHTML);
+                                if (confirm(confirmText)) {
+                                    return true;
+                                }
+                                else {
+                                    // change province to previous
+                                    $("#CustomerProvinceId").val(previousProvince);
+                                    e.preventDefault();
+                                    return false;
+                                }
+
+                            }
+                        },
+                        error: function (response) {
+                            e.preventDefault();
+                            return false;
+                        }
+
+                    });
+                }
+            }
+        });*@
+
+
+        $("#btnSignIn").on('click', function (e) {
+            e.preventDefault();
+             if (@SiteConfigurationsWc.ShowMultipleShippingAddress == 1) {
+                 var selectedProvince = $("#CustomerProvinceId").val();
+             
+                 if (selectedProvince != previousProvince) {
+                     $(this).attr('data-target', '#popup');
+                     $(this).attr('data-toggle', 'modal');
+                     $('div.modal-ba').addClass('modal-backdrop fade show').removeClass('modal-ba');
+                    var url = 'https://@SiteConfigurationsWc.StorefrontUrl/get-in-touch';
+                  
+                    var selectedProvineText = $("#CustomerProvinceId option:selected").text();
+                    var selectedAddress = $("#CustomerAddress").val();
+                    var customerCity = $("#CustomerCity").val();
+                    var customerZipCode = $("#CustomerZipCode").val();
+
+
+                    $("#myModalContent").empty();
+                    $("#myModalContent").append("It looks like you’ve moved to a new address!<br>");
+                     $("#myModalContent").append("All future orders will be delivered to the new shipping address: [" + selectedAddress + ", " + customerCity + ", " + selectedProvineText + ", " + customerZipCode  +
+                        "]" + "<br> If you’d like to discuss how to send an active order to your new address, please contact our support" +
+                        " team via the ");
+                    $("#myModalContent").append('<a target="_blank" href=' + url + '> Get in Touch </a>');
+                    $("#myModalContent").append("page or call us at 1-844-836-2582.");
+                   
+                }
+                else {
+                     $('#popup').modal('hide');
+                     $('div.modal-backdrop').addClass('modal-ba').removeClass('modal-backdrop');
+                     $('#frm_edit-profile').submit();
+                }
+            }
+         });
+       
+        $("#closebtn").click(function () {
+            $("#CustomerProvinceId").val(previousProvince);
+            $('#popup').modal('hide');
+            $('div.modal-backdrop').addClass('modal-ba').removeClass('modal-backdrop');           
+        });
+        $("#confirmbtn").click(function () {
+            $('#frm_edit-profile').submit();
+        });
+        $(".profile-page .input-wrapper").hide();
+        $(".profile-page .edit-btn").on("click", function (e) {
+            $(this).toggleClass("active");
+            $(this).parent().parent().find(".input-value-section").toggle();
+            $(this).parent().parent().find(".input-wrapper").toggle();
+            $(this).parent().parent().find(".save-container").toggle();
+            // $(this).parent().parent().find(".input-wrapper input").focus();
+            if ($(this).hasClass("active")) {
+                $(this).find("span").text("Cancel");
+                $(this).find("svg").hide();
+            } else {
+                $(this).find("span").text("Edit");
+                $(this).find("svg").show();
+            }
+            e.preventDefault();
+        })
+        //$(".profile-page .save-btn").on("click", function (e) {
+        //    $(this).parent().hide();
+        //    $(this).parent().parent().find(".input-value-section").toggle();
+        //    $(this).parent().parent().find(".input-wrapper").toggle();
+        //    $(this).parent().parent().find(".edit-btn").removeClass("active").text("Edit");
+        //    e.preventDefault();
+        //});
+    function updateDefaultAddress(customerAddressFk) {
+
+        $(".address-detail").removeClass("active");
+        $("#address-detail-" + customerAddressFk).addClass("active");
+        //if ($(this).is(":checked")) {
+        //    $(".address-detail").removeClass("active");
+        //    $("#address-detail-" + customerAddressFk).addClass("active");
+        //    //$(this).closest(".address-detail").addClass("active")
+        //   // $(this).closest(".address-detail").addClass("active").closest(".col-md-6").siblings().find(".address-detail").removeClass("active");
+        //} else {
+        //    $(this).closest(".address-detail").removeClass("active");
+        //}
+
+        // update default shipping address in database
+       // var shippingAdressFk = $(this).closest(".address-detail").closest(".col-md-6").find("#shipping-address-fk").val();
+
+        $.post("/customer/UpdateCustomerShippingAddressDefaultFlag", { shippingAdressFk: customerAddressFk }, function (data) {
+            //alert(data);
+            $("#multiple-shipping-address").html(data);
+            // $('.popup-cart').toggleClass('active');
+        });
+    }
+
+
+        //$('#multiple-shipping-address').on('click', '.address-detail .address-checkbox', function () {
+
+        //    if ($(this).is(":checked")) {
+        //        //$(".address-detail").removeClass("active");
+        //        //$(this).closest(".address-detail").addClass("active")
+        //        $(this).closest(".address-detail").addClass("active").closest(".col-md-6").siblings().find(".address-detail").removeClass("active");
+        //    } else {
+        //        $(this).closest(".address-detail").removeClass("active");
+        //    }
+
+        //    // update default shipping address in database
+        //    var shippingAdressFk = $(this).closest(".address-detail").closest(".col-md-6").find("#shipping-address-fk").val();
+
+        //    $.post("/customer/UpdateCustomerShippingAddressDefaultFlag", { shippingAdressFk: shippingAdressFk }, function (data) {
+        //        //alert(data);
+        //        $("#multiple-shipping-address").html(data);
+        //        // $('.popup-cart').toggleClass('active');
+        //    });
+
+        //});
+
+        $("#add-ship-address").click(function () {
+            $("#add-address").removeClass("d-none");
+            $("#span-add-ship-address").css("display", "block");
+            $(".shipping-address-link").addClass("d-none");
+            // window.location.href = "/customer/addshippingaddress"
+        });
+
+        $("#ship-address-cancel").click(function () {
+            $("#add-address").addClass("d-none");
+            $("#span-add-ship-address").css("display", "none");
+            $(".shipping-address-link").removeClass("d-none");
+        })
+
+        $("#add-address .save-btn.update-shipAddress").on("click", function (e) {
+           var regex = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
+            var zipValue = $(".PostalCode").val();
+            var match = regex.exec(zipValue);
+            if (match) {
+                if ((zipValue.indexOf("-") !== -1 || zipValue.indexOf(" ") !== -1) && zipValue.length == 7) {
+                    return true;
+                } else if ((zipValue.indexOf("-") == -1 || zipValue.indexOf(" ") == -1) && zipValue.length == 6) {
+                    return true;
+                }
+            } else {
+                alert('Please enter valid Postal Code');
+                return false;
+            }
+
+
+        });
+        $("#formUpdateShippingInvoiceAddress .save-btn.update-shipAddress").on("click", function (e) {
+            var regex = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
+            var shippingAdressFk = $(this).closest(".col-md-6").find("#shipping-address-fk").val()
+            var zipValue = $("#address-detail-" + shippingAdressFk +" #ShippingZipCode").val();
+            var match = regex.exec(zipValue);
+            if (match) {
+                if ((zipValue.indexOf("-") !== -1 || zipValue.indexOf(" ") !== -1) && zipValue.length == 7) {
+                    return true;
+                } else if ((zipValue.indexOf("-") == -1 || zipValue.indexOf(" ") == -1) && zipValue.length == 6) {
+                    return true;
+                }
+            } else {
+                alert('Please enter valid Postal Code');
+                return false;
+            }
+
+
+        });
+
+    </script>
+
+}
+
+
+<div class="dashboard-page profile-page">
+    <!-- Start of the Top Clip Path -->
+    @*<div class="top-clip">
+            <div class="dash-top-clip">
+            </div>
+        </div>*@
+    <!-- End of the Top Clip Path -->
+
+    <div class="section top-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 hidden-md">
+                    <h1 class="heading text-uppercase">EDIT ACCOUNT</h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- Start of Sidebar -->
+                @Html.Partial("AccountOptions", "account-info", new ViewDataDictionary { { "CustomerCreditAvaliable", ViewBag.CustomerCredit }, { "IsProfileShow", ViewBag.IsProfileShow } })
+                <!-- End of Sidebar -->
+                <!-- Start of Main Section -->
+                <div class="col-12 col-md-12 col-lg-9 col-xl-9 order-2 order-lg-1">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-9 col-xs-9">
+                            <h1 class="heading visible-md text-uppercase">EDIT ACCOUNT</h1>
+                            @if (!string.IsNullOrEmpty(@ViewBag.ReturnMessage))
+                            {
+                                <h5>@ViewBag.ReturnMessage</h5>
+                            }
+
+                            @if (TempData["message"] != null)
+                            {
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-12 col-xl-8 validation-summary-errors" data-valmsg-summary="true">
+                                        <ul>
+                                            <li> @TempData["message"]</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 col-xs-3">
+                            <!-- Blank Space -->
+                        </div>
+                    </div>
+                    <div class="form-container">
+                        <div class="row">
+                            <div class="col-12 col-xl-9">
+                                @Html.ValidationSummary()
+                                <!-- Updated - 05/04/21 -->
+                                @using (Html.BeginForm("account-info",
+                                "myaccount",
+                                null,
+                                FormMethod.Post,
+                                new { @class = "profile-form", @id = "frm_edit-profile" }))
+                                {
+                                    @Html.Hidden("CustomerLastIp", "127.0.0.1")
+                                    @Html.Hidden("returnUrl", "account-info")
+                                    @Html.Hidden("CustomerId", @Model.LoggedCustomer.CustomerId)
+                                    <div class="d-flex mb-4 align-items-center">
+                                        <h4 class="form-title text-capitalize mt-0 mb-0">
+                                            General Information
+                                        </h4>
+                                        <a class="edit-btn ml-3" href="#">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg>
+                                            <span>
+                                                Edit
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="form-group info-group">
+                                        <label for="customerfirstname" class="text-capitalize">Customer Id: @Model.CustomerMinimal.CustomerId</label>
+                                        <span class="input-value-section">
+                                            <span class="input-value">
+                                                <!-- Input Value -->
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="form-group info-group">
+                                        <label for="customerfirstname" class="text-capitalize">First Name</label>
+                                        <span class="input-value-section">
+                                            <span class="input-value">
+                                                <!-- Input Value -->
+                                                @Model.CustomerMinimal.CustomerFirstName
+                                            </span>
+                                        </span>
+                                        <span class="input-wrapper extended mt-4">
+                                            <!-- Input -->
+                                            @Html.TextBox("CustomerFirstName", @Model.CustomerMinimal.CustomerFirstName,
+                                      new
+                                      {
+                                          @class = "form-control",
+                                          @placeholder = "First Name",
+                                          required = "required",
+                                          @type = "text"
+
+                                      })
+                                        </span>
+                                    </div>
+                                    <div class="form-group info-group">
+                                        <label for="customerlastname" class="text-capitalize">Last Name</label>
+                                        <span class="input-value-section">
+                                            <span class="input-value">
+                                                <!-- Input Value -->
+                                                @Model.CustomerMinimal.CustomerLastName
+                                            </span>
+                                        </span>
+                                        <span class="input-wrapper extended mt-4">
+                                            <!-- Input -->
+                                            @Html.TextBox("CustomerLastName", @Model.CustomerMinimal.CustomerLastName,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         @placeholder = "Last Name",
+                                         required = "required"
+                                     })
+                                        </span>
+                                    </div>
+                                    <div class="form-group info-group">
+                                        <label for="username" class="text-capitalize">Email</label>
+                                        <span class="input-value-section">
+                                            <span class="input-value">
+                                                <!-- Input Value -->
+                                                @(!string.IsNullOrEmpty(Model.CustomerMinimal.CustomerTypedEmail)
+                                                                                                                                                ? Model.CustomerMinimal.CustomerTypedEmail : Model.CustomerMinimal.CustomerEmail)
+
+                                            </span>
+                                        </span>
+                                        <span class="input-wrapper extended mt-4">
+                                            <!-- Input -->
+                                            @Html.TextBox("CustomerEmail", (!string.IsNullOrEmpty(Model.CustomerMinimal.CustomerTypedEmail)
+                                                 ? Model.CustomerMinimal.CustomerTypedEmail : Model.CustomerMinimal.CustomerEmail),
+                                     new
+                                     {
+                                         @class = "form-control d-table-cell extended",
+                                         @placeholder = "Email ID",
+                                         @type = "email",
+                                         pattern = ".+@.+\\..+",
+                                         @readonly = "readonly"
+                                     })
+                                        </span>
+                                    </div>
+                                    <div class="form-group info-group">
+                                        <label for="username" class="text-capitalize">Phone Number</label>
+                                        <span class="input-value-section">
+                                            <span class="input-value">
+                                                <!-- Input Value -->
+                                                @Model.CustomerMinimal.CustomerPhone
+                                            </span>
+                                        </span>
+                                        <span class="input-wrapper extended mt-4">
+                                            <!-- Input -->
+                                            @Html.TextBox("CustomerPhone", @Model.CustomerMinimal.CustomerPhone,
+                                      new
+                                      {
+                                          @class = "form-control d-table-cell extended",
+                                          @type = "text",
+
+                                          required = "required",
+                                          @placeholder = "+1xxxxxxxxxx",
+                                          maxlength = 12,
+                                          @readonly = "readonly"
+                                      })
+                                        </span>
+                                    </div>
+                                    <div class="address-section mb-0">
+                                        <h4 class="form-title text-capitalize mb-4">Billing Address</h4>
+                                        <div class="row">
+                                            <div class="col-12 col-md-12">
+                                                <!-- Start of the Address Detail Card-->
+                                                <div class="">
+                                                    <div class="form-group info-group">
+                                                        @if (!string.IsNullOrEmpty(Model.CustomerMinimal.CustomerAddress))
+                                                        {
+                                                            <span class="input-value-section">
+                                                                <p class="input-value">
+                                                                    <!-- Input Value -->
+                                                                    @Model.CustomerMinimal.CustomerAddress<br>
+                                                                    @Model.CustomerMinimal.CustomerCity, @Model.CustomerMinimal.BillingProvinceName, @Model.CustomerMinimal.CustomerCountryName
+                                                                    <br>@Model.CustomerMinimal.CustomerZipCode
+                                                                </p>
+                                                            </span>
+                                                        }
+                                                        <span class="input-wrapper extended mt-4">
+                                                            <!-- Input -->
+                                                            <label for="Address">Address</label>
+                                                            @Html.TextBox("CustomerAddress", @Model.CustomerMinimal.CustomerAddress,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         @placeholder = "Address",
+                                         required = "required"
+                                     })
+                                                            <label for="City">City</label>
+                                                            @Html.TextBox("CustomerCity", @Model.CustomerMinimal.CustomerCity,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         @placeholder = "City",
+                                         required = "required"
+
+                                     })
+                                                            <label for="Province">Province</label>
+                                                            @Html.DropDownList("CustomerMinimal.CustomerProvinceId",
+                                  new
+                                  SelectList(Model.ProvinceList,
+                                  "ProvinceId",
+                                  "ProvinceName"),
+                                  new { @class = "form-control", Name = "CustomerProvinceId", id= "CustomerProvinceId" })
+
+                                                            <label for="Address">Country</label>
+                                                            <select class="form-control" name="CustomerCountryId">
+                                                                <option value="@SiteConfigurationsWc.StoreFrontCountryId">@SiteConfigurationsWc.StorefrontCountryName</option>
+                                                            </select>
+                                                            <label for="PostalCode">Postal Code</label>
+                                                            @Html.TextBox("CustomerZipCode", @Model.CustomerMinimal.CustomerZipCode,
+                                     new
+                                     {
+                                         @class = "form-control",
+                                         required = "required",
+                                         @placeholder = "Postal Code"
+                                     })
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <!-- End of the Address Detail Card-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="save-container">
+                                        <a class="save-btn btn btn-default" type="submit" id="btnSignIn" href="#">Save</a> <span>&nbsp;&nbsp;</span>
+                                        @*<button type="submit" id="btnSignIn" class="save-btn btn btn-default">Save</button>*@
+                                    </div>
+                                }
+                                @if (SiteConfigurationsWc.ShowMultipleShippingAddress == 1)
+                                {
+                                    <div class="address-section mt-3">
+                                        <div class="row align-items-center">
+                                            <div class="col-12">
+                                                <div class="d-flex align-items-center mb-4">
+                                                    <h4 class="form-title text-capitalize my-0 mr-3">Shipping Address</h4>
+                                                    <div class="shipping-address-link-container">
+                                                        @if (Model.CustomerShippingAddresses.Count < 3)
+                                                        {
+                                                            <div class="shipping-address-link">
+                                                                <input type="button" value="+ Add Shipping Address" class="btn-dark btn--rounded" id="add-ship-address" />
+
+                                                            </div>
+                                                        }
+                                                        <span class="ml-2">(Max 3 Ship Address)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @Html.Partial("AddShippingAddress", new ShippingAddressViewModel
+                                   {
+                                       ProvinceList = Model.ProvinceList,
+                                       ShippingAddressProvinceFk = Model.CustomerMinimal.CustomerProvinceId
+                                   })
+                                        <div class="row" id="multiple-shipping-address">
+                                            @Html.Partial("_shippingAddress",  new ShippingAddressViewModel
+                                       {
+                                           CustomerShippingAddress = Model.CustomerShippingAddresses,
+                                           ProvinceList = Model.ProvinceList,
+                                           AllowEdit = true,
+                                           ShippingAddressProvinceFk = Model.CustomerMinimal.CustomerProvinceId
+                                       })
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- /Updated - 05/04/21 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Main Section -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="popup" tabindex="-1" role="dialog" aria-labelledby="popupLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:100% !important">
+            <div class="modal-header">
+                <h5 class="modal-title" id="popupLabel"> Alert</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id='myModalContent'></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="save-btn btn btn-default" id="confirmbtn">Agree</button>
+                <button type="button" class="save-btn btn btn-default" id="closebtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

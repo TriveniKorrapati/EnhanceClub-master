@@ -1,0 +1,94 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+                                <p>
+                                    Erectile dysfunction (ED) in men can seriously affect a man’s self-esteem, sex drive, ejaculation, and personal relationships. ED is generally known to be the inability for a man to reach and maintain an erection during intercourse. The inability to reach or maintain erection can be caused by physical, psychological, and emotional factors such as: heart disease, diabetes, high blood pressure, hormonal imbalance, stress, anxiety, and depression. Erectile dysfunction can lead to dis-satisfaction and embarrassment in the bedroom because of the man’s inability to perform during sexual intercourse. This can be difficult to address and tough on the ego of both parties involved.
+                                    <br>In this article we will uncover the scientific benefits of herbal remedies, which are known for being aphrodisiacs and helping promote healthier and more active libido and potency. They are a more natural alternative to widely used erectile dysfunction medications like <a href="@Url.Action("productdetail","product", new { searchTerm = "cialis"})">Cialis</a> and <a href="@Url.Action("productdetail","product", new { searchTerm = "viagra"})">Viagra</a>.
+                                </p>
+                                <p> All herbal <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5422695/">aphrodisiacs</a> induce nitric oxide (NO) synthase which is activated for the release of NO from the axons of parasympathetic nerve endings in the walls of the arteries and sinusoids of the penile. This activation of NO stimulates soluble guanylase cyclase (GC) and the activated GC then catalyze the conversion of guanosine triphosphate to cyclic Guanosine Mono Phosphate (cGMP), which then activates cGMP-dependent protein kinase (cGKI) and to a lesser extent protein kinase A. </p>
+
+                                <p> Activated cGKI and protein kinase A phosphorylate phospholamban, activate Ca2+ pump to then activate and reduce the level of free cytoplasmic Ca2+. This results in muscle relaxation. As a result of the protein kinases activation of the cell-membrane Ca2+ pump, there is a decrease in sarcoplasmic Ca2+ concentration which then prompts a loss of contractile tone of the penile muscle and an increased blood flow in the cavernous body (erectile tissue) which results in an erection. </p>
+
+
+                                @Html.Partial("_blogButton")
+
+                                <h5>
+                                    ED ALTERNATIVE TREATMENTS:
+                                </h5>
+                                <p>
+                                    <b>Pausinystalia Yohimbe</b> is an evergreen tree native to West Africa and is known for its use in increasing flow of blood to the penis and helping bring on erections for the past 75 years. This is due to its ability to increase the production of norepinephrine; which is required for an erection to form, by stimulating blood flow through dilated blood vessels. Yohimbe stimulates pelvic nerve ganglia that boost adrenaline supply to nerve endings and lead to an increase in sexual sensation and stamina.
+
+                                    <br><br> A <a href="https://pubmed.ncbi.nlm.nih.gov/17486282/">study</a> was conducted to know the effect of yohimbine in the treatment of men with orgasmic dysfunction. Yohimbine was first given at a dosage of 20-mg to 29 men with orgasmic dysfunction of different etiology in the clinic. Under more favorable conditions of their homes, patients were allowed to increase their dosage of yohimbine. After completing treatment, 16 of the 29 patients had managed to reach orgasm and ejaculate either during masturbation and/or sexual intercourse.
+
+                                    <br><br> People with a history of heart disease, unhealthy blood pressure, kidney disease, liver disease, or mental health conditions should not take yohimbe.
+
+                                    <br><br> Speak with your doctor before taking yohimbe in the case of other treatment options that may be more right for you.
+                                </p>
+                                <p><b>Panax ginseng</b> is a 2,000-year-old health and longevity herbal medicine used by Chinese and Koreans for erectile dysfunction in men. The root of the ginseng plant is consumed as a tonic to promote improvements in concentration, libido, stamina, girth, erection duration, reduction in stress levels, and is overall good for well-being. </p>
+                                <p><b>Cayenne</b> is used as an ingestible vasodilator herbal supplement. Dilated blood vessels increase circulation of blood to the penis and make erections more rigid.. It allows for blood to flow through all areas of the body, especially the major organs, to promotes longer lasting erections and stronger ejaculative orgasms. </p>
+                                <p><b>Mondia Whitei</b> is an herb native to Africa as it is an aphrodisiac often compared to Viagra in its ability to significantly enhance sexual desire, sperm count, testosterone levels, erections, and stamina. It has been used for the management of ED by traditional medicine practitioners. Although studies done on rats show low sexual enhancement of the sexually inexperienced male. </p>
+                                <p><b>Maca Root</b> is a Peruvian aphrodisiac with fertility enhancing properties which when orally administered improves sexual desire, sperm production, and performance. It is also full of health benefits as it is rich in amino acids, iodine, iron, and magnesium.</p>
+                                <p><b>Epimedium Extract</b> (Horny Goat Weed) may restore low levels of testosterone and help balance out any thyroid imbalances all while improving libido, increasing muscle mass, and stamina. It creates a vasodilation effect that traditional Chinese medicine uses in the treatment of sexual dysfunction.</p>
+                                <p>
+
+
+                                    There is still a lot to know about natural remedies for erectile dysfunction, but if you prefer trying a more natural route to finding a solution, then the herbs we covered might be worth a shot. Otherwise, you can always speak with your doctor and get a prescription for ED medication and order online from <a href="@SiteConfigurationsWc.CdnUrl/products">Enhance Club</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

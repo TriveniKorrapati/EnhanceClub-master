@@ -1,0 +1,89 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+                                <p> Guys love to see how they measure up; from cars to clothes… there is no shortage of things you can size yourself up to. As for their sexual partners, you can guarantee they are sizing you up – at least in that way. But bigger isn’t always better. Which brings up the question, is there an ideal penis size? Do all partners just want a big penis? Well, the short answer (no pun intended) is no. But also; yes. Confused? Let’s try and unwrap this myth.</p>
+
+                                <p>The pressure to be packing some serious BDE, or ‘big dick energy’ is pushed on guys in all forms of media. From songs to commercials, movies, and social media – over-emphasising the size of male genitals has become its own cultural phenomenon. But like a lot of things entertainment driven, it’s mostly fake, over-hyped and unrealistic. When it comes to size, packing a big penis is more a myth than reality for most men (and their partners!) </p>
+
+                                <h5>IS 9 INCHES A GOOD SIZE?</h5>
+
+                                <p>
+                                    Most men wish they had a larger penis. Whether it is fueled by ego, sexual prowess, or insecurity – men tend to equate masculinity to the size of their penis. But an ideal penis size, believe it or not, according to most women – isn’t the big swinging monster. In fact, biologically speaking, a penis larger than 6 to 7 inches can be uncomfortable and reduce the pleasure your partner receives.
+
+                                    <br><br> Is a 9-inch penis too big for women? The human body was designed for the average sized penis (around 5.5 inches) to fit comfortably inside both women and men. It gives both partners a chance for maximum stimulation and pleasure. So, one might wonder… is 9 inches a good size? Chances are a 9-inch penis or longer probably isn’t what most partners are interested in. But there are always exceptions.
+                                </p>
+
+                                @Html.Partial("_blogButton")
+
+                                <h5>BIG LET DOWN</h5>
+
+                                <p>
+                                    With the average penis size being <a href="https://www.huffpost.com/entry/why-small-is-better-the-5-inch-advantage-for-men_b_58ff9812e4b0938fb73e95f2">under</a> 6 inches, the majority of men are average, although they may not realize just how average. In fact, less than 15% of all men have an erect penis larger than 7 inches. And if you want to go even bigger – there are even less. Less than 2% of men have a penis 8 inches long or larger. So, when you look around a crowded room, chances are almost every guy you see has a penis roughly the same size as yours.
+                                </p>
+
+                                <h5>I WANT MORE</h5>
+
+                                <p>Some men still feel they want to be larger, and there are some options. If you discuss with your doctor and both of you agree that a larger penis size will be better, then penis enlargement surgery is the most effective procedure, although it is also very invasive and risky. Others have tried <a href="https://www.mayoclinic.org/tests-procedures/penis-pump/about/pac-20385225">‘penis pumps’</a> which essentially create pressure around the penis, drawing excessive amounts of blood into the blood vessels, and swelling the size of the penis (to a very small degree). But this isn’t permanent and can lead to damaged blood vessels around the penis. There are no magic pills you can take to grow the size of your penis either, beyond its normal erect shape. </p>
+
+                                <h5>GET SKILLS</h5>
+
+                                <p> Intimate partners will almost always tell you that they prefer a good lover over one with a bigger than average penis size and no skills to use it. Imagine a sleek sports car, with the ability to smoothly glide around the race track at full speed. This is a much more satisfying experience than an 18-wheeler ploughing its way around the track, crashing into everything in site. One of these vehicles may be smaller, but it is also much more fun to drive. </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,264 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@section PageScripts
+{
+    <script>
+        $(document).ready(function () {            
+            if (@SiteConfigurationsWc.ShowPromotionBanner == 1) {                
+                $(".navbar-main").removeClass("fixed-top");
+                // Navbar Promo
+                $(".navbar-promo .exit").on("click", function (e) {
+                    $(this).parent().hide();                   
+                    $(".navbar-main").addClass("fixed-top");
+                    e.preventDefault();
+                });
+            }
+            
+
+            // Slick - On Change
+            var stepsCounter = $(".steps__counter");
+            $(".steps__details-slide").on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
+                // Slick - Current Slide
+                var currentStepCounter = $(".slick-current").data('slick-index');
+                var currentStep = "step-" + currentStepCounter;
+                $(".steps-container").removeClass().addClass("steps-container mb-0 " + currentStep);
+                $('.steps__image[data-step-index="' + currentStepCounter + '"]').addClass("active").siblings().removeClass("active");
+                // Slick - Steps Counter
+                if (!slick.$dots) {
+                    return;
+                }
+                var currentSlideStep = (currentSlide ? currentSlide : 0) + 1;
+                var totalSlideStep = (slick.$dots[0].children.length);
+                stepsCounter.html('<span>' + '0' + currentSlideStep + '</span>' + '/' + '0' + totalSlideStep);
+            });
+            // Slick
+            $(".steps__details-slide").slick({
+                vertical: true,
+                verticalSwiping: true,
+                adaptiveHeight: true,
+                nextArrow: $(".next"),
+                prevArrow: $(".prev"),
+                dots: true,
+                infinite: false,
+            })
+
+            var maxHeight = -1;
+            $('.slick-slide').each(function () {
+                if ($(this).height() > maxHeight) {
+                    maxHeight = $(this).height();
+                }
+            });
+            $('.slick-slide').each(function () {
+                if ($(this).height() < maxHeight) {
+                    $(this).css('margin', Math.ceil((maxHeight - $(this).height()) / 2 + 2) + 'px 0');
+                }
+            });
+
+        });
+        // Animate on scroll
+        (function () {
+            var elementsX;
+            var elementsX2;
+            var elementsY;
+            var elementsY2;
+            var elementsYS;
+            var windowHeight;
+            function init() {
+                elementsX = document.querySelectorAll('.in-x');
+                elementsX2 = document.querySelectorAll('.-in-x');
+                elementsY = document.querySelectorAll('.in-y');
+                elementsY2 = document.querySelectorAll('.-in-y');
+                elementsYS = document.querySelectorAll('.in-y-s');
+                windowHeight = window.innerHeight;
+            }
+            function checkPosition() {
+                for (var i = 0; i < elementsX.length; i++) {
+                    var element = elementsX[i];
+                    var positionFromTop = elementsX[i].getBoundingClientRect().top;
+                    if (positionFromTop - windowHeight <= 0) {
+                        element.classList.add('intro-x');
+                        element.classList.remove('in-x');
+                    }
+                }
+                for (var i = 0; i < elementsX2.length; i++) {
+                    var element = elementsX2[i];
+                    var positionFromTop = elementsX2[i].getBoundingClientRect().top;
+                    if (positionFromTop - windowHeight <= 0) {
+                        element.classList.add('-intro-x');
+                        element.classList.remove('-in-x');
+                    }
+                }
+                for (var i = 0; i < elementsY.length; i++) {
+                    var element = elementsY[i];
+                    var positionFromTop = elementsY[i].getBoundingClientRect().top;
+                    if (positionFromTop - windowHeight <= 0) {
+                        element.classList.add('intro-y');
+                        element.classList.remove('in-y');
+                    }
+                }
+                for (var i = 0; i < elementsY2.length; i++) {
+                    var element = elementsY2[i];
+                    var positionFromTop = elementsY2[i].getBoundingClientRect().top;
+                    if (positionFromTop - windowHeight <= 0) {
+                        element.classList.add('-intro-y');
+                        element.classList.remove('-in-y');
+                    }
+                }
+                for (var i = 0; i < elementsYS.length; i++) {
+                    var element = elementsYS[i];
+                    var positionFromTop = elementsYS[i].getBoundingClientRect().top;
+                    if (positionFromTop - windowHeight <= 0) {
+                        element.classList.add('intro-y-stacked');
+                        element.classList.remove('in-y-s');
+                    }
+                }
+            }
+            window.addEventListener('scroll', checkPosition);
+            window.addEventListener('resize', init);
+            init();
+            checkPosition();
+        })();
+    </script>
+
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $('.products-gallery--content #menu-brand').show();
+        //    $('.products-gallery--content #menu-generic').hide();
+        //});
+
+        $(".products-gallery--content").on('change', '#menu-selection', function ()
+        {
+
+            var selectedType = $(this).find('option:selected').val();
+
+            if (selectedType == "2") {
+                $('.products-gallery--content #menu-generic').addClass("d-none");
+                $('.products-gallery--content #menu-brand').removeClass("d-none");
+
+                if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether != 1) {
+                    var productId = $("#menu-brand option:selected").val();
+                    var strength = $('#menu-brand :selected').text();
+                    BindQuantityDropDown(false, productId, strength);
+                }
+
+            }
+            else {
+                $('.products-gallery--content #menu-brand').addClass("d-none");
+                $('.products-gallery--content #menu-generic').removeClass("d-none");
+                if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether != 1) {
+                   var productId = $("#menu-generic option:selected").val();
+                    var strength = $('#menu-generic :selected').text();
+                    BindQuantityDropDown(true, productId, strength);
+                }
+            }
+
+        });
+
+        $(".products-gallery--content").on('click', '#get-it-now', function (e)
+        {
+            var selectedVal = 0;
+            var menuSelectionVal = 0;
+            if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether == 1) {
+                var dropDownIndex = $(this).attr('data-src');
+                selectedVal = $('[name=generic-productsizeId_' + dropDownIndex + ']').val();
+                menuSelectionVal = $('[name=menu-selection_' + dropDownIndex + ']').val();
+
+                if ($('.products-gallery--content #menu-generic').hasClass("d-none")) {
+                    selectedVal = $('[name=brand-productsizeId_' + dropDownIndex + ']').val(); // $('.products-gallery--content #menu-brand').val();
+                }
+
+            }
+            else {
+                selectedVal = $('[name=quantity-productsizeId]').val();
+                menuSelectionVal = $('[name=menu-selection]').val();
+
+                //menuSelectionVal = $('cls-' + dropDownIndex).val();
+                //alert(menuSelectionVal);
+            }
+
+            //menu-selection
+
+            if ((selectedVal != 0) && (menuSelectionVal != 0)) {
+
+                var productId = $("#product-id_" + dropDownIndex).val();
+
+                var productSizeId = selectedVal
+                addProductToCart(productSizeId, productId);
+                //return true;
+            }
+            else {
+
+                alert('Please choose a valid product & strength.');
+                //return false;
+            }
+            e.preventDefault();
+        })
+
+    </script>
+}
+
+@*@Html.Partial("_homeStructureData",
+        new HomeStructureViewModel {
+    MetaDescription = ViewBag.Description,
+    })*@
+
+
+<!-- Main -->
+    <main class="page-content home-page home-page-container">
+        <!-- Hero -->
+        @Html.Partial("_bannerHomePage-v2")
+        <!-- /Hero -->
+        <!-- Products -->
+        @Html.Partial("_productsHomePage-v2")
+        <!-- /Products -->
+        <!-- Steps -->
+        @Html.Partial("_how-it-works-home-page-v2")
+
+        <!-- Practitioners -->
+        @if (@SiteConfigurationsWc.ShowHomePageDoctorSection == 1)
+        {
+        @Html.Partial("_healthcarePractitioner-v2")
+        }
+
+        <!-- /Practitioners -->
+        <!-- Testimonials -->
+        @Html.Partial("_testimonialHomePage-v2")
+        <!-- /Testimonials -->
+        <!-- Instagram -->
+        @*<div class="instagram-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2><a href="#">@@enhanceclub</a></h2>
+                        <div class="instagram-posts">
+                            <div class="instagram-carousel owl-carousel owl-theme">
+                                <div class="item"><img src="/content/images/home-page/instagram-image-01.jpg" alt="image" /></div>
+                                <div class="item"><img src="/content/images/home-page/instagram-image-02.jpg" alt="image" /></div>
+                                <div class="item"><img src="/content/images/home-page/instagram-image.png" alt="image" /></div>
+                                <div class="item"><img src="/content/images/home-page/instagram-image-02.jpg" alt="image" /></div>
+                                <div class="item"><img src="/content/images/home-page/instagram-image.png" alt="image" /></div>
+                                <div class="item"><img src="/content/images/home-page/instagram-image-02.jpg" alt="image" /></div>
+                                <div class="item"><img src="/content/images/home-page/instagram-image.png" alt="image" /></div>
+                                <div class="item"><img src="/content/images/home-page/instagram-image-02.jpg" alt="image" /></div>
+                                <div class="item"><img src="/content/images/home-page/instagram-image.png" alt="image" /></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        <!-- /Instagram -->
+        <!-- Blog -->
+        @Html.Partial("_blogHomePage-v2", new BlogListViewModel
+    {
+        BlogList = Model.BlogList
+
+    })
+        <!-- /Blog -->
+        <!-- Product Footer -->
+        @Html.Partial("_productsHomePageFooter-v2")
+        <!-- /Product Footer -->
+
+    </main>
+<!-- /Main -->

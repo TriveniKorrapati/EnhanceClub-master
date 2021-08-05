@@ -1,0 +1,158 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+<div class="popup-navbar d-flex justify-content-center flex-column">
+    <button class="btn btn-reset btn-menu-close"><img src="/content/images/close.png" alt="icon" /></button>
+    <!-- <img src="/content/images/popup-image.png" alt="image" class="popup-image" /> -->
+    <div class="popup-menu d-flex align-items-end flex-wrap">
+        <div class="w-100 py-3">
+            <div class="row d-md-none">
+                <div class="col-md-12 text-md-right">
+                    <a class="d-inline-block" href="/products">
+                        <h3>
+                            Shop
+                        </h3>
+                    </a>
+                </div>
+            </div>
+            <div class="row d-md-none">
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="col-md-12 text-md-right">
+                        <a class="d-inline-block" href="@Url.Action("dashboard","Customer")">
+                            <h3>Dashboard</h3>
+                        </a>
+                    </div>
+                    <div class="col-md-12 text-md-right">
+                        <a class="d-inline-block" href="@Url.Action("Logout","Customer")">
+                            <h3>Sign Out</h3>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-12 text-md-right">
+                        <a class="d-inline-block" href="/login">
+                            <h3>Login</h3>
+                        </a>
+                    </div>
+                }
+
+            </div>
+            <div class="row d-md-none mt-0">
+                <div class="col-md-12">
+                    <hr class="white">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-md-right">
+                    <h3>Enhance <br />Club</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                    <ul class="list-unstyled list-links club-menu">
+                        <li>
+                            @Html.ActionLink("Home",
+                                         "Index",
+                                         "Home",
+                                         null,
+                                         new { @class = "" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("About us", "about", "Home", null, new { @class = "" })
+
+                        </li>
+                        <li>
+                            @Html.ActionLink("How it Works", "How-It-Works", "Home", null, new { @class = "" })
+
+                        </li>
+                        <li>
+                            @Html.ActionLink("Learn", "Index", "Blog", null, new { @class = "" })
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-3 text-md-right">
+                    <h3>Products</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                    @Html.Partial("_productLinks")
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-3 text-md-right">
+                    <h3>Need <br />help?</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                    <ul class="list-unstyled list-links">
+                        <li>
+                            @Html.ActionLink("Get in Touch", "get-in-touch", "Home", null, new { @class = "" })
+
+                        </li>
+                        <li>
+                            @Html.ActionLink("Terms & Conditions", "terms-and-conditions", "Home", null, new { @class = "" })
+
+                        </li>
+
+                        <li>
+                            @Html.ActionLink("Shipping & Returns", "shipping-and-returns", "Home", null, new { @class = "" })
+
+                        </li>
+                        <li>                          
+                            @Html.ActionLink("FAQs", "Faq", "Home", null, new { @class = "" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Privacy Policy", "privacy-policy", "Home", null, new { @class = "" })
+
+                        </li>
+                        <li>
+                            @Html.ActionLink("Telehealth Informed Consent", "telehealth-consent", "Home", null, new { @class = "" })
+
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+            <!-- /.row -->
+            <div class="row popup-social">
+                <div class="col-md-3 text-md-right">
+                    <h3>Follow us</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                    @Html.Partial("_socialLinks" , new SocialLinksViewModel
+                    {
+                        LinkWrap = "empty"
+                    })
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-3 text-md-right">
+                    <h3>CALL US</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                    <h3>@SiteConfigurationsWc.StorefrontContact</h3>
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+        </div>
+        <!-- /.m-auto -->
+
+        <div class="popup-social w-100">
+        </div>
+        <!-- /.popup-social -->
+    </div>
+    <!-- /.popup-menu -->
+
+</div>

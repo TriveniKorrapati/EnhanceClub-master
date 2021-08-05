@@ -1,0 +1,86 @@
+﻿@model EnhanceClub.Domain.Entities.CartItem
+
+@if (Model.ProductCart.VolumeDiscountProductSize != null && Model.ProductCart.VolumeDiscountProductSize.Count() > 0)
+{
+
+    var discountProductCount = 1;
+
+    
+        <div class="cart-discount-container">
+
+            @foreach (var discountedProductSize in Model.ProductCart.VolumeDiscountProductSize)
+            {
+                if (Model.ProductCart.ProductSizeId != discountedProductSize.RelatedProductSizeFk && discountedProductSize.ProductSizeOrder > Model.ProductCart.ProductSizeOrder)
+                {
+                    <a href="javascript:void(0);" class="cart-discount discount-@discountProductCount"
+                       onclick="replaceCartItem(@Model.ProductCart.ProductSizeId, @discountedProductSize.RelatedProductSizeFk, @discountedProductSize.ProductSizeFk)">
+                        <div class="cart-discount-image">
+                            <img src="/content/images/products/@discountedProductSize.DiscountImageName" alt="">
+                        </div>
+                        <div class="cart-discount-info">
+                            <p>@discountedProductSize.DiscountMessage</p>
+                            <p class="large">@discountedProductSize.DisplayUnit NOW</p>
+                            <div class="cart-discount-price">
+                                @if (discountedProductSize.ProductSizeNonDiscountedPrice > 0)
+                                {
+                                    <div class="old-price">
+                                        CA @discountedProductSize.ProductSizeNonDiscountedPrice.ToString("c")
+                                    </div>
+                                }
+
+                                <div class="new-price">
+                                    CA @discountedProductSize.ProductSizePrice.ToString("c")
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }
+                @*else
+                {
+                    <a href="javascript:void(0);" class="cart-discount discount-@discountProductCount"
+                       onclick="replaceCartItem(@Model.ProductCart.ProductSizeId, @discountedProductSize.ProductSizeFk, @discountedProductSize.ProductSizeFk)">
+                        <div class="cart-discount-image">
+                            <img src="@Model.ProductCart.ProductImagePath" alt="">
+                        </div>
+                        <div class="cart-discount-info">
+                            <p></p>
+                            <p class="large">@discountedProductSize.FrontendVisibleItemQuantity.ToString("##") @discountedProductSize.ProductSizeUnit </p>
+                            <div class="cart-discount-price">
+                                @*<div class="old-price">
+                                        CA
+                                    </div>*@
+                                @*<div class="cart-main-price">
+                                    CA @discountedProductSize.FrontendVisibleItemPrice.ToString("c")
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                }*@
+
+                discountProductCount = discountProductCount + 1;
+            }
+            @*<a href="#" class="cart-discount discount-2">
+                    <div class="cart-discount-image">
+                        <img src="../Content/images/products/product-discount-play-2.png" alt="">
+                    </div>
+                    <div class="cart-discount-info">
+                        <p>Save up to <b>10%</b> on purchasing</p>
+                        <p class="large">12 PILLS NOW</p>
+                        <div class="cart-discount-price">
+                            <div class="old-price">
+                                CA$270.00
+                            </div>
+                            <div class="new-price">
+                                CA$229.47
+                            </div>
+                        </div>
+                    </div>
+                </a>*@
+        </div>
+    
+    <p class="disclaimer">
+        <b>Disclaimer:</b> Quantity must be within prescription limits
+    </p>
+
+
+}

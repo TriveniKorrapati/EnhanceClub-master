@@ -1,0 +1,144 @@
+﻿@model EnhanceClub.Domain.Entities.CustomerSignUp
+
+
+@section PageScripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#sign-up-form-2').bind('keydown', function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                }
+            });
+
+            if ($("#CognitoSignupPhoneVerificationCode").val().length == 6) {
+                $("#verifyPhoneAccessCode").removeAttr('disabled').css('cursor', 'pointer');
+            }
+            else {
+                $("#verifyPhoneAccessCode").attr("disabled", true).css('cursor', 'default');
+            }
+
+            $('#CognitoSignupPhoneVerificationCode').keyup(function () {
+                if ($("#CognitoSignupPhoneVerificationCode").val().length == 6) {
+                    $("#verifyPhoneAccessCode").removeAttr('disabled').css('cursor', 'pointer');
+                }
+                else {
+                    $("#verifyPhoneAccessCode").attr("disabled", true).css('cursor', 'default');
+                }
+            });
+
+            // to handle if code is directly pasted on mobile device
+            $('#CognitoSignupPhoneVerificationCode').blur(function () {
+                if ($("#CognitoSignupPhoneVerificationCode").val().length == 6) {
+                    $("#verifyPhoneAccessCode").removeAttr('disabled').css('cursor', 'pointer');
+                }
+                else {
+                    $("#verifyPhoneAccessCode").attr("disabled", true).css('cursor', 'default');
+                }
+            });
+
+            $("#verifyPhoneAccessCode").click(function () {
+                // to do verify phone access code and show shipping address controls and update header text
+                console.log("entering verifyPhoneAccessCode");
+                var customerEmail = $("#CustomerEmail").val();
+                var verificationCode = $("#CognitoSignupPhoneVerificationCode").val();
+                if (verificationCode != "") {
+                    var customerId = $("#CustomerId").val();
+                    var sessionId = $("#SessionId").val();
+                    var returnUrl = $("#returnUrl").val();
+
+                    $.ajax({
+                        url: '/customer/VerifyMfaPhoneCode',
+                        contentType: "application/json",
+                        async: true,
+                        data: JSON.stringify({
+                            customerId: customerId, customerEmail: customerEmail,
+                            phoneVerificationCode: verificationCode, sessionId: sessionId,
+                            actionType: 1,
+                                }),
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.verified) {
+                                //alert("Phone number access code authenticated");
+
+                                /* commented: may 20, redundant authentication
+                                var accessToken = data.userAccessToken;
+                                window.location.href = "/customer/loginuser/?customerEmail=" + customerEmail + "&accessToken=" + accessToken;
+                                */
+                               
+                                // if there is no retrn url, then redirect to dashboard 
+                                // else navigate to returnurl
+                                
+                                if (returnUrl == "" || returnUrl == null) {
+                                    window.location.href = "/customer/dashboard?fromlogin=true";
+                                }
+                                else {
+                                    window.location.href = returnUrl;
+                                }
+                    
+                                console.log("verify success");
+                                // to do show control for phone verification code
+                            } else {
+                                // alert("Phone number access code not authenticated");
+                                $(".validation-summary-errors").removeClass("d-none");
+                                // to do show error for authentication failed
+                            }
+                        },
+                        error: function (response) {
+                            // to do show error for authentication failed
+                        }
+                    });
+                }
+                else {
+                    alert("Please enter verification code");
+                }
+                
+            });
+
+            $("#resend-mfa, #resend-mfa-phone").click(function (event) {
+                event.preventDefault();
+                window.location.reload(true);
+            });
+        });
+
+    </script>
+}
+<div class="get-started-section started-main">
+    <div class="get-started-banner1"></div>
+    <div class="person-image">
+        <img src="/content/images/hipster-grandpa-2.png" alt="Get Started">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                <h2>Almost there...</h2>
+
+
+                <div class="validation-summary-errors d-none" data-valmsg-summary="true">
+                    <ul>
+                        <li>Failed to verify phone access code</li>
+                    </ul>
+                </div>
+
+                <h4>Verify Phone Access Code</h4>               
+
+                @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "", role = "form", @id = "sign-up-form-2", name = "signUpForm-2" }))
+                {
+                    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" id="returnUrl" />
+                    @Html.Hidden("CustomerId", @Model.CustomerId)
+                    @Html.Hidden("CustomerEmail", @Model.CustomerEmail)
+                    @Html.Hidden("SessionId", Model.SessionId)
+
+                    <div class="form-container">
+                        @Html.Partial("_mfa-verification")
+
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

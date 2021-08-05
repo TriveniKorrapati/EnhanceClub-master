@@ -1,0 +1,35 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.Domain.Entities
+
+@model EnhanceClub.WebUI.Models.CustomerOrdersViewModel
+
+
+<div class="container container-standard ">
+
+    <div class="row">
+
+        <div class="col-md-12">
+            
+            @Html.Partial("AccountOptions", "history")
+
+            <div class="account">
+                <h5>Re-Order Previously Ordered Products</h5>
+                @if (Model.ProductsOrderedList != null)
+                {
+                    @Html.Partial("ProductsOrdered", Model.ProductsOrderedList.ToList<ProductsOrdered>())
+                   
+                }
+                else
+                {
+                     @Html.Partial("Message", "You have no previous orders.")
+                }
+
+               @if (Model.CustomerOrdersList != null)
+               {
+                   @Html.Partial("OrderList", Model.CustomerOrdersList)
+               }
+               
+            </div>
+        </div>
+    </div>
+</div>

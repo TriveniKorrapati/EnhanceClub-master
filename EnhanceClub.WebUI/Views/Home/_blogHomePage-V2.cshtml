@@ -1,0 +1,48 @@
+﻿@model EnhanceClub.WebUI.Models.BlogListViewModel
+@using EnhanceClub.WebUI.Infrastructure.Utility
+
+
+<div class="blog-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Learn</h2>
+            </div>
+        </div>
+        <div class="blog-listing single-row">
+            <div class="row">
+                @foreach (var thisBlog in Model.BlogList)
+                {
+                    <div class="in-y col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="post-tiles">
+                            <a href="@Url.Action("blogselector", "blog", new { blogUrl = @thisBlog.BlogLink })">
+                                <span class="blog-thumbnail d-flex align-items-end">
+                                    <span class="blog-thumbnail-image">
+                                        <div class="blog-thumbnail-image-cover">
+                                            <img src="@thisBlog.BlogTnImage" alt="Blog Post Image">
+                                        </div>
+                                        <span class="thumbnail-gradient"></span>
+                                    </span>
+                                </span>
+                                <h3 class="blog-title">@Html.Raw(@thisBlog.BlogHeadline)</h3>
+                                <p class="blog-summary">@thisBlog.BlogMetaDescription</p>
+                                <span class="post-page">
+                                    Read more
+                                    <svg width="44" height="24" viewBox="0 0 44 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M43.0607 13.0611C43.6464 12.4754 43.6464 11.5256 43.0607 10.9398L33.5147 1.39389C32.9289 0.8081 31.9792 0.8081 31.3934 1.39389C30.8076 1.97967 30.8076 2.92942 31.3934 3.51521L39.8787 12.0005L31.3934 20.4858C30.8076 21.0716 30.8076 22.0213 31.3934 22.6071C31.9792 23.1929 32.9289 23.1929 33.5147 22.6071L43.0607 13.0611ZM0 13.5005H42V10.5005H0V13.5005Z" fill="black" />
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                }
+
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

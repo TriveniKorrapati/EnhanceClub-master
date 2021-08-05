@@ -1,0 +1,117 @@
+﻿@model  IList<EnhanceClub.Domain.Entities.ProductsOrdered>
+
+    @if (Model != null)
+    {
+        using (Html.BeginForm("AddToCartMultiple", "Cart", null, FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Qty</th>
+                        <th>Product</th>
+                        <th>Strength</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        @Html.HiddenFor(x => x[i].CartProductSizeFk)
+                        <tr>
+                            <td>
+                                @Html.CheckBoxFor(x => x[i].ProductSizeAdd, new { @class = "checkbox" })
+                            </td>
+
+                            <td>
+                                @Html.TextBoxFor(x => x[i].ProductSizeAddQty, new { @Value = "1", @size = 4, @maxlength = 4, @align = "left", pattern = "[1-9]\\d*" })
+                            </td>
+
+                            <td>
+                                @Html.DisplayTextFor(x => x[i].ProductStoreFrontRealName)
+                            </td>
+
+                            <td>
+                                @Html.DisplayTextFor(x => x[i].ProductSizeHeader)
+                                @Html.DisplayTextFor(x => x[i].ProductSizeStrength)
+                                @Html.DisplayTextFor(x => x[i].ProductSizeQty)
+                            </td>
+
+                        </tr>
+
+                    }
+
+                    @* Start: This row is for testing more than one products*@
+                    @*<tr>
+
+                            <div><input type="hidden" id="[1].CartProductSizeFk" name="[1].CartProductSizeFk" value="15" /></div>
+
+                            <td>
+                                <input type="checkbox" name="[1].ProductSizeAdd"  class ="checkbox" checked="checked" value="true"/>
+                            </td>
+
+                            <td>
+                                <input type="text" id="[1].ProductSizeAddQty" name="[1].ProductSizeAddQty" value="10" size="4" maxlength="4"/>
+                            </td>
+
+                            <td>
+                                @Html.Raw("Test Product")
+                            </td>
+
+                            <td>
+                                @Html.Raw("This is added for test purpose")
+                            </td>
+                        </tr>*@
+
+                    @* End: This row is for testing more than one products*@
+
+
+                    @if (Model.Any())
+                    {
+                        <tr>
+                            <td colspan="4" align="center">
+                                <button type="submit" class="btn btn-primary" name="Submit">Submit</button>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" align="center">
+                                You have no previous orders.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+    }
+
+
+    @*@for( var i = 0 ; i < Model.Count ; i++)
+        {
+
+            <tr>
+                <td>
+                    @Html.HiddenFor(x=>x[i].CartProductSizeFk)
+
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(x=>x[i].ProductSizeQty)
+                </td>
+            </tr>
+
+             <tr>
+                <td>
+                    <input type="hidden" id="[1].CartProductSizeFk" name="[1].CartProductSizeFk" value="15" />
+
+                </td>
+
+                <td>
+                    <input type="text" id="[1].ProductSizeQty" name="[1].ProductSizeQty" value="10" />
+                </td>
+            </tr>
+        }*@

@@ -1,0 +1,130 @@
+﻿@model EnhanceClub.WebUI.Models.CheckoutMenuViewModel
+
+@foreach (var tmp in "1")
+{
+    <ul class="nav nav-tabs sub-nav">
+
+        <li>
+            <a href="@Url.Action("index", "Cart")">
+                <i class="fa fa-arrow-left"></i> Edit Shopping Cart
+            </a>
+        </li>
+
+        @switch (@Model.TabName)
+        {
+            case "profile":
+
+                <li class="active">
+                    <a href="javascript:void();">Patient Profile</a>
+                </li>
+
+                <li class="inactive">
+                    <a href="javascript:void();">Order Review</a>
+                </li>
+
+                <li class="inactive">
+                    <a href="javascript:void();">Shipping and Billing</a>
+                </li>
+                <li class="inactive">
+                    <a href="javascript:void();">Payment</a>
+                </li>
+                break;
+
+            case "review":
+                if (@Model.CartHasRx)
+                {
+                    <li class="">
+                        <a href="@Url.Action("checkout", "Order", new {@step = 1})">Patient Profile</a>
+                    </li>
+                }
+                <li class="active">
+                    <a href="javascript:void();">Order Review</a>
+                </li>
+
+                <li class="inactive">
+                    <a href="javascript:void();">Shipping and Billing</a>
+                </li>
+         <li class="inactive">
+                    <a href="javascript:void();">Payment</a>
+                </li>
+                break;
+
+            case "shipping":
+
+                if (@Model.CartHasRx)
+                {
+                    <li class="">
+                        <a href="@Url.Action("checkout", "Order", new {@step = 1})">Patient Profile</a>
+                    </li>
+                }
+                <li class="">
+                    <a href="@Url.Action("checkout", "Order", new {@step = 2})">Order Review</a>
+                </li>
+
+                <li class="active">
+                    <a href="javascript:void();">Shipping and Billing</a>
+                </li>
+         <li class="inactive">
+                    <a href="javascript:void();">Payment</a>
+                </li>
+                break;
+        case "payment":
+
+                if (@Model.CartHasRx)
+                {
+                    <li class="">
+                        <a href="@Url.Action("checkout", "Order", new {@step = 1})">Patient Profile</a>
+                    </li>
+                }
+                <li class="">
+                    <a href="@Url.Action("checkout", "Order", new {@step = 2})">Order Review</a>
+                </li>
+
+                <li >
+                    <a href="@Url.Action("checkout", "Order", new {@step = 3})">Shipping and Billing</a>
+                </li>
+               <li class="active">
+                    <a href="javascript:void();">Payment</a>
+                </li>
+                break;
+        }
+
+    </ul>
+}
+
+
+@*<li>
+        <a href="@Url.Action("index", "Cart")">
+            <i class="fa fa-arrow-left"></i> Edit Shopping Cart
+        </a>
+    </li>
+
+     <li class="@((@Model == "profile") ? "active" : "")">
+
+          @if (@Model == "review" || @Model == "shiping")
+            {
+                <a href="@Url.Action("checkout", "Order", new {@step = 1})">Patient Profile</a>
+            }
+            else
+            {
+                <a href="javascript:void();">Patient Profile</a>
+            }
+     </li>
+
+
+      <li class="@((@Model == "review") ? "active" : "")">
+
+        @if (@Model == "shipping")
+        {
+        <a href="@Url.Action("checkout", "Order", new {@step = 2})">Order Review</a>
+        }
+        else
+        {
+        <a href="javascript:void();">Order Review</a>
+        }
+    </li>
+
+    <li class="@((@Model == "shipping") ? "active" : "inactive")">
+
+        <a href="javascript:void();">Shipping and Billing</a>
+    </li>*@

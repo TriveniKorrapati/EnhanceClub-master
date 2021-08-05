@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>My Orders</title>
+	<style>
+		html {
+			font-family: 'sans-serif';
+		}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="My Orders">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+	<link href="../../content/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+	<div id="wrapper" class="header-">
+		<nav class="navbar fixed-top navbar-expand-md">
+			<button class="btn btn-menu btn-reset"><img src="../../content/images/menu-icon.png" alt="menu" /></button>
+			<a class="navbar-brand" href="/"><img src="../../content/images/logo-active.svg" class="default"
+					alt="black" /><img src="../../content/images/logo-active.svg" class="active" alt="black" /></a>
+			<!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    			    <span class="navbar-toggler-icon"></span>
+    			  </button> -->
+			<span class="nav-link cart-open d-md-none">
+				Cart <span class="badge badge-count">0</span>
+			</span>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/#shop">Shop</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/sign-in">Login</a>
+					</li>
+					<li class="nav-item dropdown">
+						<span class="nav-link cart-open">
+							Cart <span class="badge badge-count">0</span>
+						</span>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="popup-navbar d-flex justify-content-center flex-column">
+			<button class="btn btn-reset btn-menu-close"><img src="../../content/images/close.png"
+					alt="icon" /></button>
+			<!-- <img src="../../content/images/popup-image.png" alt="image" class="popup-image" /> -->
+			<div class="popup-menu d-flex align-items-end flex-wrap">
+				<div class="w-100 py-3">
+					<div class="row">
+						<div class="col-md-3 text-md-right">
+							<h3>Enhance <br />Club</h3>
+						</div>
+						<!-- /.col-md-3 -->
+						<div class="col-md-9">
+							<ul class="list-unstyled list-links club-menu">
+								<li><a href="/">Home</a></li>
+								<li><a href="/about">About us</a></li>
+								<li><a href="/how-it-works">How it Works</a></li>
+								<li><a href="/blog">Learn</a></li>
+							</ul>
+						</div>
+						<!-- /.col-md-9 -->
+					</div>
+					<!-- /.row -->
+					<div class="row">
+						<div class="col-md-3 text-md-right">
+							<h3>Products</h3>
+						</div>
+						<!-- /.col-md-3 -->
+						<div class="col-md-9">
+							<ul class="list-unstyled list-links">
+								<li><a href="/products/spike/">Spike <span class="viagra-gradient">VIAGRA</span></a>
+								</li>
+								<li><a href="/products/play/">Play <span class="cialis-gradient">CIALIS</span></a></li>
+								<li><a href="/products/arise/">Arise <span
+											class="finasteride-gradient">FINASTERIDE</span></a></li>
+							</ul>
+						</div>
+						<!-- /.col-md-9 -->
+					</div>
+					<!-- /.row -->
+					<div class="row">
+						<div class="col-md-3 text-md-right">
+							<h3>Need <br />help?</h3>
+						</div>
+						<!-- /.col-md-3 -->
+						<div class="col-md-9">
+							<ul class="list-unstyled list-links">
+								<li><a href="/get-in-touch">Get in Touch</a></li>
+								<li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+								<li><a href="/shipping-and-returns">Shipping & Returns</a></li>
+								<li><a href="/privacy-policy">Privacy Policy</a></li>
+								<li><a href="/faq">FAQs</a></li>
+							</ul>
+						</div>
+						<!-- /.col-md-9 -->
+					</div>
+					<!-- /.row -->
+
+					<div class="row popup-social">
+						<div class="col-md-3 text-md-right">
+							<h3>Follow us</h3>
+						</div>
+						<!-- /.col-md-3 -->
+						<div class="col-md-9">
+							<a href="#"><img src="../../content/images/facebook-yl.svg" alt="icon" /></a>
+							<a href="#"><img src="../../content/images/twitter-yl.svg" alt="icon" /></a>
+							<a href="#"><img src="../../content/images/youtube-yl.svg" alt="icon" /></a>
+							<a href="#"><img src="../../content/images/instagram-yl.svg" alt="icon" /></a>
+						</div>
+						<!-- /.col-md-9 -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.m-auto -->
+
+				<div class="popup-social w-100">
+				</div>
+				<!-- /.popup-social -->
+			</div>
+			<!-- /.popup-menu -->
+		</div>
+		<!-- /.popup-navbar -->
+
+		<!-- Start of Cart Header -->
+		<div class="popup-cart dark-cart">
+			<div class="cart-inner-box">
+				<div class="row">
+					<div class="col">
+						<h2>Your cart</h2>
+						<button class="btn btn-reset btn-cart-close">close
+							<svg width="27" height="26" viewBox="0 0 27 26" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path d="M2.36719 2L24.3672 24" stroke="#FFC305" stroke-width="3"
+									stroke-linecap="round" />
+								<path d="M2 23.6334L24.7333 2.3667" stroke="#FFC305" stroke-width="3"
+									stroke-linecap="round" />
+							</svg>
+						</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="cart-product-lists">
+							<h4>You have 1 product(s) in your cart</h4>
+							<div class="cart-card yellow">
+								<div class="d-flex">
+									<div class="product-thumbnail">
+										<img src="../../content/images/cart1.png" alt="Cialis">
+									</div>
+									<div class="d-flex flex-column justify-content-center product-detail-section">
+
+										<!-- Start of the Price and Count Box -->
+										<div class="price-count-box d-flex justify-content-between align-items-center">
+											<div class="price">$ 30</div>
+											<div class="count d-flex align-items-center">
+												<span class="decrease-count">-</span>
+												<span class="count-value">1</span>
+												<span class="increase-count">+</span>
+											</div>
+										</div>
+										<!-- End of the Price and Count Box -->
+
+										<div class="product-name">
+											Cialis
+										</div>
+										<div class="remove-box">
+											<a href="#">Remove</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="offer-box">
+							<h4>Often bought together</h4>
+							<div class="cart-card green">
+								<div class="d-flex">
+									<div class="product-thumbnail">
+										<img src="../../content/images/cart2.png" alt="Cialis">
+									</div>
+									<div class="d-flex flex-column justify-content-center product-detail-section">
+
+										<!-- Start of the Price and Count Box -->
+										<div class="price-count-box d-flex justify-content-between align-items-center">
+											<div class="price">$ 30</div>
+										</div>
+										<!-- End of the Price and Count Box -->
+
+										<div class="product-name">
+											Cialis
+										</div>
+										<div class="add-box">
+											<a href="#">Add</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<div class="total-amount-box">
+							<h3>Subtotal</h3>
+							<hr>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="total-cost">
+									$ 30
+								</div>
+								<div class="additional-charges">
+									<p>Free Shipping</p>
+									<p>Taxes calculated at checkout</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row place-order-section">
+					<div class="col">
+						<button class="btn btn--rounded" id="place-order">
+							Place order
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End of Cart Header -->
+
+		<!-- Start of Order Confirmed -->
+		<div class="popup-box semi-transparent d-flex align-items-center justify-content-center place-order">
+			<div class="pop-inner-container">
+				<span class="close-popup">
+					<svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M2.30273 2L20.4285 20.1258" stroke="white" stroke-width="3" stroke-linecap="round" />
+						<path d="M2 19.8239L20.73 2.30225" stroke="white" stroke-width="3" stroke-linecap="round" />
+					</svg>
+				</span>
+				<div class="top-white-box">
+					<span class="ec-icon">
+						<svg width="58" height="50" viewBox="0 0 58 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M28.9984 25L43.4992 50H58L28.9984 0L0 50H14.5008L28.9984 25Z" fill="#FFC305" />
+						</svg>
+					</span>
+					<p>Order complete!</br> Your order <span class="yellow">#24647843</span> was received!</p>
+				</div>
+				<div class="black-box">
+					<p>Please check your order status on your account, we will let you know when you order ships and
+						then you will be able to track your package as it makes its way to your home.</p>
+					<a href="#" class="yellow">K, thanks!
+						<svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M13.2841 13L19 7.49993L13.2841 2" stroke="#FFC305" stroke-width="3"
+								stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+							<path d="M18.499 7.33008L1.99995 7.33008" stroke="#FFC305" stroke-width="3"
+								stroke-miterlimit="10" stroke-linecap="round" />
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- End of Order Confirmed -->
+
+		<div class="dashboard-page order-page">
+			<!-- Start of the Top Clip Path -->
+			<div class="top-clip">
+				<div class="dash-top-clip">
+				</div>
+			</div>
+			<!-- End of the Top Clip Path -->
+
+			<div class="section top-section">
+				<div class="container">
+					<div class="row">
+						<div class="col-12 hidden-md">
+							<h1 class="heading text-uppercase">DASHBOARD</h1>
+						</div>
+					</div>
+					<div class="row">
+
+						<!-- Start of Sidebar -->
+						<div class="col-12 col-md-12 col-lg-3 col-xl-3 sidebar order-1 order-lg-2">
+							<ul class="side-menu">
+								<li class="active">
+									<a href="/account/dashboard">
+										<svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+											xmlns="http://www.w3.org/2000/svg" class="visible-md">
+											<path
+												d="M31.6513 15.1912L29.3667 12.9065L16.7947 0.334591C16.3484 -0.111612 15.6249 -0.111612 15.1787 0.334591L2.60664 12.9065L0.320845 15.1924C-0.117656 15.6464 -0.105133 16.3699 0.348905 16.8085C0.791826 17.2362 1.49398 17.2362 1.9369 16.8085L2.27059 16.4724V30.857C2.27059 31.4883 2.78229 32 3.41352 32H28.5575C29.1887 32 29.7004 31.4883 29.7004 30.857V16.4724L30.0353 16.8073C30.4893 17.2458 31.2128 17.2332 31.6513 16.7793C32.0791 16.3363 32.0791 15.6341 31.6513 15.1912ZM19.4143 29.7142H12.5568V20.5709H19.4143V29.7142ZM27.4146 29.7142H21.7001V19.428C21.7001 18.7968 21.1884 18.2851 20.5571 18.2851H11.4139C10.7827 18.2851 10.271 18.7968 10.271 19.428V29.7142H4.55645V14.1866L15.9855 2.75753L27.4146 14.1866V29.7142Z"
+												fill="#333333" />
+										</svg>
+										<span class="hidden-md">Dashboard</span>
+									</a>
+								</li>
+								<li>
+									<a href="/account/orders">
+										<svg width="32" height="30" viewBox="0 0 32 30" fill="none"
+											xmlns="http://www.w3.org/2000/svg" class="visible-md">
+											<path
+												d="M30.6853 5.67524H5.66514L5.29323 1.53199C5.2324 0.854432 4.66455 0.335266 3.9843 0.335266H1.31419C0.58838 0.335266 0 0.923646 0 1.64945C0 2.37526 0.58838 2.96364 1.31419 2.96364H2.78282C3.58541 11.9052 1.51113 -11.2055 4.29432 19.8033C4.40159 21.017 5.05736 22.334 6.18706 23.2289C4.15026 25.83 6.01128 29.6646 9.32447 29.6646C12.0744 29.6646 14.0139 26.9219 13.0709 24.3244H20.2636C19.3218 26.9186 21.2572 29.6646 24.0101 29.6646C26.207 29.6646 27.9944 27.8772 27.9944 25.6803C27.9944 23.4833 26.207 21.696 24.0101 21.696H9.33335C8.33507 21.696 7.46514 21.0937 7.08966 20.2162L28.0921 18.9819C28.6655 18.9482 29.1506 18.5459 29.29 17.9887L31.9603 7.30815C32.1673 6.47996 31.5403 5.67524 30.6853 5.67524V5.67524ZM9.32447 27.0362C8.57688 27.0362 7.9686 26.4279 7.9686 25.6803C7.9686 24.9326 8.57688 24.3244 9.32447 24.3244C10.0721 24.3244 10.6804 24.9326 10.6804 25.6803C10.6804 26.4279 10.0721 27.0362 9.32447 27.0362ZM24.01 27.0362C23.2623 27.0362 22.6541 26.4279 22.6541 25.6803C22.6541 24.9326 23.2623 24.3244 24.01 24.3244C24.7576 24.3244 25.3659 24.9326 25.3659 25.6803C25.3659 26.4279 24.7576 27.0362 24.01 27.0362ZM26.9742 16.4147L6.73589 17.604L5.90107 8.30355H29.0021L26.9742 16.4147Z"
+												fill="#333333" />
+										</svg>
+										<span class="hidden-md">My Orders</span>
+									</a>
+								</li>
+								<li>
+									<a href="/account/profile">
+										<svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+											xmlns="http://www.w3.org/2000/svg" class="visible-md">
+											<path
+												d="M27.3137 20.6863C25.5711 18.9436 23.4968 17.6536 21.2337 16.8726C23.6576 15.2032 25.25 12.4093 25.25 9.25C25.25 4.14956 21.1004 0 16 0C10.8996 0 6.75 4.14956 6.75 9.25C6.75 12.4093 8.34244 15.2032 10.7664 16.8726C8.50325 17.6536 6.429 18.9436 4.68631 20.6863C1.66431 23.7083 0 27.7263 0 32H2.5C2.5 24.5561 8.55606 18.5 16 18.5C23.4439 18.5 29.5 24.5561 29.5 32H32C32 27.7263 30.3357 23.7083 27.3137 20.6863ZM16 16C12.2781 16 9.25 12.972 9.25 9.25C9.25 5.528 12.2781 2.5 16 2.5C19.7219 2.5 22.75 5.528 22.75 9.25C22.75 12.972 19.7219 16 16 16Z"
+												fill="#333333" />
+										</svg>
+										<span class="hidden-md">Edit Profile</span>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<svg width="32" height="32" viewBox="0 0 32 32" fill="none"
+											xmlns="http://www.w3.org/2000/svg" class="visible-md">
+											<path
+												d="M31.6976 15.512C31.7103 15.4966 31.7213 15.4803 31.7331 15.4645C31.7473 15.4455 31.762 15.4269 31.7752 15.4072C31.7879 15.3883 31.7989 15.3686 31.8105 15.3491C31.8212 15.3312 31.8324 15.3138 31.8423 15.2953C31.8529 15.2755 31.8619 15.255 31.8714 15.2348C31.8805 15.2156 31.8901 15.1967 31.8982 15.1771C31.9063 15.1574 31.9129 15.1373 31.9201 15.1173C31.9276 15.0963 31.9357 15.0755 31.9423 15.0539C31.9483 15.0339 31.9528 15.0136 31.9578 14.9934C31.9634 14.9715 31.9695 14.9498 31.9739 14.9274C31.9786 14.904 31.9813 14.8803 31.9847 14.8568C31.9874 14.8373 31.9912 14.8182 31.9931 14.7985C32.0018 14.711 32.0018 14.6228 31.9931 14.5353C31.9912 14.5156 31.9875 14.4965 31.9847 14.477C31.9813 14.4534 31.9786 14.4298 31.9739 14.4064C31.9694 14.3841 31.9633 14.3624 31.9578 14.3405C31.9527 14.3202 31.9483 14.2999 31.9422 14.2799C31.9357 14.2584 31.9276 14.2376 31.9201 14.2166C31.9129 14.1966 31.9063 14.1765 31.8982 14.1568C31.8901 14.1372 31.8805 14.1183 31.8714 14.0992C31.8619 14.0789 31.8529 14.0584 31.8423 14.0386C31.8324 14.0202 31.8212 14.0028 31.8106 13.9849C31.799 13.9654 31.788 13.9457 31.7753 13.9267C31.7621 13.907 31.7474 13.8884 31.7332 13.8695C31.7213 13.8536 31.7103 13.8373 31.6976 13.8219C31.6699 13.7882 31.6408 13.7558 31.61 13.725C31.6097 13.7247 31.6095 13.7245 31.6093 13.7242L27.6094 9.72436C27.0888 9.2037 26.2446 9.2037 25.7239 9.72436C25.2032 10.245 25.2032 11.0892 25.7239 11.6099L27.4477 13.3337H20.0003C19.2639 13.3337 18.667 13.9306 18.667 14.667C18.667 15.4033 19.2639 16.0002 20.0003 16.0002H27.4476L25.7238 17.724C25.2032 18.2447 25.2032 19.0889 25.7238 19.6096C26.2445 20.1303 27.0887 20.1303 27.6094 19.6096L31.6092 15.6098C31.6095 15.6095 31.6096 15.6093 31.6099 15.609C31.6408 15.5781 31.6699 15.5458 31.6976 15.512Z"
+												fill="#B4344A" />
+											<path
+												d="M22.6667 18.6662C21.9304 18.6662 21.3335 19.2631 21.3335 19.9995V26.6659H16.0004V5.33396V5.33346C16.0004 4.74467 15.6141 4.22557 15.0502 4.05639L10.4185 2.66688H21.3335V9.3333C21.3335 10.0696 21.9304 10.6666 22.6668 10.6666C23.4031 10.6666 24 10.0696 24 9.3333V1.33363C24 0.597281 23.4031 0.000367725 22.6668 0.000367725H1.33429C1.33416 0.000367725 1.33404 0.000367725 1.33391 0.000367725C1.29447 0.000305227 1.25541 0.00218015 1.21667 0.00555501C0.605065 0.0516781 0.206394 0.453974 0.0615249 0.934267C0.0522128 0.964141 0.0440881 0.99464 0.0368384 1.02551C0.0360885 1.02883 0.0354635 1.0322 0.0347135 1.03558C0.0275263 1.06732 0.0215266 1.09957 0.0165893 1.13226C0.0159018 1.13688 0.0151518 1.14145 0.0144643 1.14607C0.010277 1.17588 0.00696465 1.20607 0.00477724 1.23663C0.0009024 1.28588 -0.000285051 1.33525 0.000964898 1.38462V27.9997C0.000964898 28.6353 0.449572 29.1825 1.0728 29.3071L14.4056 31.9737C15.2306 32.1387 16.0003 31.5076 16.0003 30.6663V29.3325H22.6667C23.4031 29.3325 24 28.7356 24 27.9992V19.9995C24 19.2631 23.4031 18.6662 22.6667 18.6662ZM13.3338 29.0399L2.66754 26.9067V3.12611L13.3338 6.32598V27.9992V29.0399Z"
+												fill="#B4344A" />
+										</svg>
+										<span class="hidden-md">Sign Out</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+						<!-- End of Sidebar -->
+
+						<!-- Start of Main Section -->
+						<div class="col-12 col-md-12 col-lg-9 col-xl-9 order-2 order-lg-1">
+							<div class="row">
+								<div class="col-12 col-md-12 col-lg-9 col-xs-9">
+                                    <h1 class="heading visible-md text-uppercase">DASHBOARD</h1>
+                                    <h4>Welcome to your dashboard, Robert!</h4>
+									<h5>This dashboard is where it all comes together! Here you can track your purchases, prescriptions, treatment plans and even upcoming doctor appointments. You can also update your personal details, billing information and more.</h5>
+								</div>
+								<div class="col-12 col-md-12 col-lg-3 col-xs-3">
+									<!-- Blank Space -->
+								</div>
+							</div>
+
+							<!-- Start of Filter Section -->
+							<div class="row filter-section align-items-center">
+								<div class="col-12 col-md-5 col-xl-5 col-xl-5 text-right order-md-2">
+									<span class="customized-select">
+										<svg width="14" height="10" viewBox="0 0 14 10" fill="none"
+											xmlns="http://www.w3.org/2000/svg">
+											<path d="M12 2L7 7L2 2" stroke="#FFA400" stroke-width="3"
+												stroke-miterlimit="10" stroke-linecap="round" />
+										</svg>
+										<select class="filter">
+											<option>Sort by Newest</option>
+											<option>Sort by Older</option>
+											<option>Sort by High to Low</option>
+											<option>Sort by Low to High</option>
+										</select>
+									</span>
+								</div>
+								<div class="col-12 col-md-7 col-xl-7 col-xl-7 order-md-1">
+                                    <h4>LATEST PURCHASES</h4>
+								</div>
+							</div>
+							<!-- End of Filter Section -->
+
+							<!-- Start of Card Section -->
+							<div class="row">
+								<div class="col-12">
+									<div class="card-box">
+										<div class="upper-card mb-2">
+											<div class="row align-items-end">
+												<div class="col-6">
+													<h4 class="text-uppercase">ORDER <span class="highlight">#34879347</span></h4>
+												</div>
+												<div class="col-6">
+													<span class="view-invoice">
+														<a href="#">View Invoice</a>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="lower-card">
+											<div class="row">
+												<div class="col-6 col-md-4 product-items">
+													<p>
+														1x Cialis
+													</p>
+													<p>
+														4x Finasteride
+													</p>
+													<p>
+														2x Caverject
+													</p>
+												</div>
+												<div class="col-6 col-md-4 order-2 order-md-1 product-details">
+													<p>3-Month Subscription</p>
+													<p>Qty: 1</p>
+												</div>
+												<div class="col-6 col-md-4 order-1 order-md-2 text-right product-status">
+													<p><strong>Status</strong></p>
+													<p>Doctor Review</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End of Card Section -->
+
+							<!-- Start of Card Section -->
+							<div class="row">
+								<div class="col-12">
+									<div class="card-box error">
+										<div class="upper-card mb-2">
+											<div class="row align-items-end">
+												<div class="col-6">
+													<h4 class="text-uppercase">ORDER <span class="highlight">#34879347</span></h4>
+												</div>
+												<div class="col-6">
+													<span class="view-invoice">
+														<div class="warning justify-content-end ml-0 p-0">
+															<p class="info mr-3">
+																Review your prescription<br> to complete this order
+															</p>
+															<div class="icon mr-0">
+																<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+																	<path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+																	<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+																</svg>
+															</div>
+														</div>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="lower-card">
+											<div class="row">
+												<div class="col-6 col-md-4 product-items">
+													<p>
+														1x Cialis
+													</p>
+													<p>
+														4x Finasteride
+													</p>
+													<p>
+														2x Caverject
+													</p>
+												</div>
+												<div class="col-6 col-md-4 order-2 order-md-1 product-details">
+													<p>3-Month Subscription</p>
+													<p>Qty: 1</p>
+												</div>
+												<div class="col-6 col-md-4 order-1 order-md-2 text-right product-status">
+													<p><strong>Status</strong></p>
+													<p>
+														<a href="#">Upload your prescription</a>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- End of Card Section -->
+
+							<!-- Old Start of Card Section -->
+							<!-- <div class="row">
+								<div class="col-12">
+									<div class="card-box">
+										<div class="upper-card">
+											<div class="row align-items-center">
+												<div class="col-12 col-md-4"></div>
+												<div class="col-6 col-md-4">
+													<h4 class="text-uppercase">cialis</h4>
+												</div>
+												<div class="col-6 col-md-4">
+													<span class="order-id">
+														order <span class="id-value">#12839812038</span>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="lower-card">
+											<div class="row">
+												<div class="col-6 col-md-4 product-thumbnail">
+													<img src="../../content/images/products/product-item-13414.png">
+												</div>
+												<div class="col-12 col-md-4 product-details">
+													<p>3-Month Subscription</p>
+													<p><strong>Details</strong></p>
+												</div>
+												<div class="col-12 col-md-4 text-right product-status">
+													<p><strong>Status</strong></p>
+													<p class="text-capitalize">Order Shipped</p>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> -->
+							<!-- Old End of Card Section -->
+
+						</div>
+						<!-- End of Main Section -->
+
+					</div>
+				</div>
+
+				<!-- Start of Pagination -->
+
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="pagination">
+								<a href="" class="active">1</a>
+								<a href="">2</a>
+								<a href="">3</a>
+								<a href="">...</a>
+								<a href="">10</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- End of Pagination -->
+
+				<!-- Start of the Bottom Clip Path -->
+				<div class="bottom-clip">
+					<div class="dash-bottom-clip">
+					</div>
+				</div>
+				<!-- End of Bottom Clip path -->
+			</div>
+
+
+		</div>
+
+		<footer class="footer w-100">
+			<div class="container">
+				<div class="footer-content">
+					<div class="row">
+						<div class="col-lg-2 col-md-3 col-sm-6">
+							<h3>Enhance Club</h3>
+							<ul class="list-unstyled list-links">
+								<li><a href="/">Home</a></li>
+								<li><a href="/about">About us</a></li>
+								<li><a href="/how-it-works">How it Works</a></li>
+								<li><a href="/blog">Learn</a></li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 col-sm-6 -->
+						<div class="col-lg-2 col-md-3 col-sm-6">
+							<h3>Products</h3>
+							<ul class="list-unstyled list-links">
+								<li><a href="/products/spike/">Spike <span class="viagra-gradient">VIAGRA</span></a>
+								</li>
+								<li><a href="/products/play/">Play <span class="cialis-gradient">CIALIS</span></a></li>
+								<li><a href="/products/arise/">Arise <span
+											class="finasteride-gradient">FINASTERIDE</span></a></li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 col-sm-6 -->
+						<div class="col-lg-2 col-md-3 col-sm-6">
+							<h3>Need help?</h3>
+							<ul class="list-unstyled list-links">
+								<li><a href="/get-in-touch">Get in Touch</a></li>
+								<li><a href="/faq">FAQs</a></li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 col-sm-6 -->
+						<div class="col-lg-2 ml-auto col-md-3 col-sm-6">
+							<h4>FOLLOW US</h4>
+							<ul
+								class="list-unstyled social-media d-flex justify-content-sm-start justify-content-center">
+								<li><a href="#"><img src="../../content/images/facebook-icon.svg" alt="icon" /></a></li>
+								<li><a href="#"><img src="../../content/images/twitter-icon.svg" alt="icon" /></a></li>
+								<li><a href="#"><img src="../../content/images/youtube-icon.svg" alt="icon" /></a></li>
+								<li><a href="#"><img src="../../content/images/instagram-icon.svg" alt="icon" /></a>
+								</li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 col-sm-6 -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.footer-content -->
+				<div class="footer-copyright">
+					<div class="row align-items-end text-md-left text-center">
+						<div class="col-lg-7 col-md-6 order-md-3">
+							<ul
+								class="list-unstyled mb-0 d-flex justify-content-center flex-wrap justify-content-md-end">
+								<li><a href="/shipping-and-returns">Shipping & Returns</a></li>
+								<li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+								<li><a href="/privacy-policy">Privacy Policy</a></li>
+							</ul>
+						</div>
+						<!-- /.col-lg-2 col-md-3 -->
+						<div class="col-lg-2 col-md-3 my-md-0 my-4">
+							<img src="../../content/images/footerlogo.svg" class="img-fluid footer-logo" alt="logo" />
+
+							<div class="text-center d-sm-none mt-4">
+								<a href="#wrapper"><img src="../../content/images/backtotop.svg" alt="icon" /></a>
+							</div>
+						</div>
+						<!-- /.col-lg-2 col-md-3 -->
+						<div class="col-lg-3 col-md-3" style="position: relative;top: -3px;">
+							<p>All Rights Reserved © 2020</p>
+						</div>
+						<!-- /.col-lg-2 col-md-3 -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.footer-copyright -->
+			</div>
+			<!-- /.container -->
+		</footer>
+		<!-- /.footer w-100 -->
+	</div>
+	<script type="text/javascript" src="../.././assets/scripts/main.9ac689959b292e329441.js"></script>
+</body>
+
+</html>

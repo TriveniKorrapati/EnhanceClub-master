@@ -1,0 +1,51 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.OrderConfirmViewModel
+
+
+<!-- Start of Main -->
+<div class="dashboard-page order-page order-confirmation-page">
+    <!-- Start of the Top Clip Path -->
+    <!-- <div class="top-clip">
+        <div class="dash-top-clip">
+        </div>
+    </div> -->
+    <!-- End of the Top Clip Path -->
+
+    <div class="section top-section">
+        <div class="container">
+            <div class="row">
+
+                <!-- Start of Main Section -->
+                <div class="col-12 col-md-12 col-lg-12">
+
+                    <!-- Start of Filter Section -->
+                    <div class="row mt-4">
+                        <div class="col-12 col-md-7 col-xl-6 text-center text-md-right">
+                            <h4 class="white mb-4">Prescription Required!</h4>
+
+                            <p>
+                                <b>Next Steps &mdash; Please answer the questionnaire to get prescription:</b>
+                            </p>
+                            @*<div class="btn btn__secondary btn--rounded mb-3 ">
+                                <a href="@Url.Action("AddProfile", "customer", new { returnUrl = "/upload/" + @Model.OrderId, havePrescription = true })" class="buttons" style="color :white">I Have a Prescription</a>
+                            </div><br>*@
+                            <div class="btn btn__secondary btn--rounded mb-3 ">
+                                <a href="@Url.Action("AddProfile", "customer", new { returnUrl = "/requirePrescription/" + @Model.OrderId , havePrescription = false })" class="buttons" style="color :white">Go to Questionnaire</a>
+                            </div><br>
+                            <a href="@Url.Action("dashboard","customer")">&#8592; Go To Dashboard</a>
+                        </div>
+
+                    </div>
+                    <!-- End of Filter Section -->
+
+                </div>
+                <!-- End of Main Section -->
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- End of Main -->

@@ -1,0 +1,26 @@
+﻿
+@*Based on current logic, this page is not called when there is no patient profile found during checkout, rather user is redirected to Add Patient Profile*@
+
+<div class="container container-standard">
+ <div class="row">
+    <div class="col-md-12">
+        <h2>Checkout</h2>
+        <div class="checkout">
+            <ul class="nav nav-tabs sub-nav">
+                <li>
+                    <a href="@Url.Action("index", "Cart" )" >
+                        <i class="fa fa-arrow-left"></i> Edit Shopping Cart
+                    </a>
+                </li>
+                <li class="active"><a href="javascript:void();">Patient Profile</a></li>
+                <li class="inactive"><a href="javascript:void();">Order Review</a></li>
+                <li class="inactive"><a href="javascript:void();">Shipping and Billing</a></li>
+            </ul>
+            <h4 style="margin-bottom: 0;">Patient Profile List</h4><h5 style="margin-top: 0;">Currently no patient profiles exist for this customer.</h5>
+        </div>
+    </div>
+     <div class="row">
+         @Html.ActionLink("Add New Patient Profile","AddProfile","Customer")
+     </div>
+ </div>
+</div>

@@ -1,0 +1,170 @@
+﻿@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.AwsHelper
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.PrescriptionUploadViewModel
+
+@section PageScripts
+{
+    <script src="~/scripts/prescription-upload.js"></script>
+
+    <script type="text/javascript">
+        var fsFieldsContainer = $(".fs-fields");
+        var fsFieldsInit = $("#fs-fields-init");
+        if (fsFieldsInit.height() > fsFieldsContainer.height()) {
+            fsFieldsContainer.height(fsFieldsInit.height());
+        }   
+        $(window).resize(function () {
+            if ($(this).width() >= 992) {
+                $("#mobile-device").val(1);
+            } else {
+                $("#mobile-device").val(0);
+            }
+        });
+        $(document).ready(function () {
+            if ($(this).width() >= 992) {
+                $("#mobile-device").val(1);
+            } else {
+                $("#mobile-device").val(0);
+            }
+        });
+    </script>
+
+
+}@{
+    string cls = "";
+    string pageController = @ViewContext.RouteData.Values["Controller"].ToString();
+
+    var objectKey = @SiteConfigurationsWc.UploadS3CustomerIdDir + "/" + @Model.IdImageName.Trim();
+    var imageUrl = GetS3PresignedUrl.GeneratePreSignedUrl(1, objectKey);
+
+
+    var backImageKey = @SiteConfigurationsWc.UploadS3CustomerIdDir + "/" + (string.IsNullOrEmpty(Model.IdBackImageName) ? string.Empty : Model.IdBackImageName.Trim());
+    var backImageUrl = GetS3PresignedUrl.GeneratePreSignedUrl(1, backImageKey);
+
+    //var imageUrl = "";
+    cls = pageController.ToUpper() == "ORDER" ? "" : "d-none";
+}
+
+<div class="dashboard-page profile-page">
+    <!-- Start of the Top Clip Path -->
+    @*<div class="top-clip">
+        <div class="dash-top-clip">
+        </div>
+    </div>*@
+    <!-- End of the Top Clip Path -->
+
+    <div class="section top-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 hidden-md">
+                    <h1 class="heading text-uppercase">Upload Documents</h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- Start of Sidebar -->
+                @Html.Partial("AccountOptions", "upload-id", new ViewDataDictionary { { "CustomerCreditAvaliable", ViewBag.CustomerCredit }, { "IsProfileShow", ViewBag.IsProfileShow } })
+                <!-- End of Sidebar -->
+                <!-- Start of Main Section -->
+                <div class="col-12 col-md-12 col-lg-9 col-xl-9 order-2 order-lg-1 mt-3">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-9 col-xs-9">
+                            <h1 class="heading visible-md text-uppercase">Upload Documents</h1>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 col-xs-3">
+                            <!-- Blank Space -->
+                        </div>
+                    </div>
+                    @using (Html.BeginForm("upload-document-success", "Order", null, FormMethod.Post,
+                                                                       new
+                                                                       {
+                                                                           @class = "fs-form",
+                                                                           @role = "form",
+                                                                           @id = "frm_submitId",
+                                                                           @name = "frm_submitId",
+                                                                           @autocomplete = "off"
+                                                                       }))
+
+                    {
+                        <input type="hidden" value="1" id="mobile-device" />
+                        <input type="hidden" value="dashboard" name="module" id="module" />
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="notify success d-none" id="notify-message">
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-eq-height">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 text-center mb-5">
+                                <h6>Front side</h6>
+                                <div class="upload-id-box">
+                                    @{var frontImageBtn = "Upload";}
+                                    @if (Model.PrescriptionImageFound)
+                                    {
+                                        <img id="img-replaceId" src="@imageUrl" />
+                                        frontImageBtn = "Replace";
+                                    }
+                                    else
+                                    {
+                                        <img id="img-replaceId" src="/content/images/upload-id-front.svg" alt="your image">
+
+                                    }
+
+                                    <div class="input-upload">
+                                        <input type="file" name="imgReplace" id="imgReplace" class="uploader custom-replaceid" accept="image/*">
+                                        <span class="btn upload-btn">@frontImageBtn</span>
+                                    </div>
+                                </div>
+                                @*<p class="notify success">&check; Verified 01/02/2020</p>*@
+                                @if (Model.CustomerDocumentList != null)
+                                {
+                                    <p class="light mt-0 mb-2">Uploaded on @Model.CustomerDocumentList[0].CustomerIdDocumentDateCreated</p>
+                                }
+
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 text-center mb-5">
+                                <h6>Back side</h6>
+                                <div class="upload-id-box">
+                                    @{var backImageBtn = "Upload";}
+                                    @if (Model.backIdImageFound)
+                                    {
+                                        <img id="img-replaceIdStep2" src="@backImageUrl" />
+                                        backImageBtn = "Replace";
+                                    }
+                                    else
+                                    {
+                                        <img id="img-replaceIdStep2" src="/content/images/upload-id-back.svg" alt="your image">
+
+                                    }
+
+                                    <div class="input-upload">
+                                        <input type="file" name="imgReplaceBack" id="imgReplaceBack" class="uploader custom-replaceid" accept="image/*">
+                                        <span class="btn upload-btn">@backImageBtn</span>
+                                    </div>
+                                </div>
+
+                                @*<p class="notify success">&check; Verified 01/02/2020</p>*@
+                                @if (Model.CustomerDocumentList != null)
+                                {
+                                    <p class="light mt-0 mb-2">Uploaded on @Model.CustomerDocumentList[0].CustomerIdDocumentDateCreated</p>
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p class="light">
+                                    * jpeg / jpg / png / bmp Image Only
+                                </p>
+
+                            </div>
+
+                        </div>
+                    }
+                </div>
+                <!-- End of Main Section -->
+            </div>
+        </div>
+    </div>
+</div>

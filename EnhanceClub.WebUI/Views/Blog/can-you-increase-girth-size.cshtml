@@ -1,0 +1,105 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+
+                            @Html.Partial("_breadcrumb")
+
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+
+                                <p>Talking about your penis and other details about it may be a slightly sensitive topic for some people. Not least of which is because of the close, misguided association some men have with penis size and masculinity. But <a href="@SiteConfigurationsWc.CdnUrl/blog/good-size-penis">length</a> is only half of it. Many men want a thicker penis, too. Girth enlargement is rarely discussed, but that doesn’t mean there isn’t much to say about the ‘other’ size of your penis.</p>
+
+                                <h5>ROUNDABOUT ISSUE</h5>
+
+                                <p>When it comes to penis girth, on average, there aren't a lot of huge variations between men. To find the girth size of your penis, measure the circumference of your penis shaft (around the outside). The average girth size can be measured by putting the tip of your index finger (or pinky, if you have giant digits) to the tip of your thumb. The circle in the middle is roughly the size of the average penis girth.</p>
+
+                                <h5>GROW YOUR GIRTH</h5>
+
+                                <p>
+                                    Girth enlargement is possible, but there are many factors that play a part in how much bigger you can really go. Some of the most common techniques use equipment such as penis pumps and rings. But they don’t offer any permanent solutions for a thicker penis. That’s because they help pull/trap excessive blood into the shaft of an erect penis. The added pressure in the blood vessels helps swell the girth. This can lead to possible <a href="@SiteConfigurationsWc.CdnUrl/blog/erectile-tissue-damage-sign">tissue damage</a> to the penis.
+
+                                    <br><br>When it comes to prescription drugs helping with girth enlargement, the results are deflating. <a href="@SiteConfigurationsWc.CdnUrl/products">Erectile dysfunction medications</a> work by helping increase blood-flow to the penis to achieve stiffness sufficient for intercourse. But they do not include components that artificially increase penis girth. You’ll only grow to your natural size using ED meds.
+                                </p>
+
+                                <div class="cta-box mb-3">
+                                    <div class="cta-image">
+                                        <img src="/content/images/products/product-item-generic-13412.png" alt="">
+                                    </div>
+                                    <div class="cta-text">
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+                                        <a href="/products" class="btn btn__secondary btn--rounded ">Visit our online store</a>
+                                    </div>
+                                </div>
+
+                                <h5>MEDICAL INTERVENTION</h5>
+
+                                <p>
+                                    For a small minority of men who suffer from <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3583156/">hypogonadotropic hypogonadism</a>, having a micro-penis can be a result. A micro-penis is smaller than average due to improper hormone development, particularly around puberty. The lack of proper hormone development prevents the male sex organs from reaching maturity with the rest of the body.
+
+                                    <br><br><a href="https://pubmed.ncbi.nlm.nih.gov/660741/">Studies</a> have shown men with this condition can achieve girth enlargement. They can get a thicker penis using hormone therapy, particularly daily topical treatments. Results have shown up to several centimeters in length added. Plus, some men achieved a thicker penis by more than 50%. While impressive, much of the results are about helping the penis become what would have been its normal, post-pubescent size.
+
+                                    <br><br>However, hormone treatments for other conditions could also result in a thicker penis. However, we always suggest speaking with your physician to discuss whether this route is recommended for you.
+                                </p>
+
+                                <h5>WRAP IT UP</h5>
+
+                                <p> Penises come in all shapes and sizes. From surgery to pharmaceutical supplements, there are many ways to help increase the size of your penis, or at least make it look bigger than it is. If you’re hoping to achieve girth enlargement, just to try it out, there aren’t a lot of big things you can do. Chances are you’re like most men, who have already reached their penis’s full size, naturally. For those with specific medication conditions, however, there are viable treatments to help increase the girth and length of your penis.</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

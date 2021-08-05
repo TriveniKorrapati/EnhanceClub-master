@@ -1,0 +1,50 @@
+﻿
+@model EnhanceClub.WebUI.Models.OrderConfirmViewModel
+
+<script>
+    @{
+        var cntr = 1;
+    }
+    var dataLayer  = window.dataLayer || [];
+    dataLayer.push({ ecommerce: null });
+    dataLayer.push({
+        'event': 'transaction',
+        'ecommerce': {
+            'purchase': {
+                'actionField': {
+                    'id': '@Model.OrderId',
+                    'affiliation': 'Enhance Club',
+                    'revenue': '@Model.OrderTotal',
+                    'tax': '@Model.OrderTax',
+                    'shipping': '@Model.ShippingPrice',
+                    'coupon': ''
+                }, 'products':
+                [
+                    @foreach (var cartItem in Model.ProductList)
+                    {
+                        <text>
+                            {
+                                // List of productFieldObjects.
+                                'name': '@cartItem.ProductSafeUrlName',
+                                // Name or ID is required.
+                                'id': '@cartItem.ProductSizeId',
+                                'price': '@cartItem.CartItemPrice',
+                                'brand': '',
+                                'category': '@cartItem.ProductSizeStrength @cartItem.ProductSizeQuantity',
+                                'variant': '',
+                                'quantity': @cartItem.CartItemQuantity,
+                                'coupon': ''
+                                // Optional fields may be omitted or set to empty string.
+
+                            }
+                        </text>
+                        if (cntr < @Model.ProductList.Count())
+                        {
+                            <text>,</text>
+                        }
+                    }
+                ]
+            }
+        }
+    });
+</script>

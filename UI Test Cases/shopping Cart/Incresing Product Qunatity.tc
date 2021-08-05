@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Increasing the number of products into the cart
+
+Given: 1 product is added into the cart
+
+When: User clicks on '+’ 
+
+Then: Product Quantity increases by 1</description>
+   <name>Incresing Product Qunatity</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>616c0046-cd73-4886-b251-08fd26cfb6a8</testCaseGuid>
+</TestCaseEntity>

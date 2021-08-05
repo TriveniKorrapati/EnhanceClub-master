@@ -1,0 +1,55 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.ProductStructureViewModel
+
+<script type="application/ld+json">
+    {
+    @{
+        var stockMsg = "http://schema.org/InStock";
+
+        if ((Model.BrandProductCount + Model.GenericProductCount == 0))
+        {
+            stockMsg = "http://schema.org/OutOfStock";
+        }
+    }
+
+    "@@context": "http://schema.org/",
+    "@@type": "Product",
+    "name": "@Model.ProductName",
+    "category": "@Model.ProductCategory",
+    "id":"@Model.PageUrl",
+    "sku": "@Model.ProductId",
+    "url": "@Model.PageUrl",
+    "brand": "@Model.ProductName",
+    "image": "@Model.ProductImagePath",
+    "description": "@Model.MetaDescription",
+    "mpn": "@Model.ProductId",
+    "offers" :
+    {
+    "@@type": "AggregateOffer",
+    "lowPrice": "@Model.LowPrice",
+    "highPrice": "@Model.HighPrice",
+    "priceCurrency" : "@SiteConfigurationsWc.PriceCurrency",
+    "offerCount": @(Model.BrandProductCount + Model.GenericProductCount),
+    "availability" : "@stockMsg",
+    "itemCondition": "http://schema.org/NewCondition",
+    "itemOffered":{
+    "name": "@Model.BrandGeneric"
+    },
+    "seller": {
+    "@@type": "Organization",
+    "url":"@SiteConfigurationsWc.StorefrontUrl",
+    "name": "@SiteConfigurationsWc.StorefrontName"
+    }
+    }
+    }
+
+</script>
+
+
+
+
+
+
+
+

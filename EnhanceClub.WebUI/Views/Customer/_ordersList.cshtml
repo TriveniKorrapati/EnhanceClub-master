@@ -1,0 +1,481 @@
+﻿@model EnhanceClub.WebUI.Models.AccountSectionViewModel
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.Domain.Entities;
+@if (Model.AllOrders.Any())
+{
+
+    foreach (var thisOrder in Model.AllOrders)
+    {
+
+        <!-- Start of Card Section -->
+        <div class="row">
+            <div class="col-12">
+                @{
+                    var errorClass = "";
+                    var errorMessage = "";
+                    var urlAction = "";
+                    var bannerClass = "";
+                    var questionnaireCatId = @thisOrder.OrderCart.ToList().Select(x => x.ProductQuestionnaireCatId);
+                    // check if the questionnaire was ansered or not
+                    bool ifQuestionnaireAnswered = thisOrder.OrderCart.ToList().Select(x => x.IsQuestionnaireAnswered == true).FirstOrDefault();
+                    int countQuestionnaireAnswered = thisOrder.OrderCart.ToList().Where(x => x.IsQuestionnaireAnswered == true).Count();
+                    //  var catResponse = thisOrder.OrderCart.ToList().FirstOrDefault(x => x.IsQuestionnaireAnswered == true).QuestionnaireCategoryResponse;
+                    var catResponse = new QuestionnaireCategoryResponse();
+                    var catResponsesList = thisOrder.OrderCart.ToList().FirstOrDefault(x => x.IsQuestionnaireAnswered == true);
+
+                }
+                @if (catResponsesList != null)
+                {
+                    catResponse = catResponsesList.QuestionnaireCategoryResponse;
+                }
+                @*Commented this condition as currently all products require prescription*@
+                @*@if (@thisOrder.ShippingInvoiceHasRxItem)
+                    {*@
+                @*
+                    CustomerQuestionnaireCategoryResponseId
+                    CustomerQuestionnaireCategoryResponseDateCreated
+                    CustomerQuestionnaireCategoryResponseApprove
+                *@
+                @if (!@Model.UploadDocument)
+                {
+                    errorClass = "error";
+                    errorMessage = "Upload your ID to complete this order";
+                    // urlAction = "/order/UploadPrescription?orderId=" + @thisOrder.OrderInvoiceId;
+
+                    urlAction = "/prescription-options/" + @thisOrder.OrderInvoiceId;
+                }
+                else
+                {
+                    if (catResponsesList != null)
+                    {
+                        if (@catResponse.CustomerQuestionnaireCategoryResponseId > 0)
+                        {
+
+                            var numberOfDays = (DateTime.Now - @catResponse.CustomerQuestionnaireCategoryResponseDateCreated).TotalDays;
+                            if (@catResponse.CustomerQuestionnaireCategoryResponseApprove != 0)
+                            {
+                                if (numberOfDays < SiteConfigurationsWc.QuestionnaireTimeSpanDays)
+                                {
+                                    if (@catResponse.CustomerQuestionnaireCategoryResponseApprove == 1)
+                                    {
+                                        if (catResponse.CustomerPrescriptionIsValidated == 1)
+                                        {
+                                            if (catResponse.CustomerPrescriptionApproved == 1)
+                                            {
+                                                bannerClass = "text-success";
+                                                errorClass = "success";
+                                                errorMessage = "Approved";
+
+                                                if (thisOrder.ShippingInvoiceDispensed)
+                                                {
+                                                    errorMessage = errorMessage + " and Dispensed to Pharmacy";
+                                                }
+
+                                                if (thisOrder.ShippingInvoiceShipped)
+                                                {
+                                                    errorMessage = "Shipped";
+                                                    if (!string.IsNullOrEmpty(thisOrder.ShippingInvoiceTrackinCode))
+                                                    {
+                                                        errorMessage = errorMessage + ", Tracking Code - " + thisOrder.ShippingInvoiceTrackinCode;
+
+                                                    }
+
+                                                }
+                                            }
+                                            else if (catResponse.CustomerPrescriptionApproved == 2)
+                                            {
+                                                errorClass = "error";
+                                                errorMessage = "Rejected";
+                                                urlAction = "/get-in-touch/";
+                                            }
+                                            else
+                                            {
+                                                bannerClass = "text-success";
+                                                errorClass = "success";
+                                                errorMessage = "Approved, (Final review in progress)";
+                                                if (thisOrder.OrderinvoicePaymentTransactionTypeFk == 5)
+                                                {
+                                                    errorMessage = "Approved, (Payment Pending)";
+                                                }
+
+                                            }
+
+                                        }
+
+
+
+                                    }
+                                    else if (@catResponse.CustomerQuestionnaireCategoryResponseApprove == 2)
+                                    {
+                                        errorClass = "error";
+                                        errorMessage = "Rejected";
+                                        urlAction = "/get-in-touch/";
+                                    }
+                                }
+                                else if (numberOfDays > SiteConfigurationsWc.QuestionnaireTimeSpanDays)
+                                {
+                                    errorClass = "error";
+                                    errorMessage = "Answer questionnaire";
+                                    urlAction = "/prescription-options/" + @thisOrder.OrderInvoiceId;
+                                }
+                            }
+                            else if (@catResponse.CustomerQuestionnaireCategoryResponseApprove == 0 && numberOfDays < SiteConfigurationsWc.QuestionnaireTimeSpanDays)
+                            {
+                                if (@thisOrder.OrderCart.Count() == countQuestionnaireAnswered)
+                                {
+                                    bannerClass = "text-warning";
+                                    errorClass = "pending";
+                                    errorMessage = SiteConfigurationsWc.TermForPractitioner + " is Reviewing";
+                                }
+                                else
+                                {
+                                    bannerClass = "text-warning";
+                                    errorClass = "error";
+                                    errorMessage = "Please Answer questionnaire";
+                                }
+                            }
+
+
+                        }
+                    }
+
+                    else
+                    {
+                        if (@thisOrder.PrescriptionId == 0)
+                        {
+                            bannerClass = "text-error";
+                            errorClass = "error";
+                            errorMessage = "Answer questionnaire";
+                            urlAction = "/prescription-options/" + @thisOrder.OrderInvoiceId;
+                        }
+                        else
+                        {
+                            if (@thisOrder.PrescriptionApprovalStatus == 1)
+                            {
+                                bannerClass = "text-success";
+                                errorClass = "success";
+                                errorMessage = "Approved";
+
+                                if (thisOrder.ShippingInvoiceDispensed)
+                                {
+                                    errorMessage = errorMessage + " and Dispensed to Pharmacy";
+                                }
+
+                                if (thisOrder.ShippingInvoiceShipped)
+                                {
+                                    errorMessage = "Shipped";
+                                    if (!string.IsNullOrEmpty(thisOrder.ShippingInvoiceTrackinCode))
+                                    {
+                                        errorMessage = errorMessage + ", Tracking Code - " + thisOrder.ShippingInvoiceTrackinCode;
+                                    }
+
+                                }
+
+
+                            }
+                            else if (@thisOrder.PrescriptionApprovalStatus == 2)
+                            {
+                                errorClass = "error";
+                                errorMessage = "Rejected";
+                                urlAction = "/get-in-touch/";
+                            }
+                            else
+                            {
+                                bannerClass = "text-warning";
+                                errorClass = "pending";
+                                errorMessage = SiteConfigurationsWc.TermForPractitioner + " is Reviewing";
+                            }
+                        }
+                    }
+
+                    if (!thisOrder.OrderInvoiceActive)
+                    {
+                        errorClass = "error";
+                        errorMessage = "Order has been deleted";
+                        urlAction = "/get-in-touch/";
+                    }
+                    //if (@thisOrder.QuestionnaireId == 0 && @ifQuestionnaireAnswered == false)
+                    //{
+                    //    errorClass = "error";
+                    //    errorMessage = "Answer the quesionnaire to get your prescription from doctor";
+                    //    urlAction = "/prescription-options/" + @thisOrder.OrderInvoiceId;
+                    //}
+
+
+                }
+
+                @*}*@
+                <div class="card-box status @errorClass">
+                    <div class="upper-card mb-2">
+                        <div class="row align-items-end justify-content-between">
+                            <div class="col-auto">
+                                <div class="row">
+
+                                    <div class="col-auto">
+                                        <h4 class="text-uppercase">ORDER ID <span class="highlight">#@thisOrder.OrderInvoiceId</span></h4>
+                                    </div>
+                                    @*@if (@thisOrder.ShippingInvoiceId > 0)
+                                        {
+                                            <div class="col-auto">
+                                                <h4 class="text-uppercase">SHIP ID<span class="highlight">#@thisOrder.ShippingInvoiceId</span></h4>
+                                            </div>
+                                        }*@
+
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <span class="view-invoice">
+                                    <a href="@Url.Action("OrderInvoicePdf", "Customer", new { orderId = @thisOrder.OrderInvoiceId })" class="" target="_blank">View Invoice</a>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    @if (!string.IsNullOrEmpty(@errorClass))
+                    {
+                        <div class="notification-banner">
+                            <div class="row">
+                                <div class="col-12 d-md-flex">
+                                    <span class="view-invoice flex-grow-1 d-flex align-items-center justify-content-center justify-content-md-start">
+                                        <div class="warning ml-0 p-0">
+                                            <div class="icon mr-3">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                                                </svg>
+                                            </div>
+                                            <p class="info">
+                                                @errorMessage
+                                            </p>
+                                        </div>
+                                    </span>
+                                    @if (errorClass == "error")
+                                    {
+
+                                        var linkText = "Click here to finish your order";
+                                        if (errorMessage.ToLower() == "rejected" || !thisOrder.OrderInvoiceActive)
+                                        {
+                                            linkText = "Contact Us";
+                                        }
+                                        if (@thisOrder.OrderCart.Count() == countQuestionnaireAnswered || countQuestionnaireAnswered == 0)
+                                        {
+                                            <a href="@urlAction" class="text-center text-md-right d-block">@linkText</a>
+                                        }
+
+                                        else
+                                        {
+                                            var questionnaireCategoryLeft = thisOrder.OrderCart.ToList().FirstOrDefault(x => x.IsQuestionnaireAnswered == false).ProductQuestionnaireCatId;
+                                            <a class="text-center text-md-right d-block" href="@Url.Action("AddProfile", "customer", new { returnUrl = "/requirePrescription/" + @thisOrder.OrderInvoiceId + "?questionnaireCatId=" + @questionnaireCategoryLeft, havePrescription = false })">Click here to complete questionnaire</a>
+                                        }
+                                    }
+                                    else if (errorClass == "pending")
+                                    {
+
+                                        if (thisOrder.OrderinvoiceBPNotKnown && SiteConfigurationsWc.IsBPKnownLogic == 1)
+                                        {
+                                            var linkID = "BP" + @thisOrder.OrderInvoiceId.ToString();
+
+                                            <a class="text-center text-md-right d-block"
+                                               href="#" data-toggle="modal" data-target="#exampleModal" id="@linkID" onclick="GetUserBPData(@thisOrder.OrderInvoiceId,@thisOrder.OrderInvoiceCustomerFk)">Submit your BP response</a> <span>&nbsp;&nbsp;</span>
+                                        }
+
+                                        <a class="text-center text-md-right d-block" href="@Url.Action("ViewAnsweredQuestionnaire", "order", new { orderId = @thisOrder.OrderInvoiceId  })">Click here to view answered questionnaire</a>
+
+                                    }
+                                    @if (thisOrder.ShippingInvoiceShipped && !string.IsNullOrEmpty(thisOrder.ShippingInvoiceTrackinCode) && thisOrder.OrderInvoiceActive)
+                                    {
+                                        <a href="https://www.canadapost-postescanada.ca/track-reperage/en#/details/@thisOrder.ShippingInvoiceTrackinCode"
+                                           class="text-center text-md-right d-block ml-md-3">Track your order here</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="lower-card">
+                        <div class="row">
+                            <div class="col-6 col-md-5 product-items">
+                                <p><strong>Products</strong></p>
+                                @{
+                                    var cartOrderList = thisOrder.OrderCart;
+                                    if(SiteConfigurationsWc.EnableRefill == 1)
+                                    {
+                                        var cartItemListByShippingId = thisOrder.OrderCart.Where(a => a.CartShippingInvoiceFk == @thisOrder.ShippingInvoiceId).ToList();
+                                        cartOrderList = cartItemListByShippingId;
+                                    }
+
+                                }
+                                @foreach (var cartitem in cartOrderList)
+                                {
+                                <p>
+                                    @if (SiteConfigurationsWc.EnableProductGeneric)
+                                    {
+                                        if (cartitem.ProductSizeGeneric)
+                                        {
+                                            <text>
+                                                Generic
+                                            </text>
+                                        }
+                                        else
+                                        {
+                                            <text>
+                                                Brand
+                                            </text>
+                                        }
+                                    }
+                                    @cartitem.ProductName @cartitem.ProductSizeStrength
+                                    @cartitem.ProductSizeQuantity.ToString("0.##") @cartitem.ProductUnitNamePk
+                                    @if (SiteConfigurationsWc.EnableRefill == 1)
+                                    {
+                                        if (cartitem.QuestionnaireCategoryResponse != null)
+                                        {
+                                            if (cartitem.QuestionnaireCategoryResponse.CustomerPrescriptionRefillAuthorization)
+                                            {
+                                                <br />
+                                                <span>
+                                                    (@cartitem.QuestionnaireCategoryResponse.CustomerPrescriptionRefillCount Refills)
+                                                </span>
+                                            }
+
+                                        }
+                                        <br />
+                                        <text>
+                                            Shipping Id : @cartitem.CartShippingInvoiceFk @(cartitem.CartItemShipped ? "Shipped" : "")
+                                        </text>
+                                    }                                   
+
+
+                                    @*@cartitem.CartItemQuantity x @cartitem.ProductName @cartitem.ProductSizeStrength*@
+                                </p>
+                                }
+
+                            </div>
+                            <div class="col-6 col-md-3 order-2 order-md-1 product-details">
+                                <p><strong>Order Date</strong></p>
+                                <p>@thisOrder.OrderInvoiceDateCreated.ToString("MMMM, dd yyyy")</p>
+                                @if (thisOrder.OrderInvoiceCouponAppliedAmount > 0)
+                                {
+                                    <p class="order-discount"> coupon discount</p>
+                                }
+
+                                @if (thisOrder.OrderInvoiceCreditAppliedAmount > 0)
+                                {
+                                    <p class="order-discount"> credit applied</p>
+                                }
+
+                            </div>
+                            <div class="col-6 col-md-2 order-2 order-md-1 product-details">
+                                <p><strong>Order Total</strong></p>
+                                <p>$@thisOrder.OrderTotal</p>
+
+                                @if (thisOrder.OrderInvoiceCouponAppliedAmount > 0)
+                                {
+                                    <p class="order-discount">-@thisOrder.OrderInvoiceCouponAppliedAmount.ToString("c")</p>
+
+                                }
+
+                                @if (thisOrder.OrderInvoiceCreditAppliedAmount > 0)
+                                {
+                                    <p class="order-discount">-@thisOrder.OrderInvoiceCreditAppliedAmount.ToString("c") </p>
+
+                                }
+
+                            </div>
+                            <div class="col-6 col-md-2 order-1 order-md-2 text-lg-right product-status">
+                                <p><strong>Payment Status</strong></p>
+                                <p class="text-capitalize">@thisOrder.OrderPmtStatus</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- End of Card Section -->
+}
+<!-- Start of Card Section -->
+@*<div class="row">
+        <div class="col-12">
+            <div class="card-box error">
+                <div class="upper-card mb-2">
+                    <div class="row align-items-end">
+                        <div class="col-6">
+                            <h4 class="text-uppercase">ORDER <span class="highlight">#34879347</span></h4>
+                        </div>
+                        <div class="col-6">
+                            <span class="view-invoice">
+                                <div class="warning justify-content-end ml-0 p-0">
+                                    <p class="info mr-3">
+                                        Review your prescription<br> to complete this order
+                                    </p>
+                                    <div class="icon mr-0">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-exclamation-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lower-card">
+                    <div class="row">
+                        <div class="col-6 col-md-4 product-items">
+                            <p>
+                                1x Cialis
+                            </p>
+                            <p>
+                                4x Finasteride
+                            </p>
+                            <p>
+                                2x Caverject
+                            </p>
+                        </div>
+                        <div class="col-6 col-md-4 order-2 order-md-1 product-details">
+                            <p>3-Month Subscription</p>
+                            <p>Qty: 1</p>
+                        </div>
+                        <div class="col-6 col-md-4 order-1 order-md-2 text-right product-status">
+                            <p><strong>Status</strong></p>
+                            <p>
+                                <a href="#">Upload your prescription</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<!-- End of Card Section -->
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:100% !important">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Your Health Background</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="fs-field-label fs-anim-upper question">
+                    What is the top number of your blood pressure reading (i.e. systolic reading)?
+                </p>
+                <div id="topBloodPressure" class="question-counter">
+                </div>
+                <p class="fs-field-label fs-anim-upper question">
+                    What is the bottom number of your blood pressure reading (i.e. diastolic reading)?
+                </p>
+                <div id="bottomBloodPressure" class="question-counter">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="OrderInvoiceId" value="" />
+                <input type="hidden" id="CustomerFk" value="" />
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                <button type="button" class="btn btn-primary" onclick="return UpdateUserBPData()">Update Blood Pressure</button>
+            </div>
+        </div>
+    </div>
+</div>

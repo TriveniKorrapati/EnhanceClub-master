@@ -1,0 +1,274 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model IEnumerable<EnhanceClub.Domain.Entities.OrderDetail>
+@using EnhanceClub.WebUI.HtmlHelpers
+
+@foreach (var thisOrder in @Model)
+{
+
+    <table class="table" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr style="vertical-align: middle;" valign="middle">
+                <th>
+                    <a href="/">
+                        <img src="/content/images/email-logo.png" alt="">
+                    </a>
+                </th>
+                <th>
+                    <table>
+                        <tr>
+                            <td style="text-align: right; padding-right:10px;" align="right" colspan="2"><h1 style="margin-top: 0;">Order Invoice: @thisOrder.OrderInvoiceId</h1></td>
+                        </tr>
+                        <tr>
+                            <td class="bold" style="text-align: right; padding-right:10px;line-height:22px;" align="right">Order Date:</td>
+                            <td width="120px"><span>@(thisOrder.OrderInvoiceDateCreated.ToClientTime(true, "MMM-dd-yyyy HH:mm:ss"))</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bold" style="text-align: right; padding-right:10px;line-height:22px;" align="right">Customer Id:</td>
+                            <td width="120px"><span>@thisOrder.OrderInvoiceCustomerFk</span></td>
+                        </tr>
+                    </table>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <table style="width:850px;margin:0 auto;">
+                        <tr>
+                            <td colspan="2">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h2 style="margin-top: 0; font-size: 23px; border-bottom: 5px solid #1a1a1a; padding-bottom: 10px;">Billing Address</h2>
+                                            <p>
+                                                @thisOrder.OrderInvoiceBillingFirstName @thisOrder.OrderInvoiceBillingLastName<br>
+                                                @thisOrder.OrderInvoiceBillingAddress<br>
+                                                @thisOrder.OrderInvoiceBillingCity,  @thisOrder.OrderInvoiceBillingProvince<br>
+                                                @thisOrder.OrderInvoiceBillingCountry , @thisOrder.OrderInvoiceBillingZipCode
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <h2 style="margin-top: 0; font-size: 23px; border-bottom: 5px solid #1a1a1a; padding-bottom: 10px;">Shipping Address</h2>
+                                            <p>
+                                                @thisOrder.OrderInvoiceShippingFirstName @thisOrder.OrderInvoiceShippingLastName<br>
+                                                @thisOrder.OrderInvoiceShippingAddress<br>
+                                                @thisOrder.OrderInvoiceShippingCity, @thisOrder.OrderInvoiceShippingProvince<br>
+                                                @thisOrder.OrderInvoiceShippingCountry, @thisOrder.OrderInvoiceShippingZipCode <br>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h2 style="margin-bottom: 0; font-size: 23px; border-bottom: 5px solid #1a1a1a; padding-bottom: 10px;">Order Details</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <table class="orders" cellpadding="0" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Shipping No.
+                                            </th>
+                                            <th>
+                                                Product
+                                            </th>
+                                            <th style="text-align:center;width:60px;">
+                                                Qty
+                                            </th>
+                                            <th style="width:80px;">
+                                                Price
+                                            </th>
+                                            <th style="text-align: right;">
+                                                Subtotal
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var cartDetail in thisOrder.OrderCart)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @if (cartDetail.CartShippingInvoiceFk != 0)
+                                                    {@cartDetail.CartShippingInvoiceFk;
+                                                }
+                                                else
+                                                { @String.Empty;
+                                            }
+                                                </td>
+                                                <td>
+                                                    @if (SiteConfigurationsWc.EnableProductGeneric)
+                                                    {
+                                                        if (@cartDetail.ProductSizeGeneric)
+                                                        {
+                                                            <text>
+                                                                Generic
+                                                            </text>
+                                                        }
+                                                        else
+                                                        {
+                                                            <text>
+                                                                Brand
+                                                            </text>
+                                                        }
+                                                    }
+                                                    @cartDetail.ProductSizeHeader @cartDetail.ProductSizeStrength - @cartDetail.ProductSizeQuantity @cartDetail.ProductUnitNamePk
+                                                </td>
+                                                <td style="text-align:center;width:60px;">
+                                                    @cartDetail.CartItemQuantity
+                                                </td>
+                                                <td style="width:80px;">
+                                                    @cartDetail.CartItemPrice.ToString("c")
+                                                </td>
+                                                <td style="width:80px;text-align:right;">
+                                                    @cartDetail.CartLineTotal.ToString("c")
+                                                </td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="padding-bottom:20px;" width="400px">
+                                <table class="total">
+                                    <tr>
+                                        <td>
+                                            Subtotal:
+                                        </td>
+                                        <td style="text-align:right;" align="right">
+                                            @thisOrder.OrderCart.Sum(x => x.CartLineTotal).ToString("c")
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Shipping Cost:
+                                        </td>
+                                        <td style="text-align:right;" align="right">
+                                            @(thisOrder.OrderInvoiceShippingPrice == 0 ? "FREE" : thisOrder.OrderInvoiceShippingPrice.ToString("c"))
+                                        </td>
+                                    </tr>
+                                    @if (thisOrder.OrderInvoiceCreditAmount > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <p>Credits Applied : </p>
+                                            </td>
+                                            <td style="text-align:right;" align="right">
+                                                <p>-@thisOrder.OrderInvoiceCreditAmount.ToString("c")</p>
+                                            </td>
+                                        </tr>
+                                    }
+                                    @if (thisOrder.OrderInvoiceCouponAmount > 0)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <p>Coupon Discount : </p>
+                                            </td>
+                                            <td style="text-align:right;" align="right">
+                                                <p>-@thisOrder.OrderInvoiceCouponAmount.ToString("c")</p>
+                                            </td>
+                                        </tr>
+                                    }
+                                    @if (SiteConfigurationsWc.EnableTax)
+                                    {
+                                        if (@thisOrder.OrderInvoiceHarmonizedTaxAmount > 0)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    HST (@thisOrder.OrderInvoiceHarmonizedTaxPercentage.ToString("0.00")%):
+                                                </td>
+                                                <td style="text-align:right;" align="right">
+                                                    @thisOrder.OrderInvoiceHarmonizedTaxAmount.ToString("c")
+                                                </td>
+                                            </tr>
+
+                                        }
+                                        else
+                                        {
+                                            if (@thisOrder.OrderInvoiceProvinceTaxAmount > 0)
+                                            {
+                                                <tr>
+                                                    @if (@thisOrder.OrderInvoiceBillingProvince.ToLower() == "quebec")
+                                                    {
+                                                        <td>
+                                                            QST (@thisOrder.OrderInvoiceProvincialTaxPercentage.ToString("0.00")%): <br />
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            PST (@thisOrder.OrderInvoiceProvincialTaxPercentage.ToString("0.00")%): <br />
+                                                        </td>
+                                                    }
+                                                    <td style="text-align:right;" align="right">
+                                                        @thisOrder.OrderInvoiceProvinceTaxAmount.ToString("c") <br />
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                            if (@thisOrder.OrderInvoiceGlobalTaxAmount > 0)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        GST (@thisOrder.OrderInvoiceGlobalTaxPercentage.ToString("0.00")%):
+                                                    </td>
+                                                    <td style="text-align:right;" align="right">
+                                                        @thisOrder.OrderInvoiceGlobalTaxAmount.ToString("c") <br />
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+
+                                    }
+                                    <tr>
+                                        <td>
+                                            <h3 style="margin-bottom: 0; font-size: 23px;">
+                                                Total:
+                                            </h3>
+                                        </td>
+                                        <td style="text-align:right;" align="right">
+                                            <h3 style="margin-bottom: 0; font-size: 23px">
+                                                @thisOrder.OrderTotal.ToString("c")
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding:30px 0;background-color:#1a1a1a;">
+                    <table style="color:#ffffff;" cellpadding="0" cellspacing="0" border="0">
+                        <tr>
+                            <td style="text-align:center;">
+                                <a style="color:#ffffff;" href="https://www.facebook.com/enhanceclubnow" target="_blank">
+                                    Facebook
+                                </a> |
+                                <a style="color:#ffffff;" href="http://instagram.com/enhanceclub" target="_blank">
+                                    Instagram
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;color:#7c7c7c">
+                                &copy; Enhance Club @DateTime.Now.Year. All rights reserved.
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+

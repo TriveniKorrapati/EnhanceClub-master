@@ -1,0 +1,21 @@
+﻿@model EnhanceClub.WebUI.Models.BreadCrumbViewModel
+
+@if (Model.BreadCrumbLinks != null)
+{
+    <ol class="breadcrumb">
+        @foreach (var thisCrumb in Model.BreadCrumbLinks)
+        {
+            <li class="breadcrumb-item @(thisCrumb.IsActive ? "active" : "")">
+                @if (thisCrumb.MakeLink)
+                {
+                    <a href="@thisCrumb.LinkUrl" class=""> @thisCrumb.LinkText</a>
+                }
+                else
+                {
+                    <span class=""></span>@thisCrumb.LinkText
+                }
+            </li>
+        }
+
+    </ol>
+}

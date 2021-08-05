@@ -1,0 +1,21 @@
+﻿ <!-- Start of Filter Section -->
+
+
+<div class="col-12 col-md-5 col-xl-5 col-xl-5 text-right order-md-2">
+    <span class="customized-select">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L7 7L2 2" stroke="#FFA400" stroke-width="3"
+                  stroke-miterlimit="10" stroke-linecap="round" />
+        </svg>
+        <input type="hidden" value="@Model.SortOrder" id="selected-sort-order" />
+        <select class="filter" id="sort-order-dropdown">
+            <option value="1">Sort by Newest</option>
+            <option value="2">Sort by Older</option>
+            <option value="3">Sort by Price <span>&#8595;</span></option>
+            <option value="4">Sort by Price <b> &#8593; </b></option>
+        </select>
+    </span>
+</div>
+
+<!-- End of Filter Section -->

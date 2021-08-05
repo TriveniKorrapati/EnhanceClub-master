@@ -1,0 +1,41 @@
+﻿@model EnhanceClub.WebUI.Models.PasswordRecoveryViewModel
+@section PageScripts {
+
+    <script type="text/javascript">
+
+    </script>
+
+}
+<!-- Start of Main -->
+<div class="dashboard-page order-page order-confirmation-page thank-you-page">    
+
+    <div class="section top-section">
+        <div class="container">
+            <div class="row">
+
+                <!-- Start of Main Section -->
+                <div class="col-12 col-md-12 col-lg-12">
+
+                    <!-- Start of Filter Section -->
+                    <div class="row mt-4">
+                        <div class="col-12 col-md-7 col-xl-6 text-center text-md-right">
+
+
+                            <h4 class="white mb-4">Signup Not Completed!</h4>
+                            <p>You haven't completed signing up for <i>@Model.EmailProvided</i>. Contact <b>@Html.ActionLink("Customer Support", "get-in-touch", "home", null, new { @class = "" })</b> to complete the signup.</p>
+
+                        </div>
+
+                    </div>
+                    <!-- End of Filter Section -->
+
+                </div>
+                <!-- End of Main Section -->
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- End of Main -->

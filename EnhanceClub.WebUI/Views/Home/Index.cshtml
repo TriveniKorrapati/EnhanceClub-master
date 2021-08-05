@@ -1,0 +1,144 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@section PageScripts
+{
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $('.products-gallery--content #menu-brand').show();
+        //    $('.products-gallery--content #menu-generic').hide();
+        //});
+
+        $(".products-gallery--content").on('change', '#menu-selection', function ()
+        {
+
+            var selectedType = $(this).find('option:selected').val();
+
+            if (selectedType == "2") {
+                $('.products-gallery--content #menu-generic').addClass("d-none");
+                $('.products-gallery--content #menu-brand').removeClass("d-none");
+
+                if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether != 1) {
+                    var productId = $("#menu-brand option:selected").val();
+                    var strength = $('#menu-brand :selected').text();
+                    BindQuantityDropDown(false, productId, strength);
+                }
+
+            }
+            else {
+                $('.products-gallery--content #menu-brand').addClass("d-none");
+                $('.products-gallery--content #menu-generic').removeClass("d-none");
+                if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether != 1) {
+                   var productId = $("#menu-generic option:selected").val();
+                    var strength = $('#menu-generic :selected').text();
+                    BindQuantityDropDown(true, productId, strength);
+                }
+            }
+
+        });
+
+        $(".products-gallery--content").on('click', '#get-it-now', function (e)
+        {
+            var selectedVal = 0;
+            var menuSelectionVal = 0;
+            if (@SiteConfigurationsWc.ShowProductStrengthUnitTogether == 1) {
+                var dropDownIndex = $(this).attr('data-src');
+                selectedVal = $('[name=generic-productsizeId_' + dropDownIndex + ']').val();
+                menuSelectionVal = $('[name=menu-selection_' + dropDownIndex + ']').val();
+
+                if ($('.products-gallery--content #menu-generic').hasClass("d-none")) {
+                    selectedVal = $('[name=brand-productsizeId_' + dropDownIndex + ']').val(); // $('.products-gallery--content #menu-brand').val();
+                }
+
+            }
+            else {
+                selectedVal = $('[name=quantity-productsizeId]').val();
+                menuSelectionVal = $('[name=menu-selection]').val();
+
+                //menuSelectionVal = $('cls-' + dropDownIndex).val();
+                //alert(menuSelectionVal);
+            }
+
+            //menu-selection
+
+            if ((selectedVal != 0) && (menuSelectionVal != 0)) {
+
+                var productId = $("#product-id_" + dropDownIndex).val();
+
+                var productSizeId = selectedVal
+                addProductToCart(productSizeId, productId);
+                //return true;
+            }
+            else {
+
+                alert('Please choose a valid product & strength.');
+                //return false;
+            }
+            e.preventDefault();
+        })
+
+    </script>
+}
+
+@*@Html.Partial("_homeStructureData",
+    new HomeStructureViewModel {
+MetaDescription = ViewBag.Description,
+})*@
+
+
+    <main class="page-content home-page">
+
+
+        @Html.Partial("_bannerHomePage")
+
+
+        <div class="provide-area content-text text-center d-none d-lg-flex">
+
+            @Html.Partial("_happyGuys")
+        </div>
+
+        @Html.Partial("_homePageBadge")
+       
+
+                    <!-- /.healthcare-practitioners-->
+                    <!-- Update: 01/15/21 -->
+                    <div class="healthcare-practitioners">
+                        @Html.Partial("_healthcarePractitioner")
+                    </div>
+                    <!-- /.provide-area -->
+                    @Html.Partial("_productsHomePage")
+
+                    <!-- /.product-area content-text text-center -->
+                    @Html.Partial("favouriteProducts")
+
+                    <!-- /.product-favorite content-text -->
+                    <div class="enchance-area position-relative content-text mt-5 pt-4">
+                        <div class="enchance-area-clip"></div>
+                        @Html.Partial("_testimonialHomePage")
+                        @*@Html.Partial("_InstagramSection")*@
+                        <!-- /.enchance-instagram -->
+
+                        @Html.Partial("_blogHomePage",
+                            new BlogListViewModel
+                            {
+                                BlogList = Model.BlogList
+
+                            })
+
+
+                        <!-- /.enchance-reputation -->
+                    </div>
+
+                    <!-- to do add check if user is logged in and has some pending actions-->
+                    @if (SiteConfigurationsWc.EnablePrescriptionNotification)
+                    {
+                        if (Model.ShowPrescriptionNotification || !Model.UploadDocumentStatus)
+                        {
+                            @Html.Partial("_PrescriptionUploadNotification")
+                        }
+                    }
+
+                    <!-- /.enhance-area content-text -->
+    </main>
+
+

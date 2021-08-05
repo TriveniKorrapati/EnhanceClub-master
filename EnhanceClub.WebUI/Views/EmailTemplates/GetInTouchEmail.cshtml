@@ -1,0 +1,71 @@
+﻿@using System.Linq
+@using System.Security.AccessControl
+@using System.Web.DynamicData
+@using System.Web.UI.WebControls
+@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.HtmlHelpers
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.Domain.Entities.GetInTouchEmail
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enhance Club - Invoice</title>
+    <link rel="stylesheet" href="@SiteConfigurationsWc.CdnUrl/content/css/email-template.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+   
+    <!-- Sub heading -->
+   
+    <!-- Main -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#FFFFFF" width="100%">
+            <tr>
+                <td>
+                    <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle" style="border-collapse:collapse;">
+                        <tr>
+                            <td colspan="2" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#7c7c7c;">
+                                Hello Customer Service,<br>
+                                Here we recieved a query from Customer on Get In Touch page!<br>
+                               
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td colspan="2" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#7c7c7c;">
+                                
+                                <br>
+                                <p><b> Customer Name:</b></p>
+                                <p> @Model.Name</p>
+                                
+                                <p><b>Customer Phone:</b></p>
+                                <p> @Model.Phone</p>
+                               
+                                <p><b>Customer Email:</b></p>
+                                <p> @Model.Email</p>
+                               
+                                <p><b>Query Posted:</b></p>
+                                <p> @Model.Question</p>
+                            </td>
+                        </tr>
+                       
+                    </table>
+                </td>
+            </tr>
+        </table>
+    <!-- How To Order -->
+   
+    <!-- Footer -->
+  
+</body>
+
+</html>
+
+
+
+

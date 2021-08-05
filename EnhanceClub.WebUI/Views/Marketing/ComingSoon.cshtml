@@ -1,0 +1,143 @@
+﻿@model EnhanceClub.Domain.Entities.AffiliateInfo
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Coming Soon</title>
+    <style>
+        html {
+            font-family: 'sans-serif';
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Coming Soon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="/content/css/main.css" rel="stylesheet">
+    
+    @Html.Partial("_adrollScript")
+</head>
+<body>
+    <div id="wrapper" class="header-">
+
+        <div class="coming-soon-page d-flex align-items-center flex-wrap">
+            <div class="bg-image">
+                @*<video class="d-block w-100" autoplay="true" muted="true" loop="true" poster="/content/images/video/happy-guy-triangle-2.png">
+                        <source src="/content/images/video/happy-guy-triangle-3.webm" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>*@
+
+
+                <div class="d-block w-100">
+                    <img src="/content/images/side-image.png" alt="">
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-6 col-xl-6">
+                        <h1>Enhancement is Coming</h1>
+                        <h5>Join the movement and stay abreast. Gain exclusive access to insider deals.</h5>
+                        <!-- Begin Mailchimp Signup Form -->
+
+
+                        <div id="mc_embed_signup">
+
+                            @*@using (Html.BeginForm("SubscribeUser",
+                                    "Marketing",
+                                    null,
+                                    FormMethod.Get,
+                                    new { id = "mc-embedded-subscribe-form", @name = "mc-embedded-subscribe-form", @class = "validate" }))
+                                {*@
+                            <div id="mc_embed_signup_scroll" class="row align-items-center justify-content-between">
+                                <div class="col-12 col-xl-7 col-sm-12">
+                                    <input type="email" value="" name="subscriberEmail" class="email" id="mce-EMAIL" placeholder="Type your email" required>
+                                    @Html.Hidden("mce-NAME", "na")
+                                </div>
+                                <div class="col-12 col-xl-5 col-sm-12">
+                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                    @*<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_7db9e6cadf97546b7d9364e6a_ca93e2bdc3" tabindex="-1" value=""></div>*@
+                                    <div class="clear">
+                                        <input type="submit" value="JOIN THE CLUB" name="subscribe" id="mc-embedded-subscribe" class="button">
+                                    </div>
+                                </div>
+                            </div>
+                            @*}*@
+
+                            <div style="display: none;" class="subscribe-success">
+                                <div class="tick"><img height="20px" style="margin-right: 10px;" src="/content/images/tick.svg" /></div>
+                                @*<div class="content">Please check your email to confirm subscription.</div>*@
+                                <div class="content">Thanks for subscribing.</div>
+
+                            </div>
+                        </div>
+                        <!--End mc_embed_signup-->
+                    </div>
+                </div>
+            </div>
+            <footer class="footer-lp w-100">
+                <div class="container">
+                    <span class="follow-us">Follow us for updates:</span>
+                    <div class="row align-items-center text-md-left text-center">
+                        <div class="col-lg-6 col-12 d-flex align-items-center follow-us-section">
+                            <ul class="list-unstyled social-links d-flex justify-content-sm-start justify-content-center">
+                                <li>
+                                    <a target="_blank" href="https://www.facebook.com/enhanceclubnow/">
+                                        <img src="/content/images/fb.svg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://twitter.com/enhanceclub">
+                                        <img src="/content/images/twitter.svg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.pinterest.ca/enhanceclub/">
+                                        <img src="/content/images/pinterest.svg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.instagram.com/enhanceclub/">
+                                        <img src="/content/images/insta.svg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.tiktok.com/&#64;enhanceclub">
+                                        <img src="/content/images/tiktok.svg" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="mailto:invest@enhanceclub.com">
+                                        <img src="/content/images/email.svg" />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container -->
+                </div>
+            </footer>
+            <!-- /.footer w-100 -->
+        </div>
+    </div>
+    <script type="text/javascript" src="/jquery/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/comingSoon.js"></script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-27944993-14"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-27944993-14');
+    </script>
+
+
+</body>
+</html>

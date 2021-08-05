@@ -1,0 +1,59 @@
+﻿@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.PrescriptionUploadViewModel
+
+<li id="fs-fields-init" class="form-group upload-documents">
+    <div class="non-overview-item">
+        <h3 style="margin-bottom: 30px; margin-top: 80px;" class="fs-field-label fs-anim-upper" for="q1">Upload Your Presciption </h3>
+    </div>
+    
+    <div class="fs-anim-lower">
+        <p class="small-text fs-anim-lower">Please upload your prescription to complete your order.</p>
+        <div class="row">
+
+            <div class="col col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+                @Html.Hidden("orderInvoiceId",
+                Model.OrderId)
+
+
+                <h6 style="margin-top: 30px;">Upload Your Prescription</h6>
+                <p style="font-size:14px;color:#000;margin-bottom: 20px">To approve your order, the @SiteConfigurationsWc.TermForPractitioner will need to verify your prescription.</p>
+                <p style="font-size:14px;font-weight:bold;color:#000;margin-bottom: 30px">Add a picture of your Prescription.</p>
+
+                <span class="file-wrapper" style="font-size: 20px;color:#000">
+                    <input type="file" name="prescriptionImage" id="prescriptionImage" class="uploader custom-uploadpres" />
+                    <span class="btn upload-btn" style="margin-bottom: 20px">Upload Picture</span>
+
+                </span>
+
+                <p style="font-size: 12px;color:#000">Having issues uploading images?</p>
+
+            </div>
+            <div class="col col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <img id="img-uploadedpres" src="~/content/images/placeholder_350.png" alt="your image" style="width: 350px;height: auto; margin-top:40px;">
+            </div>
+
+
+        </div>
+
+      
+            <a href="@Url.Action("RequirePrescription","Order", new{orderId = @Model.OrderId })" style="font-size:18px">&#8592; I Don't Have a Prescription</a>
+
+       
+        <div class="success-msg" id="statusPres" style="font-size: 12px;">
+        </div>
+        <div class="error-msg" id="statusPresErr" style="font-size: 12px;">
+
+        </div>
+    </div>
+    <span class="upload-form-nav fs-anim-lower d-none" id="submit-documents">
+        <ul>
+            <li class="next-btn">
+                <button class="fs-submit btn" type="submit" style="display:inline">Submit</button>
+            </li>
+        </ul>
+
+    </span>
+
+</li>

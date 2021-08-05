@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘Privacy policy’ from 'Need help' on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Privacy Policy'
+
+Then: It opens the 'Privacy policy' page</description>
+   <name>Privacy From Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>5d6ea3e4-435b-43d9-9e3e-9fb326966585</testCaseGuid>
+</TestCaseEntity>

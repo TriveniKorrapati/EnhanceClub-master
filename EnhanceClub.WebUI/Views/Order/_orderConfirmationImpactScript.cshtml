@@ -1,0 +1,47 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.OrderConfirmViewModel
+
+<script>
+    @{
+        var cntr = 1;
+    }
+   
+
+    ire('trackConversion', { TOBEPROVIDEDBYIMPACT }, {
+       'orderId': @Model.OrderId,
+        'customerId': @Model.CustomerInfo.CustomerId,
+        'customerEmail': @Model.CustomerInfo.Sha1CustomerEmail,
+        'customerStatus': "",
+        'currencyCode': 'CAD',
+        'orderPromoCode': @Model.OrderInfo.OrderInvoiceCouponCodePk,
+        'orderDiscount': '',
+         'items':
+                [
+                    @foreach (var cartItem in Model.ProductList)
+                    {
+                        <text>
+                            {
+                                'name': '@cartItem.ProductSafeUrlName',
+                                'sku': '@cartItem.ProductSizeId',
+                                'subTotal': '@cartItem.CartItemPrice',
+                                'category': '@cartItem.ProductSizeStrength',
+                                'quantity': @cartItem.CartItemQuantity,
+
+                            }
+                        </text>
+                        if (cntr < @Model.ProductList.Count())
+                        {
+                            <text>,</text>
+                        }
+                    }
+            ]
+    },
+
+        {
+
+            verifySiteDefinitionMatch: true
+
+        }
+
+    );
+</script>

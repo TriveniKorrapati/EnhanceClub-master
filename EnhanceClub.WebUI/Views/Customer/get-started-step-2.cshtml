@@ -1,0 +1,211 @@
+﻿@model EnhanceClub.Domain.Entities.CustomerSignUp
+
+@section PageScripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            if ($("#CognitoSignupPhoneVerificationCode").val().length == 6) {
+                $("#verifyPhoneAccessCode").removeAttr('disabled').css('cursor', 'pointer');
+            } else {
+                $("#verifyPhoneAccessCode").attr("disabled", true).css('cursor', 'default');
+            }
+
+            $('#CognitoSignupPhoneVerificationCode').keyup(function () {
+                if ($("#CognitoSignupPhoneVerificationCode").val().length == 6) {
+                    $("#verifyPhoneAccessCode").removeAttr('disabled').css('cursor', 'pointer');
+                } else {
+                    $("#verifyPhoneAccessCode").attr("disabled", true).css('cursor', 'default');
+                }
+            });
+
+        });
+        $('#resend-mfa').click(function(e) {
+            location.reload();
+            e.preventDefault();
+        });
+
+        $("#verifyPhoneAccessCode").click(function () {
+            // to do verify phone access code and show shipping address controls and update header text
+            console.log("entering verifyPhoneAccessCode");
+            var customerEmail = $("#CustomerEmail").val();
+            var verificationCode = $("#CognitoSignupPhoneVerificationCode").val();
+            var customerId = $("#CustomerId").val();
+            var sessionId = $("#SessionId").val();
+
+            $.ajax({
+                url: '/customer/VerifyMfaPhoneCode',
+                contentType: "application/json",
+                async: true,
+                data: JSON.stringify({ customerId: customerId, customerEmail: customerEmail, phoneVerificationCode: verificationCode, sessionId: sessionId, actionType: 2 }),
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.verified) {
+                        //alert("Phone number access code authenticated");
+                        $(".shipping-details-section").removeClass("d-none");
+                        $("#phone-authentication").addClass("d-none");
+                        $("#header-text").addClass("d-none");
+
+                        var accessToken = data.userAccessToken;
+                        $("#accessToken").val(accessToken);
+
+                        console.log("verify success");
+                        // to do show control for phone verification code
+                    } else {
+                        // alert("Phone number access code not authenticated");
+                        $(".validation-summary-errors").removeClass("d-none");
+                        // to do show error for authentication failed
+                    }
+                },
+                error: function (response) {
+                    // to do show error for authentication failed
+                }
+            });
+        });
+
+
+        $("#submitform").click(function () {
+
+            // combine phone fields to generate one field
+
+            var isSuccess = false;
+            var fname = $("#CustomerFirstName").val();
+            if (fname.length < 2) {
+                alert('Please enter valid first name');
+                return false;
+            }
+            var lname = $("#CustomerLastName").val();
+            if (lname.length < 2) {
+                alert('Please enter valid last name');
+                return false;
+            }
+            // var lname = $("#CustomerAddress").val();
+            var address = $("#CustomerAddress").val();
+            if (address.length < 3) {
+                alert('Please enter valid address');
+                return false;
+            }
+            var city = $("#CustomerCity").val();
+            if (city.length < 3) {
+                alert('Please enter valid city');
+                return false;
+            }
+            var regex = /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/;
+            var zipValue = $("#CustomerZipCode").val();
+            var match = regex.exec(zipValue);
+            if (match) {
+                if ((zipValue.indexOf("-") !== -1 || zipValue.indexOf(" ") !== -1) && zipValue.length == 7) {
+                    return true;
+                } else if ((zipValue.indexOf("-") == -1 || zipValue.indexOf(" ") == -1) && zipValue.length == 6) {
+                    return true;
+                }
+            } else {
+                alert('Please enter valid Postal Code');
+                return false;
+            }
+
+        });
+
+    </script>
+}
+<div class="get-started-section started-main">
+    <div class="get-started-banner1"></div>
+    <div class="person-image">
+        <img src="/content/images/hipster-grandpa-2.png" alt="Get Started">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                <h2>Almost there...</h2>
+                @if (!string.IsNullOrEmpty(@ViewBag.ReturnMessage))
+                {
+                    <h5>@ViewBag.ReturnMessage</h5>
+                }
+                <div class="validation-summary-errors d-none" data-valmsg-summary="true">
+                    <ul>
+                        <li>Failed to verify phone access code</li>
+                    </ul>
+                </div>
+                <h4 id="header-text"><b>Step 2: </b>Now, please enter the verification code sent via text.</h4>
+
+                @using (Html.BeginForm("get-started-step-2", "Customer", FormMethod.Post, new { @class = "", role = "form", @id = "sign-up-form-2", name = "signUpForm-2" }))
+                {
+                    @Html.Hidden("CustomerId", @Model.CustomerId)
+                    @Html.Hidden("CustomerEmail", @Model.CustomerEmail)
+                    @Html.Hidden("SessionId", @Model.SessionId)
+                    @Html.Hidden("accessToken", "")
+
+                    string userPassword = "";
+
+                    if (TempData["userPassword"] != null)
+                    {
+                        userPassword = TempData["userPassword"].ToString();
+
+                    }
+                    @Html.Hidden("CustomerPassword", userPassword)
+
+                    <div class="form-container">
+                        @Html.Partial("_mfa-verification")
+
+                        <div class="shipping-details-section d-none">
+                            <div class="form-group">
+                                @Html.TextBox("CustomerFirstName", @Model.CustomerFirstName, new { @class = "", required = "required",
+                                    @placeholder = "First Name", Name = "CustomerFirstName" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBox("CustomerLastName", @Model.CustomerLastName, new { @class = "", required = "required", @placeholder = "Last Name", Name = "CustomerLastName" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBox("CustomerAddress", @Model.CustomerAddress, new { @class = "", required = "required",
+                               @placeholder = "Address", Name = "CustomerAddress",
+                               minlength = 3
+                           })
+
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBox("CustomerCity", @Model.CustomerCity, new { @class = "", required = "required",
+                               @placeholder = "City", Name = "CustomerCity",
+                               minlength = 4
+                           })
+
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        @Html.DropDownList("Customer.CustomerProvinceFk", new
+                                        SelectList(Model.ProvinceList, "ProvinceId", "ProvinceName"), new { Name = "CustomerProvinceFk" })
+
+                                        @*@Html.TextBox("CustomerProvinceFk",
+                                @Model.CustomerProvinceFk,
+                                new {@class = "", required = "required", @placeholder = "State"})*@
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        @Html.TextBox("CustomerZipCode", @Model.CustomerZipCode, new { @class = "", required = "required",
+                                       @placeholder = "Postal Code", Name = "CustomerZipCode",
+                                       minlength = 6,
+                                       maxlength = 6
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row row-padding align-items-center shipping-details-section d-none">
+                        <div class="mobile-pb-15 mb-5">
+                            <button class="btn btn--rounded" type="submit" name="submitform" id="submitform">Confirm</button>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

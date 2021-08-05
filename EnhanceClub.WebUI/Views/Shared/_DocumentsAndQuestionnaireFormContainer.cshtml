@@ -1,0 +1,348 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.WebUI.Models.RequirePrescriptionReviewViewModel
+
+<div class="form-container">
+    <div class="fs-form-wrap fs-form-review" id="fs-form-wrap">
+        @*@using (Html.BeginForm("AddingSchedule", "Order", new { page = 1, }, FormMethod.Post, new { @class = "fs-form fs-form-full", @role = "form", @id = "frm_OrderListSearch", @name = "frm_OrderListSearch" }))
+            {*@
+        <form id="myform" name="myform" action="/Order/AddQuestionnaireResponses" class="fs-form fs-form-full" method="post" autocomplete="off">
+            <div class="">
+                <h2 class="fs-field-label fs-anim-upper" for="q1">Review answers</h2>
+            </div>
+            <input type="hidden" name="sessionTrackerId" value="@Model.CustomerSessionTrackerFk" />
+            <input name="orderId" type="hidden" value="@Model.OrderId" />
+            <input type="hidden" name="deviceType" value="" />
+
+            <div class="fs-fields">
+                <p class="mb-4 label">
+                    Ok, before we go any further, just take a moment and double check your answers are the right ones.
+                    It’s important we’re all on the same page.  It means we can offer you more enhancements for your life, faster and easier!
+                </p>
+                @Html.Partial("UploadIDDoc", new DocumentIdUploadViewModel { OrderId = @Model.OrderId })
+
+
+                @if (Model.QuestionnaireList.Count() > 0)
+                {
+                    int i = 0;
+                    int j = 0;
+                    int k = 0;
+                    string groupText = "";
+                    string questionnaireCatId = Model.QuestionnaireCatId;
+                    string[] questionnaireCatIdArr = questionnaireCatId.Split(',');
+                    foreach (string questionCat in questionnaireCatIdArr)
+                    {
+                        int catId = Convert.ToInt32(questionCat);
+                        var productNames = String.Join(",", Model.ProductNameList);
+                        List<Questionnaire> singleCatQuestionsList = Model.QuestionnaireList.Where(x => x.QuestionnaireCategoryFk == catId).ToList();
+                        if (Model.AnsweredCategoriesList.Contains(catId))
+                        {
+                            <h6 style="margin-bottom: 30px;"
+                                class="fs-field-label fs-anim-upper" for="q1">
+                                Reviews include your questions previously answered for @productNames
+
+                            </h6>
+                        }
+                        foreach (var questionnaireList in singleCatQuestionsList)
+                        {
+                            if (questionnaireList.QuestionnaireId == 33)
+                            {
+
+                            }
+                            i++;
+                            bool chbCheck = false;
+                            List<QuestionnaireOption> questionnaireOptionList = new List<QuestionnaireOption>();
+
+                            // sort by product size order for ventolin
+
+
+                            if (Model.QuestionnaireOptionList != null)
+                            {
+                                questionnaireOptionList = Model.QuestionnaireOptionList.Where(x => x.QuestionnaireFk == @questionnaireList.QuestionnaireId).ToList();
+
+                            }
+
+                            <div class="form-group health-questionnaire">
+                                @*<div class="non-overview-item">
+                                        @if (Model.AnsweredCategoriesList.Contains(catId))
+                                        {
+                                            <h6 style="margin-bottom: 30px;"
+                                                class="fs-field-label fs-anim-upper" for="q1">
+                                                This page also contains your prevously answered question. You can review and edit those as well.
+                                            </h6>
+                                        }
+                                    </div>*@
+                                @if (groupText.ToLower() != questionnaireList.QuestionnaireGroupText.ToLower())
+                                {
+                                    groupText = questionnaireList.QuestionnaireGroupText;
+
+
+                                    <div class="non-overview-item">
+
+                                        <h4 style="margin-bottom: 30px;"
+                                            class="fs-field-label fs-anim-upper" for="q1">
+                                            @questionnaireList.QuestionnaireGroupText
+                                        </h4>
+                                    </div>
+                                }
+
+                                @if (questionnaireOptionList.Count() > 0)
+                                {
+
+                                    if (questionnaireList.QuestionnaireMulAns)
+                                    {
+                                        if (Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.isSelected == true))
+                                        {
+                                            chbCheck = true;
+                                        }
+
+                                        bool expl = false;
+                                        string explanationValue = "";
+                                        int optid = 0;
+
+                                        <p class="fs-field-label fs-anim-upper question" for="q2" style="margin-bottom: 30px;">
+                                            @questionnaireList.QuestionnaireText
+                                            <span class="question-counter">(<b>@i</b>/@Model.QuestionnaireList.Count())</span>
+                                        </p>
+                                        <div class="fs-anim-lower">
+                                            <div class="checkbox-group required">
+                                                @foreach (var questionnaireOptList in questionnaireOptionList)
+                                                {
+
+                                                    var lst = questionnaireOptionList.Where(x => x.QuestionnaireFk == questionnaireOptList.QuestionnaireFk
+                                                                                                          && x.QuestionOptionAskMoreInfo).ToList();
+                                                    if (lst.Count() > 1)
+                                                    {
+                                                        <input type="hidden" name="[@j].AskMoreInfoMulOption" value="1" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="hidden" name="[@j].AskMoreInfoMulOption" value="0" />
+                                                    }
+                                                    <input type="hidden" class="quesval" name="[@j].QuestionnaireId" value="@questionnaireList.QuestionnaireId" />
+                                                    <input type="hidden" name="[@j].HardStop" value="@questionnaireOptList.HardStop.ToString()" />
+                                                    <input type="hidden" name="[@j].QuestionnaireCategoryId" value="@questionnaireList.QuestionnaireCategoryFk" />
+                                                    <input type="hidden" name="[@j].QuestionnaireOptionId" value="@questionnaireOptList.QuestionOptionId" />
+                                                    <div class="custom-control custom-check orange">
+                                                        @if (questionnaireOptList.QuestionOptionAskMoreInfo)
+                                                        {
+                                                            <input type="hidden" name="[@j].needMoreExplanation" class="needMoreExplanation" value="1" />
+                                                            <input value="true" type="checkbox" name="[@j].isSelected"
+                                                                   @if (Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == @questionnaireOptList.QuestionOptionId && item.isSelected == true)) { <text> checked </text> }
+                                                                   class="custom-control-input chkbxe otherCheckBox otherTextCheckBox changeprop-@questionnaireList.QuestionnaireId"
+                                                                   @if (chbCheck) { <text> </text>  } else { <text> required="true" </text> }>
+                                                            <label class="custom-control-label checkResponseText">@questionnaireOptList.QuestionOptionText</label>
+                                                            <br />
+                                                            if (Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == questionnaireOptList.QuestionOptionId))
+                                                            {
+                                                                explanationValue = Model.AnswerList.Find(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == questionnaireOptList.QuestionOptionId).ExplanationText;
+                                                            }
+                                                            if (!string.IsNullOrEmpty(explanationValue))
+                                                            {
+                                                                <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" required id="q2" value="@explanationValue" name="[@j].ExplanationText" type="text" placeholder="@questionnaireOptList.QuestionOptionPlaceHolder" />
+                                                                explanationValue = "";
+                                                            }
+                                                            else
+                                                            {
+                                                                <input style="display:none" class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" name="[@j].ExplanationText" type="text" placeholder="@questionnaireOptList.QuestionOptionPlaceHolder" />
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            if (@questionnaireOptList.QuestionOptionText.StartsWith("No"))
+                                                            {
+                                                                <input value="true" type="checkbox" name="[@j].isSelected"
+                                                                       @if (Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == @questionnaireOptList.QuestionOptionId && item.isSelected == true)) { <text> checked </text> }
+                                                                       class="custom-control-input chkbxe noneCheckBox changeprop-@questionnaireList.QuestionnaireId"
+                                                                       @if (chbCheck) { <text> </text>  } else { <text> required="true" </text> }>
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <input value="true" type="checkbox" name="[@j].isSelected"
+                                                                       @if (Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == @questionnaireOptList.QuestionOptionId && item.isSelected == true)) { <text> checked </text> }
+                                                                       class="custom-control-input chkbxe otherCheckBox changeprop-@questionnaireList.QuestionnaireId"
+                                                                       @if (chbCheck) { <text> </text>  } else { <text> required="true" </text> }>
+                                                                //int oi = j - 2;
+
+                                                            }
+                                                            <label class="custom-control-label checkResponseText">@questionnaireOptList.QuestionOptionText</label>
+                                                        }
+
+                                                    </div>
+                                                    if ((questionnaireOptList.QuestionOptionAskMoreInfo) && Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == @questionnaireOptList.QuestionOptionId && item.ExplanationText != null))
+                                                    {
+                                                        optid = questionnaireOptList.QuestionOptionId;
+                                                        expl = true;
+                                                        @*<input type="hidden" name="[@j].needMoreExplanation" class="needMoreExplanation" value="1" />*@
+                                                    }
+                                                    j++;
+                                                }
+                                                @*@if (expl)
+                                                    {
+                                                        int oi = j - 2;
+                                                        explanationValue = Model.AnswerList.Find(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == optid).ExplanationText;
+                                                        <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" value="@explanationValue" name="[@oi].ExplanationText" type="text" placeholder="Write here" />
+                                                    }
+                                                    else
+                                                    {
+                                                        int oi = j - 2;
+
+                                                        <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox1" id="q2" name="[@oi].ExplanationText" type="text" placeholder="Write here" />
+
+                                                    }*@
+                                            </div>
+
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p class="fs-field-label fs-anim-upper question" for="q2">
+                                            @questionnaireList.QuestionnaireText
+                                            <span class="question-counter">(<b>@i</b>/@Model.QuestionnaireList.Count())</span>
+                                        </p>
+                                        <div class="custom-radio fs-anim-lower">
+                                            @{
+                                                bool expl = false;
+                                                string explanationValue = "";
+                                                int optid = 0;
+                                            }
+                                            @foreach (var questionnaireOptList in questionnaireOptionList)
+                                            {
+
+                                                k++;
+                                                string radId = k.ToString() + "opt";
+
+                                                var lst = questionnaireOptionList.Where(x => x.QuestionnaireFk == questionnaireOptList.QuestionnaireFk
+                                                                                                           && x.QuestionOptionAskMoreInfo).ToList();
+                                                if (lst.Count() > 1)
+                                                {
+                                                    <input type="hidden" name="[@j].AskMoreInfoMulOption" value="1" />
+                                                }
+                                                else
+                                                {
+                                                    <input type="hidden" name="[@j].AskMoreInfoMulOption" value="0" />
+                                                }
+                                                <input type="hidden" name="[@j].QuestionnaireId" value="@questionnaireList.QuestionnaireId" />
+                                                <input type="hidden" name="[@j].QuestionnaireCategoryId" value="@questionnaireList.QuestionnaireCategoryFk" />
+                                                <input type="hidden" name="[@j].QuestionnaireOptionId" value="@questionnaireOptList.QuestionOptionId" />
+                                                <input type="hidden" name="[@j].HardStop" value="@questionnaireOptList.HardStop.ToString()" />
+                                                if (Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == @questionnaireOptList.QuestionOptionId && item.isSelected == true))
+                                                {
+                                                    <input value="true" type="hidden" class="ques-@questionnaireList.QuestionnaireId quesopt-@questionnaireOptList.QuestionOptionId" name="[@j].isSelected" id="[@j].isSelected" />
+
+                                                }
+                                                else
+                                                {
+                                                    <input value="false" type="hidden" class="ques-@questionnaireList.QuestionnaireId quesopt-@questionnaireOptList.QuestionOptionId" name="[@j].isSelected" id="[@j].isSelected" />
+
+
+                                                }
+                                                <div class="radio-item">
+                                                    @if (questionnaireOptList.QuestionOptionAskMoreInfo)
+                                                    {
+                                                        <input type="hidden" name="[@j].needMoreExplanation" class="needMoreExplanation" value="1" />
+                                                    }
+                                                    <input class="radd" required="true" type="radio"
+                                                           @if (Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == @questionnaireOptList.QuestionOptionId && item.isSelected == true)) { <text> checked </text> }
+                                                           id="@questionnaireOptList.QuestionOptionId" name="@questionnaireList.QuestionnaireId" value="@questionnaireList.QuestionnaireId-@questionnaireOptList.QuestionOptionId">
+
+                                                    <label class="optionText" for="@questionnaireOptList.QuestionOptionId">@questionnaireOptList.QuestionOptionText</label>
+                                                    <br />
+                                                    @{
+                                                        if (Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == questionnaireOptList.QuestionOptionId))
+                                                        {
+                                                            explanationValue = Model.AnswerList.Find(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == questionnaireOptList.QuestionOptionId).ExplanationText;
+                                                        }
+                                                    }
+                                                    @if (!string.IsNullOrEmpty(explanationValue))
+                                                    {
+                                                        <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" value="@explanationValue" name="[@j].ExplanationText" required type="text" placeholder="@questionnaireOptList.QuestionOptionPlaceHolder" />
+                                                        explanationValue = "";
+                                                    }
+                                                    else
+                                                    {
+                                                        <input style="display:none" class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" name="[@j].ExplanationText" type="text" placeholder="@questionnaireOptList.QuestionOptionPlaceHolder" />
+                                                    }
+                                                </div>
+                                                if ((questionnaireOptList.QuestionOptionAskMoreInfo) && Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == @questionnaireOptList.QuestionOptionId && item.isSelected == true))
+                                                {
+                                                    optid = questionnaireOptList.QuestionOptionId;
+                                                    expl = true;
+                                                    @*<input type="hidden" name="[@j].needMoreExplanation" class="needMoreExplanation" value="1" />*@
+                                                }
+
+                                                //QuestionOptionAskMoreInfo
+                                                //if (Model.AnswerList.Any(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == @questionnaireOptList.QuestionOptionId && string.IsNullOrEmpty(item.ExplanationText)))
+                                                //{
+                                                //     explanationValue = Model.AnswerList.Find(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == @questionnaireOptList.QuestionOptionId).ExplanationText;
+                                                //    expl = true;
+                                                //}
+
+
+
+                                                j++;
+
+                                            }
+
+                                            @*@if (expl)
+                                                {
+                                                    int oi = j - 2;
+                                                    explanationValue = Model.AnswerList.Find(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId && item.QuestionnaireOptionId == optid).ExplanationText;
+                                                    <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" value="@explanationValue" name="[@oi].ExplanationText" type="text" placeholder="Write here" />
+                                                }
+                                                else
+                                                {
+                                                    int oi = j - 2;
+
+                                                    <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox1" id="q2" name="[@oi].ExplanationText" type="text" placeholder="Write here" />
+
+                                                }*@
+
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    var value = Model.AnswerList.Find(item => item.QuestionnaireId == @questionnaireList.QuestionnaireId).AnswerText;
+                                    <input type="hidden" name="[@j].QuestionnaireId" value="@questionnaireList.QuestionnaireId" />
+                                    <input type="hidden" name="[@j].QuestionnaireCategoryId" value="@questionnaireList.QuestionnaireCategoryFk" />
+                                    <input type="hidden" name="[@j].QuestionnaireOptionId" value="0" />
+                                    <input type="hidden" name="[@j].IsSelected" value="true" />
+                                    <input type="hidden" name="[@j].HardStop" value="false" />
+                                    <p class="fs-field-label fs-anim-upper question" for="q2">
+                                        @questionnaireList.QuestionnaireText
+                                        <span class="question-counter">(<b>@i</b>/@Model.QuestionnaireList.Count())</span>
+                                    </p>
+                                    <input class="fs-anim-lower text-black-50" required id="q2" name="[@j].AnswerText" type="text" value="@value" placeholder="Type here" />
+                                    j++;
+                                }
+
+
+
+                            </div>
+                        }
+                    }
+                }
+
+
+            </div>
+            <div class="form-group health-questionnaire age-confirmation">
+                <div class="custom-control custom-check orange">
+                    <input type="hidden" name="" class="" value="1">
+                    <input value="true" type="checkbox" required name="" class="custom-control-input age-confirmation-checkbox">
+                    <label class="custom-control-label">
+                        I hereby confirm that I am nineteen years of age or older and I am fully competent to make my own health care decisions. I am aware of the potential side effects and/or problems associated with taking prescription medications and understand that it would be a violation of law to falsify any information on my medical questionnaire or other medical records for the purposes of obtaining prescription medication. I hereby affirm and certify that all of the answers to questions I have given in the medical questionnaire are complete and true to the best of my knowledge and belief.I acknowledge and understand that any misrepresentation, falsification, or omission of any facts called for in the medical questionnaire has the potential of being hazardous to my health. I agree that if I fail in any way to fully furnish my complete and accurate medical history or I become aware of any changes in my physical or medical condition in the future and I fail to notify Enhanceclub.com of such omission or change in my medical condition, I am solely responsible for any adverse effects that I may suffer from taking or continuing to take any prescribed medication. In the event of any such failure by me, I hereby release Enhanceclub.com (Canada) Ltd. and all of its officers, directors, employees and contractors from any and all liability for any damages of any kind that may result.
+                    </label>
+                </div>
+            </div>
+            <button type="submit" onclick="return checkAgeCheckBox()" class="btn btn--rounded mt-5 submit-button" disabled>
+                Submit
+                Answers <img src="/Content/images/arrow-right-white.svg" />
+            </button>
+
+        </form><!-- /fs-form-wrap -->
+    </div>
+    @*<button class="fs-submit" formaction="/order/AddingSchedule" formmethod="post" type="submit">Submit answers</button>*@
+</div>

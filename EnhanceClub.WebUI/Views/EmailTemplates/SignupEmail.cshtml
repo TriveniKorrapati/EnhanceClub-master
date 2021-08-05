@@ -1,0 +1,479 @@
+﻿@using System.Linq
+@using System.Security.AccessControl
+@using System.Web.DynamicData
+@using System.Web.UI.WebControls
+@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.HtmlHelpers
+@using EnhanceClub.WebUI.Infrastructure.Utility
+
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enhance Club - Invoice</title>
+    <link rel="stylesheet" href="@SiteConfigurationsWc.CdnUrl/content/css/email-template.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Hero -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#FBA303" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse;">
+                    <tr>
+                        <td>
+                            <img style="display:block;" width="100%" src="@SiteConfigurationsWc.CdnUrl/content/images/email-hero-welcome.png" alt="Welcome to Enhance Club">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- Sub heading -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#FFFFFF" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle" style="border-collapse:collapse;">
+                    <tr style="vertical-align: middle;">
+                        <td style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:700;font-size:32px">
+                            &nbsp;<br>
+                            @if (@Model.CustomerFirstName.Length > 0)
+                            {
+                                <b>Dear @Model.CustomerFirstName,</b>
+                            }
+                            <span style="font-family:'Kumbh Sans',arial,sans-serif;font-size:22px;font-weight:400;"></span><br>
+                            Welcome to Enhance Club!<br><br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- Main -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#FFFFFF" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle" style="border-collapse:collapse;">
+                    <tr>
+                        <td colspan="2" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#7c7c7c;">
+                            &nbsp;<br>
+                            We're so glad to see you have made the choice in joining the rising movement in men's health.<br>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align: middle;">
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#7c7c7c;">
+                            <div style="margin-top:20px;">
+                                EC Badge:<br>
+                                        <span style="font-weight:900;color:#000000;">@Model.CustomerId</span><br><br>
+                            </div>
+                        </td>
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#7c7c7c;">
+                            <div style="margin-top:20px;">
+                                EC Call Sign:<br>
+                                         <span style="font-weight:900;color:#000000;">@Model.CustomerEmail</span><br><br>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#7c7c7c;">
+                            &nbsp;<br>
+                            Enhance Club is @SiteConfigurationsWc.StorefrontCountryName's leading personalized wellness service dedicated to improving men's sexual health.<br><br>
+                            We provide on-demand access to licensed Canadian Healthcare Practitioners and our dedicated pharmacy available Mon-Friday 9-5 PST.<br><br>
+                            Plus, all our Enhance Club members <b>always receive FREE & discreet home delivery with their orders.</b><br><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center" syle="text-align:center;">
+                            &nbsp;<br>
+                            <a href="@SiteConfigurationsWc.CdnUrl/" style="text-decoration:none;">
+                                <img src="@SiteConfigurationsWc.CdnUrl/Content/images/email-btn-click-now.png" alt="Click now to start living your best life">
+                            </a><br><br>
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- How To Order -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#FBA303" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" valign="bottom" style="border-collapse:collapse;">
+                    <tr style="vertical-align: bottom;" valign="bottom">
+                        <td width="60%" style="font-family:'Kumbh Sans',arial,sans-serif;">
+                            <table border="0" cellpadding="0" cellspacing="0" align="center" valign="bottom" style="border-collapse:collapse;">
+                                <tr>
+                                    <td colspan="2">
+                                        <br>
+                                        <h1 style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:700;font-size:42px;color:#ffffff;">
+                                            Consider Us Your Secret Weapon
+                                        </h1>
+                                        <p style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#000000;">
+                                            We're always here when you need us.<br>
+                                            Need to place another order?<br>
+                                            &nbsp;
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;">
+                                        <span style="font-size:22px;font-weight:700;">
+                                            Call
+                                        </span><br>
+                                               <a href="tel:@SiteConfigurationsWc.StorefrontContact" style="color:#ffffff;font-size:22px;text-decoration:none;">@SiteConfigurationsWc.StorefrontContact</a><br>
+                                        <br><br>
+                                    </td>
+                                    <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;">
+                                        <span style="font-size:22px;font-weight:700;">
+                                            Visit Us Online
+                                        </span><br>
+                                               <a href="http://@SiteConfigurationsWc.StorefrontUrl" style="color:#ffffff;font-size:22px;text-decoration:none;">@SiteConfigurationsWc.StorefrontUrl</a><br>
+                                        <br><br>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td width="40%" valign="bottom" style="font-family:'Kumbh Sans',arial,sans-serif;font-size:22px;font-weight:400;color:#7c7c7c;vertical-align:bottom;">
+                            <img style="display:block;border-style:none;" src="@SiteConfigurationsWc.CdnUrl/content/images/email-how-to-order.png" alt="How To Order">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- Footer -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#000000" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle" style="border-collapse:collapse;">
+                    <tr>
+                        <td colspan="2" style="font-family:'Kumbh Sans',arial,sans-serif;">
+                            &nbsp;
+                            <h1 style="font-size:32px;font-weight:400;color:#ffffff;">Find us when you need</h1><br>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align: top;" valign="top">
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;text-align:left;">
+                            <span style="font-weight:900;font-size:22px;color:#ffffff;">Call</span><br>
+                            <a href="tel:@SiteConfigurationsWc.StorefrontContact" style="font-size:18px;color:#FBA303;text-decoration:none;">@SiteConfigurationsWc.StorefrontContact</a><br><br>
+                            @*<span style="font-weight:900;font-size:22px;color:#ffffff;">Email</span><br>*@
+                            <a href="@SiteConfigurationsWc.CdnUrl/get-in-touch" style="font-size:18px;color:#FBA303;text-decoration:none;">
+                                <span style="font-weight:900;font-size:22px;color:#ffffff;">Get in Touch</span>
+                                <img src="@SiteConfigurationsWc.CdnUrl/content/images/get-in-touch-icon.png" alt="Get In TOUCH">
+
+                            </a><br><br>
+                        </td>
+                        <td width="50%" align="right" style="font-family:'Kumbh Sans',arial,sans-serif;text-align:right;">
+                           
+                            <a href="https://@SiteConfigurationsWc.StorefrontUrl/privacy-policy" style="font-size:18px;color:#a5a5a5;text-decoration:none;">Privacy Policy</a><br><br>
+                            <a href="https://@SiteConfigurationsWc.StorefrontUrl/faq" style="font-size:18px;color:#a5a5a5;text-decoration:none;">FAQs</a>
+                            &nbsp;<br><br>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align:bottom;" valign="bottom">
+                        <td style="font-family:'Kumbh Sans',arial,sans-serif;font-size:18px;color:#ffffff;">
+                            &nbsp;<br>
+                            CONNECT WITH US
+                            <table style="margin-top:20px;vertical-align: middle;" valign="middle">
+                                <tr width="180px">
+                                    <td width="60px">
+                                        <a href="https://www.facebook.com/enhanceclubnow/" style="text-decoration:none;">
+                                            <img src="@SiteConfigurationsWc.CdnUrl/Content/images/email-facebook-icon.png" alt="facebook">
+                                        </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td width="60px">
+                                        <a href="https://www.instagram.com/enhanceclub/?hl=en" style="text-decoration:none;">
+                                            <img src="@SiteConfigurationsWc.CdnUrl/Content/images/email-instagram-icon.png" alt="instagram">
+                                        </a>
+                                    </td>
+                                    <td width="60px">
+                                        <a href="https://twitter.com/enhanceclub" style="text-decoration:none;">
+                                            <img src="@SiteConfigurationsWc.CdnUrl/Content/images/email-twitter-icon.png" height="25" width="25" alt="twitter" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                            &nbsp;<br>
+                        </td>
+                        <td style="font-family:'Kumbh Sans',arial,sans-serif;font-size:18px;color:#ffffff;text-align:right;">
+                            <a href="https://@SiteConfigurationsWc.StorefrontUrl/">
+                                <img style="display:inline-block;width:200px;" src="@SiteConfigurationsWc.CdnUrl/content/images/footerlogo.png" alt="footer">
+                            </a><br>
+                            &nbsp;<br>
+                            All Rights Reserved &copy;  @DateTime.Now.Year<br>
+                            &nbsp;<br>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
+
+@*<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enhance Club - Invoice</title>
+    <link rel="stylesheet" href="../../content/css/email-template.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Hero -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#FBA303" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" style="border-collapse:collapse;">
+                    <tr>
+                        <td>
+                            <img style="display:block;" width="100%" src="@SiteConfigurationsWc.CdnUrl/content/images/email-hero-welcome.png" alt="Welcome to Enhance Club">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- Sub heading -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#FFFFFF" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle" style="border-collapse:collapse;">
+                    <tr style="vertical-align: middle;">
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:700;font-size:32px">
+                            <div style="margin-top:20px;margin-bottom:20px;">
+                                <span style="font-family:'Kumbh Sans',arial,sans-serif;font-size:22px;font-weight:400;">
+                                </span>
+                                Welcome to<br>
+                                Enhance Club!<br>
+                            </div>
+                        </td>
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;font-size:22px;font-weight:400;color:#7c7c7c;">
+                            We think you made a great choice for your health. So, let's get down to business.
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- Coupon -->
+    <table class="table" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" width="100%">
+        <tr style="vertical-align: middle;">
+            <td class="bg-dark" style="text-align: right;font-family:'Kumbh Sans',arial,sans-serif;font-weight:900;" align="right" width="60%" bgcolor="#333333">
+                <h1 style="margin-top:20px;margin-bottom:0; margin-right: 30px;font-size:32px;color:#ffffff; text-align: right;">
+                    <span style="color:#FBA303; text-align: right;margin-bottom:0;">
+                        50% off
+                    </span>
+                    your first order
+                </h1>
+                <p class="white" style="margin-top:0;margin-bottom:20px;margin-right: 30px;font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#ffffff;">
+                    No strings attached!
+                </p>
+            </td>
+            <td class="bg-orange" align="left" width="40%" bgcolor="#FBA303">
+                <h1 class="dark" style="margin-left:30px;font-family:'Kumbh Sans',arial,sans-serif;font-weight:700;font-size:32px;color:#333333;">#Enhance50</h1>
+            </td>
+        </tr>
+    </table>
+    <!-- Main -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#FFFFFF" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle" style="border-collapse:collapse;">
+                    <tr style="vertical-align: middle;">
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#7c7c7c;">
+                            <div style="margin-top:20px;">
+                                Customer num:<br>
+                                <span style="font-weight:900;color:#000000;">@Model.CustomerId</span>
+                            </div>
+                        </td>
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#7c7c7c;">
+                            <div style="margin-top:20px;">
+                                User ID:<br>
+                                <span style="font-weight:900;color:#000000;">@Model.CustomerEmail</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;color:#7c7c7c;">
+                            &nbsp;<br>
+                            Enhance Club has grown from our client's desires for a professional and credible service dedicated to providing men a safe space to improve their sexual health.<br><br>
+                            <span style="font-weight:900;color:#000000;">
+                                EC Membership includes industry leading Perks & Privileges:
+                            </span>
+                            <br><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;">
+                            <table style="margin-bottom:10px;font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;">
+                                <tr style="vertical-align:top;">
+                                    <td width="350">
+                                        <table style="margin-bottom:20px;font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;">
+                                            <tr style="vertical-align:top">
+                                                <td style="color:#FBA303;">
+                                                    &bull; &nbsp;
+                                                </td>
+                                                <td style="color:#7c7c7c;">
+                                                    Access to Licensed Canadian Health Care Professionals 24/7
+                                                </td>
+                                            </tr>
+                                            <tr style="vertical-align:top;">
+                                                <td style="color:#FBA303;">
+                                                    &bull; &nbsp;
+                                                </td>
+                                                <td style="color:#7c7c7c;">
+                                                    110% Price-Match Guarantee
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td width="350">
+                                        <table style="margin-bottom:20px;font-family:'Kumbh Sans',arial,sans-serif;font-weight:400;font-size:22px;">
+                                            <tr style="vertical-align:top;">
+                                                <td style="color:#FBA303;">
+                                                    &bull; &nbsp;
+                                                </td>
+                                                <td style="color:#7c7c7c;">
+                                                    Personalized Customer Service
+                                                </td>
+                                            </tr>
+                                            <tr style="vertical-align:top;">
+                                                <td style="color:#FBA303;">
+                                                    &bull; &nbsp;
+                                                </td>
+                                                <td style="color:#7c7c7c;">
+                                                    Discreet Secure Home Delivery
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- How To Order -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#FBA303" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle" style="border-collapse:collapse;">
+                    <tr style="vertical-align: middle;">
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;">
+                            <div style="margin-top:20px;margin-bottom:20px;">
+                                <h1 style="font-weight:700;font-size:32px;">
+                                    How To Order
+                                </h1><br>
+                                <span style="font-size:22px;font-weight:700;">
+                                    Call
+                                </span><br>
+                                <a href="tel:@SiteConfigurationsWc.StorefrontContact" style="color:#ffffff;font-size:22px;text-decoration:none;">@SiteConfigurationsWc.StorefrontContact</a><br>
+                                </h1><br>
+                                <span style="font-size:22px;font-weight:700;">
+                                    Visit Us Online
+                                </span><br>
+                                <a href="https://@SiteConfigurationsWc.StorefrontUrl" style="color:#ffffff;font-size:22px;text-decoration:none;">@SiteConfigurationsWc.StorefrontUrl</a><br>
+                            </div>
+                        </td>
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;font-size:22px;font-weight:400;color:#7c7c7c;">
+                            <img style="display:block;border-style:none;" src="@SiteConfigurationsWc.CdnUrl/content/images/howtoorder.png" alt="">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- Footer -->
+    <table class="table" border="0" cellpading="0" cellspacing="0" bgcolor="#1a1a1a" width="100%">
+        <tr>
+            <td>
+                <table width="700" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle" style="border-collapse:collapse;">
+                    <tr style="vertical-align: top;" valign="top">
+                        <td width="50%" style="font-family:'Kumbh Sans',arial,sans-serif;">
+                            <div style="margin-top:20px;margin-bottom:20px;">
+                                <h1 style="font-size:32px;font-weight:400;color:#ffffff;">Need Help?</h1><br>
+                                <a href="mailto:@SiteConfigurationsWc.StorefrontCustomerService" style="font-size:18px;color:#a5a5a5;text-decoration:none;">Customer Service</a><br><br>
+                                <a href="https://@SiteConfigurationsWc.StorefrontUrl/get-in-touch" style="font-size:18px;color:#a5a5a5;text-decoration:none;">Get in Touch</a><br><br>
+                                <a href="https://@SiteConfigurationsWc.StorefrontUrl/faq" style="font-size:18px;color:#a5a5a5;text-decoration:none;">FAQs</a>
+                            </div>
+                        </td>
+                        <td width="50%" align="right" style="font-family:'Kumbh Sans',arial,sans-serif;text-align:right;">
+                            <div style="margin-top:20px;margin-bottom:20px;">
+                                <h1 style="font-size:32px;font-weight:400;color:#ffffff;">Find Help</h1><br>
+                                <span style="font-weight:900;font-size:22px;color:#ffffff;">Call</span><br>
+                                <a href="tel:@SiteConfigurationsWc.StorefrontContact" style="font-size:18px;color:#FBA303;text-decoration:none;">@SiteConfigurationsWc.StorefrontContact</a><br><br>
+                                <span style="font-weight:900;font-size:22px;color:#ffffff;">Email</span><br>
+                                <a href="mailto:@SiteConfigurationsWc.StorefrontCustomerService" style="font-size:18px;color:#FBA303;text-decoration:none;">@SiteConfigurationsWc.StorefrontCustomerService</a><br><br>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align:bottom;" valign="bottom">
+                        <td style="font-family:'Kumbh Sans',arial,sans-serif;font-size:18px;color:#ffffff;">
+                            &nbsp;<br>
+                            FOLLOW US
+                            <table style="margin-top:20px;vertical-align: middle;" valign="middle">
+                                <tr>
+                                    <td width="70px">
+                                        <a href="https://www.facebook.com/enhanceclubnow">
+                                            <img src="@SiteConfigurationsWc.CdnUrl/Content/images/facebook-icon.png" alt="">
+                                        </a>
+                                    </td>
+                                    @*<td width="70px">
+                                        <a href="http://twitter.com/enhanceclub">
+                                            <img src="@SiteConfigurationsWc.CdnUrl/Content/images/twitter-icon.png" alt="">
+                                        </a>
+                                    </td>
+                                    <td width="70px">
+                                        <a href="https://www.youtube.com/channel/UCEUd47AnJTV_5K9gaTB2LwA">
+                                            <img src="@SiteConfigurationsWc.CdnUrl/Content/images/youtube-icon.png" alt="">
+                                        </a>
+                                    </td>*@
+                                    @*<td width="70px">
+                                        <a href="http://instagram.com/enhanceclub">
+                                            <img src="@SiteConfigurationsWc.CdnUrl/Content/images/instagram-icon.png" alt="">
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="font-family:'Kumbh Sans',arial,sans-serif;font-size:22px;color:#ffffff;text-align:right;">
+                            <a href="https://@SiteConfigurationsWc.StorefrontUrl/privacy-policy" style="color:#ffffff;text-decoration: none;">
+                                Privacy Policy
+                            </a>
+                        </td>
+                    </tr>
+                    <tr style="vertical-align: middle;" valign="middle">
+                        <td style="font-family:'Kumbh Sans',arial,sans-serif;font-size:22px;color:#ffffff;text-align:left;">
+                            &nbsp;<br>
+                            <a href="https://@SiteConfigurationsWc.StorefrontUrl">
+                                <img style="display:block;width:200px;" src="@SiteConfigurationsWc.CdnUrl/Content/images/footerlogo.png" alt="">
+                            </a><br>
+                            &nbsp;
+                        </td>
+                        <td style="font-family:'Kumbh Sans',arial,sans-serif;font-size:22px;color:#ffffff;text-align:right;">
+                            &nbsp;<br>
+                            All Rights Reserved &copy; @DateTime.Now.Year<br>
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>*@
+
+

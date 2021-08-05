@@ -1,0 +1,53 @@
+﻿@using EnhanceClub.Domain.Entities
+@model System.Collections.Generic.IEnumerable<EnhanceClub.Domain.Entities.PatientProfile>
+
+@foreach( var i in "1")
+{
+<div class="container container-standard">
+    <div class="row">
+        <div class="col-md-12">
+            @*<h2>My Account</h2>*@
+            <div class="checkout">
+                @Html.Partial("AccountOptions", "profile")
+                <h4 style="margin-bottom: 0;">Patient Profile List</h4><h5 style="margin-top: 0;">Please review and edit your patient profiles as needed.</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var thisProfile in @Model)
+        {
+            <div class="col-md-6">
+                <div class="pet-profile-list-item">
+                    <div class="pet-name">
+                        @thisProfile.PatientProfileFirstName
+                    </div>
+                    <div class="pet-details">
+                        Sex: @thisProfile.PatientProfileSex<br>
+                        Date of Birth: @thisProfile.PatientProfileBirthDate.ToString("dd-MMM-yy")<br>
+                        Weight: @thisProfile.PatientProfileWeightLb lbs<br>
+                        Allergies: @thisProfile.PatientProfileAllergy<br>
+                        Medical History: @thisProfile.PatientProfileMedicalHistory<br>
+                    </div>
+
+                    @Html.ActionLink("Edit Patient Profile", "EditProfile", "Customer", new { patientProfileId = thisProfile.PatientProfileId, returnUrl = "patient-profile" }, new { @class = "btn btn-primary btn-small" })
+
+                    @Html.ActionLink("Delete", "delProfile", "Customer", new { patientProfileId = thisProfile.PatientProfileId , returnUrl = "myaccount"}, new { @class = "btn btn-danger btn-small" , onclick = "return confirm('Are you sure you wish to delete this profile?');" })
+                    
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="checkout-continue-btns text-center">
+                @Html.ActionLink("Add New Patient Profile", "AddProfile", "Customer", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+
+</div>       
+
+} 

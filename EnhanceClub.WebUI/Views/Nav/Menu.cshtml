@@ -1,0 +1,53 @@
+﻿
+
+@using EnhanceClub.Domain.Entities
+@model IEnumerable<MenuItem>
+
+
+<div class="header-nav">
+    <div class="container">
+        <div class="row">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#header-nav-collapse-1">
+                Menu <i class="fa fa-bars" style="margin-left:5px; font-size:18px;"></i>
+            </button>
+            @*<div class="collapse navbar-collapse" id="header-nav-collapse-1">*@
+            
+            <div class="navbar-collapse collapse" id="header-nav-collapse-1" style="height: auto">
+                <ul class="nav nav-justified">
+                    @foreach (var link in Model)
+                    {
+                        MenuItem menuItemObj = (MenuItem)link;
+
+                        <li>
+
+                            @*@Html.RouteLink( menuItemObj.LinkText , new {controller=menuItemObj.LinkController, action= menuItemObj.LinkAction} )*@
+
+                            @*<a href=@menuItemObj.LinkAction>
+                               <p>@Html.Raw(menuItemObj.LinkText)</p>
+                            </a>*@
+
+                            @*Here new { searchLetter =""} is passed to clear search letter, otherwise after searching a letter , top menu click always includes that letter in url*@
+                            @if (menuItemObj.ResetParam)
+                            {
+                                <a href="@Url.Action(menuItemObj.LinkAction,menuItemObj.LinkController,new {searchLetter =""})">
+
+                                    <p>@Html.Raw(menuItemObj.LinkText)</p>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action(menuItemObj.LinkAction,menuItemObj.LinkController,null)">
+
+                                    <p>@Html.Raw(menuItemObj.LinkText)</p>
+                                </a>
+                            }
+
+                            
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

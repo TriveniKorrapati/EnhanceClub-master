@@ -1,0 +1,119 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.CheckoutViewModel
+
+<div class="sticky">
+    <div class="order-summary mb-4">
+        <div class="row mt-3">
+            <div class="col-12">
+                <h6 class="mb-4">Order Summary</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p>Sub Total</p>
+            </div>
+            <div class="col-6 text-right">
+                <p>@Model.Cart.ComputeCartTotalValue().ToString("c")</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <p>Shipping</p>
+            </div>
+            <div class="col-6 text-right">
+                <p>@(Model.Cart.ShippingPrice == 0 ? "FREE" : @Model.Cart.ShippingPrice.ToString("c"))</p>
+            </div>
+        </div>
+        <hr class="white mt-0">
+        @if (SiteConfigurationsWc.EnableTax && @Model.Cart.CartOtcProductsAmount > 0)
+        {
+            if (@Model.Cart.HSTPercentage > 0)
+            {
+                <div class="row">
+                    <div class="col-6">
+                        <p>HST (@Model.Cart.HSTPercentage.ToString("0.00")%)</p>
+                    </div>
+                    <div class="col-6 text-right">
+                        <p>@Model.Cart.CartHSTTaxAmount.ToString("c")</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                if (@Model.Cart.ProvincialTaxPercentage > 0)
+                {
+                    <div class="row">
+                        <div class="col-6">
+                            @if (Model.CustomerInfo.CustomerProvinceId == 354)
+                            {
+                                <p>QST (@Model.Cart.ProvincialTaxPercentage.ToString("0.00")%)</p>
+                            }
+                            else
+                            {
+                                <p>PST (@Model.Cart.ProvincialTaxPercentage.ToString("0.00")%)</p>
+                            }
+                        </div>
+                        <div class="col-6 text-right">
+                            <p>@Model.Cart.CartProvincialTaxAmount.ToString("c")</p>
+                        </div>
+                    </div>
+                }
+            }
+            if (@Model.Cart.GlobalTaxPercentage > 0)
+            {
+                <div class="row">
+                    <div class="col-6">
+                        <p>GST (@Model.Cart.GlobalTaxPercentage.ToString("0.00")%)</p>
+                    </div>
+                    <div class="col-6 text-right">
+                        <p>@Model.Cart.CartGlobalTaxAmount.ToString("c")</p>
+                    </div>
+                </div>
+            }
+        }
+        @*---Check For Coupon Applied ---*@
+        @if (@Model.Cart.CouponCode != null)
+        {
+            if (@Model.Cart.CouponAmount != 0)
+            {
+                <div class="row highlight">
+                    <div class="col-6">
+                        <p>Discount</p>
+                    </div>
+                    <div class="col-6 text-right">
+                        <p>-@Model.Cart.CouponAmount.ToString("c")</p>
+                    </div>
+                </div>
+            }
+        }
+        @if (Model.Cart.CreditApplied > 0)
+        {
+            <div class="row highlight">
+                <div class="col-6">
+                    <p>Credit</p>
+                </div>
+                <div class="col-6 text-right">
+                    <p>-@Model.Cart.CreditApplied.ToString("c")</p>
+                </div>
+            </div>
+        }
+        <div class="row total mb-3">
+            <div class="col-6">
+                <h6>Total</h6>
+            </div>
+            <div class="col-6 text-right">
+                <h6>@Model.Cart.CartNetTotal.ToString("c")</h6>
+            </div>
+        </div>
+        <div class="row align-items-center d-xl-none mb-3">
+            <div class="col-12 col-md-6 form-group text-center text-xl-right mb-0">
+                <button type="submit" formaction="/order/ordercreate" id="submit-order" formmethod="post" class="btn btn-default bg-green">Get It Now</button>
+            </div>
+            <div class="col-12 col-md-6 text-center text-md-left">
+                <p class="notify">This is a preauthorization. You will be charged once your order has been approved by the pharmacy and the @SiteConfigurationsWc.TermForPractitioner</p>
+            </div>
+        </div>
+    </div>
+
+    @Html.Partial("_checkoutPageBadge")
+</div>

@@ -1,0 +1,156 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.OrderConfirmViewModel
+
+@if (@Model.Cart.CartItems.Any())
+{
+    @Html.Hidden("salestotal", Model.Cart.CartNetTotal, new { @id = "salestotal" })
+    @Html.Hidden("urlaction", Utility.UrlControllerAction())
+
+    // value is saved here so that it is available to javascript code at the end of page as we clear cart, otherwise it will no be available to javascript code
+    var cartTotal = Model.Cart.CartNetTotal;
+    var orderCreated = @Model.OrderId;
+
+    <div class="container container-standard">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Success:</h2>
+                <p>
+                    Your order has successfully been created. Thank you for your order.<br><br>
+
+                    Your Order Invoice Number is <i><b>@Model.OrderId</b></i>.
+                    <br />
+                    Standard shipping is @SiteConfigurationsWc.ShippingtimeFrame.
+                    <br />
+                    <br />
+                    Be sure to watch your mailbox for important e-mail confirmation from us.
+                    <br />
+
+                    @if (Model.Cart.CartHasRxProducts())
+                    {
+                        <br />
+                        <b><font size=2 face="arial" color="red">Please remember to fax your prescription to us. </font></b>
+                        <br />
+                        <b>If this is a refill order, please do not send in additional documents.</b>
+                        <br />
+                        <br>
+                        <text> Our FAX: <b>@Model.StoreFrontFax</b></text>
+                        <br />
+                        <br />
+                    }
+
+                    <br /><br />
+
+                    To continue shopping @Html.ActionLink("click here", "Index", "Home")
+
+                    <br /><br />
+
+                    @if (System.Configuration.ConfigurationManager.AppSettings["Environment"].ToLower() == "live")
+                    {
+                        @section MyScripts
+                            {
+
+                            <script type="text/javascript">
+                                var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+                                document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+                            </script>
+
+
+
+                            <script type="text/javascript">
+                try {
+                    var pageTracker = _gat._getTracker("UA-90139333-1");
+                    pageTracker._trackPageview();
+                    pageTracker._addTrans(
+                        "Model.OrderId", // order ID - required
+                        "EnhanceClub", // affiliation or store name
+                        "@(Model.OrderTotal)", // total - required
+                        "0", // tax
+                        "@(Model.ShippingPrice)", // shipping
+                        "@(Model.CustomerInfo.CustomerCity)", // city
+                        "@(Model.CustomerInfo.BillingProvinceName)", // state or province
+                        "@(Model.CustomerInfo.BillingCountryName)" // country
+                    );
+
+
+                    // add item might be called for every item in the shopping cart
+                    // where your ecommerce engine loops through each item in the cart and
+                    // prints out _addItem for each
+
+                    @if (@Model.ProductList != null)
+                    {
+                        foreach (var cartItem in @Model.ProductList)
+                        {
+                            <text>pageTracker._addItem(
+                        "@Model.OrderId", // order ID - necessary to associate item with transaction
+                        "@cartItem.ProductCart.ProductSizeId", // SKU/code - required
+                        "@cartItem.ProductCart.ProductSafeUrlName", // product name
+                        "@cartItem.ProductCart.ProductSizeStrength @cartItem.ProductCart.ProductSizeQuantity", // category or variation
+                        "@cartItem.ProductCart.ProductSizeStoreFrontPrice", // unit price - required
+                        "@cartItem.Quantity" // quantity - required
+                    );</text>
+                        }
+                    }
+
+
+                    pageTracker._trackTrans(); //submits transaction to the Analytics servers
+                } catch (err) {
+                }
+                            </script>
+
+                            <script>
+
+                                var dataLayer = window.dataLayer || [];
+                                var cntr = 1;
+
+                                dataLayer.push({
+
+                                    'event': 'transaction.complete',
+                                    'ecommerce': {
+                                        'purchase': {
+                                            'actionField': {
+                                                'id': '@Model.OrderId',                         // Transaction ID. Required for purchases and refunds.
+                                                'affiliation': 'Online Store',
+                                                'revenue': @Model.OrderTotal,                     // Total transaction value (incl. tax and shipping)
+                                                'tax': '4.90',
+                                                'shipping': @Model.ShippingPrice,
+                                                'coupon': 'SUMMER_SALE'
+                                            },
+                                            'products': [
+                                                @foreach (var cartItem in Model.ProductList)
+                                            {
+                                                <text>
+                                                {​​​​​​​​                            // List of productFieldObjects.
+                                                    'name': '@cartItem.ProductName',     // Name or ID is required.
+                                                    'id': '@cartItem.ProductId',
+                                                    'price': @cartItem.CartItemPrice,
+                                                    'brand':  'Google',
+                                                    'category': 'Apparel',
+                                                    'variant': 'Gray',
+                                                    'quantity': @cartItem.CartItemQuantity,
+                                                    'coupon': 'WPE2020'                            // Optional fields may be omitted or set to empty string.
+                                                }
+                                                </text>
+                                                 if (cntr < @Model.ProductList.Count())
+                                                {
+                                                    <text>,</text>
+                                                }
+                                                cntr++;
+                                            }]
+                                        }
+                                    }
+                                });</script>
+
+                        }
+                    }
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    // clear cart contents
+    Model.Cart.Clear();
+    HttpContext.Current.Session["Cart"] = Model.Cart;
+
+}

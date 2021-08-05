@@ -1,0 +1,46 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Helpers
+@model IEnumerable<EnhanceClub.Domain.Entities.FeaturedProduct>
+
+            @foreach (var product in Model)
+{
+    FeaturedProduct featuredProductObj = (FeaturedProduct)product;
+
+
+    //string urlAction;
+
+    //if (System.Configuration.ConfigurationManager.AppSettings["Environment"] == "Live")
+    //{
+    //    urlAction = "https://" + HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;
+    //}
+    //else
+    //{
+
+    //    urlAction = "http://" + HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;
+    //}
+
+    // string urlAction = "http://" + HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;
+
+    <a href="@Url.Action("ProductDetail", "product", new { searchTerm = @featuredProductObj.ProductUrl })" role="button" class="btn btn-default btn-item">
+
+        <i class="fa fa-shopping-basket"></i>
+        @{
+    var maxLen = @featuredProductObj.FeaturedProductName.IndexOf("(", StringComparison.InvariantCulture);
+        }
+
+        @if (maxLen > 0)
+        {
+            if (@ViewBag.HideBuy == 0)
+            { <text> Buy </text>}
+            <text>    @CommonFunctions.AddLineBreakByLength(featuredProductObj.FeaturedProductName.Substring(0, maxLen - 1), 20) </text>
+        }
+        else
+        {
+            if (@ViewBag.HideBuy == 0)
+            { <text> Buy </text>}
+            <text> @Html.Raw(CommonFunctions.AddLineBreakByLength(@featuredProductObj.FeaturedProductName, 20)) </text>
+        }
+    </a>
+}
+     

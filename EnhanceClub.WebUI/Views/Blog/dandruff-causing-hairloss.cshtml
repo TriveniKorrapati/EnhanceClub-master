@@ -1,0 +1,146 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+                                <p>
+                                    When it comes to concerns guys have with their heads, what’s on top of their mind most is probably going bald.
+                                    But there is another condition that is just as common and could be a sign of something more than dry skin, dandruff.
+                                    While you’re likely not thinking much about dandruff, if you have it, guaranteed those around you certainly are.
+                                    And it is more than just a cosmetic issue if you’re wondering if dandruff can cause hair loss.
+                                    Because when it comes to issues with dandruff and thinning hair,
+                                    we’re going to do more than just scratch the surface on what it means for hair loss and if regrowth is even possible?
+                                </p>
+                                <h5>
+                                    WHAT IS IT?
+                                </h5>
+                                <p>
+                                    Dandruff, in simple term, is when the scalps since dries out, for various reasons, and begins to flake off.
+                                    (That’s what those little specs are that gather on shoulders and collars.)
+                                    Dry skin can be caused by all sorts of simple reasons from seasonal weather changes to what’s in your shower.
+                                    The dandruff is the result of your skin being irritated.
+                                    Often for simple reasons that can be easily solved, usually with simple products from the drug store. But not always.
+                                </p>
+                                <p>
+                                    Sometimes the most serious case of dandruff is related to a medical
+                                    <a href="https://www.mayoclinic.org/diseases-conditions/seborrheic-dermatitis/symptoms-causes/syc-20352710">condition</a> called, seborrheic dermatitis.
+                                    It’s an inflammatory reaction that causes an itchy rash with flaky scales on the scalp.
+                                    Often this can be treated with special medicated shampoos to help relieve the condition when severe enough.
+                                    While the dandruff doesn’t directly cause thinning hair, how you react to it can cause thinning hair and hair loss.
+                                </p>
+                                <h5>
+                                    DANDRUFF AND THINNING HAIR
+                                </h5>
+
+                                <p>
+                                    As you scratch your scalp to relieve the burning itch of your inflamed skin, you can do a lot of damage to the hair follicles in your head.
+                                    Those are the little openings where each hair grows out of. As you drag your nails back and forth, these get damaged, sometimes beyond repair.
+                                    Eventually, it can cause thinning hair and even hair loss.
+                                </p>
+                                <p>
+                                    While scalp treatments are possible (and often expensive with limited results) – once the follicles are wrecked causing hair loss, regrowth rarely occurs naturally.
+                                    Treatments like using <a href="@Url.Action("productdetail","product", new { searchTerm = "propecia" })">THICK</a> (Finasteride) can help assist the body in regrowing the thinning hair.
+                                    However, once the person stops using it, the regrown hair on their head soon becomes thinning hair before it stops growing back altogether.
+                                    However, if the hair follicles are too badly damaged, the hair will struggle to regrown at all. Regardless of the treatments used.
+                                </p>
+
+                                <div class="cta-box mb-3">
+                                    <div class="cta-image">
+                                        <img src="/content/images/products/product-item-generic-13414.png" alt="">
+                                    </div>
+                                    <div class="cta-text green">
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+                                        <a href="@Url.Action("productdetail","product", new { searchTerm = "propecia"})" class="btn btn__secondary btn--rounded ">Visit our online store</a>
+                                    </div>
+                                </div>
+                                <h5>
+                                    HAIR TREATMENT MATTERS
+                                </h5>
+                                <p>
+                                    Gone are the pioneer days of 3 ingredient soaps that was used to wash all your clothes, dishes and even you.
+                                    Today’s hair products for men are more complex, have more industrial chemicals and leave residues that can be hard to wash away. Many of these can cause dandruff and thinning hair because how they body reacts to them and how often they are used. Depending on what you put on your scalp, the chemicals, lotions, and binding agents they contain build up on your hair and scalp.
+                                    Over time, it can irritate the skin. As you scratch away the dandruff on your scalp, you’re still damaging the hair follicles.
+                                </p>
+                                <p>
+                                    When shampoos, conditioners and colour treatments slowly accumulate on your skin and over your pores, it makes it harder for the hair to push through.
+                                    The ingredients can even react negatively to some people's skin. Other times your body’s natural oils can clog up hair follicles if not washed away.
+                                    Over time, this can cause thinning hair and hair loss.
+                                    However, too many hair treatments, colourings and heavy products can also damage hair beyond repair.
+                                </p>
+                                <h5>BORN THIS WAY </h5>
+                                <p>
+                                    Some people are genetically predisposed to have dry, itchy skin, which can cause dandruff. Even without any chemical residues or dermatitis on the scalp.
+                                    But after a lifetime of scratching away hair follicles, this kind of simple dandruff can still cause hair loss.
+                                    Other times the genetics may not cause any dandruff at all but will still lead to premature thinning hair and major hair loss.
+                                </p>
+                                <p>
+                                    If things like male pattern baldness runs in the family, dandruff or not, chances are you’ll have it too.
+                                    Just look around at all your relatives. But the problem can still be made worse, or accelerated, by how you treat your head.
+                                </p>
+                                <h5>
+                                    DON’T FLAKE ON TREATING IT
+                                </h5>
+                                <p>
+                                    Dandruff can be embarrassing, irritating and unsightly.
+                                    But it also very treatable.
+                                    However, if ignored, it is not a question of can dandruff cause hair loss, but why thinning hair could be linked to dandruff.
+                                    From your genes to how you get clean, there are many factors that cause dandruff and hair loss. And they’re not always connected.
+                                    But understanding the links between them, and why treating one condition means treating them both is how to stay ahead of hair loss.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

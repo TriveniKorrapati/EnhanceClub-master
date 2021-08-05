@@ -1,0 +1,34 @@
+﻿
+@model string
+
+    <ul class="nav navbar-default navbar-more-info">
+
+    <li>
+        @Html.ActionLink("About Us", "about-us", "Home", null, new {@class = @Model == "about-us" ? "selected" : ""})
+    </li>
+
+    <li>
+        @Html.ActionLink("Customer Care Policy", "customer-care-policy", "Home", null, new { @class = @Model == "customer-care-policy" ? "selected" : "" })
+    </li>
+
+    <li>
+        @Html.ActionLink("Referral Program", "referafriend", "Home", null, new { @class = @Model == "referafriend" ? "selected" : "" })
+    </li>
+
+    <li>
+        @Html.ActionLink("Shipping", "shipping", "Home", null, new { @class = @Model == "shipping" ? "selected" : "" })
+    </li>
+
+    <li>
+        @Html.ActionLink("Price Match Guarantee", "price-match-guarantee", "Home", null, new { @class = @Model == "price-match-guarantee" ? "selected" : "" })
+    </li>
+
+    <li>
+        @Html.ActionLink("Privacy Policy", "Privacy", "Home", null, new { @class = @Model == "privacy" ? "selected" : "" })
+    </li>
+
+    @*<li>
+        @Html.ActionLink("Blog", "Index", "Blog", null, new { @class = @Model == "blog" ? "selected" : "" })
+    </li>*@
+
+</ul>

@@ -1,0 +1,201 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.ProductDetailViewModel
+
+@section MyScripts
+{
+    <script type="text/javascript">
+        $("#enquiry-sign-up").click(function (e) {            
+            e.preventDefault();
+            var enquiryEmail = $("#enquiry-email").val();
+            var prodId = $("#productId").val();
+            var dataCollect = $("#dataCollect").val();
+
+            if (enquiryEmail == "")
+                alert("Please enter email address.");
+
+            else {
+                $.ajax({
+                    url: '/product/productenquiry',
+                    contentType: "application/json",
+                    async: true,
+                    data: JSON.stringify({ productId: prodId, email: enquiryEmail, brandGeneric: 0, dataCollect: dataCollect }),
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.enquiryId > 0) {
+                            $("#enquiry-message").text("We have saved your request!");
+                            $("#enquiry-message-p").text("You will be notified once the product is available.");
+                            $("#enquiry-email").val("");
+                        }
+                        else if (data.message == "invalid email") {
+                            alert("Please enter a valid email address.");
+                        }
+                        else {
+                            alert("Error occured while processing your request.");
+                        }
+                    },
+                    error: function (response) {
+                        alert("Error occured while processing your request.");
+                    }
+                });
+            }
+
+        });
+    </script>
+}
+@*@Html.Partial("ProductStructureData", new ProductStructureViewModel { PageUrl = @Request.Url != null ?  Request.Url.AbsoluteUri : String.Empty, 
+    MainImageUrl = "img",
+    ProductName = @Model.ProductName,
+    ProductId = Model.ProductId.ToString(),
+    ProductDescription = Model.ProductDescription,
+    LowPrice = Model.ProductSizeList.OrderBy(x=>x.ProductSizePrice).Select(x=>x.ProductSizePrice).FirstOrDefault(),
+    HighPrice = Model.ProductSizeList.OrderByDescending(x => x.ProductSizePrice).Select(x => x.ProductSizePrice).FirstOrDefault(),
+    ProductType = Model.ProductTypeFk,
+    PetProduct = Model.PetProduct,
+    BrandProductCount = Model.ProductSizeList.Count(x => x.ProductSizeGeneric == false),
+    GenericProductCount = Model.ProductSizeList.Count(x => x.ProductSizeGeneric),
+    RelatedProducts = Model.RelatedProducts
+})*@
+
+@Html.Partial("DrugStructureData", new DrugStructureViewModel
+{
+    DosageForm = @Model.ProductSearch.ProductUnits,
+    ProductTypeFk = @Model.ProductSearch.ProductTypeFk,
+    ManufacturerNamePk = Model.ProductSearch.ManufacturerNamePk,
+    ProductName = @Model.ProductSearch.ProductName,
+    ProductCautions = @Model.ProductSearch.ProductCautions
+})
+
+@*Commented as Per Amir on 20 Mar 2020*@
+@*@Html.Partial("ProductStructureDataJson", new ProductStructureViewModel
+{
+    PageUrl = @Request.Url != null ? Request.Url.AbsoluteUri : String.Empty,
+    MainImageUrl = "img",
+    ProductName = @Model.ProductName,
+    ProductId = Model.ProductId.ToString(),
+    ProductDescription = Model.ProductDescription,
+    LowPrice =  Model.ProductSizeList.OrderBy(x => x.ProductSizePrice).Select(x => x.ProductSizePrice).FirstOrDefault(),
+    HighPrice = Model.ProductSizeList.OrderByDescending(x => x.ProductSizePrice).Select(x => x.ProductSizePrice).FirstOrDefault(),
+    ProductType = Model.ProductTypeFk,
+    PetProduct = Model.PetProduct,
+    BrandProductCount = Model.ProductSizeList.Count(x => x.ProductSizeGeneric == false),
+    GenericProductCount = Model.ProductSizeList.Count(x => x.ProductSizeGeneric),
+    RelatedProducts = Model.RelatedProducts
+})*@
+
+@* foreach is just so that I can mix c# code with razor -- Rajiv*@
+
+@foreach (var i in "1")
+{
+    <div class="container container-standard">
+
+        <h1 style="word-wrap: break-word;">
+            @Model.ProductSearch.ProductStoreFrontRealName
+        </h1>
+
+                @if (@Model.ProductSearch.ProductTypeFk == 2)
+                {
+                    <div class="rx-container" style="margin-bottom:5px">
+                        <img src="~/content/images/rx.gif" alt="Prescription required">Only Available By Prescription
+                    </div>
+                }
+
+        @*  Norton Guarantee  *@
+        <div class="row">
+
+            <div class="col-md-12" style="margin-left: -15px">
+                <span id="_GUARANTEE_Kicker" name="_GUARANTEE_Kicker" type="Kicker Custom 4"></span>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                @*-- what-is-generic-popup --*@
+
+                <div id="what-is-generic-wrap">
+
+                    <div id="what-is-generic">
+                        <h5>What is a Generic Drug?</h5>
+                        <p>A generic drug is a copy of the brand-name drug with the same dosage, safety, strength, quality, consumption method, performance, and intended use. Before generics become available on the market, the generic company must prove it has the same active ingredients as the brand-name drug and works in the same way and in the same amount of time in the body.</p>
+                        <p>The only differences between generics and their brand-name counterparts is that generics are less expensive and may look slightly different (eg. different shape or color), as trademarks laws prevent a generic from looking exactly like the brand-name drug.</p>
+                        <p>Generics are less expensive because generic manufacturers don't have to invest large sums of money to develop a drug. When the brand-name patent expires, generic companies can manufacture a copy of the brand-name and sell it at a substantial discount.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>  @*---End:  row of what is generic--- *@
+        
+        @*---if no product size is available, show out of stock---*@
+                    @if (Model.ProductSearch.ProductDataCollect == true)
+            {
+                @Html.Hidden("productId", Model.ProductSearch.ProductId);
+                <div class="row main-padding-side">
+                    <div class="col-xs-12">
+                        <div class="row text-center">
+                            <div class="col-xs-12">
+                                <p>
+                                    <h2>
+                                       @Model.ProductSearch.ProductDataCollectMessage
+                                    </h2>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row card b-gray text-center middle-xs mb">
+                            <div class="col-xs-12 email-sign-up">
+                                @*<div class="product-logo mb">
+                                        <img src="http://www.placehold.it/200x80.jpg" />
+                                    </div>*@
+
+                                <h3 class="mn" id="enquiry-message">We will notify you as soon as it becomes available.</h3>
+                                <p id="enquiry-message-p">Please leave your email below.</p>
+                                <div class="form side">
+                                    @if (!string.IsNullOrEmpty(Model.CustomerEmail))
+                                    {
+                                        @Html.TextBox("enquiry-email", Model.CustomerEmail, new { placeholder = "Email Address", @id = "enquiry-email", @disabled = "disabled" });
+                                    }
+                                    else
+                                    {
+                                        @Html.TextBox("enquiry-email", Model.CustomerEmail, new { placeholder = "Email Address", @id = "enquiry-email" });
+                                    }
+                                    <a class="button btn btn-default" href="#" id="enquiry-sign-up">
+                                        Sign Up
+                                    </a>
+                                <input type="hidden" value="1" id="dataCollect" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        @*-- Drug Info --*@
+
+        @* -- the reason for using anonymous object is that I don't wan to pass full ProductSearch as it is a big object that we don't need ---*@
+
+        <div class="row med-desc">
+            
+            @Html.Partial("ProductDescription", new
+            {
+                Model.ProductSearch.ProductName,
+                Model.ProductSearch.ProductDirections,
+                Model.ProductSearch.ProductIngredients,
+                Model.ProductSearch.ProductSideEffects,
+                Model.ProductSearch.ProductCautions,
+                Model.ProductSearch.ProductDescription,
+                Model.ProductSearch.ProductStoreFrontDirections,
+                Model.ProductSearch.ProductStoreFrontIngredients,
+                Model.ProductSearch.ProductStoreFrontSideEffects,
+                Model.ProductSearch.ProductStoreFrontCautions,
+                Model.ProductSearch.ProductStoreFrontDescription
+            }.ToExpando())
+            
+
+        </div>
+    </div>
+}

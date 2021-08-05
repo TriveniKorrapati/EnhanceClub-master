@@ -1,0 +1,105 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="https://www.enhanceclub.com/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content=" https://www.enhanceclub.com/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="https://www.enhanceclub.com/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+
+                                <p>Who doesn’t love being a proud owner of all things thick? Unfortunately, for many men, this is not less than a distant dream when it comes to hair. Baldness is a word scary enough to send most men into panic mode. The thought of losing their beloved hair is probably as petrifying as going financially bankrupt. Unfortunately, baldness does not respond to an RSVP before showing up, so it might be a practical idea to start giving it more attention than not; chances are it has already arrived disguised as a seemingly harmless hair loss on the temples. </p>
+
+                                <h5>HAIR LOSS: WHY ME AND WHY NOW? </h5>
+                                <p>
+                                    Male-pattern baldness, a.k.a. <a href="https://medlineplus.gov/genetics/condition/androgenetic-alopecia/">Androgenetic alopecia</a>, one of the most common causes of a receding hairline, isn’t an overnight occurrence. It entails a gradual increase in the severity of hair loss or hair thinning over a period of time, which could be years or decades. Hair loss at the temples is the first stage. When on a random afternoon, the classic M-shaped hairline shows itself in the mirror, you can assume that the decline in your hair growth has already begun for quite some time. This is caused by an imbalance of DHT, or dihydrotestosterone – the primary hormone responsible for causing male-pattern baldness. DHT affects your hair follicles and restricts the growth of new hair which results is thinning hair, a receding hairline, or almost total baldness in some cases.
+
+                                    <br><br>Apart from genetic influences, several factors affect hair loss in men:
+
+                                    <ul>
+                                        <li>Medication side effects</li>
+                                        <li>Stress</li>
+                                        <li>Hormonal imbalance  </li>
+                                        <li>Smoking </li>
+                                        <li>Deficiency of vitamins and protein </li>
+                                        <li>Hairstyles that leave the hair pulled back for a longer time </li>
+                                        <li>Styling products loaded with chemicals, plus styling tools </li>
+                                    </ul>
+                                </p>
+                                <h5>CAN IT BE TREATED? </h5>
+                                <p>Hair loss becomes more challenging to treat as it amplifies in severity, so you should be doing something about it before it’s too late. Most available treatments and solutions can assist you in slowing down the process of <a href="https://www.aad.org/public/diseases/hair-loss/insider/shedding/">shedding</a>, if not preventing it altogether. It is always advisable to consult a medical professional before beginning the course for any medication. Telehealth platforms like <a href="https://www.enhanceclub.com/">Enhance Club</a> can provide personalized treatment plans. </p>
+
+                                <div class="cta-box mb-3">
+                                    <div class="cta-image">
+                                        <img src="/content/images/products/product-item-generic-13414.png" alt="">
+                                    </div>
+                                    <div class="cta-text green">
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+                                        <a href="/products/propecia" class="btn btn__secondary btn--rounded ">Visit our online store</a>
+                                    </div>
+                                </div>
+
+                                <h5>TREATMENT FOR HAIR LOSS</h5>
+                                <p>Drugs for hair loss work by balancing the DHT hormone. Finasteride (Generic Propecia) is a prescription drug pill tablet, usually taken at the same time as part of a normal daily routine. It could take up to 3 months before you start seeing the benefits. It is recommended to continue the medication for a year before deciding if it is doing its best for you. Finasteride is also often taken in combination with Minoxidil. Discontinuation of the drug can cause hair loss to return. </p>
+
+                                <h5>NON- MEDICAL SOLUTIONS</h5>
+                                <p>
+                                    While getting medication prescribed for your condition should be the first resort, some behavioral treatments should be effectively administered to enhance the results. Start by keeping your hands off your hair. As tempting as it may seem, constantly touching, twisting, or fidgeting with hair should be avoided. Another no-brainer is to skip styling tools like hot ironing curl or blower. Styling creams, gels, or sprays, with heavy chemicals showing up on the ingredient list, aren’t good ideas either. Kick stress out of your life if you want healthy hair. Consume a hearty amount of food that’s high in protein and Omega-3 fatty acids.
+                                    Follow these lifestyle tweaks, and along with the proper <a href="https://www.enhanceclub.com/products/propecia">treatment</a>, you can enjoy things just as you like - Thick.
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

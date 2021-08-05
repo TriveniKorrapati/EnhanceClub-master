@@ -1,0 +1,29 @@
+﻿@model EnhanceClub.Domain.Entities.CustomerSignUp
+
+<div class="row" id="phone-authentication">
+    <div class="col-md-6 mb-md-0">
+        <div class="form-group">
+            @Html.TextBox("CognitoSignupPhoneVerificationCode", @Model.CognitoSignupPhoneVerificationCode,
+           new { @class = "verification phone", required = "required", @placeholder = "Verification Code (6 digits)",
+           Name = "CognitoSignupPhoneVerificationCode",
+           maxlength = 6})
+        </div>
+    </div>
+    <div class="col-md-6">
+        <p class="mb-3 mb-md-0">
+            Haven't received it yet?
+            <a class="" id="resend-mfa" style="text-decoration: underline;" href="#">Resend Code</a>
+        </p>
+    </div>
+
+
+    <div class="col-md-12">
+        <div class="form-group align-content-center">
+            <div class="mobile-pb-15 mb-5">
+                <button class="btn btn--rounded mb-2 mb-md-0" type="button" id="verifyPhoneAccessCode">Confirm</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+

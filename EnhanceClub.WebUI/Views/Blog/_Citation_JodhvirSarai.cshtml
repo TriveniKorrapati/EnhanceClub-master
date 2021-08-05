@@ -1,0 +1,30 @@
+﻿<aside>
+    <div class="authorBox">
+
+        <div class="d-flex align-items-center mb-4">
+            <div class="author-image mr-3">
+                <img src=" https://www.enhanceclub.com/Content/images/home-page/dr-jodhvir-sarai.png" alt="Dr. Jodhvir Sarai" class="blog-content-imagecomponent___StyledImg-ncacvf-0">
+            </div>
+            <div class="author-details">
+                <p>
+                    <b>
+                        Medically reviewed by <span class="highlight"> Jodhvir Sarai, MD</span><br>
+                        Written by our Editorial Team<br>
+                        Last updated
+                        @if (ViewBag.BlogLastModified != null)
+                        {
+                            @ViewBag.BlogLastModified.ToString("dd MMMM yyyy")<br>
+                        }
+                        Published
+                        @if (ViewBag.BlogDateCreated != null)
+                        {
+                            @ViewBag.BlogDateCreated.ToString("dd MMMM yyyy")
+                        }
+                    </b>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</aside>

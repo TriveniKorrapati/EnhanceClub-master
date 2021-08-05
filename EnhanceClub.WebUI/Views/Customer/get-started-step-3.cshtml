@@ -1,0 +1,57 @@
+﻿@model EnhanceClub.Domain.Entities.CustomerSignUp
+
+@section PageScripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            if (parseInt(($(".ld-module-trigger-count").html())) > 0) {
+                $('#btnshop').hide();
+                $('#btncheckout').show();
+
+            }
+            else {
+                $('#btncheckout').hide();
+                $('#btnshop').show();
+            }
+
+        });
+
+    </script>
+}
+
+<div class="get-started-section started-main">
+    <div class="get-started-banner1"></div>
+    <div class="person-image">
+        <img src="/content/images/hipster-grandpa-3.png" alt="Get Started">
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                <h2>Thanks!</h2>
+
+
+
+                <h4>Thanks for signing up. Click on the link below to continue with your process.</h4>
+
+
+                <div class="form-container">
+                    <div class="col-md-12">
+                        <div class="form-group align-content-center">
+                            <div class="mobile-pb-15 mb-5">
+                                @*<button class="btn btn--rounded mb-2 mb-md-0" type="button" name="submitform" id="submitform"></button>*@
+                                <a class="btn btn--rounded" id="place-order" href="@Url.Action("products","product")">
+                                    Next Step
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

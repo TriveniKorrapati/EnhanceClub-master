@@ -1,0 +1,390 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+
+@using EnhanceClub.WebUI.Models
+
+
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="https://www.enhanceclub.com/blog/@Model.BlogLink" />
+
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+
+            <meta itemprop="url" content=" https://www.enhanceclub.com/content/images/logo-active.svg">
+
+            <meta itemprop="width" content="800">
+
+            <meta itemprop="height" content="60">
+
+        </div>
+
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+
+
+    </div>
+
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+
+        <meta itemprop="url" content="https://www.enhanceclub.com/content/images/@Model.BlogMainImage" />
+
+        <meta itemprop="height" content="120">
+
+        <meta itemprop="width" content="120">
+
+    </div>
+
+    <div class="blog-post">
+
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+
+        </div>
+
+        <div class="post-main-section">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <div class="post-content-section">
+
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+
+
+
+                            <ul class="breadcrumbs">
+
+                                <li>
+
+
+
+
+
+
+
+                                    <a href="/" title="Home">Home</a>
+
+
+
+
+
+                                    <a href="/blog" title="Blog">Blog</a>
+
+
+
+
+
+                                    "@Model.BlogMetaTitle”
+
+
+
+
+
+                                </li>
+
+                            </ul>
+
+
+
+                            <script type="application/ld+json">
+
+                                {
+
+                                "@@context": "https://schema.org",
+
+                                "@@type": "BreadcrumbList",
+
+                                "itemListElement": [{
+
+                                "@@type": "ListItem",
+
+                                "position": 1,
+
+                                "name": "Home",
+
+                                "item": "https://www.enhanceclub.com"
+
+                                },{
+
+                                "@@type": "ListItem",
+
+                                "position": 2,
+
+                                "name": "Blog",
+
+                                "item": "https://www.enhanceclub.com/blog"
+
+                                },{
+
+                                "@@type": "ListItem",
+
+                                "position": 3,
+
+                                "name": "@@Model.BlogMetaTitle "
+
+                                }]
+
+                                }
+
+                            </script>
+
+
+
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+
+                            <div itemprop="articlebody">
+
+
+
+                                <p>Men in their 20s should be jumping with both feet into every sexual adventure out there and not be worrying about whether they’ll lose the bat when it’s game time. It’s an age when men are armed with high energy levels and an equal burst of <a href="https://www.webmd.com/sex-relationships/ss/slideshow-sex-drive-changes-age">testosterone</a>, so naturally, sex life is meant to go through the ceiling both in terms of quantity and quality. However, for a percentage of men who face Erectile Dysfunction (yes, ED can affect young men … while most common in older men, it also affects younger men in their 20s, 30s, and 40s.), things don’t always look up like they should. </p>
+
+
+
+
+
+
+
+                                <h5>WHAT IS ED, a.k.a. ERECTILE DYSFUNCTION?  </h5>
+
+
+
+                                <p>
+                                    If you face one or more of the following: 
+                                </p>
+                                    
+                                <ul style="font-family:Muli;font-size:18px;color:#7c7c7c">
+                                    
+
+
+                                    <li>
+
+                                        Unable to get an erection at all 
+                                    </li>
+
+
+                                    <li>
+                                        Failure to get an erection sometimes     
+                                    </li>
+
+
+                                    <li>
+                                        Partial or short-lived erection 
+
+                                    </li>
+
+                                    <li>
+                                        Not enough erection to enjoy a satisfactory or fulfilling sex 
+                                    </li>
+                                   
+                                </ul>
+
+                                
+                                <p>
+                                    you’re experiencing symptoms of ED. ED is a condition that affects erections in sexually active men. This occurs when the penis does not receive enough blood to achieve or maintain an erection during sex, even when sexually aroused. The reasons could be several, including physical and emotional.  
+                                </p>
+
+
+
+
+
+
+
+                                <h5> IS IT THE OCCURRENCE OF ED IN YOUNG MEN NORMAL? </h5>
+
+
+
+
+
+
+
+                                <p> <a href="https://www.niddk.nih.gov/health-information/urologic-diseases/erectile-dysfunction/definition-facts">Thirty million men</a> in the United States alone suffer from ED. While it is not common, researchers suggest that more men in their younger years face ED than perceived. 26% of adult men under 40 are affected by ED, half of them with cases higher in severity. A primary factor attributed to this is that younger men are more likely to indulge in smoking, drugs, and alcohol. Facing ED at any age is not desirable but being affected by erectile dysfunction in 20s adds to the frustration. On top of an unfulfilled sex life, men with ED also face complications such as failed relationships, due to intimacy loss or inability to conceive, depression, anxiety, and a severe loss of self-esteem and self-worth.  </p>
+
+
+
+                                <div class="cta-box mb-3">
+
+                                    <div class="cta-image">
+
+                                        <img src="/content/images/products/product-item-generic-13412.png" alt="">
+
+                                    </div>
+
+                                    <div class="cta-text">
+
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+
+                                        <a href="/products" class="btn btn__secondary btn--rounded ">Visit our online store</a>
+
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                                <h5> WHAT ARE THE CAUSES? </h5>
+
+
+
+
+
+
+
+                                <p> ED in young men can be a result of different <a href="@Url.Action("BlogSelector", "Blog", new { blogUrl = "common-causes-ED" })">factors</a> ranging from physical to psychological.
+
+
+
+
+
+
+
+                                <p>
+                                    <b>Stress</b>
+
+
+
+                                    <br>Sexual excitement starts in the brain and it is the brain where it stops too. Being stressed is a trigger strong enough to fade every iota of arousal in your head. Therefore, the brain will not be as effective in sending signals to your penis to increase the blood flow to give you an erection. You could be stressed about anything – job, money, relationships, self-image; all these events can contribute to sexual dysfunction.
+
+
+
+
+
+
+
+                                <p>
+                                    <b>Alcohol and drugs</b>
+
+
+
+                                    <br>Younger men are more likely to indulge in alcoholism and drug addiction. Both these intoxicants tamper with the brain's signals to send increased blood flow to the penis when sexually excited. This results in <a href="https://www2.hse.ie/wellbeing/alcohol/physical-health/alcohols-effect-on-the-body/sex-life-and-fertility.html">erectile dysfunction because of alcohol</a>. Increased lethargy, lack of human connection, and dependence on substances to function daily make the road to recovery less simple. 
+
+
+
+
+
+
+
+                                <p>
+                                    <b>Steroids</b>
+
+
+
+                                    <br>Performance enhancing drugs and steroids that promote muscle mass building or are consumed to tweak male traits, like voice and hair, can have a negative effect on sex life. In the long run, consuming these can shrink testicles, stimulate breast development, and cause infertility and erectile dysfunction even in your 20s. Other side effects include, but are not limited to, high blood pressure, acne, aggression, increased bad cholesterol, liver tumors, and depression. 
+
+
+
+
+
+
+
+                                <p>
+                                    <b>Physical causes </b>
+
+
+
+                                    <br>Younger men who suffer from high blood pressure, heart problems, diabetes, obesity, and hormonal disorders are at an increased risk of facing ED.    
+                                </p>
+
+
+
+
+
+
+
+                                <h5> IS ED IN YOUNG MEN TREATABLE? </h5>
+
+
+
+
+
+
+
+                                <p>
+                                    With ED, the benefits lie more in treating the cause than the dysfunction. You can easily get oral medication like the Generic Viagra prescribed for your condition; however, making certain lifestyle changes like quitting smoking, exercising more, working on your performance anxiety, and prioritizing your mental health are more beneficial in the long haul. 
+
+
+
+
+
+
+
+                                    <br><br>Treating ED with oral medication requires consultation with and procuring a prescription from a licensed medical professional. You can conveniently do this from the comfort of your home with telehealth platforms like Enhance Club.   
+
+
+
+
+
+
+
+                                    <br><br> Surgery, injections, Therapy, Vacuum constriction devices, Alprostadil are also some of the other treatments available for ED. A healthcare professional would be best at evaluating which option works best for your case especially if your concern is erectile dysfunction in your 20s.  
+                                </p>
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+
+                        <h2>@ViewBag.NextBlogTitle </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>  

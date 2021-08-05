@@ -1,0 +1,86 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.HomePageViewModel
+
+@{
+    var imageFolderPath = @SiteConfigurationsWc.ProductImagePath;    
+}
+
+<div class="product-container">
+    <div class="container">
+        <div class="row justify-content-between">
+            @foreach (var prod in Model.FeaturedProducts)
+            {
+                int productId = prod.FeaturedProductId;
+                var productClass = "red";
+                switch (productId)
+                {
+                    case 13412:
+                        productClass = "red";
+                        break;
+                    case 13413:
+                        productClass = "yellow";
+                        break;
+                    case 13424:
+                        productClass = "orange";
+                        break;
+                    case 13414:
+                        productClass = "green";
+                        break;
+                    default:
+                        break;
+                }
+                var imagePath = @imageFolderPath + "product-item-generic-" + @prod.FeaturedProductId + ".png";
+                <div class="intro-y col-6 col-lg-auto">
+                    <div class="product-column @productClass">
+                        <img src="@imagePath" alt="">
+                        <p class="h3 mb-0">@prod.FeaturedProductDisplayName</p>
+                        <p>
+                            @prod.ProductSearch.ProductGenericName
+                            <span>
+                                Generic @prod.ProductSearch.ProductName
+                            </span>
+                        </p>
+                        <a class="btn" href="@Url.Action("ProductDetail", "Product", new { searchTerm = @prod.ProductSearch.ProductStoreFrontSafeUrlName })">Shop Now</a>
+                    </div>
+                </div>
+            }
+            @*<div class="intro-y col-6 col-lg-auto">
+                    <div class="product-column">
+                        <img src="/Content/images/products/product-item-generic-13424.png" alt="">
+                        <p class="h3 mb-0">Rise</p>
+                        <p>
+                            Vardenafil
+                            <span>Generic Levitra</span>
+                        </p>
+                        <a class="btn" href="#">Shop Now</a>
+                    </div>
+                </div>
+                <div class="intro-y col-6 col-lg-auto">
+                    <div class="product-column">
+                        <img src="/Content/images/products/product-item-generic-13413.png" alt="">
+                        <p class="h3 mb-0">Play</p>
+                        <p>
+                            Tadalafil
+                            <span>Generic Cialis</span>
+                        </p>
+                        <a class="btn" href="#">Shop Now</a>
+                    </div>
+                </div>
+                <div class="intro-y col-6 col-lg-auto">
+                    <div class="product-column">
+                        <img src="/Content/images/products/product-item-generic-13414.png" alt="">
+                        <p class="h3 mb-0">Thick</p>
+                        <p>
+                            Finasteride
+                            <span>Generic Propecia</span>
+                        </p>
+                        <a class="btn" href="#">Shop Now</a>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+

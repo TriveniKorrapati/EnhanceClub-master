@@ -1,0 +1,102 @@
+﻿@using EnhanceClub.WebUI.Models
+
+@section PageScripts
+{
+    <script src="~/scripts/prescription-upload.js"></script>
+
+    <script type="text/javascript">
+        var fsFieldsContainer = $(".fs-fields");
+        var fsFieldsInit = $("#fs-fields-init");
+        if (fsFieldsInit.height() > fsFieldsContainer.height()) {
+            fsFieldsContainer.height(fsFieldsInit.height());
+        }
+    </script>
+
+   
+}
+
+<div class="container">
+    <div class="row">
+        @Html.Partial("UploadDocLeftMenu")
+        <div class="col-12 col-lg-9">
+            <div class="documents-section">
+                <div class="section" id="step1">
+                    <div id="get-in-touch-clip" class="clip"></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-container">
+                                    <div class="fs-form-wrap" id="fs-form-wrap">
+                                        @using (Html.BeginForm("upload-document-success", "Order", null, FormMethod.Post,
+                                                                        new
+                                                                        {
+                                                                            @class = "fs-form fs-form-full",
+                                                                            @role = "form",
+                                                                            @id = "frm_submitId",
+                                                                            @name = "frm_submitId",
+                                                                            @autocomplete = "off"
+                                                                        }))
+                                        {
+
+
+                                            @*<div class="overview-item">
+                                                    <h2 class="fs-field-label fs-anim-upper" for="q1">Review answers</h2>
+                                                </div>*@
+
+                                        <ol class="fs-fields">
+                                            @if (Model.PrescriptionImageFound)
+                                            {
+                                                @Html.Partial("IdAlreadyUploaded", new DocumentIdUploadViewModel
+                                               { CustomerDocumentList = Model.CustomerDocumentList, IdImageFound = Model.PrescriptionImageFound,
+                                                   IdImageName = Model.IdImageName, CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                   HavePrescription = true
+                                               })
+                                            }
+                                            else
+                                            {
+                                                @Html.Partial("UploadIDDoc",
+                                               new DocumentIdUploadViewModel
+                                               { OrderId = Model.OrderId,
+                                                   CustomerDocumentList = Model.CustomerDocumentList,
+                                                   CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                   HavePrescription = true
+                                               })
+                                            }
+                                            @if (Model.backIdImageFound)
+                                            {
+                                                @Html.Partial("IdAlreadyUploadedStep2", new DocumentIdUploadViewModel
+                                           {
+                                               CustomerDocumentList = Model.CustomerDocumentList,
+                                               IdImageFound = Model.backIdImageFound,
+                                               IdBackImageName = Model.IdBackImageName,
+                                               CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                               HavePrescription = true
+                                           })
+                                            }
+                                            else
+                                            {
+                                                @Html.Partial("UploadIDDocStep2",
+                                               new DocumentIdUploadViewModel
+                                               { OrderId = Model.OrderId,
+                                                   CustomerDocumentList = Model.CustomerDocumentList,
+                                                   CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                   HavePrescription = true
+                                               })
+
+                                            }
+                                            @Html.Partial("UploadPrescription", new PrescriptionUploadViewModel { OrderId = Model.OrderId, QuestionnaireCatId = Model.QuestionnaireCatId })
+                                        </ol>
+                                            @*<button class="fs-submit" id="fs-submit" type="submit">Submit answers</button>*@
+                                            <!-- /fs-form -->
+                                        }
+
+                                    </div><!-- /fs-form-wrap -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

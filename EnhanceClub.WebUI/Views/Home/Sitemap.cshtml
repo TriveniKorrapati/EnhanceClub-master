@@ -1,0 +1,228 @@
+﻿@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.Models
+@model EnhanceClub.Domain.Entities.AffiliateInfo
+
+   <h1>
+        Sitemap
+    </h1>
+    @*<div class="row">
+        <div class="col-md-3 search-product">
+            <p>
+                Search for a product:
+            </p>
+        </div>
+        <div class="col-md-6">
+            <div class="prescription-search">
+                @Html.Partial("ProductSearch", new SearchBarViewModel { SearchType = "all", SearchBarLocation = "inner" })
+            </div>
+        </div>
+    </div>*@
+<div class="row">
+    <div class="col-md-12">
+        <div class="prescription-search">
+            @Html.Partial("ProductSearch", new SearchBarViewModel { SearchType = "all", SearchBarLocation = "inner" })
+                  </div>
+    </div>
+</div>
+
+
+    
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    Website
+                </h3>
+               
+                <ul>
+                    <li> @Html.ActionLink("Home", "index", "Home")</li>
+                    <li> @Html.ActionLink("Prescription Products", "prescription", "Product")</li>
+                    <li> @Html.ActionLink("Non Prescription Products", "Otc", "Product")</li>
+                    @*<li> @Html.ActionLink("Pet Medications", "Pet", "Product")</li>*@
+                    <li> @Html.ActionLink("Drug Refills", "order-history", "myaccount") </li>
+                    <li> @Html.ActionLink("How To Order", "howtoorder", "Home") </li>
+                    <li> @Html.ActionLink("Frequently Asked Questions", "faq", "Home") </li>
+                    <li> @Html.ActionLink("Contact Us", "contact", "Home") </li>
+                    <li> @Html.ActionLink("Customer Login", "login", "Customer") </li>
+                    <li> @Html.ActionLink("Customer Signup", "signup", "Customer") </li>
+                    @*<li> @Html.ActionLink("Blog", "index", "Blog") </li>*@
+                </ul>
+            </div>
+        </div>
+@*comment pet & blog section temporarily 23 april 2020*@
+ 
+        @*<div class="row">
+            <div class="col-md-12">
+                <h3>
+                    Blog Posts
+                </h3>
+
+                <ul>
+                    <li>
+                        @Html.ActionLink("Answering the question of rising Abilify Prices",
+                                     "answering-rising-abilify-price",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Where to buy Premarin Cream Online",
+                            "where-to-buy-premarin-cream-online",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("How to Reverse Fatty Liver in 5 Steps ",
+                            "how-to-reverse-fatty-liver",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Where to buy Canadian Generic Cialis Online 2017",
+                            "generic-cialis-online",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("What Causes a Weak Immune System",
+                            "what-causes-a-weak-immune-system",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Periodontitis Stages: The Result of Poor Oral Hygiene",
+                            "periodontitis-stages",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Best Place to buy Canadian Viagra and more!",
+                            "best-place-to-buy-canadian-viagra",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("How to get through Withdrawal from Pain Pills",
+                            "pain-pills-withdrawal",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("How to Easily Prevent Dangerous Blood Clots in Legs ",
+                            "prevent-blood-clots-in-legs",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Can Osteopenia be Reversed?",
+                            "can-osteopenia-be-reversed",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("How Long Does it Take to Pass a Kidney Stone?",
+                            "how-long-kidney-stone-to-pass",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("Is Zantac Safe for Long-Term Use",
+                            "is-zantac-safe",
+                            "Blog")
+                    </li>
+
+                    <li>
+                        @Html.ActionLink("How to Lower Blood Pressure in Minutes",
+                            "high-to-low-blood-pressure-in-minutes",
+                            "Blog")
+                    </li>
+
+                    <li> @Html.ActionLink("How to deal with low levels of Sleep Deprivation",
+                             "how-to-deal-with-low-level-sleep-deprivation",
+                             "Blog")</li>
+
+                    <li> @Html.ActionLink("Understanding Labels: What Does ‘Inactive Ingredient’ Mean?",
+                             "what-does-inactive-ingredients-mean",
+                             "Blog")</li>
+
+                    <li> @Html.ActionLink("Find Some High Protein Meals For Weight Loss Today",
+                             "high-protein-meals-for-weight-loss",
+                             "Blog")</li>
+
+                    <li> @Html.ActionLink("Canadian Pharmacy Cialis – Buy Cialis Online Safely",
+                             "canadian-pharmacy-cialis",
+                             "Blog")</li>
+
+                    <li> @Html.ActionLink("5 Essential Supplements and Vitamins for Menopause",
+                             "vitamins-for-menopause",
+                             "Blog")</li>
+
+                    <li> @Html.ActionLink("This Canadian Online Pharmacy is The Answer to Soaring Drug Prices!",
+                             "canadian-online-pharmacy",
+                             "Blog")</li>
+                    <li> @Html.ActionLink("How to save money online buying from Canadian Pharmacy",
+                             "buying-from-canadian-pharmacy",
+                             "Blog")</li>
+
+                </ul>
+            </div>
+        </div>*@
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    Information
+                </h3>
+
+               
+                <ul>
+                    <li> @Html.ActionLink("Refer a Friend", "referafriend", "Home")</li>
+                    <li> @Html.ActionLink("Shipping Information", "shipping", "Home")</li>
+                    <li> @Html.ActionLink("Customer Care Policy", "Customer-Care-Policy", "Home")</li>
+                    <li> @Html.ActionLink("Privacy Policy", "Privacy", "Home")</li>
+                    <li> @Html.ActionLink("About Us", "about-us", "Home")</li>
+                    <li> @Html.ActionLink("Drug Safety", "Drug-Safety", "Home")</li>
+                    <li> @Html.ActionLink("Price Match Guarantee", "Price-Match-Guarantee", "Home")</li>
+
+                    
+                </ul>
+
+            </div>
+        </div>
+@*Commented code on 14 April 2020 according to Russel design*@
+        @*<div class="row">
+            <div class="col-md-12">
+                <h3>
+                    Popular Prescription Medications
+                </h3>
+
+                @Html.Action("FeaturedProductListNoFormat", "FeaturedProduct", new { category = "1" })
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    Popular Over-The-Counter Medications
+                </h3>
+
+                @Html.Action("FeaturedProductListNoFormat", "FeaturedProduct", new { productType = "Otc" })
+
+             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>
+                    Popular Pet Medications
+                </h3>
+
+                @Html.Action("FeaturedProductListNoFormat", "FeaturedProduct", new { productType = "Pet" })
+                
+            </div>
+        </div>*@
+
+
+    
+@*--- Show Side bar with refer friend and free shipping link ---*@
+@section left {
+    @Html.Partial("ReferNFreeShipping")
+    @*@Html.Partial("infoLinks")*@
+}

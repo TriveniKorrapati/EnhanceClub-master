@@ -1,0 +1,102 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+                                <p>
+                                    The end of the 1990’s introduced erectile dysfunction medication, ushering in a new sexual revolution for both men and women.
+                                    <a href="@Url.Action("productdetail","product", new { searchterm = "viagra"})">Viagra</a> (which uses the main ingredient Sildenafil) is one of the most popular drugs in the world.
+                                    And for very good reason.
+                                    Sex is amazing and if you are not able to enjoy it, then that is one of the greatest disappointments in life.
+                                    But even this little helper can come with a big danger if you don’t use it right because you can overdose on Viagra.
+                                </p>
+
+                                <h5>WHAT IS HAPPENING</h5>
+
+                                <p>Men achieve a point of erection when the hormones in the body trigger a rush of blood to the penis, engorging its blood vessels. The huge increase in blood is what helps the penis maintain its erect shape and firmness. Typically, after ejaculation, the body will begin to let the excess blood leave the penis, allowing it to go ‘soft’.</p>
+
+                                <h5>HOW VIAGRA WORKS</h5>
+
+                                <p>When men’s bodies are working normally, sexual function isn’t an issue. When there are underlying health issues, drugs like Viagra assist men achieving an erection that can’t get on their own. Viagra allows the body to flood the penis with blood, allowing it to become erect for long enough to perform sexual intercourse. But not without its risks. </p>
+
+
+                                @Html.Partial("_blogButton")
+
+
+                                <h5>CAN YOU OVERDOSE ON VIAGRA?</h5>
+
+                                <p>
+                                    Yes, you can overdose on Viagra because the dosage amount recommended is different for each patient. The dosage given is determined by a doctor who will weigh all health-factors before choosing the prescription strength. To avoid Viagra overdose, doctors and pharmacists will give instructions for how to use it properly to each patient, depending on a person’s medical needs. Viagra should be great option for most men, but there are exceptions and that is something to discuss with your doctor.
+
+                                    <br><br>The reasons for taking Viagra can vary. So, how it can interact with other drugs or ongoing health issues can be amplified by taking too much. Symptoms of Viagra overdose include blurred vision, chest pains, nausea, and heart attacks. However, what most men should be most concerned about is probably something they’ve never heard of, <a href="https://www.mayoclinic.org/diseases-conditions/priapism/symptoms-causes/syc-20352005#:~:text=Priapism%20is%20a%20prolonged%20erection,who%20have%20sickle%20cell%20anemia.">priapism</a>.
+                                </p>
+
+                                <h5>TOO LONG</h5>
+
+                                <p>
+                                    Viagra allows men to achieve an erection sufficient for sex for around three (3) hours after taking it (give or take). But when the penis is fully erect for too long, it can lead to serious health complications. When men have an erection that lasts for around six (6) hours or more, they are in danger of permanently damaging the tissue of their penis.
+
+                                    <br><br>An overdose on Viagra means your body is keeping too much blood in the penis for too long. When that happens, the blood vessels and sensitive tissues inside the penis can be damage or die. It can lead to painful, misshapen erections due to things like scar-tissue that results.  Overtime, it can rob a man of his ability to enjoy a full and robust sex life.
+                                </p>
+
+                                <h5>DO IT RIGHT</h5>
+
+                                <p>Viagra is a wonderful medication that has brought men, and their partners, countless pleasures as a result. Everyone should be able to enjoy a fun and exciting sex life if they want. Regardless of underlying health issues. Viagra can help them achieve it. But the risk of Viagra overdose is real and should not be ignored. Just like whatever might be contributing to your issues with erectile dysfunction. Speak with your doctor when considering taking Viagra to learn if it’s right for you.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

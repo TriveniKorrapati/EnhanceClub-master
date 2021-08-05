@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : User signs in with valid credentials
+
+Given: I am Logged-out system user.
+
+Then: I log in into my Account
+
+When: I entered valid credentials</description>
+   <name>Valid sign In</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>d893385a-1fcd-4ea0-b5bb-962f1701f931</testCaseGuid>
+</TestCaseEntity>

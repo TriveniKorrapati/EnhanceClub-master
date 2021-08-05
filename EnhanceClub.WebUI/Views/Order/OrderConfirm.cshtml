@@ -1,0 +1,93 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.OrderConfirmViewModel
+
+@if (@Model.ProductList.Any())
+{
+
+    <!-- Start of Main -->
+    <div class="dashboard-page order-page order-confirmation-page">
+        <!-- Start of the Top Clip Path -->
+        <!-- <div class="top-clip">
+            <div class="dash-top-clip">
+            </div>
+        </div> -->
+        <!-- End of the Top Clip Path -->
+
+        <div class="section top-section">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Start of Main Section -->
+                    <div class="col-12 col-md-12 col-lg-12">
+
+                        <!-- Start of Filter Section -->
+                        <div class="row mt-4">
+                            <div class="col-12 col-md-7 col-xl-6 text-center text-md-right">
+                                <h4 class="white mb-4">Order Received!</h4>
+                                <p>
+                                    Your order <span class="white">#@Model.OrderId</span> was received!
+                                </p>
+                                @if (@Model.HasRxProducts)
+                                {
+                                    <p>
+                                        @*<b>Next Steps &mdash; Please select one of the following:</b>*@
+                                        <b>Answering this quick health questionnaire will help us acquire your prescription for this order. Complete it and we'll handle the rest.</b>
+                                    </p>
+                                    @*<div class="btn btn__secondary btn--rounded mb-3 ">
+                                          <a href="@Url.Action("AddProfile", "customer", new { returnUrl = "/upload/" + @Model.OrderId, havePrescription =true })" class="buttons" style="color :white">I Have a Prescription</a>
+                                        </div><br>*@
+                                    <div class="btn btn__secondary btn--rounded mb-3 ">
+                                        <a href="@Url.Action("AddProfile", "customer", new { returnUrl = "/requirePrescription/" + @Model.OrderId, havePrescription = false })" class="buttons" style="color :white">Go to Questionnaire</a>
+                                    </div>
+                                }
+                                <br>
+                                <a href="@Url.Action("dashboard", "customer")">&#8592; Go To Dashboard</a>
+                            </div>
+
+                        </div>
+                        <!-- End of Filter Section -->
+
+                    </div>
+                    <!-- End of Main Section -->
+
+                </div>
+
+                <div class="row">
+                    @if (SiteConfigurationsWc.Environment.ToLower() == "live")
+                    {
+                        @section PageScripts{
+                            @Html.Partial("_orderconfirmScript")
+                            @if (SiteConfigurationsWc.EnableImpactScript == 1)
+                            {
+
+                                @Html.Partial("_orderConfirmationImpactScript")
+                            }
+                        }
+                    }
+                    @if (SiteConfigurationsWc.Environment.ToLower() == "dev")
+                    {
+                        @section PageScripts{
+                            @Html.Partial("_orderconfirmScriptV2")
+                            @if (SiteConfigurationsWc.EnableImpactScript == 1)
+                            {
+
+                                @Html.Partial("_orderConfirmationImpactScript")
+                            }
+                        }
+                    }
+                    
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!-- End of Main -->
+
+    // clear cart contents
+    HttpContext.Current.Session["Cart"] = new Cart();
+
+}
+
+

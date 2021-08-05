@@ -1,0 +1,68 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model System.Collections.Generic.IEnumerable<FeaturedProduct>
+
+ 
+<div class="related-items" id="related-items">
+
+        <div class="container">
+            <div class="row main-margin">
+                <div class="col-sm-12">
+                    <h3 class="mb-4">You might <br />also like</h3>
+                </div>
+                @if (Model != null)
+                {
+                    foreach (var product in Model)
+                    {
+                        FeaturedProduct featuredProductObj = (FeaturedProduct)product;
+
+                        var productImageUrl = @SiteConfigurationsWc.ProductImagePath + @SiteConfigurationsWc.ProductGenericImagePrefix + featuredProductObj.FeaturedProductId + ".png";
+
+                        string urlAction;
+
+                        //if (System.Configuration.ConfigurationManager.AppSettings["Environment"].ToLower() == "live")
+                        //{
+                        //    urlAction = "https://" + HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;
+                        //}
+                        //else
+                        //{
+                        //    urlAction = "http://" + HttpContext.Current.Request.Url.Authority + "/" + @featuredProductObj.ProductUrl;
+                        //}
+                        <div class="col-12 col-md-12 col-lg-6 col-xl-4 related-item">
+                            <a href="@Url.Action("ProductDetail", "product", new { searchTerm = @featuredProductObj.ProductUrl })">
+                                <div class="related-item-img">
+                                    <img src="@productImageUrl" />
+                                </div>
+                                <div class="related-item-info">
+                                    <h5>
+                                        @featuredProductObj.FeaturedProductDisplayName
+                                    </h5>
+                                    <p class="large">
+                                        @if (featuredProductObj.FeaturedProductName.ToLower().Contains("caverject"))
+                                        {
+                                            @featuredProductObj.FeaturedProductName
+
+
+                                        }
+                                        else
+                                        {
+                                            @featuredProductObj.FeaturedProductGenericName
+                                            if (@SiteConfigurationsWc.ShowProductBrandNameWithGeneric == "1")
+                                            {
+                                                <br />
+                                                <text>
+                                                    (Generic @featuredProductObj.FeaturedProductName)
+                                                </text>
+                                            }
+                                        }
+
+                                    </p>
+                                </div>
+
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>

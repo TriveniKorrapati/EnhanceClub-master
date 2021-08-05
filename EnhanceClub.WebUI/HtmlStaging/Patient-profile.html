@@ -1,0 +1,919 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+
+
+
+
+
+
+
+    <title>
+        Add a Patient Profile | Enhance Club
+    </title>
+
+    <meta name="description">
+
+    <style>
+        html {
+            font-family: 'sans-serif';
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/content/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/content/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/content/images/favicon/favicon-16x16.png">
+<link rel="manifest" href="/content/images/favicon/site.webmanifest">
+<link rel="mask-icon" href="/content/images/favicon/safari-pinned-tab.svg" color="#ffa400">
+<meta name="msapplication-TileColor" content="#ffa400">
+<meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/content/css/main.css" />
+
+    <!-- Google Tag Manager -->
+<script>
+    (function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+            'gtm.start':
+
+                new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+
+            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+
+    })(window, document, 'script', 'dataLayer', 'GTM-MPXHZ7Z');</script>
+<!-- End Google Tag Manager -->
+
+
+
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPXHZ7Z"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+    <div id="wrapper" class="header-">
+        
+<nav class="navbar fixed-top navbar-expand-md">
+    <button class="btn btn-menu btn-reset"><img src="/content/images/menu-icon.png" alt="menu" /></button>
+    <a class="navbar-brand" href="/">
+        <img src="/content/images/logo-white.svg" class="default" alt="white" /><img src="/content/images/logo-active.svg" class="active" alt="black" />
+    </a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button> -->
+    
+    <span class="nav-link cart-open d-md-none">
+
+        
+        
+        Cart <span class="badge badge-count">
+
+<div class="ld-module-cart">
+
+    <span class="ld-module-trigger collapsed" role="button" data-ld-toggle="true" data-toggle="collapse" data-target="#shop-cart" aria-controls="shop-cart" aria-expanded="false">
+        <span class="ld-module-trigger-icon">
+            <i class="icon-ld-cart"></i>
+        </span><!-- /.ld-module-trigger-icon -->
+        <span class="ld-module-trigger-count">0</span>
+    </span><!-- /.ld-module-trigger -->
+
+    <!-- /.ld-module-dropdown -->
+
+</div><!-- /.module-cart --> </span>
+        
+
+    </span>
+    
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/products">Shop</a>
+            </li>
+
+                <li class="nav-item">
+
+                    <a class="nav-link" href="/account">
+                        <i class="fa fa-user"></i> My Account
+                    </a>
+                </li>
+            <li>
+                <a class="nav-link" href="/Customer/Logout">
+                    Sign Out
+                </a>
+
+            </li>
+
+            <li class="nav-item dropdown">
+               
+                
+                <span class="nav-link cart-open">
+                    
+                    
+                    Cart <span class="badge badge-count">
+
+<div class="ld-module-cart">
+
+    <span class="ld-module-trigger collapsed" role="button" data-ld-toggle="true" data-toggle="collapse" data-target="#shop-cart" aria-controls="shop-cart" aria-expanded="false">
+        <span class="ld-module-trigger-icon">
+            <i class="icon-ld-cart"></i>
+        </span><!-- /.ld-module-trigger-icon -->
+        <span class="ld-module-trigger-count">0</span>
+    </span><!-- /.ld-module-trigger -->
+
+    <!-- /.ld-module-dropdown -->
+
+</div><!-- /.module-cart --> </span>
+
+                </span>
+                
+
+                <!-- check with sandy how this menu activates-->
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+<div class="popup-navbar d-flex justify-content-center flex-column">
+    <button class="btn btn-reset btn-menu-close"><img src="/content/images/close.png" alt="icon" /></button>
+    <!-- <img src="/content/images/popup-image.png" alt="image" class="popup-image" /> -->
+    <div class="popup-menu d-flex align-items-end flex-wrap">
+        <div class="w-100 py-3">
+            <div class="row d-md-none">
+                <div class="col-md-12 text-md-right">
+                    <a class="d-inline-block" href="/products">
+                        <h3>
+                            Shop
+                        </h3>
+                    </a>
+                </div>
+            </div>
+            <div class="row d-md-none">
+                    <div class="col-md-12 text-md-right">
+                        <a class="d-inline-block" href="/account">
+                            <h3>My Account</h3>
+                        </a>
+                    </div>
+                    <div class="col-md-12 text-md-right">
+                        <a class="d-inline-block" href="/Customer/Logout">
+                            <h3>Sign Out</h3>
+                        </a>
+                    </div>
+
+            </div>
+            <div class="row d-md-none mt-0">
+                <div class="col-md-12">
+                    <hr class="white">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 text-md-right">
+                    <h3>Enhance <br />Club</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                    <ul class="list-unstyled list-links club-menu">
+                        <li>
+                            <a class="" href="/">Home</a>
+                        </li>
+                        <li>
+                            <a class="" href="/about">About us</a>
+
+                        </li>
+                        <li>
+                            <a class="" href="/how-it-works">How it Works</a>
+
+                        </li>
+                        <li>
+                            <a class="" href="/blog">Learn</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-3 text-md-right">
+                    <h3>Products</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                    <ul class="list-unstyled list-links product-list">
+
+    <li>
+
+        <a href="/products/viagra" class="">
+            EXTRA<span class="viagra-gradient">
+                SILDENAFIL
+                    (Generic Viagra)            </span>
+
+        </a>
+
+    </li>
+
+    <li>
+        <a href="/products/levitra" class="">
+            RISE <span class="vandernafil-gradient">
+                VARDENAFIL                      (Generic Levitra)            </span>
+        </a>
+
+    </li>
+
+    <li>
+        <a href="/products/cialis" class="">
+            PLAY<span class="cialis-gradient">
+                TADALAFIL                     (Generic Cialis)            </span>
+        </a>
+    </li>
+
+    <li>
+        <a href="/products/propecia" class="">
+            THICK <span class="finasteride-gradient">
+                FINASTERIDE                      (Generic Propecia)            </span>
+        </a>
+
+    </li>
+
+    
+
+
+    
+    </ul>
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-3 text-md-right">
+                    <h3>Need <br />help?</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                    <ul class="list-unstyled list-links">
+                        <li>
+                            
+                            <a class="" href="/get-in-touch">Get in Touch</a>
+
+                        </li>
+                        <li>
+                            
+                            <a class="" href="/terms-and-conditions">Terms &amp; Conditions</a>
+
+                        </li>
+
+                        <li>
+                            
+                            <a class="" href="/shipping-and-returns">Shipping &amp; Returns</a>
+
+                        </li>
+
+                        <li>
+                            
+                            <a class="" href="/privacy-policy">Privacy Policy</a>
+
+                        </li>
+
+                        <li>
+                            
+                            <a class="" href="/faq">FAQs</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+            <!-- /.row -->
+            <div class="row popup-social">
+                <div class="col-md-3 text-md-right">
+                    <h3>Follow us</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                            <a href="https://www.facebook.com/enhanceclubnow" target="_blank"><img src="/content/images/facebook-yl.svg" alt="icon" /></a>
+        <a href="http://instagram.com/enhanceclub" target="_blank"><img src="/content/images/instagram-yl.svg" alt="icon" /></a>
+
+
+
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-3 text-md-right">
+                    <h3>CALL US</h3>
+                </div>
+                <!-- /.col-md-3 -->
+                <div class="col-md-9">
+                    <h3>1-844-836-2582</h3>
+                </div>
+                <!-- /.col-md-9 -->
+            </div>
+        </div>
+        <!-- /.m-auto -->
+
+        <div class="popup-social w-100">
+        </div>
+        <!-- /.popup-social -->
+    </div>
+    <!-- /.popup-menu -->
+
+</div>
+
+
+
+<!-- /.popup-navbar -->
+
+
+        
+        
+        <div id="cart-popup">
+            
+        </div>
+
+        <div class="dashboard-page">
+    <!-- Start of the Top Clip Path -->
+    <div class="top-clip">
+        <div class="dash-top-clip">
+        </div>
+    </div>
+    <!-- End of the Top Clip Path -->
+
+    <div class="section top-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 hidden-md">
+                    <h1 class="heading text-uppercase">ADD PROFILE</h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- Start of Main Section -->
+                <div class="col-12 col-md-12 col-lg-9 col-xl-9 order-2 order-lg-1">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-9 col-xs-9">
+                            <h1 class="heading visible-md text-uppercase">ADD PROFILE</h1>
+                                <h5>It seems you haven’t created a patient profile yet. Please add yours and then continue to our questionnaire.</h5>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 col-xs-3">
+                            <!-- Blank Space -->
+                        </div>
+                    </div>
+                    <div class="form-container">
+                        <div class="row">
+                            <div class="col-12 col-xl-9">
+                                <div class="validation-summary-valid" data-valmsg-summary="true"><ul><li style="display:none"></li>
+</ul></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-9">
+                                <h4 class="form-title text-capitalize mt-0 mb-4">
+                                    Patient Profile
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-9">
+<form action="/Customer/AddProfile" class="profile-form" id="frm_edit-profile" method="post"><input type="hidden" value="/requirePrescription/5314" name="returnUrl" />
+
+<div class="form-group info-group">
+    <label for="customerfirstname" class="text-capitalize">
+        First
+        Name
+    </label>
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        <input class="form-control" id="PatientProfileFirstName" name="PatientProfileFirstName" placeholder="Patient First Name" required="required" type="text" value="Russel" />
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="customerlastname" class="text-capitalize">Last Name</label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        <input class="form-control" id="PatientProfileLastName" name="PatientProfileLastName" placeholder="Patient Last Name" required="required" type="text" value="Per" />
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="">Patient's Birthdate</label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        <input class="form-control" id="PatientProfileBirthDate" min="1950-01-01" name="PatientProfileBirthDate" placeholder="yyyy--mm--dd" required="required" type="date" value="2021-04-01" />
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="text-capitalize">Sex</label>
+
+    <span class="input-wrapper extended mt-4">
+        <select class="form-control" id="PatientProfileSex" name="PatientProfileSex"><option value="">Select Gender</option>
+<option value="m">Male</option>
+<option value="f">Female</option>
+<option value="u">Prefer Not To Select</option>
+</select>
+    </span>
+</div>
+    <div class="form-group info-group">
+        <label for="username" class=""> Personal Health Number</label>
+
+        <span class="input-wrapper extended mt-4">
+            <!-- Input -->
+            <input class="form-control" id="PatientPersonalHealthNumber" maxlength="12" name="PatientPersonalHealthNumber" placeholder="PHN" required="required" type="text" value="" />
+        </span>
+    </div>
+<div class="form-group info-group">
+    <label for="username" class="text-capitalize">
+        Do you have any allergies
+        to medications?
+        Please list them.
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        <textarea class="form-control" cols="20" id="PatientProfileAllergy" name="PatientProfileAllergy" placeholder="List your allergeries" rows="2">
+</textarea>
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="text-capitalize">
+        Please list your current medical conditions.
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        <textarea class="form-control" cols="20" id="PatientProfileMedicalHistory" name="PatientProfileMedicalHistory" placeholder="List your medical conditions" rows="2">
+</textarea>
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="text-capitalize">
+        Please list any past surgeries you’ve had
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        <textarea class="form-control" cols="20" id="PatientProfilePastSurgeries" name="PatientProfilePastSurgeries" placeholder="List past surgeries, if any" rows="2">
+</textarea>
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="text-capitalize">
+        Please list your current medications.
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        <textarea class="form-control" cols="20" id="PatientProfileMedication" name="PatientProfileMedication" placeholder="List your current medications" rows="2">
+</textarea>
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="text-capitalize">
+        Please list any herbal supplements.
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        <textarea class="form-control" cols="20" id="PatientProfileHerbalSupplements" name="PatientProfileHerbalSupplements" placeholder="List any herbal supplements" rows="2">
+</textarea>
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="text-capitalize">
+        Please list family illness history.
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        <textarea class="form-control" cols="20" id="PatientProfileFamilyHistoryIllness" name="PatientProfileFamilyHistoryIllness" placeholder="List any family illness" rows="2">
+</textarea>
+    </span>
+</div>
+
+<div class="form-group row documents-section">
+    <div class="">
+        <label for="username" class="text-capitalize">
+            Social History
+        </label>
+
+            <div class="custom-control custom-check orange">
+
+                <input class="custom-control-input social-history" data-val="true" data-val-required="The IsSelected field is required." id="SocialHistoryList_0__IsSelected" name="SocialHistoryList[0].IsSelected" type="checkbox" value="true" /><input name="SocialHistoryList[0].IsSelected" type="hidden" value="false" />
+                <label class="custom-control-label" for="Drink">Drink</label>
+                <input data-val="true" data-val-number="The field SocialHistoryId must be a number." data-val-required="The SocialHistoryId field is required." id="SocialHistoryList_0__SocialHistoryId" name="SocialHistoryList[0].SocialHistoryId" type="hidden" value="1" />
+                <input class="social-history-name" id="SocialHistoryList_0__SocialHistoryName" name="SocialHistoryList[0].SocialHistoryName" type="hidden" value="Drink" />
+                <input id="SocialHistoryList_0__IsSelected" name="SocialHistoryList[0].IsSelected" type="hidden" value="False" />
+            </div>
+            <div class="custom-control custom-check orange">
+
+                <input class="custom-control-input social-history" data-val="true" data-val-required="The IsSelected field is required." id="SocialHistoryList_1__IsSelected" name="SocialHistoryList[1].IsSelected" type="checkbox" value="true" /><input name="SocialHistoryList[1].IsSelected" type="hidden" value="false" />
+                <label class="custom-control-label" for="Smoke">Smoke</label>
+                <input data-val="true" data-val-number="The field SocialHistoryId must be a number." data-val-required="The SocialHistoryId field is required." id="SocialHistoryList_1__SocialHistoryId" name="SocialHistoryList[1].SocialHistoryId" type="hidden" value="2" />
+                <input class="social-history-name" id="SocialHistoryList_1__SocialHistoryName" name="SocialHistoryList[1].SocialHistoryName" type="hidden" value="Smoke" />
+                <input id="SocialHistoryList_1__IsSelected" name="SocialHistoryList[1].IsSelected" type="hidden" value="False" />
+            </div>
+            <div class="custom-control custom-check orange">
+
+                <input class="custom-control-input social-history" data-val="true" data-val-required="The IsSelected field is required." id="SocialHistoryList_2__IsSelected" name="SocialHistoryList[2].IsSelected" type="checkbox" value="true" /><input name="SocialHistoryList[2].IsSelected" type="hidden" value="false" />
+                <label class="custom-control-label" for="Marijuana">Marijuana</label>
+                <input data-val="true" data-val-number="The field SocialHistoryId must be a number." data-val-required="The SocialHistoryId field is required." id="SocialHistoryList_2__SocialHistoryId" name="SocialHistoryList[2].SocialHistoryId" type="hidden" value="3" />
+                <input class="social-history-name" id="SocialHistoryList_2__SocialHistoryName" name="SocialHistoryList[2].SocialHistoryName" type="hidden" value="Marijuana" />
+                <input id="SocialHistoryList_2__IsSelected" name="SocialHistoryList[2].IsSelected" type="hidden" value="False" />
+            </div>
+            <div class="custom-control custom-check orange">
+
+                <input class="custom-control-input social-history" data-val="true" data-val-required="The IsSelected field is required." id="SocialHistoryList_3__IsSelected" name="SocialHistoryList[3].IsSelected" type="checkbox" value="true" /><input name="SocialHistoryList[3].IsSelected" type="hidden" value="false" />
+                <label class="custom-control-label" for="Tobacco">Tobacco</label>
+                <input data-val="true" data-val-number="The field SocialHistoryId must be a number." data-val-required="The SocialHistoryId field is required." id="SocialHistoryList_3__SocialHistoryId" name="SocialHistoryList[3].SocialHistoryId" type="hidden" value="4" />
+                <input class="social-history-name" id="SocialHistoryList_3__SocialHistoryName" name="SocialHistoryList[3].SocialHistoryName" type="hidden" value="Tobacco" />
+                <input id="SocialHistoryList_3__IsSelected" name="SocialHistoryList[3].IsSelected" type="hidden" value="False" />
+            </div>
+            <div class="custom-control custom-check orange">
+
+                <input class="custom-control-input social-history noneCheckBox" data-val="true" data-val-required="The IsSelected field is required." id="SocialHistoryList_4__IsSelected" name="SocialHistoryList[4].IsSelected" type="checkbox" value="true" /><input name="SocialHistoryList[4].IsSelected" type="hidden" value="false" />
+                <label class="custom-control-label" for="None">None</label>
+                <input data-val="true" data-val-number="The field SocialHistoryId must be a number." data-val-required="The SocialHistoryId field is required." id="SocialHistoryList_4__SocialHistoryId" name="SocialHistoryList[4].SocialHistoryId" type="hidden" value="5" />
+                <input class="social-history-name" id="SocialHistoryList_4__SocialHistoryName" name="SocialHistoryList[4].SocialHistoryName" type="hidden" value="None" />
+                <input id="SocialHistoryList_4__IsSelected" name="SocialHistoryList[4].IsSelected" type="hidden" value="False" />
+            </div>
+    </div>
+</div>
+<input type="hidden" name="consentChanged" id="consentChanged" value="false">
+<input type="hidden" name="checkedValue" id="checkedValue" value="True">
+<!--commented consultation section-->
+
+
+        <div class="">
+            <button type="submit" class="save-btn btn btn-default">
+                Continue to Questionnaire
+            </button>
+        </div></form>                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Main Section -->
+            </div>
+        </div>
+    </div>
+</div>
+
+        <footer class="footer w-100">
+    <div class="container">
+        <div class="footer-content">
+            <div class="row">
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <h3>Enhance Club</h3>
+                    <ul class="list-unstyled list-links list-single">
+                        <li>
+                            <a class="" href="/">Home</a>
+                        </li>
+
+                        <li>
+                            <a class="" href="/about">About us</a>
+
+                        </li>
+
+                        <li>
+                            <a class="" href="/how-it-works">How it Works</a>
+
+                        </li>
+
+                        <li>
+                            <a class="" href="/blog">Learn</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                <div class="col-xl-6 col-md-3 col-sm-6">
+                    <h3>Products</h3>
+                    <ul class="list-unstyled list-links product-list">
+
+    <li>
+
+        <a href="/products/viagra" class="">
+            EXTRA<span class="viagra-gradient">
+                SILDENAFIL
+                    (Generic Viagra)            </span>
+
+        </a>
+
+    </li>
+
+    <li>
+        <a href="/products/levitra" class="">
+            RISE <span class="vandernafil-gradient">
+                VARDENAFIL                      (Generic Levitra)            </span>
+        </a>
+
+    </li>
+
+    <li>
+        <a href="/products/cialis" class="">
+            PLAY<span class="cialis-gradient">
+                TADALAFIL                     (Generic Cialis)            </span>
+        </a>
+    </li>
+
+    <li>
+        <a href="/products/propecia" class="">
+            THICK <span class="finasteride-gradient">
+                FINASTERIDE                      (Generic Propecia)            </span>
+        </a>
+
+    </li>
+
+    
+
+
+    
+    </ul>
+
+                </div>
+
+                <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                <div class="col-xl-2 col-md-3 col-sm-6">
+                    <h3>Need help?</h3>
+                    <ul class="list-unstyled list-links list-single">
+                        <li>
+                            <a class="" href="/get-in-touch">Get in Touch</a>
+                        </li>
+                        <li>
+                            <a class="" href="/faq">FAQs</a>
+                        </li>
+                        <li>
+                            <a href="tel:1-844-836-2582" class="no-break">
+                                1-844-836-2582
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                
+                         <div class="col-xl-2 ml-xl-auto col-md-3 col-sm-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>FOLLOW US</h4>
+                    <ul class="list-unstyled social-media d-flex justify-content-sm-start justify-content-center">
+                        <li><a href="https://www.facebook.com/enhanceclubnow" target="_blank"><img src="/content/images/facebook-icon.svg" alt="icon" /></a></li>
+                        
+                        <li><a href="http://instagram.com/enhanceclub" target="_blank"><img src="/content/images/instagram-icon.svg" alt="icon" /></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="mt-0">
+                        All Enhanceclub.com products are dispensed from Pharmasave 1000 in Surrey, B.C: <br><br>
+                        PHARMASAVE HEALTH CENTRE #1000<br>
+                        101 - 1688 152 St Surrey, BC<br>V4A 4N2 CANADA<br><br>
+                        Phone: (604) 538-6334<br>
+                        Fax: (604) 538-6389<br>
+                        College of Pharmacists of BC Licence Number: 15037 Pharmacy Manager: Jason Chan
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+
+                <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.footer-content -->
+        <div class="footer-copyright">
+            <div class="row align-items-end text-md-left text-center">
+                <div class="col-lg-7 col-md-6 order-md-3">
+                    <ul class="list-unstyled mb-0 d-md-flex justify-content-center justify-content-lg-between">
+
+                        <li>
+                            
+                            <a class="" href="/shipping-and-returns">Shipping &amp; Returns</a>
+
+                        </li>
+
+                        <li>
+                            
+                            <a class="" href="/terms-and-conditions">Terms &amp; Conditions</a>
+
+                        </li>
+                        <li>
+                            
+                            <a class="" href="/telehealth-consent">Telehealth Informed Consent</a>
+
+                        </li>
+                        <li>
+                            
+                            <a class="" href="/privacy-policy">Privacy Policy</a>
+
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.col-lg-2 col-md-3 -->
+                <div class="col-lg-2 col-md-3 my-md-0 my-4">
+                    <img src="/content/images/footerlogo.svg" class="img-fluid footer-logo" alt="logo" />
+
+                    <div class="text-center d-sm-none mt-4">
+                        <a href="#wrapper"><img src="/content/images/backtotop.svg" alt="icon" /></a>
+                    </div>
+                </div>
+                <!-- /.col-lg-2 col-md-3 -->
+                <div class="col-lg-3 col-md-3">
+                    <div style="display: flex; align-items: center;">
+                        <p style="margin-right: 1rem;" class="mt-0">All Rights Reserved © 2021</p>
+<div style="width: 20px; display: inline-block;">
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 60 60" xml:space="preserve">
+<path d="M47.7 5.8C42.7 2.1 36.6 0 30 0S17.3 2.1 12.3 5.8v48.5c5 3.6 11.1 5.8 17.7 5.8s12.7-2.1 17.7-5.8V5.8z" fill="#fff" /><path class="st1" d="M0 30c0 10 4.9 18.8 12.3 24.2V5.8C4.9 11.2 0 20 0 30zM60 30c0-10-4.9-18.8-12.3-24.2v48.5C55.1 48.8 60 40 60 30zM37.8 36.4l6.1-6.1s-2.2-.1-1.4-3.1l.9-3.6s-3.4 1.3-4.1.7c0 0-.6 0-1.1-2.3L35 26.3s-.7.7-.9-.3l1.6-9.3-2.4 1.6s-.5.4-.8-.3L30 12.3 27.5 18c-.3.7-.8.3-.8.3l-2.4-1.6 1.6 9.3c-.1 1-.9.3-.9.3L21.8 22c-.6 2.3-1.1 2.3-1.1 2.3-.7.6-4.1-.7-4.1-.7l.9 3.6c.9 3-1.4 3.1-1.4 3.1l6.1 6.1c1.8 1.7 0 4 0 4l6.1-1.2c1.4-.3 1.2.6 1.2.6l-.2 7.9h1.4l-.2-7.9s-.2-.9 1.2-.6l6.1 1.2s-1.9-2.3 0-4z" /></svg>
+</div>                    </div>
+                    
+                </div>
+                <!-- /.col-lg-2 col-md-3 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.footer-copyright -->
+    </div>
+    <!-- /.container -->
+</footer>
+
+    </div>
+    <script type="text/javascript" src="/jquery/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classie/1.0.1/classie.min.js" integrity="sha256-6O5DljdGA6AiaEVC/Zn8pNLNbQGparYTI9091fGX64k=" crossorigin="anonymous"></script>
+    <script src="/scripts/fullscreenForm.js"></script>
+    <script src="/scripts/main.js"></script>
+    <script src="/content/vendors/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+    <script src="/bundles/customJs?v=DGcYcHI4xfOLtlwdrZbzhyRqvPQGCD_xw9IEOcMj8lE1"></script>
+
+    
+    
+    
+
+<!-- Start of healthstoresupport Zendesk Widget script -->
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=2bdc304a-5068-44a7-af09-e0746742dfff"> </script>
+<!-- End of healthstoresupport Zendesk Widget script -->
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialogue">
+
+            <div class="modal-header">
+                <button type="button" class="modal-close-btn pull-right" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-content" style="overflow: auto">
+
+            </div>
+
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function mobilecheck() {
+            let check = false;
+            (function (a) { if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a) || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0, 4))) check = true; })(navigator.userAgent || navigator.vendor || window.opera);
+            return check;
+        }
+        var mobile = mobilecheck();
+        if (!mobile) {
+            telLinks = document.querySelectorAll('[href^="tel:"]');
+
+            Array.from(telLinks).forEach(function (link) {
+                link.removeAttribute('href');
+            });
+        }
+        $(function () {
+
+            // Initialize numeric spinner input boxes
+            //$(".numeric-spinner").spinedit();
+            // Initialize modal dialog
+            // attach modal-container bootstrap attributes to links with .modal-link class.
+            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+            $('body').on('click', '.modal-link', function (e) {
+                console.log($('inside on-click'));
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+                $('div.modal-ba').addClass('modal-backdrop fade show').removeClass('modal-ba');
+            });
+            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+            $('body').on('click', '.modal-close-btn', function () {
+                $('#modal-container').modal('hide');
+                $('div.modal-backdrop').addClass('modal-ba').removeClass('modal-backdrop');
+            });
+            //clear modal cache, so that new content can be loaded
+            $('#modal-container').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+            $('#CancelModal').on('click', function () {
+                return false;
+            });
+        });
+
+                        //$("#modal-container").draggable({
+                        //    handle: ".modal-header"
+                        //});
+    </script>
+    
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            //  if none is selected for social history then unselect all
+            $('input.social-history').on('change', function () {
+                if ($(this).closest('.custom-check').find('.social-history-name').val() == 'None') {
+                    $('input.social-history').not(this).prop('checked', false);
+                }
+                else {
+                    $('.noneCheckBox').prop('checked', false);
+                }
+            });
+
+            //$("#checkedValue").val('');
+            //$("#consultationhours").hide();
+        });
+
+        function SetConsentValue(val) {
+            $("#consentChanged").val(true);
+            $("#checkedValue").val(val);
+            if (val) {
+                $("#consultationhours").show();
+            }
+            else { $("#consultationhours").hide(); }
+        }
+       
+        $(".btn-default").on('click', function (event)
+        {
+            if (checkMinimumAge())
+            {
+                //if ($("#checkedValue").val() == "") {
+                //    alert('select any (yes/no) if you need Additional Counselling ');
+                //    return false;
+                //}
+                //else {
+
+                //    if ($("#checkedValue").val().toLowerCase() == "true") {
+                //        var checked = $("input[type=checkbox]:checked").length;
+
+                //        if (!checked) {
+                //            alert("You must select at least one best time for consulting.");
+                //            return false;
+                //        }
+
+                //    }
+                //    return true;
+                //}
+            }
+            else
+            {
+                return false;
+            }
+        });
+
+        $("#PatientProfileBirthDate").blur(function () {
+         
+            checkMinimumAge();
+        });
+        function checkMinimumAge(){
+            var today = new Date();
+            var PatientProfileBirthDate = new Date($("#PatientProfileBirthDate").val());
+            var age = Math.floor((today - PatientProfileBirthDate) / (365.25 * 24 * 60 * 60 * 1000));
+            if (age < 18) {
+                alert('You must be at least 18 years old!')
+                return false;
+            }
+            else
+                return true;
+        }
+
+    </script>
+
+
+
+</body>
+</html>

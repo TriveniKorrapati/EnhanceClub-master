@@ -1,0 +1,18 @@
+﻿@using EnhanceClub.Domain.Entities 
+@model EnhanceClub.WebUI.Models.ProductSearchViewModel
+
+@* ---loop over proucts found to show list of products *@
+
+@foreach (var thisProduct in Model.ProductList)
+{    
+        <div class="row med-container">
+            <div class="col-md-12">
+
+                <h5>
+                    @Html.RouteLink(@thisProduct.ProductName, "product-search-name", new { @searchTerm = thisProduct.ProductStoreFrontSafeUrlName })
+                    @Html.RouteLink("View Product", "product-search-name", new { @searchTerm = thisProduct.ProductStoreFrontSafeUrlName }, new { @class = "btn add-to-cart" })
+                </h5>
+            </div>
+        </div>
+}
+

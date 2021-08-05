@@ -1,0 +1,34 @@
+﻿@model EnhanceClub.WebUI.Models.DrugStructureViewModel
+
+<script type="application/ld+json">
+    {
+    "@@context": "http://schema.org",
+    "@@type": "Drug",
+     "dosageForm": [
+     @if (@Model.DosageForm != null)
+     {
+         foreach (var thisDosage in Model.DosageForm.Split(','))
+          {
+              <text>"@thisDosage" </text>
+          }
+     }
+    ],
+   
+    "legalStatus": [{
+    "@@type": "DrugLegalStatus",
+    "applicableLocation": "US",
+    "name": "@(Model.ProductTypeFk == 2 ? "prescription drug" : "non-prescription drug")" 
+    }],
+    
+    "manufacturer": [{
+    "@@type": "Organization",
+    "name": "@Model.ManufacturerNamePk"
+    }],
+
+    "name": "@Model.ProductName",
+    "prescriptionStatus":  "@(Model.ProductTypeFk == 2 ? "http://schema.org/PrescriptionOnly" : "http://schema.org/OTC")",
+    "warning": "@Model.ProductCautions"
+    }
+</script>
+
+

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+  xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+
+  <mvcSiteMapNode title="Home" controller="Home" action="Index">
+    <mvcSiteMapNode title="About Us" controller="Home" action="About" url="/about" />
+
+    <mvcSiteMapNode title="Products" controller="Product" action="Products" key ="ProductsListCategory">
+      <mvcSiteMapNode title="Product Name" controller="Product" action="ProductDetail" route="product-search-name" 
+                      isDynamic="true" dynamicParameters="searchTerm" 
+                   preservedRouteParameters="searchTerm,affiliateInfo,cart,loggedCustomer" 
+                      dynamicNodeProvider="EnhanceClub.WebUI.Helpers.ProductDynamicNodeProvider, EnhanceClub.WebUI">
+        </mvcSiteMapNode>
+      <!--<mvcSiteMapNode title="Viagra" controller="Product" action="ProductDetail" url="/products/viagra">
+        
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="Levitra" controller="Product" action="ProductDetail" url="/products/levitra">
+
+      </mvcSiteMapNode>
+      <mvcSiteMapNode title="Propecia" controller="Product" action="ProductDetail" url="/products/propecia">
+
+      </mvcSiteMapNode>-->   
+      
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Blog" controller="Blog" action="Index">
+      <mvcSiteMapNode title="Blog Name" controller="Blog" action="BlogSelector"
+                     isDynamic="true" dynamicParameters="searchTerm"
+                  preservedRouteParameters="blogUrl,affiliateInfo"
+                     dynamicNodeProvider="EnhanceClub.WebUI.Helpers.BlogDynamicNodeProvider, EnhanceClub.WebUI">
+        </mvcSiteMapNode>
+    </mvcSiteMapNode>
+   
+  </mvcSiteMapNode>
+
+</mvcSiteMap>

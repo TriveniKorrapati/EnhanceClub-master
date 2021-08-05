@@ -1,0 +1,191 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.CartIndexViewModel
+
+
+<div class="popup-cart dark-cart">
+    <div class="cart-inner-box">
+        <div class="row">
+            <div class="col">
+                <h2>Your cart</h2>
+                <button class="btn btn-reset btn-cart-close">
+                    close
+                    <svg width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.36719 2L24.3672 24" stroke="#FFC305" stroke-width="3" stroke-linecap="round"></path>
+                        <path d="M2 23.6334L24.7333 2.3667" stroke="#FFC305" stroke-width="3" stroke-linecap="round"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        @if (TempData["productName"] != null)
+        {
+            var productName = TempData["productName"].ToString();
+            <div class="row">
+                <div class="col-12 mt-2 mb-0">
+                    <div class="notify error" id="cart-message">
+                        Another product size for <b>@productName</b> is already added in cart. Please remove existing cart item to add a new one.
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col">
+                <div class="cart-product-lists">
+
+                    @{
+                        var cartItems = @Model.Cart.CartItems != null ? @Model.Cart.CartItems.Sum(x => x.Quantity) : 0;
+                        int i = 0;
+                        var sortedCartItemList = @Model.Cart.CartItems.OrderByDescending(x => x.CartItemOrder);
+                    }
+                    <h4>You have @cartItems product(s) in your cart</h4>
+                    @foreach (var cartItem in @sortedCartItemList)
+                    {
+
+                        <div class="cart-card @cartItem.ProductCart.CartDisplayColor">
+                            <div class="d-flex">
+                                <div class="product-thumbnail">
+                                    <img src="@cartItem.ProductCart.ProductImagePath" alt="@cartItem.ProductCart.ProductStoreFrontName">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center product-detail-section">
+
+                                    <!-- Start of the Price and Count Box -->
+                                    <div class="price-count-box d-flex justify-content-between align-items-center">
+                                        @if (cartItem.ProductCart.ProductSizeNonDiscountedPrice > 0)
+                                        {
+                                            <div class="price cart-discount-price">
+                                                <span class="new-price">@cartItem.ProductCart.ProductSizeStoreFrontPrice.ToString("c")</span>
+                                                <div class="old-price">@cartItem.ProductCart.ProductSizeNonDiscountedPrice.ToString("c")</div>
+                                            </div>
+                                            <b class="small grey">(You saved @cartItem.ProductCart.ProductSizeSavedPrice.ToString("c")!)</b><br>
+                                        }
+                                        else
+                                        {
+                                            <div class="price">@cartItem.ProductCart.ProductSizeStoreFrontPrice.ToString("c") </div>
+                                        }
+
+                                        <div class="count d-flex align-items-center">
+                                            <input type="hidden" name="[@i].CartProductSizeFk" class="prod-size-fk" value="@cartItem.ProductCart.ProductSizeId" />
+                                            @*<span class="decrease-count">-</span>
+                                                <span class="count-value">@cartItem.Quantity</span>
+                                                <span class="increase-count">+</span>*@
+                                        </div>
+                                    </div>
+                                    <!-- End of the Price and Count Box -->
+
+                                    <div class="product-name">
+                                        @if (SiteConfigurationsWc.EnableProductGeneric)
+                                        {
+                                            if (cartItem.ProductCart.ProductSizeGeneric)
+                                            {
+                                                <text>
+                                                    Generic
+                                                </text>
+                                            }
+                                            else
+                                            {
+                                                <text>
+                                                    Brand
+                                                </text>
+                                            }
+                                        }
+                                        @cartItem.ProductCart.ProductStoreFrontName @cartItem.ProductCart.ProductSizeStrength
+                                        @cartItem.ProductCart.ProductSizeQuantity.ToString("0.##") @cartItem.ProductCart.ProductUnitNamePk
+
+                                        @if (@cartItem.ProductCart.ProductTypeFk == 2)
+                                        {
+                                            @*<img src="../../content/images/rx.svg" alt="">*@
+                                            <span class="rx small">
+                                                <text>
+                                                    Prescription required. Simply complete a <b>FREE</b> online telehealth assessment and a licensed @SiteConfigurationsWc.TermForPractitioner will review it and determine the best treatment options for you.
+                                                </text>
+                                            </span>
+
+                                        }
+                                    </div>
+                                    <div class="remove-box">
+                                        <a href="javascript:void(0);" onclick="removeCartItem(@cartItem.ProductCart.ProductSizeId)"><b>Remove</b></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @Html.Partial("_volumeDiscountProductSize", cartItem)
+
+                        i = i + 1;
+                    }
+
+                </div>
+                @if (Model.RelatedProducts != null)
+                {
+                    <div class="offer-box" style="display:none">
+                        <h4>Often bought together</h4>
+                        <div class="cart-card green">
+                            <div class="d-flex">
+                                <div class="product-thumbnail">
+                                    @{var imagePath = SiteConfigurationsWc.ProductImagePath + "product-item-" + @Model.RelatedProducts.FeaturedProductId + ".png";}
+                                    <img src="@imagePath" alt="@Model.RelatedProducts.FeaturedProductName">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center product-detail-section">
+
+                                    <!-- Start of the Price and Count Box -->
+                                    <!-- End of the Price and Count Box -->
+
+                                    <div class="product-name">
+                                        @Model.RelatedProducts.FeaturedProductName
+                                    </div>
+                                    <div class="add-box">
+                                        <a href="@Url.Action(@Model.RelatedProducts.ProductUrl,"product")">Add</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="subtotal container">
+            @if (@Model.Cart.CartItems.Any())
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="total-amount-box">
+                            <h3>Subtotal</h3>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="total-cost">
+                                    @Model.Cart.ComputeCartTotalValue().ToString("c")
+                                </div>
+                                <div class="additional-charges">
+                                    @*<p>Shipping and</p>
+                                        <p>Taxes calculated at checkout</p>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row place-order-section">
+                    <div class="col-12">
+                        <a class="btn btn--rounded" id="place-order" href="@Url.Action("Checkout", "Order", null)">
+                            Place order
+                        </a>
+                    </div>
+                </div>
+
+            }
+            else
+            {
+                <div class="row place-order-section">
+                    <div class="col-12">
+                        <a class="btn btn--rounded" id="place-order" href="@Url.Action("products","product")">
+                            Shop Now
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+
+
+    </div>
+</div>
+<div class="popup-cart-blocker"></div>

@@ -1,0 +1,41 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.ProductStructureViewModel
+
+<div itemscope itemtype="http://schema.org/Product">
+    <meta itemprop="name" content="@Model.ProductName" />
+    <meta itemprop="category" content="@Model.ProductCategory" />
+    <meta itemprop="url" content="@Model.PageUrl" />
+    <meta itemprop="description" content="@Model.ProductDescription" />
+    <meta itemprop="mpn" content="@Model.ProductId" />
+
+    <div itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+
+        <meta itemprop="lowPrice" content="@Model.LowPrice" />
+        <meta itemprop="highPrice" content="@Model.HighPrice" />
+        <meta itemprop="priceCurrency" content="USD" />
+        <meta itemprop="itemCondition" content="http://schema.org/NewCondition" />
+        <meta itemprop="availability" content="http://schema.org/InStock" />
+
+        <span itemprop="seller" itemscope itemtype="http://schema.org/Organization">
+            <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+            <meta itemprop="url" content="https://@SiteConfigurationsWc.StorefrontUrl.ToLower()">
+        </span>
+
+        <div itemprop="itemOffered">
+            @*<meta itemprop="type" content="Thing" />*@
+            <meta itemprop="name" content="@Model.BrandGeneric" />
+        </div>
+    </div>
+
+    @foreach (var thisProduct in Model.RelatedProducts)
+    {
+        <text>
+
+            <div itemprop="isRelatedTo" itemscope itemtype="http://schema.org/Product">
+                <meta itemprop="name" content="@thisProduct.FeaturedProductName">
+                <meta itemprop="url" content="https://@SiteConfigurationsWc.StorefrontUrl.ToLower()/@thisProduct.ProductUrl">
+            </div>
+        </text>
+    }
+</div>

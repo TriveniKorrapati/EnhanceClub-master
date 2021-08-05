@@ -1,0 +1,104 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content=" https://www.enhanceclub.com/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+
+                            @Html.Partial("_breadcrumb")
+
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+
+
+                                <p>A lot of guys think what it would be like if they were "bigger". As in having a <a href="@SiteConfigurationsWc.CdnUrl/blog/good-size-penis">larger penis</a>.  But the reality is, what you have is what you get. Or is it? Erectile dysfunction medications have been on the market helping men for more than 20 years. But does <a href="https://www.enhanceclub.com/products/viagra">Viagra</a> make your penis bigger too? Can it really increase penis size with just a little pill? There are some long and short answers to whether you can increase your penis size. </p>
+
+                                <h5>EASY TO SWALLOW</h5>
+
+                                <p>
+                                    If you want to increase penis size, looking for over the counter solutions will probably leave you deflated. If you want to know if Viagra will make your penis bigger you have to look at how it works within the body.
+
+                                    <br><br>Male erectile dysfunction medication, particularly Viagra, has been <a href="https://www.mayoclinic.org/diseases-conditions/erectile-dysfunction/in-depth/erectile-dysfunction/art-20047821">proven effective and safe</a> for men to address their sexual performance. Taken in pill form, it allows the body to engorge the penis with blood, sufficient for sexual intercourse. As blood vessels in the penis become engorged, it means the erection achieved should be sufficient for sexual intercourse. The rush of blood will increase the length and width of the penis increases. But there’s a catch…
+                                </p>
+
+                                <h5>POWER UP</h5>
+
+                                <p>When Viagra makes your flaccid penis harder and larger, it is only doing so to its natural size. The human body limits how much bigger you can go without surgical or hormonal intervention. Viagra won’t directly <a href="@SiteConfigurationsWc.CdnUrl/blog/can-you-increase-girth-size">increase your penis size</a>, but it can help achieve its full potential. </p>
+
+
+                                <div class="cta-box mb-3">
+                                    <div class="cta-image">
+                                        <img src="/content/images/products/product-item-generic-13412.png" alt="">
+                                    </div>
+                                    <div class="cta-text">
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+                                        <a href="/products" class="btn btn__secondary btn--rounded ">Visit our online store</a>
+                                    </div>
+                                </div>
+
+                                <h5>OTHER OPTIONS</h5>
+
+                                <p>If you want to increase your penis size, there are a few options. One of the most common is <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6474863/">surgery</a>, but it is not for the faint of heart. Essentially, doctors make and incision around the base of the shaft of the penis. The doctor will then extend the penis outward, using part of the shaft length normally hidden inside the body. But this procedure has limits to how many extra centimetres can be pulled out. And what, if any, damage occurs or scar tissue that could impact the ability to achieve and maintain an erection. </p>
+
+                                <h5>HANDS ON</h5>
+
+                                <p>Depending on some medical conditions, there are also topical treatments to help increase penis size, too. Conditions, such as micro-penis, where the male <a href="https://my.clevelandclinic.org/health/diseases/17955-micropenis">sex organs</a> don’t fully mature, can be treated this way. Hormonal creams have been shown to dramatically increase both length and width. But the results are more about helping the penis achieve what would have been its normal size. Rather than just making it bigger. There aren’t any medically approved, non-prescription products that have been proven effective for increasing penis size. </p>
+
+                                <h5>WHAT NOW</h5>
+
+                                <p>If you want to increase the size of your penis using Viagra, it won’t make a big difference. Penis size has more to do to with your overall stature than anything else. Without surgical intervention or medically necessary treatments, you are limited for ways to increase your penis size. Chances are your penis is just the right size and your partner(s) is already satisfied with it. Besides, most people will say that how a man uses his penis is a lot more satisfying that just tossing a giant, thunderous cock you can’t handle.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

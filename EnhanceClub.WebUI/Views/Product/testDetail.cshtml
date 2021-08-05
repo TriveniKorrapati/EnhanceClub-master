@@ -1,0 +1,181 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@using Microsoft.Ajax.Utilities
+@model EnhanceClub.Domain.Entities.ProductSearch
+
+
+@foreach (var  i in "1")
+{
+        <div class="container container-standard">
+
+            <h1>
+                @Model.ProductStoreFrontRealName
+            </h1>
+
+            @if (@Model.ProductTypeFk == 2)
+            {
+            <div class="rx-container">
+                <img src="~/content/images/rx.gif" alt="Prescription required">Only Available By Prescription
+            </div>
+            }
+
+            @*  Norton Guarantee  *@
+            <div class="row">
+
+                <div class="col-md-12" style="margin-left: -15px">
+                    <span id="_GUARANTEE_Kicker" name="_GUARANTEE_Kicker" type="Kicker Custom 4"></span>
+                </div>
+
+            </div>
+
+        <div class="row">
+
+            @if (@Model.ProductSizeBrandCount > 0)
+            {
+                // get only brand product sizes
+
+                List<ProductSize> brandProductSizeList = Model.ProductSizeList.Where(x => !x.ProductSizeGeneric).ToList();
+
+                // Add emptry product Id so that Select a Size is generated
+                brandProductSizeList.Insert(0, new ProductSize {ProductSizeId = 0 });
+                
+                <div class="col-md-12 brand-choice opt-buy">
+
+                    <div class="col-md-3">
+                        <p>Top brand choice</p>
+                    </div>
+
+                    <div class="col-md-9 med-opt med-right">
+                         @using (Html.BeginForm("AddToCart", "Cart", null, FormMethod.Post, new {Name = "frm_product"}))
+                          {
+                              <div class="clearfix product-options">
+
+                                  <div class="product-qty">
+                                      Qty. @Html.TextBox("cartItemQuntity", 1, new { @size = 1, @maxlength = 3, @required = "required" })
+                                  </div>
+
+                                  <div class="product-price">
+
+                                      @Html.DropDownList("menu", new
+                                          SelectList(brandProductSizeList, "DisplayValue", "DisplayText"), new {Name = "productsizeId", @size = 1})
+
+                                  </div>
+
+                                  @*Add To Cart*@ 
+                                  <div class="add-to-cart-group">
+                                      <div class="inner-addon">
+                                         
+                                          <input type="submit" class="btn add-to-cart" value="Add to Cart" onclick="if (productsizeId.value != 0) { return true; } else { alert('Please choose a valid product size.'); return false; }">
+                                      </div>
+                                  </div>
+
+
+                              </div>
+                          }
+                    </div>
+
+                </div>
+            }
+
+            @*--- for generic products ---*@ 
+
+            @if (@Model.ProductSizeGenericCount > 0)
+            {
+                
+                 // get only generic product sizes
+
+                List<ProductSize> genericProductSizeList = Model.ProductSizeList.Where(x => x.ProductSizeGeneric).ToList();
+
+                // Add emptry product Id so that Select a Size is generated
+                genericProductSizeList.Insert(0, new ProductSize {ProductSizeId = 0 });
+                
+                <div class="col-md-12 brand-choice opt-buy">
+
+                    <div class="col-md-3">
+                        <p>Top Generic choice</p>
+                         @*-- What is Generic --*@
+                        <p><a class="btn-what-is-generic" href="#what-is-generic">What is Generic?</a></p>
+                    </div>
+
+                    <div class="col-md-9 med-opt med-right">
+                         @using (Html.BeginForm("AddToCart", "Cart", null, FormMethod.Post, new {Name = "frm_product"}))
+                          {
+                              <div class="clearfix product-options">
+
+                                  <div class="product-qty">
+                                      Qty. @Html.TextBox("cartItemQuntity", 1, new { @size = 1, @maxlength = 3, @required = "required" })
+                                  </div>
+
+                                  <div class="product-price">
+
+                                      @Html.DropDownList("menu", new
+                                          SelectList(genericProductSizeList, "DisplayValue", "DisplayText"), new {Name = "productsizeId", @size = 1})
+
+                                  </div>
+
+                                  @*Add To Cart*@ 
+                                  <div class="add-to-cart-group">
+                                      <div class="inner-addon">
+                                         
+                                          <input type="submit" class="btn add-to-cart" value="Add to Cart" onclick="if (productsizeId.value != 0) { return true; } else { alert('Please choose a valid product size.'); return false; }">
+                                      </div>
+                                  </div>
+
+
+                              </div>
+                          }
+                    </div>
+
+                </div>
+            }
+
+        </div>   @*---End: row of product sizes--- *@
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    
+                    @*-- what-is-generic-popup --*@
+
+                    <div id="what-is-generic-wrap">
+
+                        <div id="what-is-generic">
+                            <h5>What is a Generic Drug?</h5>
+                            <p>A generic drug is a copy of the brand-name drug with the same dosage, safety, strength, quality, consumption method, performance, and intended use. Before generics become available on the market, the generic company must prove it has the same active ingredients as the brand-name drug and works in the same way and in the same amount of time in the body.</p>
+                            <p>The only differences between generics and their brand-name counterparts is that generics are less expensive and may look slightly different (eg. different shape or color), as trademarks laws prevent a generic from looking exactly like the brand-name drug.</p>
+                            <p>Generics are less expensive because generic manufacturers don't have to invest large sums of money to develop a drug. When the brand-name patent expires, generic companies can manufacture a copy of the brand-name and sell it at a substantial discount.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>  @*---End:  row of what is generic--- *@
+
+            @*-- Drug Info --*@
+
+
+            <div class="row med-desc">
+                @Html.Partial("ProductDescription", new {
+                                                        Model.ProductDirections,
+                                                        Model.ProductIngredients, 
+                                                        Model.ProductSideEffects,
+                                                        Model.ProductCautions,
+                                                        Model.ProductDescription,
+                                                       
+                                                        Model.ProductStoreFrontDirections,
+                                                        Model.ProductStoreFrontIngredients,
+                                                        Model.ProductStoreFrontSideEffects,
+                                                        Model.ProductStoreFrontCautions,
+                                                        Model.ProductStoreFrontDescription
+                                                        }.ToExpando())
+
+              
+            </div>
+        </div>
+    }
+
+@*--- Show Side bar with refer friend and free shipping link ---*@
+@section left {
+    @Html.Partial("ReferNFreeShipping")
+    @*@Html.Partial("infoLinks")*@
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap:https://www.enhanceclub.com/sitemap_index

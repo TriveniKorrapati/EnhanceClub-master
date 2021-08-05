@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘Spike’ from Products on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Spike’
+
+Then: It opens the 'Spike' product page</description>
+   <name>Spike from Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>7c1555b1-cc5a-40aa-bc47-a9fa1fe440e9</testCaseGuid>
+</TestCaseEntity>

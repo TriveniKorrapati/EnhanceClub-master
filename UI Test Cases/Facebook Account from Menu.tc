@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘EC Facebook Account’ from 'Follow Us' on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Facebook' logo
+
+Then: It opens the 'EC' account page on Facebook</description>
+   <name>Facebook Account from Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>841dc553-640d-42fd-9a8d-0e5eae7b8504</testCaseGuid>
+</TestCaseEntity>

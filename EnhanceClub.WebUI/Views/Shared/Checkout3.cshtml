@@ -1,0 +1,92 @@
+﻿@model EnhanceClub.WebUI.Models.CartIndexViewModel
+@foreach (var tmp in "1")
+{
+ if (@Model.Cart.CartItems.Any())
+ {
+        <table class="row table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="cart-item">Item</th>
+                                <th class="cart-unit">Price</th>
+                            </tr>
+                        </thead>
+
+             <tbody>
+
+                 @{
+                     var loopvar = 0;
+                 }
+             @foreach (var cartItem in @Model.Cart.CartItems)
+             {
+
+                 <tr>
+
+                     <td class="cart-item" style="word-break: break-all;">
+                         @cartItem.ProductCart.ProductStoreFrontName
+
+                         @cartItem.ProductCart.ProductSizeStrength
+
+                         @cartItem.ProductCart.ProductSizeQuantity
+
+                         @cartItem.ProductCart.ProductUnitNamePk
+@if (cartItem.ProductCart.ProductTypeFk == 2)
+                         {
+                         <span class="rx-required">
+                             <img src="/Content/images/rx.gif" alt="Prescription required">
+                         </span>
+}                     
+    <br>
+                         <input type="hidden" name="[0].CartProductSizeFk" value="19392">
+                         Qty: @cartItem.Quantity<br>
+@if (cartItem.ProductCart.ProductTypeFk == 2)
+{
+    <p> Patient: @Html.DropDownList("CartProfileFk", new
+                                           SelectList(@Model.ProfileList, "PatientProfileId", "PatientName"), new { Name = "[" + @loopvar + "]" + "." + "CartProfileFk" })</p>
+}
+
+                         <input type="hidden" name="[@loopvar].CartProductSizeFk" value="@cartItem.ProductCart.ProductSizeId" />
+
+                     </td>
+                     <td class="cart-unit">
+                         @cartItem.CartLineTotal
+                     </td>
+                     @*<td class="cart-item">
+
+                         @if (cartItem.ProductCart.ProductSizeGeneric)
+                         {
+                             <text>
+                                 Generic
+                             </text>
+                         }
+                        
+
+                        
+                            
+
+                     </td>*@
+
+                     @*<td class="cart-pet">
+                         @if (cartItem.ProductCart.ProductTypeFk == 2)
+                         {
+                             @Html.DropDownList("CartProfileFk", new
+                                           SelectList(@Model.ProfileList, "PatientProfileId", "PatientName"), new { Name = "[" + @loopvar + "]" + "." + "CartProfileFk" })
+                         }
+                     </td>*@
+
+                     @*<td class="cart-refill">
+                         @if (cartItem.ProductCart.ProductTypeFk == 2)
+                         {
+                             @Html.CheckBox("cartRefill", false, new { @class = "checkbox", Name = "[" + @loopvar + "]" + "." +"CartRefill" })
+                          
+                         }
+                     </td>*@
+
+                 </tr>
+
+                 loopvar = loopvar + 1;
+             }
+             </tbody>
+
+         </table>
+    }
+}

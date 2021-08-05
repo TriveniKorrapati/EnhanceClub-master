@@ -1,0 +1,29 @@
+﻿@model dynamic
+
+<div class="product-favorite position-relative content-text">
+    @*<div class="section-count">1.</div>*@
+    <img src="/content/images/home-page/hand-pills.png" class="hand-pills position-absolute" alt="img" />
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-sm-12">
+                <h2><span>SELECT YOUR <br />FAVORITE PRODUCT</span></h2>
+            </div>
+            <!-- /.col-sm-12 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+    <div class="polygon-shape d-sm-flex d-none">
+        <img src="/content/images/home-page/polygon_01.png" alt="">
+        <img src="/content/images/home-page/polygon_03.png" alt="">
+        <img src="/content/images/home-page/polygon_02.png" alt="">
+    </div>
+    <!-- /.polygon-shape -->
+
+    @*<img src="/content/images/home-page/image-step.jpg" class="w-100 d-sm-none d-block" alt="image" />*@
+
+    <div class="btn-shop-sharpe text-center">
+    </div>
+    <a href="@Url.Action("products","product")" class=" btn-shop">Shop Now <img src="/content/images/home-page/arrow-next-white.svg" alt="arrow" /></a>
+</div>

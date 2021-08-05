@@ -1,0 +1,66 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+
+@{
+    var imageFolderPath = @SiteConfigurationsWc.ProductImagePath;
+}
+<div class="product-footer-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-lg-flex justify-content-between">
+                    <div class="product-footer-heading">
+                        <p class="h5">
+                            The best version<br>
+                            of you is just a<br>
+                            <a class="underline" href="@Url.Action("Products", "Product")">click away</a>
+                        </p>
+                    </div>
+                    <div class="product-footer">
+                        @foreach (var prod in Model.FeaturedProducts)
+                                    {
+                                        int productId = prod.FeaturedProductId;
+                                        var productClass = "red";
+                                        switch (productId)
+                                        {
+                                            case 13412:
+                                                productClass = "red";
+                                                break;
+                                            case 13413:
+                                                productClass = "yellow";
+                                                break;
+                                            case 13424:
+                                                productClass = "orange";
+                                                break;
+                                            case 13414:
+                                                productClass = "green";
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                        var imagePath = @imageFolderPath + "product-item-generic-" + @prod.FeaturedProductId + ".png";
+<div class="product-footer-column @productClass">
+    <div class="product-footer-image">
+        <a href="@Url.Action("ProductDetail", "Product",
+                                                                  new { searchTerm = @prod.ProductSearch.ProductStoreFrontSafeUrlName })"><img src="@imagePath" alt=""></a>
+    </div>
+    <div class="product-footer-column__details @productClass">
+        <p class="h3 mb-0">@prod.FeaturedProductDisplayName</p>
+        <p>
+            <b>@prod.ProductSearch.ProductGenericName</b>
+            <span>
+                Generic @prod.ProductSearch.ProductName
+            </span>
+        </p>
+        <a class="btn underline" href="@Url.Action("ProductDetail", "Product",
+                                                                  new { searchTerm = @prod.ProductSearch.ProductStoreFrontSafeUrlName })">Shop Now</a>
+    </div>
+</div>
+
+
+}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

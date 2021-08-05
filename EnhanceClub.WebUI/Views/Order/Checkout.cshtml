@@ -1,0 +1,758 @@
+﻿@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.CheckoutViewModel
+
+
+@section PageScripts
+{
+    <script src="~/scripts/checkout.js"></script>
+
+
+    @if (SiteConfigurationsWc.CheckoutDiscountOffer == 1)
+    {
+        ViewBag.OrderCount = Model.PreviousOrderCount;
+
+        <script>
+
+            function GetCheckoutDiscountCookie(name) {
+
+                let result = document.cookie.match("(^|[^;]+)\\s*" + name + "\\s*=\\s*([^;]+)")
+                return result ? result.pop() : null
+
+                //var value = "; " + document.cookie;
+                //var parts = value.split("; " + name + "=");
+                //if (parts.length == 2) return parts.pop().split(";").shift();
+                //else return null;
+            }
+
+            function SetCheckoutDiscountCookieCount(count) {
+                 
+                var offerCount = GetCheckoutDiscountCookie("CheckoutDiscountViewCount");
+                 
+                if (!isNaN(offerCount) && offerCount !== null) {
+
+                    offerCount = parseInt(offerCount);
+                    offerCount = offerCount + 1;
+
+                    var expires = ""; 
+                    var days = parseInt(@SiteConfigurationsWc.CheckoutDiscountOfferExpiryDays);
+
+                    if (days) {
+                        var date = new Date();
+                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                        expires = "; expires=" + date.toUTCString();
+                    } 
+
+                    document.cookie = "CheckoutDiscountViewCount= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+
+                    if (parseInt(count) >= 0) {
+                        document.cookie = "CheckoutDiscountViewCount" + "=" + count + expires + "; path=/";
+                    }
+                    else {
+                        document.cookie = "CheckoutDiscountViewCount" + "=" + offerCount + expires + "; path=/";
+                    }                    
+                } 
+            }             
+            
+
+            function SetCheckoutDiscountCookie() {
+
+                var expires = ""; 
+                var days = parseInt(@SiteConfigurationsWc.CheckoutDiscountOfferExpiryDays);
+
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                } 
+
+                document.cookie = "CheckoutDiscountViewCount= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+                document.cookie = "CheckoutDiscountViewCount" + "=" + 1 + expires + "; path=/";
+
+                //$(".checkout-popup-container").fadeOut();
+
+                return false;
+            }
+
+
+            $("body").mouseleave(function () {
+                 
+                var orderCount = parseInt( @ViewBag.OrderCount);
+                var discountCookie = GetCheckoutDiscountCookie("CheckoutDiscountViewCount");
+
+                if (orderCount === 0) {
+                    if (isNaN(discountCookie) || discountCookie === null || parseInt(discountCookie) <= 2) {
+
+                        if (isNaN(discountCookie) || discountCookie === null) {
+                            SetCheckoutDiscountCookie();
+                        }
+
+                        $(".checkout-popup-container").fadeIn();
+                    }
+                } 
+            });
+
+            $(".checkout-popup-exit").on("click", function () {
+                $(".checkout-popup-container").fadeOut(); 
+                SetCheckoutDiscountCookieCount();
+            });
+
+            function CloseDiscountWindow() {
+                $(".checkout-popup-container").fadeOut(); 
+                SetCheckoutDiscountCookieCount(3);
+                return true;
+            }
+        </script>
+    }
+}
+
+@if (SiteConfigurationsWc.CheckoutDiscountOffer == 1)
+{
+    <!-- Checkout Popup -->
+    <div class="checkout-popup-container">
+        <div class="checkout-popup">
+            <div class="checkout-popup-exit">
+                <img src="/Content/images/close-yellow.svg" alt="" id="CloseImageClick">
+            </div>
+            <div class="checkout-popup-info">
+                <p class="checkout-popup-heading">
+                    <b>Wait!</b>
+                    Don't leave yet...
+                    <span class="highlight">20% OFF</span>
+                    your first order
+                </p>
+                <p class="checkout-popup-coupon">
+                    Use code* <span class="checkout-popup-coupon-code">POPUP20</span>
+                </p>
+                <p class="checkout-popup-disclaimer">
+                    *Please remember this coupon code <br class="d-none d-md-block">above and enter it during checkout.
+                </p>
+                @*<div class="btn btn--default mb-2">Save Now</div><br class="d-none d-sm-block">*@
+                <a  id="CloseWindowAnchor" onclick="CloseDiscountWindow(0)">No thanks, I would rather not save money</a>
+            </div>
+            <div class="checkout-popup-image image-1"></div>
+        </div>
+        <div class="checkout-popup-bg"></div>
+    </div>
+    <!-- /Checkout Popup -->
+}
+
+@{
+    string requiredDynamically = "";
+
+    bool enablePayment = false;
+    enablePayment = SiteConfigurationsWc.EnablePayment;
+    if (enablePayment)
+    {
+        requiredDynamically = "required";
+    }
+    if (Model.Cart.CouponPromotionalFreeOrder || Model.Cart.CartNetTotal == 0)
+    {
+        requiredDynamically = "";
+    }
+}
+@using (Html.BeginForm("Checkout", "Order", null, FormMethod.Post, new { @class = "form-horizontal", @role = "form", @id = "frm_checkout", @name = "frm_checkout_2" }))
+{
+    <input type="hidden" name="isRefill" value="@Model.IsRefill">
+    <!-- Start of Main -->
+    <div class="dashboard-page order-page cart-page">
+        <!-- Start of the Top Clip Path -->
+        <!-- <div class="top-clip">
+            <div class="dash-top-clip">
+            </div>
+        </div> -->
+        <!-- End of the Top Clip Path -->
+
+        <div class="section top-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="mb-4">Shipping and Payment</h4>
+                    </div>
+                </div>
+                @if (TempData["creditCardError"] != null)
+                {
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-12 col-xl-8 validation-summary-errors" data-valmsg-summary="true">
+                            <ul>
+                                <li> Error.  @TempData["creditCardError"]</li>
+                            </ul>
+                        </div>
+                        @*<input type="hidden" id="credit-card-error" value="@TempData["creditCardError"]" />*@
+                    </div>
+
+                }
+                <div class="row">
+                    <!-- Start of Sidebar -->
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-4 sidebar order-2 white" id="order-summary">
+                        @Html.Partial("_orderSummary")
+                    </div>
+                    <!-- End of Sidebar -->
+                    <!-- Start of Main Section -->
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-8 order-1">
+                        <!-- Start of Pre-Auth -->
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="white mt-0 mb-4"><span class="highlight">This is a pre-authorization.</span> You will be charged once your order has been approved by the pharmacy and the @SiteConfigurationsWc.TermForPractitioner. </p>
+                            </div>
+                        </div>
+                        <!-- End of Pre-Auth -->
+                        <!-- Start of Card Section -->
+                        @{
+                            int counter = 0;
+                            var sortedCartItemList = @Model.Cart.CartItems.OrderByDescending(x => x.CartItemOrder);
+                        }
+                        @foreach (var cartItem in @sortedCartItemList)
+                        {
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card-box mb-0">
+                                        <div class="upper-card">
+                                            <div class="row align-items-center">
+                                                <div class="col-8">
+                                                    <h4 class="text-uppercase">@cartItem.ProductCart.ProductStoreFrontName</h4>
+                                                </div>
+                                                @if (SiteConfigurationsWc.EnableSubscription)
+                                                {
+
+                                                    <div class="col-4 white">
+                                                        <input type="hidden" name="[@counter].ProductSizeId" value="@cartItem.ProductCart.ProductSizeId" />
+                                                        <input type="hidden" name="[@counter].ProductId" value="@cartItem.ProductCart.ProductId" />
+                                                        <input type="hidden" name="[@counter].CartItemQuantity" value="@cartItem.Quantity" />
+                                                        @if (@cartItem.ProductCart.Subscription)
+                                                        {
+                                                            <h6>
+                                                                @Html.CheckBox("[" + @counter + "].Subscription", @cartItem.ProductCart.Subscription,
+                                                           new { @class = "auto-refill",
+                                                                  disabled = "disabled"  }) Auto Refill
+                                                            </h6>
+                                                        }
+                                                        else
+                                                        {
+                                                            <h6>
+                                                                @Html.CheckBox("[" + @counter + "].Subscription", @cartItem.ProductCart.Subscription,
+                                                           new { @class = "auto-refill" }) Auto Refill
+                                                            </h6>
+                                                        }
+
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="lower-card">
+                                            <div class="row">
+                                                <div class="col-12 checkout-order">
+                                                    <div class="checkout-image">
+                                                        <img src="@cartItem.ProductCart.ProductImagePath">
+                                                    </div>
+                                                    <p class="checkout-info">
+                                                        @if (SiteConfigurationsWc.EnableProductGeneric)
+                                                        {
+                                                            if (cartItem.ProductCart.ProductSizeGeneric)
+                                                            {
+                                                                <text>
+                                                                    Generic
+                                                                </text>
+                                                            }
+                                                            else
+                                                            {
+                                                                <text>
+                                                                    Brand
+                                                                </text>
+                                                            }
+                                                        }
+                                                        @cartItem.ProductCart.ProductSizeStrength
+                                                        @cartItem.ProductCart.ProductSizeQuantity.ToString("0.##") @cartItem.ProductCart.ProductUnitNamePk
+                                                        @if (cartItem.ProductCart.ProductSizeNonDiscountedPrice > 0)
+                                                        {
+                                                            <span class="ml-5 text-right"> <b class="small grey">(You saved @cartItem.ProductCart.ProductSizeSavedPrice.ToString("c")!)</b></span>
+                                                        }
+                                                        <br>
+                                                        @*Qty: @cartItem.Quantity <br />*@
+                                                        @if (@cartItem.ProductCart.ProductTypeFk == 2)
+                                                        {
+                                                            @*<span class="rx">
+                                                                    <img src="../../content/images/rx.svg" alt="">
+                                                                    <span>Prescription Required</span>
+                                                                </span>*@
+                                                            <span class="rx small">
+                                                                <text>
+                                                                    Prescription required. Simply complete a <b>FREE</b> online telehealth assessment and a licensed @SiteConfigurationsWc.TermForPractitioner will review it and determine the best treatment options for you.
+                                                                </text>
+                                                            </span>
+                                                            if (SiteConfigurationsWc.EnableSubscription && @cartItem.ProductCart.Subscription)
+                                                            {
+                                                                <span class="text-warning small">
+                                                                    You have already subscribed for Subscription for this product. Please review your order before proceeding
+                                                                </span>
+                                                            }
+                                                        }
+                                                    </p>
+                                                    @if (cartItem.ProductCart.ProductSizeNonDiscountedPrice > 0)
+                                                    {
+                                                        <div class="mb-0 checkout-price cart-discount-price">
+                                                            <span class="new-price">
+                                                                <b>@cartItem.ProductCart.ProductSizeStoreFrontPrice.ToString("c")</b>
+                                                            </span>
+                                                            <div class="old-price">@cartItem.ProductCart.ProductSizeNonDiscountedPrice</div>
+                                                        </div>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="mb-0 checkout-price"><strong>@cartItem.ProductCart.ProductSizeStoreFrontPrice.ToString("c")</strong></p>
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-0">
+                                @Html.Partial("_volumeDiscountProductSize", cartItem)
+                            </div>
+                            counter++;
+                        }
+                        <!-- End of Card Section -->
+                        <!-- Start of Shipping Address -->
+                        <input type="hidden" value="@SiteConfigurationsWc.ShowMultipleShippingAddress" id="multiple-address" />
+                        <input type="hidden" id="selected-ship-address" name="selectedShipAddressFk" value="@Model.SelectedShipAddressFk" />
+                        <div class="row mt-4">
+                            <div class="col-12 d-table mb-4">
+                                <h4 class="d-table-cell">Shipping Address</h4>
+                                @if (SiteConfigurationsWc.ShowMultipleShippingAddress == 0)
+                                {
+                                    <a href="#" class="d-table-cell text-right edit-address">Edit Address</a>
+                                }
+
+                            </div>
+                        </div>
+
+                        @if (SiteConfigurationsWc.ShowMultipleShippingAddress == 1)
+                        {
+
+                            <div class="address-section row mb-5">
+                                @Html.Partial("_shippingAddress",  new ShippingAddressViewModel
+                           {
+                               CustomerShippingAddress = Model.CustomerShippingAddresses,
+                               ProvinceList = Model.ProvinceList,
+                               AllowEdit = false,
+                               SelectedShipAddressFk = Model.SelectedShipAddressFk
+                           }))
+
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row mb-5">
+                                <div class="col-12 col-md-12">
+                                    <div class="card-address active">
+                                        <div class="icon">
+                                            <img src="../../content/images/shipping-icon.svg" alt="">
+                                        </div>
+                                        <div class="address-info">
+
+                                            <p>
+                                                @Model.CustomerInfo.CustomerFirstName @Model.CustomerInfo.CustomerLastName<br>
+                                                @Model.CustomerInfo.CustomerAddress<br>
+                                                @Model.CustomerInfo.CustomerCity, @Model.CustomerInfo.BillingProvinceName, @Model.CustomerInfo.BillingCountryName<br>
+                                                @Model.CustomerInfo.CustomerZipCode
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-container address-form mb-4">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="profile-form row">
+                                            <div class="col-12 col-md-6 form-group info-group">
+                                                <label for="username" class="text-capitalize">Address</label>
+                                                <span class="input-wrapper extended mb-0 d-block">
+                                                    <!-- Input -->
+                                                    @Html.TextBox("ShippingAddress", @Model.CustomerInfo.CustomerAddress,
+                                                     new
+                                                     {
+                                                         required = "required",
+                                                         @class = "form-control",
+                                                         placeholder = "Address"
+                                                     })
+                                                </span>
+                                            </div>
+                                            <div class="col-12 col-md-6 form-group info-group">
+                                                <label for="username" class="text-capitalize">Country</label>
+                                                <span class="input-wrapper extended mb-0 d-block">
+                                                    <!-- Input -->
+                                                    <select class="form-control" name="ShippingCountryId">
+                                                        <option value="@SiteConfigurationsWc.StoreFrontCountryId" selected>@SiteConfigurationsWc.StorefrontCountryName</option>
+                                                    </select>
+                                                </span>
+                                            </div>
+                                            <div class="col-12 col-md-6 form-group info-group">
+                                                <label for="username" class="text-capitalize">City</label>
+                                                <span class="input-wrapper extended mb-0 d-block">
+                                                    <!-- Input -->
+                                                    @Html.TextBox("ShippingCity", @Model.CustomerInfo.CustomerCity,
+                                                            new
+                                                            {
+                                                                required = "required",
+                                                                @class = "form-control",
+                                                                @placeholder = "City"
+                                                            })
+                                                </span>
+                                            </div>
+                                            <div class="col-12 col-md-6 form-group info-group">
+                                                <label for="username" class="text-capitalize">Province</label>
+                                                <span class="input-wrapper extended mb-0 d-block">
+                                                    <!-- Input -->
+                                                    @Html.DropDownList("ShippingProvinceId", new
+                                                    SelectList(Model.ProvinceList, "ProvinceId", "ProvinceName", @Model.CustomerInfo.CustomerProvinceId),
+                                                        new { @class = "form-control", Name = "ShippingProvinceId" })
+                                                </span>
+                                            </div>
+                                            <div class="col-12 col-md-6 form-group info-group">
+                                                <label for="username" class="text-capitalize">Postal Code</label>
+                                                <span class="input-wrapper extended mb-0 d-block">
+                                                    <!-- Input -->
+                                                    @Html.TextBox("ShippingZipCode", @Model.CustomerInfo.CustomerZipCode,
+                                                        new
+                                                        {
+                                                            required = "required",
+                                                            @class = "form-control",
+                                                            @placeholder = "Postal Code"
+                                                        })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+
+                        <!-- End of Shipping Address -->
+                        <!-- Start of Billing Address -->
+                        <div class="row">
+                            <div class="col-12 d-table mb-4">
+                                <h4 class="d-table-cell">Billing Address</h4>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-12 col-md-12">
+                                <div class="check-section">
+                                    <div class="custom-control custom-check">
+                                        <input name="" class="custom-control-input billing-address" type="checkbox" value="true">
+                                        <label class="custom-control-label"> Same as Shipping Address</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-container address-form mt-4 mb-4" id="same-billing-address">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="profile-form row">
+                                        <input type="hidden" id="Customer_BillingFirstName"
+                                               value="@Model.CustomerInfo.CustomerFirstName" name="Customer.CustomerFirstName" />
+                                        <input type="hidden" id="Customer_BillingLastName"
+                                               value="@Model.CustomerInfo.CustomerLastName" name="Customer.CustomerLastName" />
+                                        <div class="col-12 col-md-6 form-group info-group">
+                                            <label for="username" class="text-capitalize">Address</label>
+                                            <span class="input-wrapper extended mb-0 d-block">
+                                                <!-- Input -->
+                                                @Html.TextBox("Customer.CustomerAddress", @Model.CustomerInfo != null ? @Model.CustomerInfo.CustomerAddress : null,
+                                                            new
+                                                            {
+                                                                required = "required",
+                                                                @class = "form-control",
+                                                                @placeholder = "Address"
+                                                            })
+                                            </span>
+                                        </div>
+                                        <div class="col-12 col-md-6 form-group info-group">
+                                            <label for="username" class="text-capitalize">Country</label>
+                                            <span class="input-wrapper extended mb-0 d-block">
+                                                <!-- Input -->
+                                                <select class="form-control" name="Customer.CustomerCountryId">
+                                                    <option value="@SiteConfigurationsWc.StoreFrontCountryId">@SiteConfigurationsWc.StorefrontCountryName</option>
+                                                </select>
+                                            </span>
+                                        </div>
+                                        <div class="col-12 col-md-6 form-group info-group">
+                                            <label for="username" class="text-capitalize">City</label>
+                                            <span class="input-wrapper extended mb-0 d-block">
+                                                <!-- Input -->
+                                                @Html.TextBox("Customer.CustomerCity", @Model.CustomerInfo != null ? @Model.CustomerInfo.CustomerCity : null,
+                                                        new
+                                                        {
+                                                            required = "required",
+                                                            @class = "form-control",
+                                                            @placeholder = "City"
+                                                        })
+                                            </span>
+                                        </div>
+                                        <div class="col-12 col-md-6 form-group info-group">
+                                            <label for="username" class="text-capitalize">Province</label>
+                                            <span class="input-wrapper extended mb-0 d-block">
+                                                <!-- Input -->
+                                                @Html.DropDownList("Customer.CustomerProvinceId", new
+                                                    SelectList(Model.ProvinceList, "ProvinceId", "ProvinceName", Model.CustomerInfo.CustomerProvinceId),
+                                                    new { Name = "Customer.CustomerProvinceId", @class = "form-control" })
+                                                @*<input type="text" value="@Model.CustomerInfo.BillingProvinceName" class="form-control" style="background-color: #EBEBE4;" readonly />*@
+
+                                                @Html.Hidden("Customer.CustomerProvinceId", Model.CustomerInfo.CustomerProvinceId)
+                                            </span>
+                                        </div>
+                                        <div class="col-12 col-md-6 form-group info-group">
+                                            <label for="username" class="text-capitalize">Postal Code</label>
+                                            <span class="input-wrapper extended mb-0 d-block">
+                                                <!-- Input -->
+                                                @Html.TextBox("Customer.CustomerZipCode", @Model.CustomerInfo.CustomerZipCode,
+                                                new
+                                                {
+                                                    required = "required",
+                                                    @class = "form-control",
+                                                    @placeholder = "Postal Code"
+                                                })
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Billing Address -->
+                        <!-- Start of Coupon / Gift Card -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="coupon">
+                                    <!--End of Credit Applied-->
+                                    @*  commented check to apply either coupon or credit ; date July 9, 2021
+            @if (!@Model.Cart.CreditAppliedFlag)
+        {*@
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h4> Coupon</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row align-items-center">
+                                        <div class="col-12 col-md-6">
+                                            @{
+
+                                                string textBoxStyle = "";
+                                            }
+
+                                            @if (@Model.Cart.CouponValidMessageActual == "Coupon Applied Successfully")
+                                            {
+                                                textBoxStyle = "background-color:white; border: 1px solid;border-color: green !important;";
+                                            }
+                                            <div class="form-group info-group discount mb-0 p-0
+
+                                                  @if (@Model.Cart.CouponValidMessageActual == "Coupon Applied Successfully" || @Model.Cart.CouponValidMessageActual == null||string.IsNullOrEmpty(@Model.Cart.CouponCode))
+                                                  {
+                                               <text></text>
+
+                                                  }
+                                                  else
+                                                  {
+                                                      <text>error</text>
+
+                                                  }
+                                                  ">
+                                                <span class="input-wrapper extended mb-0 d-block">
+                                                    <div class="error-btn"></div>
+                                                    <input type="hidden" name="getCouponCodeCrossValue" class="CrossClass" value="0" />
+                                                    @Html.TextBox("couponCode", @Model.Cart.CouponCode,
+                                                    new
+                                                    {
+                                                        @class = "form-control CouponCodeClass",
+                                                        @placeholder = "Coupon Code",
+                                                    @style = @textBoxStyle
+                                                    })
+                                                </span>
+                                                <div class="btn btn-default" onclick="applyChanges()">Apply</div>
+                                            </div>
+                                            @if (@Model.Cart.CouponValidMessageActual == "Coupon Applied Successfully")
+                                            {
+                                                <input type="hidden" id="couponApplied" value="1" />
+                                                <p class="success-msg mt-1">
+                                                    @Model.Cart.CouponValidMessageActual
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                if ((!string.IsNullOrEmpty(@Model.Cart.CouponValidMessageActual)) && !string.IsNullOrEmpty(Model.Cart.CouponCode))
+                                                {
+                                                    <p class="error-msg mt-1" id="coupon-message">
+                                                        @Model.Cart.CouponValidMessageActual
+                                                    </p>
+                                                }
+                                            }
+                                            <!-- <p class="error-msg mt-1">
+                Coupon invalid
+            </p> -->
+                                            <!-- <p class="success-msg mt-1">
+                <span>THISISACOUPONCODE</span> applied!
+            </p> -->
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <p class="m-0 white mt-3 mt-md-0">
+                                                <span class="highlight">Do you have a coupon?</span><br>
+                                                It's time to use it!
+                                            </p>
+                                        </div>
+                                    </div>
+                                    @*}   commented check to apply either coupon or credit ; date July 9, 2021*@
+                                    @if (Model.CreditAvailable > 0) /* && @Model.Cart.CouponAmount == 0)*/ // commented check to apply either coupon or credit ; date July 9, 2021
+                                    {
+                                        @*if (!@Model.Cart.CreditAppliedFlag)
+            {
+                <span class="highlight apply-credit">You can choose to apply either Coupon or Available Credit</span>
+            }*@
+
+                                        <div class="row apply-credit">
+                                            <div class="col-12">
+                                                <h4> Credit</h4>
+                                            </div>
+                                        </div>
+                                        decimal maxCredit = Math.Min(@Model.Cart.CartNetTotalBeforeCredit * @Model.StoreFrontExchangeRate, @Model.CreditAvailable);
+                                        <input type="hidden" id="CartNetTotal" value="@Model.Cart.CartNetTotal" />
+                                        <input type="hidden" id="MaxCreditAmount" value="@maxCredit" />
+                                        <div class="row align-items-center mb-4 apply-credit">
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group info-group discount mb-0 p-0">
+                                                    <span class="input-wrapper extended mb-0 d-block">
+                                                        @Html.TextBox("creditApplied", @Model.Cart.CreditApplied,
+                                                        new
+                                                        {
+                                                            @class = "form-control",
+                                                            @placeholder = "Max " + @Model.CreditAvailable.ToString("c") + " Credits"
+                                                        })
+                                                    </span>
+                                                    <div class="btn btn-default" onclick="applyChanges()">Apply</div>
+                                                </div>
+                                                @if (!string.IsNullOrEmpty(Convert.ToString(TempData["creditError"])))
+                                                {
+                                                    <p class="error-msg mt-1" id="credit-message">
+                                                        @TempData["creditError"]
+                                                    </p>
+                                                }
+                                                <!-- <p class="success-msg mt-1">
+                    <span>THISISACOUPONCODE</span> applied!
+                </p> -->
+                                                <!-- <p class="error-msg mt-1">
+                    Coupon invalid
+                </p> -->
+                                            </div>
+                                            <div class="col-12 col-md-6">
+                                                <p class="m-0 white mt-3 mt-md-0">
+                                                    <span class="highlight">You have credit!</span><br>
+                                                    You have <b>@Model.CreditAvailable.ToString("c")</b> attached to your account.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Coupon / Gift Card -->
+                        <!-- Start of Credit / Debit -->
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h4 class="d-block">Payment</h4>
+                                    </div>
+                                </div>
+                                <div class="form-container mt-0">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="profile-form row">
+                                                <div class="col-12 col-md-6 form-group info-group">
+                                                    <label for="username" class="text-capitalize">Card Type</label>
+                                                    <span class="input-wrapper extended mb-0 d-block">
+                                                        @Html.DropDownList("cardType",
+                                         new SelectList(Model.CardTypeList,
+                                             "Value",
+                                             "Text",
+                                             String.Empty),
+                                                 new { Name = "cardType", Id = "cardType", @class = "custom-select" , @required = requiredDynamically })
+                                                    </span>
+                                                </div>
+                                                <div class="col-12 col-md-6 form-group info-group">
+                                                    <label for="username" class="text-capitalize">Name on card</label>
+                                                    <span class="input-wrapper extended mb-0 d-block">
+                                                        <!-- Input -->
+                                                        <input type="text" class="form-control" placeholder="" value="" name="cardHolderName" id="cc_name" maxlength="50" @requiredDynamically>
+                                                    </span>
+                                                </div>
+                                                <div class="col-12 col-md-6 form-group info-group">
+                                                    <label for="username" class="text-capitalize">Credit Number</label>
+                                                    <span class="input-wrapper extended mb-0 d-block">
+                                                        <!-- Input -->
+                                                        <input type="text" class="form-control creditCardText" autocomplete="off" placeholder="0000-0000-0000-0000" value="" maxlength="19" name="cardNumber" id="cardNumber" @requiredDynamically>
+                                                    </span>
+                                                </div>
+                                                <div class="col-12 col-md-6 form-group info-group">
+                                                    <label for="username" class="text-capitalize">Expiry Date</label>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            @Html.DropDownList("CardExpireMonth", new SelectList(Model.MonthList, "Value", "Text"),
+                                                      new { Name = "CardExpireMonth", Id = "CardExpireMonth", @class = "custom-select",@required=requiredDynamically })
+                                                        </div>
+                                                        <div class="col-6">
+                                                            @Html.DropDownList("CardExpireYear", new SelectList(Model.YearList, "Value", "Text", null),
+                           new { Name = "CardExpireYear", Id = "CardExpireYear", @class = "custom-select", @required = requiredDynamically })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6 col-md-3 form-group info-group">
+                                                    <label for="username" class="text-capitalize">CVV</label>
+                                                    <span class="input-wrapper extended mb-0 d-block">
+                                                        <!-- Input -->
+                                                        <input type="text" class="form-control" placeholder="123" value="" id="cvvCode" name="cvvCode" maxlength="3" pattern="\d{3}" @requiredDynamically>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Credit / Debit -->
+                        <!-- Start of Submit -->
+                        <div class="row align-items-center d-none d-xl-block">
+                            <div class="col-12 col-md-6 form-group text-center text-xl-right mb-0">
+                                <button type="submit" formaction="/order/ordercreate" id="submit-order" formmethod="post" class="btn btn-default bg-green">Get it now</button>
+                            </div>
+                            <div class="col-12 col-md-6 text-center text-md-left">
+                                <p class="notify">This is a preauthorization. You will be charged once your order has been approved by the pharmacy and the @SiteConfigurationsWc.TermForPractitioner</p>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                        </div>
+                        <!-- End of Submit -->
+                    </div>
+                    <!-- End of Main Section -->
+
+                </div>
+            </div>
+
+
+            <!-- Start of the Bottom Clip Path -->
+            @*<div class="bottom-clip">
+                    <div class="dash-bottom-clip">
+                    </div>
+                </div>*@
+            <!-- End of Bottom Clip path -->
+        </div>
+
+
+    </div>
+    <!-- End of Main -->
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario: Open ‘Terms and conditions’ from 'Need help' on the Menu page
+
+Given: User is on Menu Page
+
+When: User clicks ‘Terms and conditions'
+
+Then: It opens the 'Terms and conditions' page</description>
+   <name>Terms And conditions form Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>a12b6414-88c2-4f74-91ef-c2d66f5da7b6</testCaseGuid>
+</TestCaseEntity>

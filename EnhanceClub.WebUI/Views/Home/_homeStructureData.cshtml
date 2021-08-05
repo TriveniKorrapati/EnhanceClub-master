@@ -1,0 +1,31 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.HomeStructureViewModel
+
+<script type="application/ld+json">
+    {
+    "@@context": "http://schema.org",
+    "@@type": "Pharmacy",
+    "name": "@SiteConfigurationsWc.StorefrontName",
+    "url" : " @SiteConfigurationsWc.StorefrontUrl",
+    "logo": " https://www.enhanceclub.com/content/images/logo-active.svg ",
+    "image": " https://www.enhanceclub.com/content/images/logo-active.svg ",
+    "pricerange": "$$",
+    "photo" : " https://www.enhanceclub.com/content/images/logo-active.svg ",
+    "description": "@Model.MetaDescription",
+    "telephone": "@SiteConfigurationsWc.StorefrontContact",
+    "address": "@SiteConfigurationsWc.StorefrontAddress1, @SiteConfigurationsWc.StorefrontAddress2, @SiteConfigurationsWc.StorefrontAddress3",
+    "sameAs": [
+    "https://www.facebook.com/enhanceclubnow",
+    "http://instagram.com/enhanceclub",
+    "https://twitter.com/enhanceclub"
+    ],
+    "areaServed" : [{
+    "@@type": "Country",
+    "name": "CA"
+    },{
+    "@@type": "Country",
+    "name": "USA"
+    }]
+    },
+
+</script> 

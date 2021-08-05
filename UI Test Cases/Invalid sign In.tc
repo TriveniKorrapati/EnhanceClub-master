@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : User signs with Invalid credentials
+
+Given: I am a logged-out system user.
+
+When: I entered the invalid credentials.
+
+Then: I cannot log in into my account</description>
+   <name>Invalid sign In</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>06de5201-b202-4b05-be04-6674853d78db</testCaseGuid>
+</TestCaseEntity>

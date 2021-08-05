@@ -1,0 +1,92 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model System.Collections.Generic.IEnumerable<FeaturedProduct>
+
+<div class="product-footer-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-lg-flex justify-content-between">
+                    <div class="product-footer-heading">
+                        <p class="h5">
+                            The best version<br>
+                            of you is just a<br>
+                            <a class="underline" href="@Url.Action("products", "product")">click away</a>
+                        </p>
+                    </div>
+                    @if (Model != null)
+                    {
+                        int count = 1;
+                        <div class="product-footer">
+                            @foreach (var product in Model)
+
+                            {
+                                string urlAction;
+                                string colorClass = "";
+                                switch(product.FeaturedProductId)
+                                {
+                                    case 13412:
+                                        colorClass = "red";
+                                        break;
+
+                                    case 13413:
+                                        colorClass = "yellow";
+                                        break;
+
+                                    case 13424:
+                                        colorClass = "orange";
+                                        break;
+
+                                    case 13414:
+                                        colorClass = "green";
+                                        break;
+                                }
+                                FeaturedProduct featuredProductObj = (FeaturedProduct)product;
+
+                                var productImageUrl = @SiteConfigurationsWc.ProductImagePath + @SiteConfigurationsWc.ProductGenericImagePrefix + featuredProductObj.FeaturedProductId + ".png";
+
+                              
+
+                               
+                                <div class="product-footer-column @colorClass">
+                                    <div class="product-footer-image">
+                                        <a href="@Url.Action("ProductDetail", "product", new { searchTerm = @featuredProductObj.ProductUrl })"> 
+                                        <img src="@productImageUrl" alt=""></a>
+                                    </div>
+                                    <div class="product-footer-column__details">
+                                        <p class="h3 mb-0">@featuredProductObj.FeaturedProductDisplayName</p>
+                                        <p>
+                                            @if (featuredProductObj.FeaturedProductName.ToLower().Contains("caverject"))
+                                            {
+                                                @featuredProductObj.FeaturedProductName
+                                            }
+                                            else
+                                            {
+                                                @featuredProductObj.FeaturedProductGenericName
+                                                if (@SiteConfigurationsWc.ShowProductBrandNameWithGeneric == "1")
+                                                { 
+                                                    <span>
+                                                        (Generic @featuredProductObj.FeaturedProductName)
+                                                    </span>
+                                                }
+                                            }
+                                        </p>
+                                        <a class="btn underline" href="@Url.Action("ProductDetail", "product", new { searchTerm = @featuredProductObj.ProductUrl })">Shop Now</a>
+                                    </div>
+                                </div>
+
+                                if(count == 3)
+                                {
+                                    break;
+                                }
+                                count += 1;
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 

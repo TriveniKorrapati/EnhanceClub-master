@@ -1,0 +1,105 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model dynamic
+
+<ul class="list-unstyled list-links product-list">
+
+    <li>
+
+        <a href="@Url.Action("ProductDetail",
+                     "Product",
+                     new {searchTerm = "viagra"})" class="">
+            <span class="viagra-gradient">EXTRA</span>
+                SILDENAFIL
+                @if (@SiteConfigurationsWc.ShowProductBrandNameWithGeneric == "1")
+                {
+                    <text>(Generic Viagra)</text>} 
+        </a>
+
+    </li>
+
+    <li>
+        <a href="@Url.Action("ProductDetail",
+
+                     "Product",
+                     new {searchTerm = "levitra"})" class="">
+            <span class="vandernafil-gradient">RISE</span>  
+                VARDENAFIL  @if (@SiteConfigurationsWc.ShowProductBrandNameWithGeneric == "1")
+                {
+                    <text>(Generic Levitra)</text>}
+            
+        </a>
+
+    </li>
+
+    <li>
+        <a href="@Url.Action("ProductDetail",
+
+                     "Product",
+                     new {searchTerm = "cialis"})" class="">
+            <span class="cialis-gradient">PLAY</span>
+                TADALAFIL @if (@SiteConfigurationsWc.ShowProductBrandNameWithGeneric == "1")
+                {
+                    <text>(Generic Cialis)</text>}
+        </a>
+    </li>
+
+    <li>
+        <a href="@Url.Action("ProductDetail",
+
+                     "Product",
+                     new {searchTerm = "propecia"})" class="">
+            <span class="finasteride-gradient">THICK</span>
+                FINASTERIDE  @if (@SiteConfigurationsWc.ShowProductBrandNameWithGeneric == "1")
+                {
+                    <text>(Generic Propecia)</text>            } 
+        </a>
+
+    </li>
+
+    @*<li>
+
+            <a href="@Url.Action("ProductDetail",
+                         "Product",
+                         new {searchTerm = "valtrex"})" class="">
+                SPIKE<span class="valtrex-gradient">VALTREX</span>
+
+            </a>
+
+        </li>
+        <li>
+            <a href="@Url.Action("ProductDetail",
+
+                         "Product",
+                         new {searchTerm = "staxyn"})" class="">
+                EASE<span class="staxyn-gradient">STAXYN</span>
+            </a>
+        </li>*@
+
+
+    @*<li>
+            <a href="@Url.Action("ProductDetail",
+
+                         "Product",
+                         new {searchTerm = "acyclovir"})" class="">
+                FRESH <span class="acyclovir-gradient">ACYCLOVIR</span>
+            </a>
+
+        </li>*@
+    @if (!SiteConfigurationsWc.InactiveProductLinkHide)
+    {
+        <li>
+            <a href="@Url.Action("ProductDetail",
+
+             "Product",
+             new { searchTerm = "caverject-impulse-kit" })" class="">
+                <span class="alprostadil-gradient caverject-gradient">INJECT</span>
+                    Caverject
+                    @*ALPROSTADIL  @if (@SiteConfigurationsWc.ShowProductBrandNameWithGeneric == "1")
+                        {
+                            <text>(Generic Caverject)</text>}*@
+                
+            </a>
+
+        </li>
+    }
+</ul>

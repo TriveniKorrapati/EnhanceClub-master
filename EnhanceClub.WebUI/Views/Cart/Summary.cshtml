@@ -1,0 +1,100 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.Domain.Entities.Cart
+
+
+@*<a href="/cart" >
+    <i class="las la-shopping-cart"></i>
+    <span class="hide-for-mobile">
+        Cart
+    </span>
+    @Model.CartItems.Sum(x => x.Quantity) item(s)
+  
+    </a>*@
+<div class="ld-module-cart">
+
+    <span class="ld-module-trigger collapsed" role="button" data-ld-toggle="true" data-toggle="collapse" data-target="#shop-cart" aria-controls="shop-cart" aria-expanded="false">
+        <span class="ld-module-trigger-icon">
+            <i class="icon-ld-cart"></i>
+        </span><!-- /.ld-module-trigger-icon -->
+        <span class="ld-module-trigger-count">@Model.CartItems.Sum(x => x.Quantity)</span>
+    </span><!-- /.ld-module-trigger -->
+
+    @*<div class="ld-module-dropdown collapse" id="shop-cart" aria-expanded="false" role="list">
+
+        <div class="ld-cart-contents">
+
+            <div class="ld-cart-head hidden">
+                <span class="font-weight-bold text-uppercase ltr-sp-175">Your cart <span class="color-primary">2</span></span>
+            </div><!-- /.ld-cart-head -->
+            @if (@Model.CartItems.Any())
+            {
+                int i = 0;
+              
+                <div class="ld-cart-products">
+                    @foreach (var cartItem in @Model.CartItems)
+                    {
+                        string imageSource = "https://"+@SiteConfigurationsWc.StorefrontUrl+"/Content/images/product/" + @cartItem.ProductCart.ProductId + ".png";
+                        <div class="ld-cart-product">
+                            <a href="@Url.Action("RemoveFromCart", "Cart", new {ProductId = cartItem.ProductCart.ProductSizeId })" class="ld-cart-product-remove remove">
+                                <i class="icon-ion-ios-close"></i>
+                            </a>
+                            <input type="hidden" name="[@i].CartProductSizeFk" value="@cartItem.ProductCart.ProductSizeId" />
+                            <div class="ld-cart-product-info">
+                                <a href="@Url.Action("ProductDetail", "Product", new {searchTerm = cartItem.ProductCart.ProductSafeUrlName}) ">
+                                    <figure>
+                                        <img src="@imageSource" alt="Cart Product">
+                                    </figure>
+                                    <span class="ld-cart-product-details">
+                                        <span class="ld-cart-product-name">@cartItem.ProductCart.ProductStoreFrontName</span>
+                                        <span class="ld-cart-product-extra">
+                                            <span>Size: XL</span>
+                                        </span>
+                                        <span class="ld-cart-product-price">
+                                            <span>@cartItem.ProductCart.ProductSizeStoreFrontPrice.ToString("c")</span>
+                                            <span class="ld-cart-product-quantity">@cartItem.Quantity</span>
+                                        </span><!-- /.ld-cart-product-price -->
+                                    </span><!-- /.ld-cart-product-details -->
+                                </a>
+                            </div><!-- /.ld-cart-product-info -->
+                        </div><!-- /.ld-cart-product -->
+
+                       
+                    }
+                </div><!-- /.ld-cart-products -->
+
+                <div class="ld-cart-foot">
+                    <div class="ld-cart-total">
+                        <span class="ld-cart-total-label font-weight-bold text-uppercase ltr-sp-175">Subtotal</span>
+                        <span class="ld-cart-total-price color-primary">@Model.ComputeCartTotalValue().ToString("c")</span>
+                    </div><!-- /.ld-cart-total -->
+                    <div class="ld-cart-button">
+                        <a href="@Url.Action("Checkout", "Order", null)" class="btn btn-lg btn-solid text-uppercase ltr-sp-175">
+                            <span>
+                                <span class="btn-txt">Checkout</span>
+                                <span class="btn-icon"><i class="fa fa-angle-right"></i></span>
+                            </span>
+                        </a>
+                        <a href="@Url.Action("index", "cart", null) " class="btn btn-lg btn-naked text-uppercase ltr-sp-175">
+                            <span>
+                                <span class="btn-txt">View Cart</span>
+                                <span class="btn-icon"><i class="fa fa-angle-right"></i></span>
+                            </span>
+                        </a>
+                    </div><!-- /.ld-cart-button -->
+                </div><!-- /.ld-cart-foot -->
+            }
+            else
+            {
+                <div class="ld-cart-products">
+<span>No product in the cart.</span>
+            </div>
+            }
+            <div class="ld-cart-message">
+                <p>Free Delivery on all purchases over $100 </p>
+            </div><!-- /.ld-cart-message -->
+
+        </div><!-- /.ld-cart-contents -->
+
+    </div>*@<!-- /.ld-module-dropdown -->
+
+</div><!-- /.module-cart -->

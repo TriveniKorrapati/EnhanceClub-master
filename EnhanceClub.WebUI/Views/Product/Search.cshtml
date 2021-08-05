@@ -1,0 +1,66 @@
+﻿@using EnhanceClub.WebUI.HtmlHelpers
+@model EnhanceClub.WebUI.Models.ProductSearchViewModel
+
+
+
+<div class="col-md-12 content-container home-content">
+
+    <div class="row">
+        <div id="search-results-wrap">
+
+            @* Search Results Heading & Breadcrumb --*@
+            <div class="container container-standard">
+
+                <div class="row search-results-heading">
+                    <div class="col-md-12">
+                        <div class="results-float">
+                            <h4>Search Medications by "<b>@Model.SearchTermPassed</b>"</h4>
+                        </div>
+                        @*only show pagination if there are more thamn one pages*@
+                        @if (@Model.PagingInfo.TotalPages > 1)
+                        {
+                            <div class="results-float pagination-right">
+                                @*@Html.PageLinks(Model.PagingInfo, x => Url.Action("Search", new {Page = x})))*@
+
+                                <ul class="pagination">
+                                    <li><a>Page</a></li>
+
+                                    @Html.PageLinksLi(Model.PagingInfo, x => Url.Action("Search", new { page = x, searchterm = @Model.SearchTermPassed }))
+                                </ul>
+
+                            </div>
+                        }
+                    </div>
+                    <div class="col-md-12">
+                        <div class="pagination-right quick-jump">
+
+                            @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "ddlMenu" }))
+                            {
+                                @Html.DropDownList("menu", new
+                                              SelectList(Model.ProductsAsListDropDown, "UrlAction", "ProductName"), new { Name = "goto_prodpage", @size = 1 })
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @* Search Results Heading & Breadcrumb --*@
+
+            @* -- Search Results --*@
+            <div id="search-results">
+
+                @Html.Partial("ProductSearchedList", Model)
+
+            </div>
+            @* -- Search Results --*@
+
+        </div>
+
+    </div>
+
+</div>
+
+@*--- Show Side bar with refer friend and free shipping link ---*@
+@section left {
+    @Html.Partial("ReferNFreeShipping")
+    @*@Html.Partial("infoLinks")*@
+}

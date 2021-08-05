@@ -1,0 +1,49 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.Domain.Entities.AffiliateInfo
+
+
+<div class="container container-standard home-text">
+    <h1>125% Price Match Guarantee</h1>
+    <div class="row">
+        <div class="col-md-12">
+
+
+            <p>
+                You will always find the lowest price on your medications with @SiteConfigurationsWc.StorefrontName. We are so confident we have the lowest price available that we are offering the 125% price match guarantee. If you find your medication cheaper elsewhere we will not only match the price but beat it by 25% of the difference. 
+            </p>
+            
+           
+                <p style="text-decoration: underline">Example </p>
+            <p>
+                If you find a product for $140.00 on @SiteConfigurationsWc.StorefrontName and find the same product for $100.00 elsewhere, @SiteConfigurationsWc.StorefrontName will provide you with a $50.00 discount. This will bring your total to $90.00.
+            </p>
+
+
+            <p>
+                Offer is subject to the following terms:
+            </p>
+
+           
+                <p style="text-decoration: underline">Terms & Conditions of Program </p>
+                
+            
+            <p>
+            <ol>
+                <li>The offer is valid at the time of the sale and up to 7 days after.</li>
+                <li>The differences in charges for the cost of standard shipping will be included in the comparison if applicable.</li>
+                <li>Products must be identical and in stock at the time of placing an order with the other accredited online mail order pharmacy.</li>
+                <li>Products must be authentic in brand and size (same manufacturer, same country of manufacture, same country of dispensation, same pack size, same strength, same quantity, etc. (e.g. We will price match 30 tablets of Canadian Brand Name Lipitor 10mg made by Pfizer Canada Inc. to 30 tablets of Canadian Brand Name Lipitor 10mg made by Pfizer Canada Inc.)</li>
+                <li>Products must be new as we cannot match the price of any used or expired product.</li>
+                <li>We will only match the current advertised price.</li>
+                <li>Price match can only be issued over the phone with our customer service team.</li>
+            </ol>
+            </p>
+        </div>
+    </div>
+</div>
+@*--- Show more info links ---*@
+@section moreinfo {
+
+    @Html.Partial("MoreInfoLinks", "price-match-guarantee")
+}

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enhance Club - Invoice</title>
+    <style>
+        /* Normalize */
+        /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+        /* Document
+        ========================================================================== */
+        /**
+        * 1. Correct the line height in all browsers.
+        * 2. Prevent adjustments of font size after orientation changes in iOS.
+        */
+        html {
+            line-height: 1.15;
+            /* 1 */
+            -webkit-text-size-adjust: 100%;
+            /* 2 */
+        }
+
+        /* Sections
+        ========================================================================== */
+        /**
+        * Remove the margin in all browsers.
+        */
+        body {
+            margin: 0;
+        }
+
+        /**
+        * Render the `main` element consistently in IE.
+        */
+        main {
+            display: block;
+        }
+
+        /**
+        * Correct the font size and margin on `h1` elements within `section` and
+        * `article` contexts in Chrome, Firefox, and Safari.
+        */
+        h1 {
+            font-size: 2em;
+            margin: 0.67em 0;
+        }
+
+        /* Grouping content
+        ========================================================================== */
+        /**
+        * 1. Add the correct box sizing in Firefox.
+        * 2. Show the overflow in Edge and IE.
+        */
+        hr {
+            box-sizing: content-box;
+            /* 1 */
+            height: 0;
+            /* 1 */
+            overflow: visible;
+            /* 2 */
+        }
+
+        /**
+        * 1. Correct the inheritance and scaling of font size in all browsers.
+        * 2. Correct the odd `em` font sizing in all browsers.
+        */
+        pre {
+            font-family: monospace, monospace;
+            /* 1 */
+            font-size: 1em;
+            /* 2 */
+        }
+
+        /* Text-level semantics
+        ========================================================================== */
+        /**
+        * Remove the gray background on active links in IE 10.
+        */
+        a {
+            background-color: transparent;
+        }
+
+        /**
+        * 1. Remove the bottom border in Chrome 57-
+        * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+        */
+        abbr[title] {
+            border-bottom: none;
+            /* 1 */
+            text-decoration: underline;
+            /* 2 */
+            text-decoration: underline dotted;
+            /* 2 */
+        }
+
+        /**
+        * Add the correct font weight in Chrome, Edge, and Safari.
+        */
+        b,
+        strong {
+            font-weight: bolder;
+        }
+
+        /**
+        * 1. Correct the inheritance and scaling of font size in all browsers.
+        * 2. Correct the odd `em` font sizing in all browsers.
+        */
+        code,
+        kbd,
+        samp {
+            font-family: monospace, monospace;
+            /* 1 */
+            font-size: 1em;
+            /* 2 */
+        }
+
+        /**
+        * Add the correct font size in all browsers.
+        */
+        small {
+            font-size: 80%;
+        }
+
+        /**
+        * Prevent `sub` and `sup` elements from affecting the line height in
+        * all browsers.
+        */
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+        }
+
+        sub {
+            bottom: -0.25em;
+        }
+
+        sup {
+            top: -0.5em;
+        }
+
+        /* Embedded content
+        ========================================================================== */
+        /**
+        * Remove the border on images inside links in IE 10.
+        */
+        img {
+            border-style: none;
+        }
+
+        /* Forms
+        ========================================================================== */
+        /**
+        * 1. Change the font styles in all browsers.
+        * 2. Remove the margin in Firefox and Safari.
+        */
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font-family: inherit;
+            /* 1 */
+            font-size: 100%;
+            /* 1 */
+            line-height: 1.15;
+            /* 1 */
+            margin: 0;
+            /* 2 */
+        }
+
+        /**
+        * Show the overflow in IE.
+        * 1. Show the overflow in Edge.
+        */
+        button,
+        input {
+            /* 1 */
+            overflow: visible;
+        }
+
+        /**
+        * Remove the inheritance of text transform in Edge, Firefox, and IE.
+        * 1. Remove the inheritance of text transform in Firefox.
+        */
+        button,
+        select {
+            /* 1 */
+            text-transform: none;
+        }
+
+        /**
+        * Correct the inability to style clickable types in iOS and Safari.
+        */
+        button,
+        [type="button"],
+        [type="reset"],
+        [type="submit"] {
+            -webkit-appearance: button;
+        }
+
+        /**
+        * Remove the inner border and padding in Firefox.
+        */
+        button::-moz-focus-inner,
+        [type="button"]::-moz-focus-inner,
+        [type="reset"]::-moz-focus-inner,
+        [type="submit"]::-moz-focus-inner {
+            border-style: none;
+            padding: 0;
+        }
+
+        /**
+        * Restore the focus styles unset by the previous rule.
+        */
+        button:-moz-focusring,
+        [type="button"]:-moz-focusring,
+        [type="reset"]:-moz-focusring,
+        [type="submit"]:-moz-focusring {
+            outline: 1px dotted ButtonText;
+        }
+
+        /**
+        * Correct the padding in Firefox.
+        */
+        fieldset {
+            padding: 0.35em 0.75em 0.625em;
+        }
+
+        /**
+        * 1. Correct the text wrapping in Edge and IE.
+        * 2. Correct the color inheritance from `fieldset` elements in IE.
+        * 3. Remove the padding so developers are not caught out when they zero out
+        *    `fieldset` elements in all browsers.
+        */
+        legend {
+            box-sizing: border-box;
+            /* 1 */
+            color: inherit;
+            /* 2 */
+            display: table;
+            /* 1 */
+            max-width: 100%;
+            /* 1 */
+            padding: 0;
+            /* 3 */
+            white-space: normal;
+            /* 1 */
+        }
+
+        /**
+        * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+        */
+        progress {
+            vertical-align: baseline;
+        }
+
+        /**
+        * Remove the default vertical scrollbar in IE 10+.
+        */
+        textarea {
+            overflow: auto;
+        }
+
+        /**
+        * 1. Add the correct box sizing in IE 10.
+        * 2. Remove the padding in IE 10.
+        */
+        [type="checkbox"],
+        [type="radio"] {
+            box-sizing: border-box;
+            /* 1 */
+            padding: 0;
+            /* 2 */
+        }
+
+        /**
+        * Correct the cursor style of increment and decrement buttons in Chrome.
+        */
+        [type="number"]::-webkit-inner-spin-button,
+        [type="number"]::-webkit-outer-spin-button {
+            height: auto;
+        }
+
+        /**
+        * 1. Correct the odd appearance in Chrome and Safari.
+        * 2. Correct the outline style in Safari.
+        */
+        [type="search"] {
+            -webkit-appearance: textfield;
+            /* 1 */
+            outline-offset: -2px;
+            /* 2 */
+        }
+
+        /**
+        * Remove the inner padding in Chrome and Safari on macOS.
+        */
+        [type="search"]::-webkit-search-decoration {
+            -webkit-appearance: none;
+        }
+
+        /**
+        * 1. Correct the inability to style clickable types in iOS and Safari.
+        * 2. Change font properties to `inherit` in Safari.
+        */
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            /* 1 */
+            font: inherit;
+            /* 2 */
+        }
+
+        /* Interactive
+        ========================================================================== */
+        /*
+        * Add the correct display in Edge, IE 10+, and Firefox.
+        */
+        details {
+            display: block;
+        }
+
+        /*
+        * Add the correct display in all browsers.
+        */
+        summary {
+            display: list-item;
+        }
+
+        /* Misc
+        ========================================================================== */
+        /**
+        * Add the correct display in IE 10+.
+        */
+        template {
+            display: none;
+        }
+
+        /**
+        * Add the correct display in IE 10.
+        */
+        [hidden] {
+            display: none;
+        }
+
+        /* End Normalize.css */
+        @font-face {
+            font-family: GeomanistBold;
+            src: url("../../content/fonts/hinted-Geomanist-Bold.ttf");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: GeomanistRegular;
+            src: url("../../content/fonts/hinted-Geomanist-Regular.ttf");
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: GeomanistLight;
+            src: url("../../content/fonts/hinted-Geomanist-Light.ttf");
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Muli;
+            src: url("../../content/fonts/Muli.ttf");
+            font-weight: normal;
+        }
+
+        @font-face {
+            font-family: MuliBold;
+            src: url("../../content/fonts/Muli-Bold.ttf");
+            font-weight: bold;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            border-collapse: collapse;
+        }
+
+        .section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            color: #1a1a1a;
+            font-family: Muli, "Helvetica", "Arial", sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        th,
+        .bold {
+            font-family: GeomanistBold, "Helvetica", "Arial", sans-serif;
+        }
+
+        h1 span:not(.highlight) {
+            font-family: GeomanistRegular, "Helvetica", "Arial", sans-serif;
+            font-size: 22px;
+        }
+
+        .normal {
+            font-family: GeomanistLight, "Helvetica", "Arial", sans-serif;
+        }
+
+        .large {
+            font-family: GeomanistBold, "Helvetica", "Arial", sans-serif;
+            font-size: 40px;
+            color: #333333;
+        }
+
+        .highlight {
+            color: #FBA303 !important;
+        }
+
+        .white {
+            color: #ffffff !important;
+        }
+        .black {
+            color: #1a1a1a;
+        }
+
+        .dark {
+            color: #333333 !important;
+        }
+        .bg-orange {
+            background-color: #FBA303;
+        }
+
+        .bg-grey {
+            background-color: #f2f2f2;
+        }
+        .bg-dark {
+            background-color: #333333;
+        }
+
+        .table tr {
+            vertical-align: top;
+            text-align: left;
+        }
+
+        .table th span {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .table p {
+            font-family: GeomanistRegular, "Helvetica", "Arial", sans-serif;
+            font-size: 22px;
+            line-height: normal;
+            color: #7C7C7C;
+        }
+
+        .table p b {
+            font-family: GeomanistBold, "Helvetica", "Arial", sans-serif;
+            color: #1a1a1a;
+        }
+        .coupon-code td {
+            padding: 0 !important;
+        }
+        .list {
+            margin-bottom: 22px;
+        }
+        .customer-info tr td:first-child,
+        .list tr td:first-child {
+            padding-left: 0;
+        }
+        .list tr td:first-child p {
+            color: #FBA303;
+        }
+        .list p {
+            margin: 0;
+        }
+        .how-to-order td {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+        }
+        .how-to-order h2 {
+            margin-top: 0;
+            margin-bottom: 10px
+        }
+        .how-to-order a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .table>tbody th,
+        .table>tbody td {
+            padding: 8px;
+        }
+
+        table.orders tr th,
+        table.orders tr td {
+            padding-bottom: 10px;
+        }
+
+        table.orders tr th:first-child,
+        table.orders tr td:first-child,
+        table.total tr td:first-child {
+            padding-left: 0;
+        }
+
+        table.orders tr th:last-child,
+        table.orders tr td:last-child,
+        table.total tr td:last-child {
+            padding-right: 0;
+        }
+
+        table.orders tbody tr:last-child {
+            border-bottom: 2px solid #e7e7e7;
+        }
+
+        table.orders tbody tr:last-child td {
+            padding-bottom: 20px;
+        }
+        .order-summary p {
+            margin: 0;
+        }
+        .order-summary .total {
+            margin-top: 20px;
+        }
+        .footer {
+            background-color: #1a1a1a;
+        }
+        .footer p a {
+            text-decoration: none;
+        }
+        .footer .contact p a {
+            font-size: 18px;
+            text-decoration: none;
+            color: #a5a5a5;
+        }
+        .footer .social p {
+            font-size: 18px;
+            text-transform: uppercase;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="table" cellpadding="0" cellspacing="0">
+        <thead>
+            <tr class="bg-orange" style="vertical-align: middle;" valign="middle">
+                <th>
+                    <table class="section">
+                        <tr>
+                            <td style="padding:0;">
+                                <img style="display:block;" width="100%" src="../../content/images/email-hero-3.png" alt="">
+                            </td>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Subheading -->
+            <tr>
+                <td colspan="2">
+                    <table class="section">
+                        <tr style="vertical-align: middle;" valign="middle">
+                            <td width="50%">
+                                <h1>
+                                    <span>
+                                        Hi Michael,
+                                    </span><br>
+                                    Have sex on the brain?
+                                </h1>
+                            </td>
+                            <td width="50%" style="text-align: center;" align="center">
+                                <a class="bg-dark" style="text-transform:uppercase;display:inline-block;padding:5px 50px;border-radius:50px;text-decoration: none;" href="#">
+                                    <p><b class="white">Reset Password</b></p>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p style="margin-top:0;">
+                                    If you’ve forgotten your password or want a reset, we can help you whip one off. Just click the button above. If not, simply ignore and enjoy this awkward silence together.
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- How To Order -->
+            <tr class="bg-orange how-to-order">
+                <td>
+                    <table class="section">
+                        <tr style="vertical-align: middle;" valign="middle">
+                            <td width="50%">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <h2 class="large black">
+                                                How To Order
+                                            </h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p class="white">
+                                                <b>Call</b><br>
+                                                <a href="#">
+                                                    1-888-798-9128
+                                                </a>
+                                            </p>
+                                            <p class="white">
+                                                <b>Visit Us Online</b><br>
+                                                <a href="#">
+                                                    enhanceclub.com
+                                                </a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td width="50%">
+                                <img style="display:block;" src="../../content/images/howtoorder.png" alt="">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <!-- Footer -->
+            <tr class="footer">
+                <td colspan="2">
+                    <table class="section" style="text-align: center;" align="center">
+                        <tr>
+                            <td>
+                                <table style="color:#ffffff;" cellpadding="0" cellspacing="0" border="0">
+                                    <tr class="contact">
+                                       <td>
+                                           <h1 class="normal">
+                                               Need Help?
+                                           </h1>
+                                           <p>
+                                               <a href="#">Customer Service</a>
+                                           </p>
+                                           <p>
+                                               <a href="#">Get in Touch</a>
+                                           </p>
+                                           <p>
+                                               <a href="#">FAQs</a>
+                                           </p>
+                                       </td>
+                                       <td style="text-align: right;" align="right">
+                                           <h1 class="normal">
+                                               Find Help
+                                           </h1>
+                                           <p>
+                                               <b class="white">Call</b><br>
+                                               <a href="#" class="highlight">1-888-798-9128</a>
+                                           </p>
+                                           <p>
+                                               <b class="white">Email</b><br>
+                                               <a href="#" class="highlight">customerservice@enhanceclub.com</a>
+                                           </p>
+                                       </td>
+                                    </tr>
+                                    <tr style="vertical-align: bottom;" valign="bottom">
+                                        <td class="social">
+                                            <p>
+                                                Follow Us
+                                            </p>
+                                            <table>
+                                                <tr class="icons">
+                                                    <td width="25%">
+                                                        <a href="#">
+                                                            <img src="../../Content/images/facebook-icon.svg" alt="">
+                                                        </a>
+                                                    </td>
+                                                    <td width="25%">
+                                                        <a href="#">
+                                                            <img src="../../Content/images/twitter-icon.svg" alt="">
+                                                        </a>
+                                                    </td>
+                                                    <td width="25%">
+                                                        <a href="#">
+                                                            <img src="../../Content/images/youtube-icon.svg" alt="">
+                                                        </a>
+                                                    </td>
+                                                    <td width="25%">
+                                                        <a href="#">
+                                                            <img src="../../Content/images/instagram-icon.svg" alt="">
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td style="text-align: right;" align="right">
+                                            <p>
+                                                <a class="white" href="#">
+                                                    Privacy Policy
+                                                </a>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr style="vertical-align: middle;" valign="middle">
+                                        <td>
+                                            <p class="white">
+                                                Logo
+                                            </p>
+                                        </td>
+                                        <td style="text-align: right;" align="right">
+                                            <p class="white">
+                                                All Rights Reserved &copy; 2020
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

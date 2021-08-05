@@ -1,0 +1,75 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.NewsLetterSignUpViewModel
+<html>
+
+<head>
+    <title>Thank you for Signinging up for EnhanceClub Newsletter</title>
+
+    <link href="http://www.EnhanceClub/content/css/EmailStyle.css" rel="stylesheet">
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+    <div align="center">
+        <table class="table" width="688">
+
+            <tr>
+                <td colspan="2">
+                    <a href="https://www.EnhanceClub">
+                        <img src="http://@SiteConfigurationsWc.StorefrontUrl/content/images/email/canp-email-header.jpg" border="0" alt="">
+                    </a>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <br /><br />
+                    <span style="color: #2F435E; font-size: 17px;"><b> Your subscription has been confirmed. You’ve been added to our newsletter list and will hear from us soon. </b></span>
+                    <br /><br />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p>
+                        The team at @SiteConfigurationsWc.StorefrontName would like to thank you for signing up to our newsletter. As a member of our newsletter list you will have access to exclusive offers, coupons and promotional codes.
+                    </p>
+
+                    <p>
+                        If you are interested in getting more health tips you can always check out our new blog posts by clicking <a href="https://www.EnhanceClub/blog/?utm_source=newsletter&utm_medium=email ">Blog.</a>
+                    </p>
+                    
+                    <p>
+                        <b>$10 OFF - Coupon Code: <span style="color: red">EnhanceClub10</span></b>
+                    </p>
+
+                    <p align="center">
+                        <img src="http://www.EnhanceClub/content/images/email/canadapharmacy-coupon.jpg">
+                    </p>
+
+                    <p>
+                        Please <b>DO NOT REPLY </b>to this email as this email address it not monitored.
+                    </p>
+
+                    <p>
+                        @if (SiteConfigurationsWc.Environment.ToLower() == "dev")
+                        {
+                            <text>
+                                If you would like to unsubscribe please click <a href="http://10.1.1.85/customer/unsubscribe/@Model.PromoEmailId">here.</a>
+                            </text>
+                        }
+                        else
+                        {
+                            <text>
+                                If you would like to unsubscribe please click <a href="https://@SiteConfigurationsWc.StorefrontUrl/customer/unsubscribe/@Model.PromoEmailId">here.</a>
+                            </text>
+                        }
+
+                    </p>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1328 @@
+﻿@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Models
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.WebUI.Models.RequirePrescriptionViewModel
+
+@section PageScripts
+{
+    <script type="text/javascript">
+        $(window).resize(function () {
+            if ($(this).width() >= 992) {
+                $("#mobile-layout").remove();
+            } else {
+                $("#web-layout").remove();
+            }
+        });
+
+        $(document).ready(function () {
+            if ($(this).width() >= 992) {
+                $("#mobile-layout").remove();
+            } else {
+                $("#web-layout").remove();
+            }
+            $(document).keydown(
+                function (e) {
+                    if (e.which === 13) {
+                        e.preventDefault();
+                        return false;
+
+                        //event.preventDefault();
+                    }
+
+                });
+            //$("#myform").keydown(function (e) {
+            //    if (e.which === 13) {
+            //        return false;
+            //    }
+            //});
+            // localStorage.clear();
+
+            $('.btnEnabled').hide();
+            $('.btnDisabled').show();
+            $('.btnEnabled1').hide();
+            $('.reviewButton').hide();
+            $('.btnDisabledId').show();
+            $('.explainFurtherTextBox').hide();
+            //   $('.explainFurtherTextBox12').hide();
+            var sessionList = new Array();
+
+            if (localStorage.getItem("answeredList") != null) {
+
+                var storedNames = JSON.parse(localStorage['answeredList']);
+
+
+                //commented Session Code Start
+                //$.each(storedNames, function (i, el) {
+
+                //    var v = $('#' + el).val();
+
+                //    var arr = v.split('-');
+
+                //    $('.ques-' + arr[0]).val("false");
+                //    $('.quesopt-' + arr[1]).val("true");
+
+
+                //    //list.push(el);
+                //    var optionCheckBoxSelected = $('#' + el).closest('.chkbxe').find('.needMoreExplanationOption').val();
+
+
+                //    var optionRadioSelected = $('#' + el).closest('.radio-item').find('.needMoreExplanationOption').val();
+                //   // var optionChkSelected = $('#' + el).closest('.chkbxe').find('.needMoreExplanationOption').val();
+                //   // var otherSelectedForChk = $('#' + el).closest('.health-questionnaire').find('.chkOtherSessionClass').val();
+
+                //    if ((optionRadioSelected == 1) || (optionCheckBoxSelected==1)) {
+                //        $('#' + el).prop('checked', true);
+                //        $('#' + el).closest('.health-questionnaire').find('.explainFurtherTextBox').show();
+                //        $('#' + el).closest('.health-questionnaire').find('.btnEnabled').hide();
+                //        $('#' + el).closest('.health-questionnaire').find('.btnEnabled1').hide();
+                //        $('#' + el).closest('.health-questionnaire').find('.reviewButton').hide();
+                //        $('#' + el).closest('.health-questionnaire').find('.btnDisabled').show();
+                //    }
+                //    //else if (optionChkSelected==1)
+                //    //{
+                //    //    //if (otherSelectedForChk == 0) {
+
+                //    //    //    $('#' + el).closest('.chkbxe').find('.chkOtherSessionClass').val('1');
+                //    //    //}
+
+                //    //    //$('#' + el).closest('.health-questionnaire').find('.explainFurtherTextBox').show();
+                //    //    //$('#' + el).closest('.health-questionnaire').find('.btnEnabled').hide();
+                //    //    //$('#' + el).closest('.health-questionnaire').find('.btnEnabled1').hide();
+                //    //    //$('#' + el).closest('.health-questionnaire').find('.reviewButton').hide();
+                //    //    //$('#' + el).closest('.health-questionnaire').find('.btnDisabled').show();
+                //    //}
+                //    else
+                //    {
+                //        $('#' + el).prop('checked', true);
+                //        $('#' + el).closest('.health-questionnaire').find('.btnEnabled').show();
+                //        $('#' + el).closest('.health-questionnaire').find('.btnEnabled1').show();
+                //        $('#' + el).closest('.health-questionnaire').find('.reviewButton').show();
+                //        $('#' + el).closest('.health-questionnaire').find('.btnDisabled').hide();
+                //    }
+
+                //    //var alertError = $('#' + el).closest('.health-questionnaire').find('.alert-error').val();
+                //    //alert(alertError);
+                //    //$('#' + el).closest('.health-questionnaire').find('.btnDisabled').hide();
+                //   // alert(el);
+                //    sessionList.push(el);
+                //});
+
+                //commented Session Code End
+
+            }
+            else {
+
+                localStorage['answeredList'] = JSON.stringify(sessionList)
+            }
+
+
+
+
+            //alert($('.currQues').val());explainFurtherText
+            $(".radd").on("change", function () {
+                 
+                //var idElement = $(this).attr('id');
+
+                //if (jQuery.inArray(idElement, listt) == -1) {
+                //    listt.push(idElement);
+                //}
+
+                //localStorage.setItem("answeredList", JSON.stringify(listt));
+
+                var v = $(this).val();
+                var arr = v.split('-');
+
+                $('.ques-' + arr[0]).val("false");
+                $('.quesopt-' + arr[1]).val("true");
+                //delete all existing radio button for question from session
+                $('.radioSession-' + arr[0]).each(function () {
+
+                    var idElement = $(this).attr('id');
+                    sessionList = jQuery.grep(sessionList, function (value) {
+                        return value != idElement;
+                    });
+                     
+                });
+                // add current radio button selected to the session
+                var idElement1 = $(this).attr('id');
+                  
+                
+                /*Track Customer Questionnaire Response*/               
+                if (@SiteConfigurationsWc.TrackCustomerQuestionnaireResponse == 1) {                   
+
+                    var questionnaireFkId = $(this).attr('name');
+
+                    var customerOrderId = document.myform.elements['orderId'].value;
+
+                    TrackCustomerQuestionnaireResponse(questionnaireFkId, customerOrderId);
+                }
+
+                if (jQuery.inArray(idElement1, sessionList) == -1) {
+                    sessionList.push(idElement1);
+
+                }
+                if (idElement1 == 58 || idElement1 == 107 || idElement1 == 106) {
+                    if ($('#EnableBPPopUp').val().toLowerCase() == "true") {
+                        alert('Unfortunately we may not be able to prescribe your medication without a recent blood pressure. We recommend that you obtain a blood pressure reading from your nearest pharmacy or physicians office. Your questionnaire answers have been saved for when you return!. Thank You!')
+                       // $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').hide();
+                       // $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').hide();
+                       // $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').show();
+                       // $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').hide();
+                       // $(event.currentTarget).closest('.health-questionnaire').find('.notKnownBp').val(true);
+                       //// return false
+                    }
+
+                    if (idElement1 == 58) {
+                        alert("The clinician may contact you to take your blood pressure reading.");
+                    }
+                }
+
+                if (@SiteConfigurationsWc.IsBPKnownLogic == 1) {
+                    if (parseInt(idElement1) === 57 || parseInt(idElement1) === 58) {
+                        if ($('#58').is(':checked')) {
+                            $('input[name=36]').attr("disabled", true);
+                            $('input[name=37]').attr("disabled", true);
+
+                            $('input[id=106]').attr("disabled", false);
+                            $('input[id=107]').attr("disabled", false);
+
+                            $("#106").prop('checked', true);
+                            $("#107").prop('checked', true);
+
+                            for (var i = 58; i <= 69; i++) {
+
+                                var elementId = "[" + i.toString() + "].isSelected";
+
+                                if (i === 63 || i === 69) {
+                                    $('input[name="' + elementId + '"]').val("true");
+                                }
+                                else {
+                                    $('input[name="' + elementId + '"]').val("false");
+                                }
+                            } 
+                        }
+                        else if ($('#57').is(':checked')) {
+
+                            $("#106").prop('checked', false);
+                            $("#107").prop('checked', false);
+
+                            $('input[name=36]').attr("disabled", false);
+                            $('input[name=37]').attr("disabled", false);
+
+                            $('input[id=106]').attr("disabled", true);
+                            $('input[id=107]').attr("disabled", true);
+                        }
+                    } 
+                }                
+
+                localStorage.setItem("answeredList", JSON.stringify(sessionList));
+                var questionRequiredMoreInfo = $(event.currentTarget).closest('.health-questionnaire').find('.needMoreExplanation').val();
+                  
+                if (questionRequiredMoreInfo == 1) {
+                    var optionSelected = $(event.currentTarget).closest('.radio-item').find('.needMoreExplanationOption').val();
+                  
+                    if (optionSelected == 1) {
+                        //alert(optionSelected);
+                        //$(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+                        //$(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').show();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').show();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').hide();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').hide();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').show();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').hide();
+                    }
+                    else {
+                        $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').hide();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').show();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').hide();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+
+                    }
+
+                }
+                else {
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').show();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').hide();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+                } 
+            });
+
+            $(".respCheckBox").on("change", function () {
+                 
+                if (this.checked) { 
+                    var idElement = $(this).attr('id');
+                    //test code for textboaxes
+                    //IDs.push([idElement, 'textVal']);
+                    //localStorage.setItem("testId", JSON.stringify(IDs));
+                    
+
+                    if (jQuery.inArray(idElement, sessionList) == -1) {
+                        sessionList.push(idElement);
+                    }
+
+                    localStorage.setItem("answeredList", JSON.stringify(sessionList));
+
+                    var questionRequiredMoreInfo = $(event.currentTarget).closest('.chkbxe').find('.needMoreExplanationOption').val();
+                     
+                    /*Track Customer Questionnaire Response*/               
+                    if (@SiteConfigurationsWc.TrackCustomerQuestionnaireResponse == 1) {                   
+
+                        var questionnaireElement = $(this).attr('name');
+
+                        if (questionnaireElement !== undefined) {                             
+                            var elementName = questionnaireElement.split(".")[0] + ".QuestionnaireId";
+                           
+                            var QuestionnaireFkId = document.myform.elements[elementName].value; 
+
+                            var customerOrderId = document.myform.elements['orderId'].value;
+                            TrackCustomerQuestionnaireResponse(QuestionnaireFkId, customerOrderId);    
+                        }                            
+                    }
+
+                    if (questionRequiredMoreInfo == 1) {
+                        // $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                        // $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').show()
+                        $(event.currentTarget).closest('.chkbxe').find('.explainFurtherTextBox').show()
+
+                        if ($(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').val().trim() === "") {
+                            $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').hide();
+                            $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').hide();
+                            $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').show();
+                        }
+                        else {
+                            $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                            $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+                            $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').hide();
+                        }
+                        var checkResponseText = $(event.currentTarget).closest('.chkbxe').find('.checkResponseText').text();
+
+                        if (checkResponseText.match("^No")) {
+                            $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').hide();
+                            //$(event.currentTarget).closest('.health-questionnaire').find('.otherCheckBox:checked').remove().checkboxradio('refresh'); noneCheckBox
+                            $(event.currentTarget).closest('.health-questionnaire').find('.otherCheckBox').prop('checked', false).checkboxradio('refresh');
+                            //$(event.currentTarget).closest('.health-questionnaire').find('.otherCheckBox').prop('checked', false).checkboxradio('refresh');
+                            //$('#ch1, #ch3').prop('checked', true).checkboxradio('refresh');
+                        }
+                        else {
+                            $(event.currentTarget).closest('.health-questionnaire').find('.noneCheckBox').prop('checked', false).checkboxradio('refresh');
+                        }
+
+                    }
+                    else {
+
+                        if ($(event.currentTarget).closest('.health-questionnaire').find('.otherTextCheckBox:checked').length == 0) {
+                            //$(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').hide();
+                            $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                            $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').hide();
+                            $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+                            var checkResponseText = $(event.currentTarget).closest('.chkbxe').find('.checkResponseText').text();
+
+                            //if (checkResponseText.indexOf("None") > -1) {
+                            if (checkResponseText.match("^No")) {
+                                $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').hide();
+                                //$(event.currentTarget).closest('.health-questionnaire').find('.otherCheckBox:checked').remove().checkboxradio('refresh');
+                                $(event.currentTarget).closest('.health-questionnaire').find('.otherCheckBox').prop('checked', false).checkboxradio('refresh');
+                                //$(event.currentTarget).closest('.health-questionnaire').find('.noneCheckBox').prop('checked', true).checkboxradio('refresh');
+                                //$('#ch1, #ch3').prop('checked', true).checkboxradio('refresh');
+                            }
+                            else {
+                                $(event.currentTarget).closest('.health-questionnaire').find('.noneCheckBox').prop('checked', false).checkboxradio('refresh');
+                            }
+                        }
+                        else {
+
+                            var checkResponseText = $(event.currentTarget).closest('.chkbxe').find('.checkResponseText').text();
+
+                            //if (checkResponseText.indexOf("None") > -1) {
+                            if (checkResponseText.match("^No")) {
+                                $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                                $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').hide();
+                                $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+                                $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').hide();
+                                //$(event.currentTarget).closest('.health-questionnaire').find('.otherCheckBox:checked').remove().checkboxradio('refresh');
+                                $(event.currentTarget).closest('.health-questionnaire').find('.otherCheckBox').prop('checked', false).checkboxradio('refresh');
+                                $(event.currentTarget).closest('.health-questionnaire').find('.noneCheckBox').prop('checked', true).checkboxradio('refresh');
+                                //$('#ch1, #ch3').prop('checked', true).checkboxradio('refresh');
+                            }
+                            else {
+                                $(event.currentTarget).closest('.health-questionnaire').find('.noneCheckBox').prop('checked', false).checkboxradio('refresh');
+                            }
+
+                        }
+                    }
+
+                    //$(this).prop('checked', true).checkboxradio('refresh'); 
+                }
+
+                else {
+                    $(event.currentTarget).closest('.chkbxe').find('.explainFurtherTextBox').hide()
+
+                    // var idElement = $(this).attr('id');
+
+                    //sessionList = jQuery.grep(sessionList, function (value) {
+                    //    return value != idElement;
+                    //});
+
+
+                    // localStorage.setItem("answeredList", JSON.stringify(sessionList));
+
+
+
+                    // var questionRequiredMoreInfo = $(event.currentTarget).closest('.chkbxe').find('.needMoreExplanationOption').val();
+                    //// alert(questionRequiredMoreInfo);
+                    // if (questionRequiredMoreInfo == 1)
+                    // {
+
+                    //     if ($(event.currentTarget).closest('.health-questionnaire').find('.otherTextCheckBox:checked').length == 0)
+
+                    //     {
+
+                    //         $(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').hide();
+                    //     }
+                    //     if (($(event.currentTarget).closest('.health-questionnaire').find('.otherTextCheckBox:checked').length == 0)&&
+                    //         ($(event.currentTarget).closest('.health-questionnaire').find('.respCheckBox:checked').length != 0)) {
+
+                    //         $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                    //         $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').hide();
+                    //     }
+                    //     else {
+
+
+                    //         $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').hide();
+                    //         $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').show();
+                    //     }
+
+                    // }
+                    // else {
+
+                    //     if ($(event.currentTarget).closest('.health-questionnaire').find('.respCheckBox:checked').length == 0) {
+
+                    //         $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').hide();
+                    //         $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').show();
+                    //     }
+                    //     else {
+
+                    //         if (($(event.currentTarget).closest('.health-questionnaire').find('.otherTextCheckBox:checked').length != 0)
+                    //             && ($(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').val().trim() === "")) {
+
+                    //             $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').hide();
+                    //             $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').show();
+                    //         }
+                    //         else {
+                    //             $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                    //             $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').hide();
+                    //         }
+
+
+                    //     }
+
+                    // }
+
+                    var checkEmptyText = true;
+                    $(event.currentTarget).closest('.health-questionnaire').find('input[type=text]').each(function () {
+                        if (!$(this).is(":hidden")) {
+                            if ($(this).val().trim() === "") {
+                                checkEmptyText = false;
+                            }
+
+                        }
+                    });
+                    if ($(event.currentTarget).closest('.health-questionnaire').find('.respCheckBox:checked').length == 0) {
+
+                        checkEmptyText = false;
+                    }
+                    if (!checkEmptyText) {
+                        // $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').hide();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').hide();
+                        //  $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').hide();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').show();
+                    }
+                    else {
+                        // $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                        //  $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').show();
+                        $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').hide();
+                    }
+                }
+
+
+            });
+
+            function TrackCustomerQuestionnaireResponse(questionnaireFk,customerOrderId) {
+               
+                if (@SiteConfigurationsWc.TrackCustomerQuestionnaireResponse == 1) {                   
+
+                    var deviceType = $("#mobile-device").val();
+
+                    $.ajax({
+                        url: '@Url.Action("TrackCustomerQuestionnaireResponse", "Order")',
+                        data: { questionnaireFk: questionnaireFk, orderId: customerOrderId, deviceType: deviceType },
+                        type: "POST",
+                        success: function (data) {                        
+                            return true;
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) { 
+                            return true;
+                        },
+                    });
+                }
+            }
+
+            $('.btnDisabled').click(function (e) {
+                 
+                var alertError = $(event.currentTarget).closest('.health-questionnaire').find('.alert-error').val()
+                var bpAlert = $(event.currentTarget).closest('.health-questionnaire').find('.notKnownBp').val()
+                // none check is added for propcia question 9/14, as we are selecting none option by default
+                // so only on this case, on next button click, disabled event is fired and we have to explicitly fire enabled event in
+                // else section
+                if (bpAlert=='true') {
+                    alert('Unfortunately we may not be able to prescribe your medication without a recent blood pressure. We recommend that you obtain a blood pressure reading from your nearest pharmacy or physicians office. Your questionnaire answers have been saved for when you return!. Thank You!')
+                    return false
+                }
+
+                var noneChecked = $(event.currentTarget).closest('.health-questionnaire').find('.noneCheckBox').is(":checked");
+
+                if (@SiteConfigurationsWc.IsBPKnownLogic == 1) {
+                    if ($('#58').is(':checked')) {
+                        noneChecked = true;
+
+                        $('.btnDisabled').hide(); 
+                        $('.reviewButton').show();
+                    }
+                }                  
+                 
+                if (!noneChecked) {
+                    var questionRequiredMoreInfo = $(event.currentTarget).closest('.health-questionnaire').find('.needMoreExplanationOption').val();
+                    if (($(event.currentTarget).closest('.health-questionnaire').find('.otherTextCheckBox:checked').length != 0)
+                        && ($(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').val().trim() === "")) {
+                        alert("Please write your response");
+                    }
+                    else if (($(event.currentTarget).closest('.health-questionnaire').find('.NeedMoreOption:checked').length != 0)
+                        && ($(event.currentTarget).closest('.health-questionnaire').find('.explainFurtherTextBox').val().trim() === "")) {
+                        alert("Please write your response");
+                    }
+                    else {
+                        alert(alertError);
+                    }
+                }
+                
+               else {
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show().trigger("click");
+                }
+
+            });
+            $('.btnDisabledId').click(function (e) {
+                alert('Please select your id');
+            });
+            $('.btnEnabled1').click(function (e) {
+
+                var catId = $(event.currentTarget).closest('.health-questionnaire').find('.hiddenCatid').val();
+                var itemCount = $(event.currentTarget).closest('.health-questionnaire').find('.itemCount').val();
+                //$(event.currentTarget).closest('.health-questionnaire').find('.HiddenCatId').hide();
+                $.ajax({
+                    url: '@Url.Action("LoadSideBar", "Order")',
+                    data: { catId: catId, itemCount: itemCount },
+                    type: "POST",
+                    success: function (data) {
+                        $('#myPartialViewContainer').html(data);
+                        return true;
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown);
+                        return false;
+                    },
+                });
+
+                $('html, body').animate({ scrollTop: '0px' }, 100);
+
+            });
+
+            $('.btnEnabled').click(function (e) {
+                 
+                $(".side-nav1 a").removeClass("active");
+                var f = $(event.currentTarget).closest('.health-questionnaire').find('.activateSideBar').val();
+                $('#' + f).addClass('active');
+                $('html, body').animate({ scrollTop: '0px' }, 100);
+
+            });
+            $('.backbutton').click(function (e) {
+                $(".side-nav1 a").removeClass("active");
+                var f = $(event.currentTarget).closest('.health-questionnaire').find('.activateSideBarBack').val();
+
+                $('#' + f).addClass('active');
+                $('html, body').animate({ scrollTop: '0px' }, 100);
+
+            });
+
+
+            $(".txtAns").on("input", function () {
+                var checkEmptyText = true;
+                $(event.currentTarget).closest('.health-questionnaire').find('input[type=text]').each(function () {
+                    if (!$(this).is(":hidden")) {
+                        if ($(this).val().trim() === "") {
+                            checkEmptyText = false;
+                        }
+
+                    }
+                });
+                if (!checkEmptyText) {
+                    $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').hide();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').hide();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').hide();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').show();
+                }
+                else {
+                    $(event.currentTarget).closest('.health-questionnaire').find('.reviewButton').show();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled').show();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnEnabled1').show();
+                    $(event.currentTarget).closest('.health-questionnaire').find('.btnDisabled').hide();
+                }
+
+            });
+
+            $("#mobile-review-answer").click(function (e) {               
+                if (($('#img-uploaded').length > 0 && !$('#img-uploaded').hasClass('image-uploaded-success'))
+                ||
+                    ($('#img-replaceId').length > 0 && !$('#img-replaceId').hasClass('image-uploaded-success')) 
+                ){
+                    e.preventDefault();
+                    alert("Please upload front side of your id.");
+                }
+                else if (
+                    ($('#img-uploadedStep2').length > 0 && !$('#img-uploadedStep2').hasClass('image-uploaded-success'))
+                    ||
+                    ($('#img-replaceIdStep2').length > 0 && !$('#img-replaceIdStep2').hasClass('image-uploaded-success'))
+                )
+                {
+                    e.preventDefault();
+                    alert("Please upload back side of your id.");
+                }
+                else {
+                    // get all radio buttons               
+                    var error = false;
+                    $('.health-questionnaire').each(function (index, item) {
+
+                        var alertError = $(this).find('.alert-error').val();
+                        var radiobuttons = $(item).find(".radd");
+
+                        //if (radiobuttons != 'undefined' && radiobuttons.filter(':checked').length == 0) {
+                        //    error = true;
+                        //}
+
+                        $(this).find('.explainFurtherTextBox').css("border-color", "#ffffff").css("border-bottom", "2px solid rgba(0, 0, 0, 0.4");
+                        $(this).find('.txtAns').css("border-color", "#ffffff").css("border-bottom", "2px solid rgba(0, 0, 0, 0.4");
+
+                        if ($(item).find(".radd").is(':checked')) {
+                            if (($(this).find('.otherTextCheckBox:checked').length != 0)
+                                && ($(this).find('.explainFurtherTextBox').val().trim() === "")) {
+                                error = true;
+                                $(this).find('.explainFurtherTextBox').css("border-color", "#FF5432");
+                            }
+                            else if (($(this).find('.NeedMoreOption:checked').length != 0)
+                                && ($(this).find('.explainFurtherTextBox').val().trim() === "")) {
+                                error = true;
+                                $(this).find('.explainFurtherTextBox').css("border-color", "#FF5432");
+                            }
+                        }
+                        else if ($(this).find('.radd:checked').length == 0 && $(this).find('.alert-error').val() != 'Please write your response') {
+                            // none checked
+                            var noneChecked = $(this).find('.noneCheckBox').is(":checked");
+                            if (noneChecked)
+                                error = false;
+                            else
+                                error = true;
+                        }
+                        else if ($(this).find('.alert-error').val() == 'Please write your response' && $(this).find('.txtAns').val() === "") {
+                            error = true;
+                            $(this).find('.txtAns').css("border-color", "#FF5432");
+                        }
+
+                    });
+                    if (error) {
+                        e.preventDefault();
+                        alert("Please answer all questions.");
+                    }
+                }
+               
+              
+            });
+
+        });
+
+
+
+    </script>
+    <script src="~/scripts/prescription-upload.js"></script>
+}
+<!-- End of Order Confirmed -->
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-3">
+            <div class="documents-section-steps d-none d-lg-block">
+                <div class="section">
+                    <ul class="steps dark" id="myPartialViewContainer">
+                        @Html.Partial("UploadDocLeftMenuDynamic", new QuestionGroupSideBarModel { QuestionnaireGroupList = Model.QuestionnaireGroupList, ActiveMenu = "upload-doc", ItemCount = 0 })
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-9">
+            <div class="documents-section">
+                <div class="section" id="step1">
+                    <div id="get-in-touch-clip" class="clip"></div>
+
+                    <div class="container mt-lg-0">
+                        
+                        <input type="hidden" value="questionnaire" name="module" id="module"/>
+
+                        <div class="row d-none d-lg-flex" id="web-layout">
+                            <div class="col-12">
+                                <div class="form-container">
+                                    <div class="fs-form-wrap" id="fs-form-wrap">
+
+                                        <form id="myform" name="myform" action="/Order/ReviewAnswer" class="fs-form fs-form-full" method="post" autocomplete="off">
+                                            <input name="notKnownBp" type="hidden" value="false" class="notKnownBp" />
+                                            <input type="hidden" name="deviceType" value="0" id="mobile-device" />
+                                            <input name="EnableBPPopUp" id="EnableBPPopUp" type="hidden" value="@SiteConfigurationsWc.EnableBloodPressurePopup" />
+
+                                            <input type="hidden" name="sessionTrackerId" value="@Model.CustomerSessionTrackerFk" />
+                                            <input name="orderId" type="hidden" value="@Model.OrderId" />
+                                            
+                                            <ol class="fs-fields">
+                                                @if (@ViewBag.idImageFound)
+                                                {
+                                                    @Html.Partial("IdAlreadyUploaded", new DocumentIdUploadViewModel { IdImageFound = @ViewBag.idImageFound, IdImageName = @ViewBag.idImageFileName,
+                                                       CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                       HavePrescription = false
+                                                   })
+                                                }
+                                                else
+                                                {
+                                                    @Html.Partial("UploadIDDoc", new DocumentIdUploadViewModel { OrderId = Model.OrderId, CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                       HavePrescription = false })
+                                                }
+                                                @if (@ViewBag.backIdImageFound)
+                                                {
+                                                    @Html.Partial("IdAlreadyUploadedStep2", new DocumentIdUploadViewModel { IdImageFound = @ViewBag.backIdImageFound,
+                                                       IdBackImageName = @ViewBag.IdBackImageName, CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                       HavePrescription = false
+                                                   })
+
+                                                }
+                                                else
+                                                {
+                                                    @Html.Partial("UploadIDDocStep2", new DocumentIdUploadViewModel { OrderId = Model.OrderId, CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                       HavePrescription = false })
+                                                }
+
+                                                @if (Model.QuestionnaireList.Count() > 0)
+                                                {
+
+                                                    string questionnaireCatId = Model.QuestionnaireCatId;
+                                                    string[] questionnaireCatIdArr = questionnaireCatId.Split(',');
+                                                    questionnaireCatIdArr = questionnaireCatIdArr.Distinct().ToArray();
+                                                    int index = 0;
+                                                    int currentQuestion = 0;
+                                                    int j = 0;
+                                                    foreach (string questionCat in questionnaireCatIdArr)
+                                                    {
+                                                        index = index + 1;
+                                                        int catId = Convert.ToInt32(questionCat);
+                                                        List<Questionnaire> singleCatQuestionsList = Model.QuestionnaireList.Where(x => x.QuestionnaireCategoryFk == catId).ToList();
+                                                        int catTotalQues = 0;
+                                                        int questionNum = 0;
+                                                        string groupText = "";
+
+                                                        int k = 0;
+                                                        foreach (var questionnaireList in singleCatQuestionsList)
+                                                        {
+                                                            catTotalQues++;
+                                                            if (questionnaireList.QuestionnaireId == 33)
+                                                            {
+
+                                                            }
+
+
+                                                            //  ViewContext.Controller.ViewBag.DayBlockClass = currentQuestion;
+                                                            if (groupText.ToLower() != questionnaireList.QuestionnaireGroupText.ToLower())
+                                                            {
+                                                                groupText = questionnaireList.QuestionnaireGroupText;
+                                                                questionNum = 0;
+                                                            }
+                                                            questionNum++;
+                                                            currentQuestion++;
+                                                            List<QuestionnaireOption> questionnaireOptionList = new List<QuestionnaireOption>();
+                                                            int totalQuestionCount = Model.QuestionnaireList.Count(item => item.QuestionnaireGroupText == @questionnaireList.QuestionnaireGroupText && item.QuestionnaireCategoryFk == catId);
+                                                            if (Model.QuestionnaireOptionList != null)
+                                                            {
+                                                                questionnaireOptionList = Model.QuestionnaireOptionList.Where(x => x.QuestionnaireFk == @questionnaireList.QuestionnaireId).ToList();
+
+                                                            }
+                                                            <li class="form-group health-questionnaire">
+                                                                <input name="notKnownBp" type="hidden" value="false" class="notKnownBp" />
+                                                                <input name="EnableBPPopUp" id="EnableBPPopUp" type="hidden" value="@SiteConfigurationsWc.EnableBloodPressurePopup" />
+                                                                <div class="non-overview-item">
+                                                                    <h4 class="fs-field-label fs-anim-upper" style="margin-bottom:20px" for="q1">@questionnaireList.QuestionnaireCategory</h4>
+                                                                    <h5 style="margin-bottom: 30px;" class="fs-field-label fs-anim-upper" for="q1">@questionnaireList.QuestionnaireGroupText</h5>
+                                                                </div>
+
+                                                                @if (questionnaireOptionList.Count() > 0)
+                                                                {
+
+                                                                    if (questionnaireList.QuestionnaireMulAns)
+                                                                    {
+                                                                        <input type="hidden" value="Please choose at-least one answer" class="alert-error" />
+                                                                        <p class="fs-field-label fs-anim-upper question" for="q2" style="margin-bottom: 30px;">
+                                                                            @questionnaireList.QuestionnaireText
+                                                                            <span class="text-dark">(Please select all that apply)</span>
+                                                                        </p>
+                                                                        <div class="fs-anim-lower">
+                                                                            @{
+                                                                                bool expl = false;
+                                                                                string explanationValue = "";
+                                                                                int optid = 0;
+                                                                            }
+                                                                            @foreach (var questionnaireOptList in questionnaireOptionList)
+                                                                            {
+                                                                                <input type="hidden" name="[@j].HardStop" value="@questionnaireOptList.HardStop.ToString()" />
+                                                                                <input name="[@j].AnswerText" type="hidden" value="Null" placeholder="" />
+                                                                                <input type="hidden" name="[@j].QuestionnaireId" value="@questionnaireList.QuestionnaireId" />
+                                                                                <input type="hidden" name="[@j].QuestionnaireCategoryId" value="@questionnaireList.QuestionnaireCategoryFk" />
+                                                                                <input type="hidden" name="[@j].QuestionnaireOptionId" value="@questionnaireOptList.QuestionOptionId" />
+                                                                                <div class="custom-control custom-check orange chkbxe">
+
+                                                                                    @if (@questionnaireOptList.QuestionOptionAskMoreInfo)
+                                                                                    {
+                                                                                        <input value="true" type="checkbox" id="@questionnaireOptList.QuestionOptionId" name="[@j].isSelected" class="custom-control-input otherCheckBox respCheckBox otherTextCheckBox">
+                                                                                        <input type="hidden" name="[@j].needMoreExplanationOption" class="needMoreExplanationOption" value="1" />
+                                                                                        <label class="custom-control-label checkResponseText">@questionnaireOptList.QuestionOptionText</label>
+
+                                                                                        <input type="hidden" class="chkOtherSessionClass" value="0" />
+                                                                                        if (@questionnaireOptList.QuestionOptionAskMoreInfo)
+                                                                                        {
+                                                                                            <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" name="[@j].ExplanationText" type="text" placeholder="@questionnaireOptList.QuestionOptionPlaceHolder" />
+                                                                                        }
+                                                                                        <input type="hidden" name="checkIfTextOpen" class="checkIfTextOpen" value="0" />
+                                                                                        expl = true;
+                                                                                        optid = j;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        if (@questionnaireOptList.QuestionOptionNone)
+                                                                                        {
+                                                                                            <input type="hidden" name="[@j].noneOption" class="noneOption" value="1" />
+                                                                                            @*select none option by default for question 9/14*@
+                                                                                            if (@questionnaireOptList.QuestionnaireFk == 49)
+                                                                                            {
+                                                                                                <input value="true" type="checkbox" name="[@j].isSelected" class="custom-control-input respCheckBox noneCheckBox" checked>
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                <input value="true" type="checkbox" name="[@j].isSelected" class="custom-control-input respCheckBox noneCheckBox">
+                                                                                            }
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            <input value="true" type="checkbox" id="@questionnaireOptList.QuestionOptionId" name="[@j].isSelected" class="custom-control-input otherCheckBox respCheckBox">
+                                                                                            <input type="hidden" name="[@j].noneOption" class="noneOption" value="0" />
+
+                                                                                        }
+                                                                                        <input type="hidden" class="chkOtherSessionClass" value="0" />
+                                                                                        <input type="hidden" name="[@j].needMoreExplanationOption" class="needMoreExplanationOption" value="0" />
+                                                                                        <label class="custom-control-label checkResponseText">@questionnaireOptList.QuestionOptionText</label>
+
+                                                                                    }
+                                                                                </div>
+                                                                                j++;
+                                                                            }
+                                                                            @*@if (expl)
+                                        {
+                                            <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" name="[@optid].ExplanationText" type="text" placeholder="Type here" />
+                                        }*@
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input type="hidden" value="Please choose at-least one answer" class="alert-error" />
+                                                                        <p class="fs-field-label fs-anim-upper question" for="q2">@questionnaireList.QuestionnaireText</p>
+                                                                        <div class="custom-radio fs-anim-lower">
+                                                                            @{
+                                                                                bool expl = false;
+                                                                                string explanationValue = "";
+                                                                                int optid = 0;
+                                                                            }
+                                                                            @foreach (var questionnaireOptList in questionnaireOptionList)
+                                                                            {
+                                                                                k++;
+                                                                                string radId = k.ToString() + "opt";
+                                                                                <input type="hidden" name="[@j].QuestionnaireId" value="@questionnaireList.QuestionnaireId" />
+
+                                                                                if (@questionnaireList.QuestionnaireAskMoreInfo)
+                                                                                {
+                                                                                    <input type="hidden" name="[@j].needMoreExplanation" class="needMoreExplanation" value="1" />
+
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input type="hidden" name="[@j].needMoreExplanation" class="needMoreExplanation" value="0" />
+                                                                                }
+                                                                                <input type="hidden" name="[@j].HardStop" value="@questionnaireOptList.HardStop.ToString()" />
+                                                                                <input type="hidden" name="[@j].QuestionnaireCategoryId" value="@questionnaireList.QuestionnaireCategoryFk" />
+                                                                                <input type="hidden" name="[@j].QuestionnaireOptionId" value="@questionnaireOptList.QuestionOptionId" />
+                                                                                <input name="[@j].AnswerText" type="hidden" value="Null" placeholder="" />
+                                                                                <input type="hidden" class="ques-@questionnaireList.QuestionnaireId quesopt-@questionnaireOptList.QuestionOptionId" name="[@j].isSelected" id="[@j].isSelected" />
+                                                                                <div class="radio-item">
+                                                                                    @if (@questionnaireOptList.QuestionOptionAskMoreInfo)
+                                                                                    {
+                                                                                        <input type="hidden" name="[@j].needMoreExplanationOption" class="needMoreExplanationOption" value="1" />
+                                                                                        expl = true;
+                                                                                        optid = j;
+                                                                                        <input class="radd NeedMoreOption radioSession-@questionnaireList.QuestionnaireId" type="radio" id="@questionnaireOptList.QuestionOptionId" name="@questionnaireList.QuestionnaireId" value="@questionnaireList.QuestionnaireId-@questionnaireOptList.QuestionOptionId">
+                                                                                        <label class="optionText" for="@questionnaireOptList.QuestionOptionId">@questionnaireOptList.QuestionOptionText</label>
+                                                                                        <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" name="[@optid].ExplanationText" type="text" placeholder="@questionnaireOptList.QuestionOptionPlaceHolder" />
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input type="hidden" name="[@j].needMoreExplanationOption" class="needMoreExplanationOption" value="0" />
+                                                                                        <input class="radd radioSession-@questionnaireList.QuestionnaireId" type="radio" id="@questionnaireOptList.QuestionOptionId" name="@questionnaireList.QuestionnaireId" value="@questionnaireList.QuestionnaireId-@questionnaireOptList.QuestionOptionId">
+                                                                                        <label class="optionText" for="@questionnaireOptList.QuestionOptionId">@questionnaireOptList.QuestionOptionText</label>
+                                                                                    }
+
+
+                                                                                </div>
+
+                                                                                j++;
+
+                                                                            }
+
+                                                                            @*@if (expl)
+                                        {
+                                            <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" name="[@optid].ExplanationText" type="text" placeholder="Type here" />
+                                        }*@
+                                                                        </div>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="hidden" name="[@j].HardStop" value="False" />
+                                                                    <input type="hidden" value="Please write your response" class="alert-error" />
+                                                                    <input type="hidden" name="[@j].QuestionnaireId" value="@questionnaireList.QuestionnaireId" />
+                                                                    <input type="hidden" name="[@j].QuestionnaireCategoryId" value="@questionnaireList.QuestionnaireCategoryFk" />
+                                                                    <input type="hidden" name="[@j].QuestionnaireOptionId" value="0" />
+                                                                    <input type="hidden" name="[@j].IsSelected" value="true" />
+                                                                    <p class="fs-field-label fs-anim-upper question" for="q2">@questionnaireList.QuestionnaireText</p>
+                                                                    <input class="fs-anim-lower text-black-50 txtAns" id="q2" name="[@j].AnswerText" type="text" placeholder="Type here" />
+                                                                    j++;
+                                                                }
+
+
+                                                                @*<span class="small-text fs-anim-lower">Press “Enter” to proceed</span>*@
+                                                                <span class="upload-form-nav fs-anim-lower">
+                                                                    <input type="hidden" class="currQues" value="@currentQuestion">
+                                                                    @if (@currentQuestion < @Model.QuestionnaireList.Count())
+                                                                    {
+                                                                        if (questionNum < totalQuestionCount)
+                                                                        {
+
+                                                                            <input type="hidden" class="activateSideBar" value="@questionnaireList.QuestionnaireGroupId-@questionnaireList.QuestionnaireGroupText.Replace(" ", "")">
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            int strId = Model.QuestionnaireList[currentQuestion].QuestionnaireGroupId;
+                                                                            String str = Model.QuestionnaireList[currentQuestion].QuestionnaireGroupText;
+
+                                                                            <input type="hidden" class="activateSideBar" value="@strId-@str.Replace(" ", "")">
+
+                                                                        }
+
+
+                                                                    }
+                                                                    @if ((questionNum == 1) && (currentQuestion != 1))
+                                                                    {
+                                                                        int strId = Model.QuestionnaireList[currentQuestion - 2].QuestionnaireGroupId;
+                                                                        String str = Model.QuestionnaireList[currentQuestion - 2].QuestionnaireGroupText;
+                                                                        <input type="hidden" class="activateSideBarBack" value="@strId-@str.Replace(" ", "")">
+                                                                    }
+                                                                    else if (currentQuestion > 1)
+                                                                    {
+                                                                        <input type="hidden" class="activateSideBarBack" value="@questionnaireList.QuestionnaireGroupId-@questionnaireList.QuestionnaireGroupText.Replace(" ", "")">
+
+                                                                    }
+                                                                    <ul class="has-counter">
+                                                                        @if (@questionNum != 0)
+                                                                        {
+                                                                            <li class="back-btn backbutton">
+                                                                                <span class="form-back-btn">back</span>
+                                                                            </li>
+                                                                        }
+                                                                        @if (@currentQuestion < @Model.QuestionnaireList.Count())
+                                                                        {
+                                                                            if (index < questionnaireCatIdArr.Length && catTotalQues == singleCatQuestionsList.Count())
+                                                                            {
+
+                                                                                <li class="btnEnabled1 next-btn">
+                                                                                    <input type="hidden" class="hiddenCatid" value="@questionnaireCatIdArr[index]">
+                                                                                    <input type="hidden" class="itemCount" value="@singleCatQuestionsList.Count()">
+                                                                                    <div class="btn btn__yellow btn--rounded">Next Step <img src="/Content/images/arrow-right.svg" /></div>
+                                                                                </li>
+                                                                                <li class="btnDisabled disabled">
+                                                                                    <div class="btn btn__yellow btn--rounded">Next Step <img src="/Content/images/arrow-right.svg" /></div>
+                                                                                </li>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <li class="btnEnabled next-btn">
+                                                                                    <div class="btn btn__yellow btn--rounded">Next Step <img src="/Content/images/arrow-right.svg" /></div>
+                                                                                </li>
+                                                                                <li class="btnDisabled disabled">
+                                                                                    <div class="btn btn__yellow btn--rounded">Next Step <img src="/Content/images/arrow-right.svg" /></div>
+                                                                                </li>
+                                                                            }
+
+                                                                        }
+
+                                                                        else
+                                                                        {
+                                                                            <button type="button" class="btn btn__yellow btn--rounded btnDisabled btn-question-review">Review Answers <img src="/Content/images/arrow-right.svg" /></button>
+                                                                            <button type="submit" class="btn btn__yellow btn--rounded reviewButton  btn-question-review">Review Answers <img src="/Content/images/arrow-right.svg" /></button>
+                                                                        }
+
+                                                                    </ul>
+                                                                    <div class="question-counter">
+
+                                                                        <span style="font-weight: bold;">@questionNum</span><span>/@totalQuestionCount</span>
+                                                                        @*<span style="font-weight: bold;">@i</span><span>/@Model.QuestionnaireList.Count()</span>*@
+                                                                    </div>
+
+                                                                </span>
+                                                            </li>
+                                                        }
+                                                    }
+
+                                                }
+                                            </ol>
+
+                                        </form><!-- /fs-form-wrap -->
+                                    </div>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-5 pt-5 d-block d-lg-none" id="mobile-layout">
+                            <div class="col-12">
+                                <div class="form-container">
+                                    <div class="fs-form-wrap" id="fs-form-wrap">
+
+                                        <form id="myform" name="myform" action="/Order/ReviewAnswer" class="fs-form fs-form-full" method="post" autocomplete="off">
+
+                                            <input type="hidden" name="deviceType" value="1" id="mobile-device" />
+                                            <input name="orderId" type="hidden" value="@Model.OrderId" />
+                                            <input type="hidden" name="sessionTrackerId" value="@Model.CustomerSessionTrackerFk" />
+
+                                            <div class="fs-fields">
+
+                                                <ol>
+                                                    @if (@ViewBag.idImageFound)
+                                                    {
+                                                        @Html.Partial("IdAlreadyUploaded", new DocumentIdUploadViewModel
+                                                   {
+                                                       IdImageFound = @ViewBag.idImageFound,
+                                                       IdImageName = @ViewBag.idImageFileName,
+                                                       CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                       HavePrescription = false,
+                                                       IsMobileDevice = true
+                                                   })
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.Partial("UploadIDDoc", new DocumentIdUploadViewModel
+                                                   {
+                                                       OrderId = Model.OrderId,
+                                                       CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                       HavePrescription = false,
+                                                       IsMobileDevice = true
+                                                   })
+                                                    }
+                                                    @if (@ViewBag.backIdImageFound)
+                                                    {
+                                                        @Html.Partial("IdAlreadyUploadedStep2", new DocumentIdUploadViewModel
+                                                   {
+                                                       IdImageFound = @ViewBag.backIdImageFound,
+                                                       IdBackImageName = @ViewBag.IdBackImageName,
+                                                       CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                       HavePrescription = false,
+                                                       IsMobileDevice = true
+                                                   })
+
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.Partial("UploadIDDocStep2", new DocumentIdUploadViewModel
+                                                   {
+                                                       OrderId = Model.OrderId,
+                                                       CustomerDocumentIdValid = @ViewBag.CustomerDocumentValidated,
+                                                       HavePrescription = false,
+                                                       IsMobileDevice = true
+                                                   })
+                                                    }
+
+                                                </ol>
+                                                @if (Model.QuestionnaireList.Count() > 0)
+                                                {
+                                                    int i = 0;
+                                                    int j = 0;
+                                                    int k = 0;
+                                                    string groupText = "";
+                                                    string questionnaireCatId = Model.QuestionnaireCatId;
+                                                    string[] questionnaireCatIdArr = questionnaireCatId.Split(',');
+                                                    questionnaireCatIdArr = questionnaireCatIdArr.Distinct().ToArray();
+                                                    foreach (string questionCat in questionnaireCatIdArr)
+                                                    {
+                                                        int catId = Convert.ToInt32(questionCat);
+
+                                                        List<Questionnaire> singleCatQuestionsList = Model.QuestionnaireList.Where(x => x.QuestionnaireCategoryFk == catId).ToList();
+
+                                                        foreach (var questionnaireList in singleCatQuestionsList)
+                                                        {
+                                                            i++;
+                                                            bool chbCheck = false;
+                                                            List<QuestionnaireOption> questionnaireOptionList = new List<QuestionnaireOption>();
+
+                                                            // sort by product size order for ventolin
+
+
+                                                            if (Model.QuestionnaireOptionList != null)
+                                                            {
+                                                                questionnaireOptionList = Model.QuestionnaireOptionList.Where(x => x.QuestionnaireFk == @questionnaireList.QuestionnaireId).ToList();
+
+                                                            }
+
+                                                            <div class="form-group health-questionnaire">
+                                                                <input name="notKnownBp" type="hidden" value="false" class="notKnownBp" />
+                                                                <input name="EnableBPPopUp" id="EnableBPPopUp" type="hidden" value="@SiteConfigurationsWc.EnableBloodPressurePopup" />
+
+                                                                @*<div class="non-overview-item">
+                                @if (Model.AnsweredCategoriesList.Contains(catId))
+                                {
+                                    <h6 style="margin-bottom: 30px;"
+                                        class="fs-field-label fs-anim-upper" for="q1">
+                                        This page also contains your prevously answered question. You can review and edit those as well.
+                                    </h6>
+                                }
+                            </div>*@
+                                                                @if (groupText.ToLower() != questionnaireList.QuestionnaireGroupText.ToLower())
+                                                                {
+                                                                    groupText = questionnaireList.QuestionnaireGroupText;
+
+
+                                                                    <div class="non-overview-item">
+
+                                                                        <h4 style="margin-bottom: 30px;"
+                                                                            class="fs-field-label fs-anim-upper" for="q1">
+                                                                            @questionnaireList.QuestionnaireGroupText
+                                                                        </h4>
+                                                                    </div>
+                                                                }
+
+                                                                @if (questionnaireOptionList.Count() > 0)
+                                                                {
+
+                                                                    if (questionnaireList.QuestionnaireMulAns)
+                                                                    {
+
+                                                                        bool expl = false;
+                                                                        string explanationValue = "";
+                                                                        int optid = 0;
+                                                                        <input type="hidden" value="Please choose at-least one answer" class="alert-error" />
+                                                                        <p class="fs-field-label fs-anim-upper question" for="q2" style="margin-bottom: 30px;">
+                                                                            @questionnaireList.QuestionnaireText
+                                                                            <span class="text-dark">(Please select all that apply)</span>
+                                                                            <span class="question-counter">(<b>@i</b>/@Model.QuestionnaireList.Count())</span>
+                                                                        </p>
+                                                                        <div class="fs-anim-lower">
+                                                                            <div class="checkbox-group required">
+                                                                                @foreach (var questionnaireOptList in questionnaireOptionList)
+                                                                                {
+                                                                                    <input type="hidden" name="[@j].HardStop" value="@questionnaireOptList.HardStop.ToString()" />
+                                                                                    <input name="[@j].AnswerText" type="hidden" value="Null" placeholder="" />
+                                                                                    <input type="hidden" class="" name="[@j].QuestionnaireId" value="@questionnaireList.QuestionnaireId" />
+                                                                                    <input type="hidden" name="[@j].QuestionnaireCategoryId" value="@questionnaireList.QuestionnaireCategoryFk" />
+                                                                                    <input type="hidden" name="[@j].QuestionnaireOptionId" value="@questionnaireOptList.QuestionOptionId" />
+
+                                                                                    <div class="custom-control custom-check orange chkbxe">
+                                                                                        @if (questionnaireOptList.QuestionOptionAskMoreInfo)
+                                                                                        {
+                                                                                            <input value="true" type="checkbox" id="@questionnaireOptList.QuestionOptionId" name="[@j].isSelected" class="custom-control-input otherCheckBox respCheckBox otherTextCheckBox">
+                                                                                            <input type="hidden" name="[@j].needMoreExplanationOption" class="needMoreExplanationOption" value="1" />
+
+                                                                                            <label class="custom-control-label checkResponseText">@questionnaireOptList.QuestionOptionText</label>
+
+                                                                                            <br />
+                                                                                            <input type="hidden" class="chkOtherSessionClass" value="0" />
+                                                                                            if (@questionnaireOptList.QuestionOptionAskMoreInfo)
+                                                                                            {
+                                                                                                <input value="true" type="checkbox" id="@questionnaireOptList.QuestionOptionId" name="[@j].isSelected" class="custom-control-input otherCheckBox respCheckBox otherTextCheckBox">
+                                                                                                <input type="hidden" name="[@j].needMoreExplanationOption" class="needMoreExplanationOption" value="1" />
+                                                                                                <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" name="[@j].ExplanationText" type="text" placeholder="@questionnaireOptList.QuestionOptionPlaceHolder" />
+
+                                                                                                <input type="hidden" class="chkOtherSessionClass" value="0" />
+                                                                                            }
+
+                                                                                            <input type="hidden" name="checkIfTextOpen" class="checkIfTextOpen" value="0" />
+                                                                                            expl = true;
+                                                                                            optid = j;
+
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            if (@questionnaireOptList.QuestionOptionNone)
+                                                                                            {
+                                                                                                @*select none option by default for question 9/14*@
+                                                                                                if (@questionnaireOptList.QuestionnaireFk == 49)
+                                                                                                {
+                                                                                                    <input value="true" type="checkbox" name="[@j].isSelected" class="custom-control-input respCheckBox noneCheckBox" checked>
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    <input value="true" type="checkbox" name="[@j].isSelected" class="custom-control-input respCheckBox noneCheckBox">
+                                                                                                }
+
+                                                                                                <input type="hidden" name="[@j].noneOption" class="noneOption" value="1" />
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                <input value="true" type="checkbox" id="@questionnaireOptList.QuestionOptionId" name="[@j].isSelected" class="custom-control-input otherCheckBox respCheckBox">
+                                                                                                <input type="hidden" name="[@j].noneOption" class="noneOption" value="0" />
+
+                                                                                            }
+                                                                                            <input type="hidden" class="chkOtherSessionClass" value="0" />
+                                                                                            <input type="hidden" name="[@j].needMoreExplanationOption" class="needMoreExplanationOption " value="0" />
+                                                                                            <label class="custom-control-label checkResponseText">@questionnaireOptList.QuestionOptionText</label>
+
+                                                                                        }
+
+                                                                                    </div>
+
+                                                                                    j++;
+                                                                                }
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input type="hidden" value="Please choose at-least one answer" class="alert-error" />
+                                                                        <p class="fs-field-label fs-anim-upper question" for="q2">
+                                                                            @questionnaireList.QuestionnaireText
+                                                                            <span class="question-counter">(<b>@i</b>/@Model.QuestionnaireList.Count())</span>
+                                                                        </p>
+                                                                        <div class="custom-radio fs-anim-lower">
+                                                                            @{
+                                                                                bool expl = false;
+                                                                                string explanationValue = "";
+                                                                                int optid = 0;
+                                                                            }
+                                                                            @foreach (var questionnaireOptList in questionnaireOptionList)
+                                                                            {
+                                                                                k++;
+                                                                                string radId = k.ToString() + "opt";
+                                                                                <input type="hidden" name="[@j].QuestionnaireId" value="@questionnaireList.QuestionnaireId" />
+                                                                                if (@questionnaireList.QuestionnaireAskMoreInfo)
+                                                                                {
+                                                                                    <input type="hidden" name="[@j].needMoreExplanation" class="needMoreExplanation" value="1" />
+
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <input type="hidden" name="[@j].needMoreExplanation" class="needMoreExplanation" value="0" />
+                                                                                }
+                                                                                <input type="hidden" name="[@j].QuestionnaireCategoryId" value="@questionnaireList.QuestionnaireCategoryFk" />
+                                                                                <input type="hidden" name="[@j].QuestionnaireOptionId" value="@questionnaireOptList.QuestionOptionId" />
+                                                                                <input type="hidden" name="[@j].HardStop" value="@questionnaireOptList.HardStop.ToString()" />
+                                                                                <input name="[@j].AnswerText" type="hidden" value="Null" placeholder="" />
+                                                                                <input type="hidden" class="ques-@questionnaireList.QuestionnaireId quesopt-@questionnaireOptList.QuestionOptionId" name="[@j].isSelected" id="[@j].isSelected" />
+
+                                                                                <div class="radio-item">
+                                                                                    @if (questionnaireOptList.QuestionOptionAskMoreInfo)
+                                                                                    {
+
+
+                                                                                        <input type="hidden" name="[@j].needMoreExplanation" class="needMoreExplanation" value="1" />
+                                                                                        <input type="hidden" name="[@j].needMoreExplanationOption" class="needMoreExplanationOption" value="1" />
+                                                                                        expl = true;
+                                                                                        optid = j;
+                                                                                        <input class="radd NeedMoreOption radioSession-@questionnaireList.QuestionnaireId" type="radio" id="@questionnaireOptList.QuestionOptionId" name="@questionnaireList.QuestionnaireId" value="@questionnaireList.QuestionnaireId-@questionnaireOptList.QuestionOptionId">
+                                                                                        <label class="optionText" for="@questionnaireOptList.QuestionOptionId">@questionnaireOptList.QuestionOptionText</label>
+                                                                                        <input class="fs-anim-lower text-black-50 txtAns explainFurtherTextBox" id="q2" name="[@optid].ExplanationText" type="text" placeholder="@questionnaireOptList.QuestionOptionPlaceHolder" />
+
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        <input type="hidden" name="[@j].needMoreExplanationOption" class="needMoreExplanationOption" value="0" />
+                                                                                        <input class="radd radioSession-@questionnaireList.QuestionnaireId" type="radio" id="@questionnaireOptList.QuestionOptionId" name="@questionnaireList.QuestionnaireId" value="@questionnaireList.QuestionnaireId-@questionnaireOptList.QuestionOptionId">
+                                                                                        <label class="optionText" for="@questionnaireOptList.QuestionOptionId">@questionnaireOptList.QuestionOptionText</label>
+                                                                                    }
+                                                                                </div>
+
+                                                                                j++;
+
+                                                                            }
+
+
+
+                                                                        </div>
+                                                                    }
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="hidden" name="[@j].HardStop" value="False" />
+                                                                    <input type="hidden" value="Please write your response" class="alert-error" />
+                                                                    <input type="hidden" name="[@j].QuestionnaireId" value="@questionnaireList.QuestionnaireId" />
+                                                                    <input type="hidden" name="[@j].QuestionnaireCategoryId" value="@questionnaireList.QuestionnaireCategoryFk" />
+                                                                    <input type="hidden" name="[@j].QuestionnaireOptionId" value="0" />
+                                                                    <input type="hidden" name="[@j].IsSelected" value="true" />
+
+                                                                    <p class="fs-field-label fs-anim-upper question" for="q2">
+                                                                        @questionnaireList.QuestionnaireText
+                                                                        <span class="question-counter">(<b>@i</b>/@Model.QuestionnaireList.Count())</span>
+                                                                    </p>
+                                                                    <input class="fs-anim-lower text-black-50 txtAns" id="q2" name="[@j].AnswerText" type="text" placeholder="Type here" />
+
+                                                                    j++;
+                                                                }
+
+
+
+                                                            </div>
+                                                        }
+                                                    }
+                                                }
+
+
+                                            </div>
+                                            <button type="submit" class="btn btn__yellow btn--rounded" id="mobile-review-answer">Review Answers <img src="/Content/images/arrow-right.svg" /></button>
+                                            @*<button type="submit" class="btn btn__success btn--rounded mt-5">
+            Submit
+            Answers <img src="/Content/images/arrow-right-white.svg" />
+        </button>*@
+
+                                        </form><!-- /fs-form-wrap -->
+                                    </div>
+                                    @*<button class="fs-submit" formaction="/order/AddingSchedule" formmethod="post" type="submit">Submit answers</button>*@
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Models
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articlebody">
+
+
+                                <p>
+                                    Life is full of accidental bangs and bumps, some far more obvious and impactful than others. Over time, that big hit you took on the crossbar of your bike or a slapshot to the groin could develop into long-term issues. Penis injuries can lead to problems later in life, depending on the severity. This includes issues with scar tissue and penile fracture. But there are signs that you can look for to help get treatment and prevent further damage and disruption to your sex life.
+                                </p>
+                                <h5>BLOW TO THE HEAD</h5>
+
+                                <p>
+                                    Boys learn early in life the intense agony with injuries to the testes or penis. However, the severity of the immediate pain from <a href="https://www.urologyhealth.org/urology-a-z/p/penile-trauma">
+                                        penis injuries<a /> can lead to problems throughout life.
+
+                                        <br><br> The penis is comprised of soft tissues and blood vessels. An erection is achieved when hormones trigger extra blood flow into the penis, engorging the blood vessels. That helps the penis swell and become firm and erect, making it sufficient for intercourse. But the penis tissues and vessels are delicate. When severely injured, one of the most common problems to arise is scar tissue build up.
+
+                                        <br><br>Scar tissue from a penile fracture is a common problem. Over time, the penis can become misshapen when erect (and soft, too). Scar tissue from penis injuries can also make erections painful. As the body sends what would be the normal amount of blood flow into the penis, there is now too much liquid volume for the space available. The scar tissue, often hard and lumpy, can often make the penis appear misshappen.
+                                </p>
+
+                                <div class="cta-box mb-3">
+                                    <div class="cta-image">
+                                        <img src="/content/images/products/product-item-generic-13412.png" alt="">
+                                    </div>
+                                    <div class="cta-text">
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+                                        <a href="/products" class="btn btn__secondary btn--rounded ">Visit our online store</a>
+                                    </div>
+                                </div>
+
+
+                                <h5>IT’S ALL FUN AND GAMES UNITL</h5>
+
+                                <p>Sex injuries to the penis are very common. If you have a penis or have ever accidentally hit one, you’re familiar with the endless possibilities for injury. So, be careful and pay attention to what you’re doing. If you do get injured or hurt, it’s a good idea to see a doctor. It’s important to make sure you haven’t done something that might not be apparent now but could become a problem later. A doctor, or most likely a urologist, can do minor operations to repair the damaged penis to ensure it functions normally. (Take note: the most common way it occurs is when the partner is riding on top of the erect penis while the man lies on his back. You’ll know when it happens!) </p>
+
+                                <h5>MAJOR TRAUMA</h5>
+
+                                <p>
+                                    In the extremely rare event of partial or full amputation of the penis, you can still get help. Once emergency services have been called and the patient has been given help, find the part of the appendage that has been cut off. Be sure to wrap it in sterile gauze (or something clean if you don’t have that). Do not wash it. Pack it with ice or something cold, if available. Label the package with person’s name and time it was packed, bring it to hospital with the patient or send it with the ambulance. NEVER place any amputated body part directly on ice or ice packs. That can cause additional tissue damage.
+                                    <br><br>A successful reattachment can help reduce the risk from long term damage, like scar tissue, and potentially the inability to achieve an erection.
+                                </p>
+
+                                <h5>IN THE END</h5>
+
+                                <p>Be careful and watch what you are doing in bed. It’s easy to get caught up in the moment. If you do get injured or hurt, speak with a medical professional. They’ve seen it all before and know what to do. Not doing something about a penis injury or a penis fracture can shatter more than a great moment.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action(" BlogSelector", "Blog" , new { BlogUrl=@ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

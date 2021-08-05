@@ -1,0 +1,228 @@
+﻿@using EnhanceClub.WebUI.Models
+@model EnhanceClub.WebUI.Models.CustomerProfileViewModel
+
+
+<div class="form-group info-group">
+    <label for="customerfirstname" class="text-capitalize">
+        First
+        Name
+    </label>
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        @Html.TextBox("PatientProfileFirstName", @Model.PatientProfile.PatientProfileFirstName, new { @class = "form-control", required = "required", @placeholder = "Patient First Name" })
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="customerlastname" class="text-capitalize">Last Name</label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        @Html.TextBox("PatientProfileLastName", @Model.PatientProfile.PatientProfileLastName, new { @class = "form-control", required = "required", @placeholder = "Patient Last Name" })
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="">Patient's Birthdate</label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        @Html.TextBox("PatientProfileBirthDate", @Model.PatientProfile.PatientProfileBirthDate.ToString("yyyy-MM-dd"), new { @required = "required", @class = "form-control", @type = "date", @min = "1900-01-01", @placeholder = "yyyy--mm--dd" })
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="text-capitalize">Gender</label>
+
+    <span class="input-wrapper extended mt-4">
+        @Html.DropDownList("PatientProfileSex", new SelectList(@Model.GenderList, "Value", "Text", Model.PatientProfile.PatientProfileSex), new { @class = "form-control", required = "required" })
+    </span>
+    <span class="input-wrapper extended mt-4 d-none" id="gender-other-text">
+        @Html.TextBox("PatientProfileGenderOther", Model.PatientProfile.PatientProfileGenderOther, new  {@class ="form-control mt-1", @placeholder = "Type other details"})
+    </span>
+</div>
+@if (Model.PatientProfile.CustomerProvinceCode == "BC")
+{
+    <div class="form-group info-group">
+        <label for="username" class=""> Personal Health Number</label>
+
+        <span class="input-wrapper extended mt-4">
+            <!-- Input -->
+            @Html.TextBox("PatientPersonalHealthNumber", @Model.PatientProfile.PatientPersonalHealthNumber,
+           new { @required = "required", @class = "form-control", @placeholder = "PHN", @maxlength = 12 })
+        </span>
+    </div>
+}
+@*<div class="form-group info-group">
+        <label for="customerfirstname" class="text-capitalize">
+            Phone
+            Number
+        </label>
+        <span class="input-wrapper extended mt-4">
+            @Html.TextBox("PatientProfilePhoneNumber", @Model.PatientProfile.PatientProfilePhoneNumber,
+            new { @class = "form-control", required = "required", pattern = @"\d{3}-\d{3}-\d{4}", @placeholder = "Patient Phone(xxx-xxx-xxxx)" })
+        </span>
+    </div>*@
+<div class="form-group info-group">
+    <label for="username" class="">
+      1.  Do you have any allergies to medications? Please list them:
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        @Html.TextArea("PatientProfileAllergy", @Model.PatientProfile.PatientProfileAllergy, new { @class = "form-control", @placeholder = "List your allergeries", required = "required" })
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="">
+       2. Please list your past medical history along with your current medical conditions:
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        @Html.TextArea("PatientProfileMedicalHistory", @Model.PatientProfile.PatientProfileMedicalHistory, new { @class = "form-control", @placeholder = "List your medical conditions" , required = "required" })
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username" class="">
+       3. Please list any past surgeries you’ve had:
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        @Html.TextArea("PatientProfilePastSurgeries", @Model.PatientProfile.PatientProfilePastSurgeries,
+       new { @class = "form-control", @placeholder = "List past surgeries, if any" , required = "required" })
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username">
+        4. Please list your current medications:
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        @Html.TextArea("PatientProfileMedication", @Model.PatientProfile.PatientProfileMedication,
+       new { @class = "form-control", @placeholder = "List your current medications" , required = "required" })
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username">
+        5. Please list any herbal supplements:
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        @Html.TextArea("PatientProfileHerbalSupplements",
+       @Model.PatientProfile.PatientProfileHerbalSupplements, new { @class = "form-control", @placeholder = "List any herbal supplements", required = "required" })
+    </span>
+</div>
+<div class="form-group info-group">
+    <label for="username">
+       6. Please list family illness history.
+    </label>
+
+    <span class="input-wrapper extended mt-4">
+        <!-- Input -->
+        @Html.TextArea("PatientProfileFamilyHistoryIllness",
+       @Model.PatientProfile.PatientProfileFamilyHistoryIllness, new { @class = "form-control", @placeholder = "List any family illness" , required = "required" })
+    </span>
+</div>
+
+<div class="documents-section form-group mb-5">
+    <div class="">
+        <label for="username">
+          7. Social history
+        </label>
+
+        @for (var i = 0; i < Model.SocialHistoryList.Count(); i++)
+        {
+            var checkboxClass = "custom-control-input social-history";
+            <div class="custom-control custom-check orange">
+
+                @if (Model.SocialHistoryList[i].SocialHistoryName.ToLower() == "none")
+                {
+                    checkboxClass = "custom-control-input social-history noneCheckBox";
+                }
+                @Html.CheckBoxFor(m => m.SocialHistoryList[i].IsSelected, new { @class = @checkboxClass })
+                <label class="custom-control-label" for="@Model.SocialHistoryList[i].SocialHistoryName">@Model.SocialHistoryList[i].SocialHistoryName</label>
+                @Html.HiddenFor(m => m.SocialHistoryList[i].SocialHistoryId)
+                @Html.HiddenFor(m => m.SocialHistoryList[i].SocialHistoryName, new { @class = "social-history-name" })
+                @Html.HiddenFor(m => m.SocialHistoryList[i].IsSelected)
+            </div>
+        }
+    </div>
+</div>
+<input type="hidden" name="consentChanged" id="consentChanged" value="false">
+<input type="hidden" name="checkedValue" id="checkedValue" value="True">
+<!--commented consultation section-->
+@*
+    <div class="row documents-section">
+        <div class="col-md-12 form-group">
+            <label for="username" class="text-capitalize">
+                Once your order is complete, would you like the pharmacist to contact you for additional counselling with regards to your medication?
+            </label>
+            <span class="custom-radio">
+                <!-- Input -->
+                <input type="hidden" name="consentChanged" id="consentChanged" value="false">
+                <input type="hidden" name="checkedValue" id="checkedValue" value="True">
+                <div class="radio-item">
+                    @Html.RadioButton("PatientProfileConsultationConsent", @Model.PatientProfile.PatientProfileConsultationConsent!=null? @Model.PatientProfile.PatientProfileConsultationConsent:false,
+                           new { @onclick = "SetConsentValue(true)" ,
+                               id = "PatientProfileConsultationConsentYes",
+                               name = "PatientProfileConsultationConsenty" })
+                    <label class="text-capitalize" for="PatientProfileConsultationConsentYes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    @Html.RadioButton("PatientProfileConsultationConsent", @Model.PatientProfile.PatientProfileConsultationConsent != null ? @Model.PatientProfile.PatientProfileConsultationConsent : false,
+                       new {
+                           @onclick = "SetConsentValue(false)" ,
+                           id = "PatientProfileConsultationConsentNo",
+                           name = "PatientProfileConsultationConsentN" })
+                    <label class="text-capitalize" for="PatientProfileConsultationConsentNo"> No </label>
+                </div>
+            </span>
+        </div>
+
+        <div id="consultationhours">
+            <p class="mt-5 mb-4">
+                Please select the best time for them to reach you (Mon-Sat)
+            </p>
+            @for (var i = 0; i < Model.ConsultationHours.Count(); i++)
+            {
+            <div class="custom-control custom-check orange">
+
+                @Html.CheckBoxFor(m => m.ConsultationHours[i].IsSelected, new { @class = "custom-control-input" })
+                <label class="custom-control-label">@Model.ConsultationHours[i].ConsultationHour</label>
+                @Html.HiddenFor(m => m.ConsultationHours[i].ConsultationHoursId)
+                @Html.HiddenFor(m => m.ConsultationHours[i].ConsultationHour)
+                @Html.HiddenFor(m => m.ConsultationHours[i].IsSelected)
+            </div>
+            }
+
+        </div>
+    </div>*@
+
+@if (ViewBag.ReturnUrl == "EditPatientProfile")
+{
+    <div class="">
+        <button type="submit" class="save-btn btn btn-default">
+            Update profile
+        </button>
+    </div>
+}
+else
+{
+    if (@Model.havePrescription)
+    {
+        <div class="">
+            <button type="submit" class="save-btn btn btn-default">
+                Continue to Upload
+                Prescription
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="">
+            <button type="submit" class="save-btn btn btn-default">
+                Continue to Questionnaire
+            </button>
+        </div>}
+}

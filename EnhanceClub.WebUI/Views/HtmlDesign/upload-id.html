@@ -1,0 +1,576 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+
+    <script type="text/javascript">
+        var fsFieldsContainer = $(".fs-fields");
+        var fsFieldsInit = $("#fs-fields-init");
+        if (fsFieldsInit.height() > fsFieldsContainer.height()) {
+            fsFieldsContainer.height(fsFieldsInit.height());
+    </script>
+
+    <title>
+        Send Prescription Online - Select Your Send Method
+    </title>
+
+    <meta name="description">
+
+    <style>
+        html {
+            font-family: 'sans-serif';
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/content/css/main.css" />
+
+</head>
+<body>
+
+    <div id="wrapper" class="header-">
+
+        <nav class="navbar fixed-top navbar-expand-md">
+            <button class="btn btn-menu btn-reset"><img src="/content/images/menu-icon.png" alt="menu" /></button>
+            <a class="navbar-brand" href="/">
+                <img src="/content/images/logo-black.svg" class="default" alt="black" /><img src="/content/images/logo-active.svg" class="active" alt="black" />
+            </a>
+            <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+
+            <span class="nav-link cart-open d-md-none">
+
+
+
+                Cart <span class="badge badge-count">
+
+                    <div class="ld-module-cart">
+
+                        <span class="ld-module-trigger collapsed" role="button" data-ld-toggle="true" data-toggle="collapse" data-target="#shop-cart" aria-controls="shop-cart" aria-expanded="false">
+                            <span class="ld-module-trigger-icon">
+                                <i class="icon-ld-cart"></i>
+                            </span><!-- /.ld-module-trigger-icon -->
+                            <span class="ld-module-trigger-count">0</span>
+                        </span><!-- /.ld-module-trigger -->
+                        <!-- /.ld-module-dropdown -->
+
+                    </div><!-- /.module-cart -->
+                </span>
+
+
+            </span>
+
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/#shop">Shop</a>
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="/account">
+                            <i class="fa fa-user"></i> My Account
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/Customer/Logout">
+                            Sign Out
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+
+                        <span class="nav-link cart-open">
+
+
+                            Cart <span class="badge badge-count">
+
+                                <div class="ld-module-cart">
+
+                                    <span class="ld-module-trigger collapsed" role="button" data-ld-toggle="true" data-toggle="collapse" data-target="#shop-cart" aria-controls="shop-cart" aria-expanded="false">
+                                        <span class="ld-module-trigger-icon">
+                                            <i class="icon-ld-cart"></i>
+                                        </span><!-- /.ld-module-trigger-icon -->
+                                        <span class="ld-module-trigger-count">0</span>
+                                    </span><!-- /.ld-module-trigger -->
+                                    <!-- /.ld-module-dropdown -->
+
+                                </div><!-- /.module-cart -->
+                            </span>
+
+                        </span>
+
+
+                        <!-- check with sandy how this menu activates-->
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+
+
+
+        <div class="popup-navbar d-flex justify-content-center flex-column">
+            <button class="btn btn-reset btn-menu-close"><img src="/content/images/close.png" alt="icon" /></button>
+            <!-- <img src="/content/images/popup-image.png" alt="image" class="popup-image" /> -->
+            <div class="popup-menu d-flex align-items-end flex-wrap">
+                <div class="w-100 py-3">
+                    <div class="row">
+                        <div class="col-md-3 text-md-right">
+                            <h3>Enhance <br />Club</h3>
+                        </div>
+                        <!-- /.col-md-3 -->
+                        <div class="col-md-9">
+                            <ul class="list-unstyled list-links club-menu">
+                                <li>
+                                    <a class="" href="/">Home</a>
+                                </li>
+                                <li>
+                                    <a class="" href="/about">About us</a>
+
+                                </li>
+                                <li>
+                                    <a class="" href="/how-it-works">How it Works</a>
+
+                                </li>
+                                <li>
+                                    <a class="" href="/blog">Learn</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-md-9 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-3 text-md-right">
+                            <h3>Products</h3>
+                        </div>
+                        <!-- /.col-md-3 -->
+                        <div class="col-md-9">
+                            <ul class="list-unstyled list-links">
+
+                                <li>
+
+                                    <a href="/products/viagra-otc" class="">
+                                        SPIKE<span class="viagra-gradient">VIAGRA</span>
+
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <a href="/products/cialis-otc" class="">
+                                        PLAY<span class="cialis-gradient">CIALIS</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/products/propecia-otc" class="">
+                                        ARISE <span class="finasteride-gradient">FINASTERIDE</span>
+                                    </a>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-md-9 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-md-3 text-md-right">
+                            <h3>Need <br />help?</h3>
+                        </div>
+                        <!-- /.col-md-3 -->
+                        <div class="col-md-9">
+                            <ul class="list-unstyled list-links">
+                                <li>
+
+                                    <a class="" href="/get-in-touch">Get in Touch</a>
+
+                                </li>
+                                <li>
+
+                                    <a class="" href="/terms-and-conditions">Terms &amp; Conditions</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/shipping-and-returns">Shipping &amp; Returns</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/privacy-policy">Privacy Policy</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/faq">FAQs</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.col-md-9 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row popup-social">
+                        <div class="col-md-3 text-md-right">
+                            <h3>Follow us</h3>
+                        </div>
+                        <!-- /.col-md-3 -->
+                        <div class="col-md-9">
+                            <a href="https://www.facebook.com/enhanceclubnow" target="_blank"><img src="/content/images/facebook-yl.svg" alt="icon" /></a>
+                            <a href="http://twitter.com/enhanceclub" target="_blank"><img src="/content/images/twitter-yl.svg" alt="icon" /></a>
+                            <a href="https://www.youtube.com/channel/UCEUd47AnJTV_5K9gaTB2LwA" target="_blank"><img src="/content/images/youtube-yl.svg" alt="icon" /></a>
+                            <a href="http://instagram.com/enhanceclub" target="_blank"><img src="/content/images/instagram-yl.svg" alt="icon" /></a>
+
+
+
+                        </div>
+                        <!-- /.col-md-9 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.m-auto -->
+
+                <div class="popup-social w-100">
+                </div>
+                <!-- /.popup-social -->
+            </div>
+            <!-- /.popup-menu -->
+
+        </div>
+
+
+
+        <!-- /.popup-navbar -->
+
+
+
+
+        <div id="cart-popup">
+
+        </div>
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3">
+                    <div class="documents-section-steps">
+                        <div class="section">
+                            <ul class="steps dark">
+                                <li class="side-nav" data="0" parent="0">
+                                    <a href="#" class="active">
+                                        <span class="counter">1</span>
+                                        <p>
+                                            Upload your ID Documents
+                                        </p>
+                                    </a>
+                                </li>
+                                <li parent="1">
+                                    <a href="#">
+                                        <span class="counter">2</span>
+                                        <p>
+                                            Upload your Prescription
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="documents-section">
+                        <div class="section" id="step1">
+                            <div id="get-in-touch-clip" class="clip"></div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-container">
+                                            <div class="fs-form-wrap" id="fs-form-wrap">
+                                                <form id="myform" action="/get-in-touch/thank-you.html" class="fs-form fs-form-full" autocomplete="off">
+                                                    <div class="overview-item">
+                                                        <h2 class="fs-field-label fs-anim-upper" for="q1">Review answers</h2>
+                                                    </div>
+
+                                                    <ol class="fs-fields">
+                                                        <li id="fs-fields-init" class="form-group upload-documents">
+                                                            <form action="/Order/LoadId" class="fs-form fs-form-full" enctype="multipart/form-data" id="frm_submitId" method="post" name="frm_submitId" role="form">
+                                                                <div class="non-overview-item">
+                                                                    <h3 style="margin-bottom: 30px;" class="fs-field-label fs-anim-upper" for="q1">Upload your documents</h3>
+                                                                </div>
+                                                                <div class="fs-anim-lower">
+                                                                    <p class="small-text fs-anim-lower">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non cursus turpis. Praesent accumsan pretium lectus in luctus. Sed efficitur a sapien sit amet aliquam. Donec ante erat, sodales sit amet ipsum sit amet, dapibus eleifend neque.</p>
+                                                                    <div class="row">
+
+                                                                        <input id="returnUrl" name="returnUrl" type="hidden" value="/customer/upload/1" />
+                                                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+                                                                            <h6 style="margin-top: 30px;">Upload your documents</h6>
+                                                                            <p style="font-size:14px;color:#000;margin-bottom: 20px">To legally prescribe you medication, your doctor will need a photo of your driver’s license or passport.</p>
+                                                                            <p style="font-size:14px;font-weight:bold;color:#000;margin-bottom: 30px">Add a picture of a government issued ID.</p>
+
+                                                                            <span class="file-wrapper" style="font-size: 20px;color:#000">
+                                                                                <input type="file" name="imgInp" id="imgInp" class="uploader custom-uploadid" />
+                                                                                <span class="btn upload-btn" style="margin-bottom: 20px">Upload Picture</span>
+                                                                            </span>
+                                                                            <p style="font-size: 12px;color:#000">Having issues uploading images?</p>
+
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                                                            <img id="img-uploaded" src="https://placehold.it/350x350" alt="your image" style="width: 350px;height: auto; margin-top:40px;">
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="alert-msg" id="status" style="font-size: 12px; color: #f00">
+                                                                    </div>
+
+                                                                </div>
+                                                                <span class="small-text fs-anim-lower">Press “Enter” to proceed</span>
+                                                                <span class="upload-form-nav fs-anim-lower">
+                                                                    <ul>
+                                                                        <li class="next-btn">
+                                                                            <div class="btn btn__yellow btn--rounded" id="1stbutton">Next Step <img src="../../Content/images/arrow-right.svg" /></div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </span>
+                                                            </form></liid="fs-fields-init">
+                                                        <li class="form-group upload-documents">
+                                                            <div class="non-overview-item">
+                                                                <h3 style="margin-bottom: 30px;" class="fs-field-label fs-anim-upper" for="q1">Upload your Presciption documents</h3>
+                                                            </div>
+                                                            <div class="fs-anim-lower">
+                                                                <p class="small-text fs-anim-lower">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non cursus turpis. Praesent accumsan pretium lectus in luctus. Sed efficitur a sapien sit amet aliquam. Donec ante erat, sodales sit amet ipsum sit amet, dapibus eleifend neque.</p>
+                                                                <div class="row">
+
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+
+                                                                        <input id="OrderInvoiceId" name="OrderInvoiceId" type="hidden" value="1" />
+
+                                                                        <input id="returnUrl" name="returnUrl" type="hidden" value="/customer/upload/1" />
+
+                                                                        <h6 style="margin-top: 30px;">Upload your prescription</h6>
+                                                                        <p style="font-size:14px;color:#000;margin-bottom: 20px">To legally prescribe you medication, your doctor will need a photo of your driver’s license or passport.</p>
+                                                                        <p style="font-size:14px;font-weight:bold;color:#000;margin-bottom: 30px">Add a picture of a government issued ID.</p>
+
+                                                                        <span class="file-wrapper" style="font-size: 20px;color:#000">
+                                                                            <input type="file" name="prescriptionImage" id="prescriptionImage" class="uploader custom-uploadpres" />
+                                                                            <span class="btn upload-btn" style="margin-bottom: 20px">Upload Picture</span>
+                                                                        </span>
+                                                                        <p style="font-size: 12px;color:#000">Having issues uploading images?</p>
+
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                                                                        <img id="img-uploadedpres" src="https://placehold.it/350x350" alt="your image" style="width: 350px;height: auto; margin-top:40px;">
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="alert-msg" id="statusPres" style="font-size: 12px; color: #f00">
+                                                                </div>
+                                                            </div>
+                                                            <span class="upload-form-nav fs-anim-lower">
+                                                                <ul>
+                                                                    <li class="next-btn">
+                                                                        <button class="fs-submit" id="fs-submit" type="submit" style="display:inline">Submit</button>
+                                                                    </li>
+                                                                </ul>
+                                                            </span>
+                                                        </li>
+                                                    </ol>
+
+                                                </form><!-- /fs-form -->
+
+                                            </div><!-- /fs-form-wrap -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer w-100">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-3 col-sm-6">
+                            <h3>Enhance Club</h3>
+                            <ul class="list-unstyled list-links">
+                                <li>
+                                    <a class="" href="/">Home</a>
+                                </li>
+
+                                <li>
+                                    <a class="" href="/about">About us</a>
+
+                                </li>
+
+                                <li>
+                                    <a class="" href="/how-it-works">How it Works</a>
+
+                                </li>
+
+                                <li>
+                                    <a class="" href="/blog">Learn</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                        <div class="col-xl-4 col-md-3 col-sm-6">
+                            <h3>Products</h3>
+                            <ul class="list-unstyled list-links">
+                                <li>
+                                    <a href="/products/viagra-otc" class="">
+                                        SPIKE<span class="viagra-gradient">VIAGRA</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/products/cialis-otc" class="">
+                                        PLAY<span class="cialis-gradient">CIALIS</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/products/propecia-otc" class="">
+                                        ARISE <span class="finasteride-gradient">FINASTERIDE</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/products/viagra-otc" class="">
+                                        NOSTRUM<span class="valtrex-gradient">VALTREX</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/products/cialis-otc" class="">
+                                        EASE<span class="staxyn-gradient">STAXYN</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/products/propecia-otc" class="">
+                                        LEVITRA <span class="vandernafil-gradient">VANDERNAFIL</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/products/cialis-otc" class="">
+                                        FRESH<span class="acyclovir-gradient">ACYCLOVIR</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/products/propecia-otc" class="">
+                                        POKE <span class="caverject-gradient">CAVERJECT</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                        <div class="col-lg-2 col-md-3 col-sm-6">
+                            <h3>Need help?</h3>
+                            <ul class="list-unstyled list-links">
+                                <li>
+                                    <a class="" href="/get-in-touch">Get in Touch</a>
+                                </li>
+                                <li>
+                                    <a class="" href="/faq">FAQs</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                        <div class="col-lg-2 ml-auto col-md-3 col-sm-6">
+                            <h4>FOLLOW US</h4>
+                            <ul class="list-unstyled social-media d-flex justify-content-sm-start justify-content-center">
+                                <li><a href="https://www.facebook.com/enhanceclubnow" target="_blank"><img src="/content/images/facebook-icon.svg" alt="icon" /></a></li>
+                                <li><a href="http://twitter.com/enhanceclub" target="_blank"><img src="/content/images/twitter-icon.svg" alt="icon" /></a></li>
+                                <li><a href="https://www.youtube.com/channel/UCEUd47AnJTV_5K9gaTB2LwA" target="_blank"><img src="/content/images/youtube-icon.svg" alt="icon" /></a></li>
+                                <li><a href="http://instagram.com/enhanceclub" target="_blank"><img src="/content/images/instagram-icon.svg" alt="icon" /></a></li>
+
+
+
+                            </ul>
+                        </div>
+                        <!-- /.col-lg-2 col-md-3 col-sm-6 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.footer-content -->
+                <div class="footer-copyright">
+                    <div class="row align-items-end text-md-left text-center">
+                        <div class="col-lg-7 col-md-6 order-md-3">
+                            <ul class="list-unstyled mb-0 d-flex justify-content-center flex-wrap justify-content-md-end">
+
+                                <li>
+
+                                    <a class="" href="/shipping-and-returns">Shipping &amp; Returns</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/terms-and-conditions">Terms &amp; Conditions</a>
+
+                                </li>
+
+                                <li>
+
+                                    <a class="" href="/privacy-policy">Privacy Policy</a>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- /.col-lg-2 col-md-3 -->
+                        <div class="col-lg-2 col-md-3 my-md-0 my-4">
+                            <img src="/content/images/footerlogo.svg" class="img-fluid footer-logo" alt="logo" />
+
+                            <div class="text-center d-sm-none mt-4">
+                                <a href="#wrapper"><img src="/content/images/backtotop.svg" alt="icon" /></a>
+                            </div>
+                        </div>
+                        <!-- /.col-lg-2 col-md-3 -->
+                        <div class="col-lg-3 col-md-3" style="position: relative;top: -3px;">
+                            <p>All Rights Reserved © 2020</p>
+                        </div>
+                        <!-- /.col-lg-2 col-md-3 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.footer-copyright -->
+            </div>
+            <!-- /.container -->
+        </footer>
+
+    </div>
+    <script type="text/javascript" src="/jquery/jquery-3.4.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/classie/1.0.1/classie.min.js" integrity="sha256-6O5DljdGA6AiaEVC/Zn8pNLNbQGparYTI9091fGX64k=" crossorigin="anonymous"></script>
+    <script src="/scripts/fullscreenForm.js"></script>
+    <script src="/scripts/main.js"></script>
+    <script src="/bundles/customJs?v=YxuAoTmAZ6YixWaZUWsHZb6luRObVU4YvmPtjS0lnu41"></script>
+
+
+    <script src="../../Scripts/prescription-upload.js"></script>
+
+</body>
+</html>

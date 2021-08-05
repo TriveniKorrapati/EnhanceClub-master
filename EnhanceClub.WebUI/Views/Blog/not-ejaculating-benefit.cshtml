@@ -1,0 +1,281 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+
+@using EnhanceClub.WebUI.Models
+
+
+
+@model EnhanceClub.Domain.Entities.BlogTable
+
+
+
+
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="https://www.enhanceclub.com/blog/@Model.BlogLink" />
+
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+
+            <meta itemprop="url" content=" https://www.enhanceclub.com/content/images/logo-active.svg">
+
+            <meta itemprop="width" content="800">
+
+            <meta itemprop="height" content="60">
+
+        </div>
+
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+
+
+    </div>
+
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+
+        <meta itemprop="url" content="https://www.enhanceclub.com/content/images/@Model.BlogMainImage" />
+
+        <meta itemprop="height" content="120">
+
+        <meta itemprop="width" content="120">
+
+    </div>
+
+    <div class="blog-post">
+
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+
+        </div>
+
+        <div class="post-main-section">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <div class="post-content-section">
+
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+
+
+
+                            <ul class="breadcrumbs">
+
+                                <li>
+
+
+
+
+
+
+
+                                    <a href="/" title="Home">Home</a>
+
+
+
+
+
+                                    <a href="/blog" title="Blog">Blog</a>
+
+
+
+
+
+                                    "@Model.BlogMetaTitle”
+
+
+
+
+
+                                </li>
+
+                            </ul>
+
+
+
+                            <script type="application/ld+json">
+
+                                {
+
+                                "@@context": "https://schema.org",
+
+                                "@@type": "BreadcrumbList",
+
+                                "itemListElement": [{
+
+                                "@@type": "ListItem",
+
+                                "position": 1,
+
+                                "name": "Home",
+
+                                "item": "https://www.enhanceclub.com"
+
+                                },{
+
+                                "@@type": "ListItem",
+
+                                "position": 2,
+
+                                "name": "Blog",
+
+                                "item": "https://www.enhanceclub.com/blog"
+
+                                },{
+
+                                "@@type": "ListItem",
+
+                                "position": 3,
+
+                                "name": "@@Model.BlogMetaTitle "
+
+                                }]
+
+                                }
+
+                            </script>
+
+
+
+                            <h1 itemprop="headline">@Model.BlogHeadline</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+
+
+                            <div itemprop="articlebody">
+
+
+
+
+
+                                <p>We’ve all heard of “No Fap November” and the idea of not masturbating or having intercourse for a specific amount of time, but what are the benefits of not ejaculating and partaking in a sex-ban? It Is said that abstaining from sexual activity and ejaculation will make you more focused, increase testosterone levels, and even increase the intensity of your next ejaculation. </p>
+
+                                <h5> BENEFITS OF NOT EJACULATING </h5>
+
+                                <p>
+                                    When it comes to the benefits of not ejaculating, you can be sure that semen retention is part of the conversation. Did you know that when a man doesn’t ejaculate for long periods of time their semen is broken down and reabsorbed into the body? Nutrients in the sperm are recycled back into the body and new sperm are produced.
+
+                                    <br><br>Some men may even claim that their memory has improved during semen retention. The benefits of not ejaculating can be found in other aspects such as better focus/concentration, increased self-confidence, clear skin, increased muscle mass, and improved spiritual health. Some spiritual health improvements come in the form of improved sense of purpose, deeper emotional bonding with your partner, and greater harmony.
+                                </p>
+
+                                <h5>IMPROVED SEXUAL CONTINENCE </h5>
+
+                                <p> Through semen retention and sexual continence, men can greatly improve self-control and restraint. The act of abstaining from ejaculation will do several benefits including the act of edging or stop and start method to gaining pleasure. Edging will increase the intensity of orgasm once you finally do allow yourself it. </p>
+
+                                <div class="cta-box mb-3">
+
+                                    <div class="cta-image">
+
+                                        <img src="/content/images/products/product-item-generic-13412.png" alt="">
+
+                                    </div>
+
+                                    <div class="cta-text">
+
+                                        <h5 class="mb-3">Start being the man you want to be!<br>Check out our products.</h5>
+
+                                        <a href="/products" class="btn btn__secondary btn--rounded ">Visit our online store</a>
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <h5> BALANCED TESTOSTERONE LEVELS </h5>
+
+                                <p> Another one of the benefits of not ejaculating for men can be found for those that are looking to increase their testosterone levels. Low testosterone levels can have a negative impact on mood, energy levels, sex drive, and overall day-to-day performance. It can be a leading cause towards loss of muscle mass, <a href="https://www.enhanceclub.com/blog/common-causes-ED">erectile dysfunction</a>, and a higher body fat percentage. </p>
+
+
+
+                                <h5> ARE THERE RISKS ASSOCIATED WITH NOT EJACULATING?</h5>
+
+                                <p>
+                                    There are no known adverse effects to non-ejaculation. Because this is non-threatening, it can be worth a shot for men looking to increase their focus and life force in one area or another. Athletes often make use of the benefits of not <a href="https://bryantcohen.medium.com/4-supernatural-benefits-of-abstinence-3a590ae4d39a">ejaculating before an athletic competition</a> to increase their focus and overall performance.
+
+                                    <br><br> The key to partaking in semen retention is to not take it all too seriously. If you feel pain or discomfort in any way during this practice, then consider ejaculating and trying again later.
+
+                                    <br><br> Here’s a recap of all the benefits of not ejaculating and what you can look forward to with just a bit of self-discipline:
+                                </p>
+                                <p>
+
+                                    <ul>
+
+                                        <li>Increased sexual stamina (ability to have sex for longer durations of time)</li>
+
+                                        <li> Potential for multiple orgasms (you may be able to have many non-ejaculatory orgasms in a row without a refractory period) </li>
+
+                                        <li> More self-control and body awareness (because of the practice involved in learning to orgasm without ejaculation) </li>
+
+                                        <li> Better quality sperm (more sperm in your next ejaculation) </li>
+
+                                        <li> Balanced/increased testosterone level </li>
+
+                                        <li> <a href="https://www.mindbodygreen.com/0-4366/Sexual-Energy-and-Creative-Genius.html">Stronger life force energy</a> (some spiritual practices, like tantra, believe semen retention has energetic benefits) </li>
+
+                                        <li> Greater emotional intimacy between you and your partner </li>
+
+                                        <li> Increased focus towards mental and physical activities </li>
+
+                                    </ul>
+                                </p>
+                                <p>
+                                    <br><br> Just the increased emotional intimacy between you and your partner are enough to be of value to try the benefits of not ejaculating out. It could even be of value to try this with other male friends of yours that are also in relationships or looking for a deeper connection with someone they have interest in as a pact or otherwise competition to see who can go the longest abstaining from ejaculation.
+
+                                    <br><br> Similarly, if you are on a sports team, with the knowledge you have gained from the above context, you and your teammates could try this to see how this practice benefits or changes your stamina and overall performance.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+
+                        <h2>@ViewBag.NextBlogTitle </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div> 

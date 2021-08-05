@@ -1,0 +1,76 @@
+﻿@using EnhanceClub.WebUI.Models
+
+@using EnhanceClub.WebUI.Models
+@model System.Collections.Generic.IEnumerable<EnhanceClub.Domain.Entities.PatientProfile>
+
+@foreach (var i in "1")
+{
+    <div class="content-container container home-content">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Checkout</h1>
+                <div class="checkout">
+                    @Html.Partial("CheckoutMenu", new CheckoutMenuViewModel { TabName = "profile", CartHasRx = false })
+                    <h2 class="text-center">Patient Profile List</h2>
+                    <p class="text-center">Please review and edit your patient profiles as needed.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var thisProfile in @Model)
+            {
+                <div class="col-md-6">
+                    <div class="pet-profile-list-item">
+                        <div class="pet-name highlight">
+                            <b>
+                                @thisProfile.PatientProfileFirstName
+                            </b>
+                        </div>
+                        <div class="pet-details m-b">
+                            <b>
+                                Sex: @thisProfile.PatientProfileSex
+                            </b>
+                            <br>
+                            <b>
+                                Date of Birth: @thisProfile.PatientProfileBirthDate.ToString("dd-MMM-yy")
+                            </b>
+                            <br>
+                            <b>
+                                Weight: @thisProfile.PatientProfileWeightLb lbs
+                            </b>
+                            <br>
+                            <b>
+                                Allergies: @thisProfile.PatientProfileAllergy
+                            </b>
+                            <br>
+                            <b>
+                                Medical History: @thisProfile.PatientProfileMedicalHistory
+                            </b>
+                            <br>
+
+
+                            @Html.ActionLink("Edit Patient Profile", "Checkout", "Order", new { @step = "1.5", patientProfileId = thisProfile.PatientProfileId }, new { @class = "btn btn-secondary btn-small" })
+
+                            @Html.ActionLink("Delete", "delProfile", "Customer", new { patientProfileId = thisProfile.PatientProfileId }, new { @class = "btn btn-danger btn-small", onclick = "return confirm('Are you sure you wish to delete this profile?');" })
+
+                            @*<a href="#myself##xfa.edit_patient#patientprofile_id/#patientprofile_id#.htm" class="btn btn-primary btn-small">Edit Patient Profile</a>*@
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+        <div class="row">
+           
+                <div class="col-md-12 text-right text-center-mobile">
+                    @Html.ActionLink("Add New Patient Profile", "Checkout", "Order", new { @step = "5" }, new { @class = "btn btn-secondary" })
+                    @Html.ActionLink("Proceed To Order Review", "Checkout", "Order", new { @step = "2" }, new { @class = "btn btn-primary" })
+                </div>
+            
+        </div>
+
+    </div>
+
+} 

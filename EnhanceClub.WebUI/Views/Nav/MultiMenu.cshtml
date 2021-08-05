@@ -1,0 +1,121 @@
+﻿@using System.Resources
+@using EnhanceClub.Domain.Entities
+@using EnhanceClub.Domain.Entities
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@model IEnumerable<EnhanceClub.Domain.Entities.MenuTab>
+
+
+                      @*current-menu-item*@
+                      <div class="collapse navbar-collapse" id="main-header-collapse">
+
+                          <ul id="primary-nav" class="main-nav nav align-items-lg-stretch justify-content-lg-center" data-submenu-options='{ "toggleType":"fade", "handler":"mouse-in-out" }'>
+                              @foreach (var tab in Model)
+                              {
+                                  MenuTab menuTab = (MenuTab)tab;
+                                  if (menuTab.TabItems.Count() == 1)
+                                  {
+                                      
+                                      <li>
+                                          @{
+                                      var thisTab = tab.TabItems.FirstOrDefault();
+                                          }
+                                          <a href="@Url.Action(thisTab.LinkAction, thisTab.LinkController, null)">
+                                              <span class="link-icon"></span>
+                                              <span class="link-txt">
+                                                  <span class="link-ext"></span>
+                                                  <span class="txt">
+                                                      @Html.Raw(thisTab.LinkText)
+                                                  </span>
+                                              </span>
+                                          </a>
+                                      </li>
+                                  }
+                                  else
+                                  {
+                                    <li class="menu-item-has-children megamenu">
+                                        <a href="/prescription">
+                                            <span class="link-icon"></span>
+                                            <span class="link-txt">
+                                                <span class="link-ext"></span>
+                                                <span class="txt">
+                                                    @tab.TabHeader
+                                                    <span class="submenu-expander">
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        <ul class="nav-item-children">
+                                            <li>
+                                                <div class="container megamenu-container">
+                                                    <div class="vc_row row megamenu-inner-row bg-white p-0">
+                                                        <div class="container ld-container">
+                                                            <div class="row ld-row">
+
+                                                                <div class="megamenu-column col-md-3 py-md-3 px-md-4">
+                                                                    <div class="megamenu-column-inner pl-md-4 py-md-4">
+                                                                        <a href="/prescription" class="btn btn-solid text-uppercase btn-md border-none lh-2 font-weight-bold ltr-sp-2 mb-md-3 mb-10">
+                                                                            <span>
+                                                                                <span class="btn-txt">@tab.TabHeader</span>
+                                                                                <!-- <span class="btn-icon">
+                                                                                    <i class="fa fa-angle-right"></i>
+                                                                                </span> -->
+                                                                            </span>
+                                                                        </a>
+                                                                        <!-- <h3 class="megamenu-heading font-size-12 text-uppercase ltr-sp-175 mb-3">Categories</h3> -->
+                                                                        <ul class="lqd-custom-menu reset-ul font-size-15 lh-2 ltr-sp-025 font-weight-medium">
+                                                                            @foreach (var thisMenu in tab.TabItems)
+                                                                            {
+                                                                                <li>
+                                                                                    <a href="@Url.Action(thisMenu.LinkAction, thisMenu.LinkController, new { searchTerm = thisMenu.ProductSearchTerm })">
+                                                                                        <i class="fa fa-angle-right mr-2"></i>@Html.Raw(thisMenu.LinkText)
+                                                                                    </a>
+                                                                                </li>
+
+                                                                            }
+                                                                        </ul>
+                                                                    </div><!-- /.megamenu-column-inner -->
+                                                                </div><!-- /.megamenu-column -->
+
+                                                                <div class="megamenu-column col-md-3 bg-cover bg-center" data-responsive-bg="true">
+                                                                    <img class="invisible" src="./demo/misc/megamenu-img-1.jpg" alt="Megamenu Image">
+                                                                </div><!-- /.megamenu-column -->
+
+                                                                <div class="megamenu-column col-md-3" style="background-color: #f0f0f0;">
+                                                                    <div class="megamenu-column-inner py-md-4 px-md-4">
+                                                                        <h3 class="font-size-30 lh-115">Why Choose Canada Pharmacy.ca</h3>
+                                                                        <p class="mb-md-6">
+                                                                            <span class="font-size-15 lh-175 text-fade-dark-07">• Great Prices</span><br>
+                                                                            <span class="font-size-15 lh-175 text-fade-dark-07">• Secure Checkout</span><br>
+                                                                            <span class="font-size-15 lh-175 text-fade-dark-07">• Fast Shipping</span>
+                                                                        </p>
+                                                                        <a href="/prescription" class="btn btn-solid text-uppercase btn-md border-none lh-2 font-weight-bold ltr-sp-2">
+                                                                            <span>
+                                                                                <span class="btn-txt">@tab.TabHeader</span>
+                                                                                <span class="btn-icon">
+                                                                                    <i class="fa fa-angle-right"></i>
+                                                                                </span>
+                                                                            </span>
+                                                                        </a>
+                                                                    </div><!-- /.megamenu-column-inner -->
+                                                                </div><!-- /.megamenu-column -->
+
+                                                            </div><!-- /.row ld-row -->
+                                                        </div><!-- /.container ld-container -->
+                                                    </div><!-- /.vc_row -->
+                                                </div><!-- /.megamenu-container -->
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+
+
+                                  }
+
+
+
+                              }
+                          </ul>
+
+                      </div><!-- /#main-header-collapse -->

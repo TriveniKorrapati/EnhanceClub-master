@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description>Scenario : Open ‘How it works’ from Menu
+
+Given: User is on Menu Page
+
+When: User clicks on how it works 
+
+Then: It opens the 'How it works' page</description>
+   <name>How It Works From Menu</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>00b8391b-84bc-4224-ad74-11f308ee1c60</testCaseGuid>
+</TestCaseEntity>

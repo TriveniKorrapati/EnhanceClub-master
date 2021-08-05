@@ -1,0 +1,15 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@{ string urlaction = @ViewContext.RouteData.Values["Controller"] + "/" + @ViewContext.RouteData.Values["action"];}
+
+
+@switch (urlaction)
+{
+    case "Home/Index":
+
+        <meta name="description" content="@SiteConfigurationsWc.StorefrontName is an online Canadian Pharmacy which delivers medication directly to your door. Offering the best prices on generic and brand medications.">
+
+        break;
+}
+
+

@@ -1,0 +1,14 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@using EnhanceClub.WebUI.Infrastructure.Utility
+@{ string urlaction = @ViewContext.RouteData.Values["Controller"] + "/" + @ViewContext.RouteData.Values["action"];}
+
+            
+    @switch (urlaction)
+    {
+        case "Home/Index":
+            @Html.Raw("Canadian Pharmacy - Online Canada Pharmacy | " + SiteConfigurationsWc.StorefrontUrl)
+            break;
+
+    }
+ 
+   

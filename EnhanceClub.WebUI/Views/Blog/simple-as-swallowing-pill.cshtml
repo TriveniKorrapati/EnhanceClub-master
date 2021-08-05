@@ -1,0 +1,123 @@
+﻿@using EnhanceClub.WebUI.Infrastructure.Utility
+@model EnhanceClub.Domain.Entities.BlogTable
+
+<div itemscope itemtype=" http://schema.org/BlogPosting">
+
+    <meta itemprop="name" content="@Model.BlogMetaTitle" />
+    <meta itemscope itemprop="mainEntityOfPage" itemtype=https://schema.org/WebPage itemid="@SiteConfigurationsWc.CdnUrl/blog/@Model.BlogLink" />
+    <div itemprop="author" itemscope itemtype=http://schema.org/Person>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+    </div>
+    <meta itemprop="datePublished" content="@Model.BlogDateCreated">
+    <meta itemprop="dateModified" content="@Model.BlogLastModified">
+    <div itemprop="publisher" itemscope itemtype=https://schema.org/Organization>
+        <div itemprop="logo" itemscope itemtype=https://schema.org/ImageObject>
+            <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/logo-active.svg">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="60">
+        </div>
+        <meta itemprop="name" content="@SiteConfigurationsWc.StorefrontName">
+
+    </div>
+    <div itemprop="image" itemscope itemtype=https://schema.org/ImageObject>
+        <meta itemprop="url" content="@SiteConfigurationsWc.CdnUrl/content/images/@Model.BlogMainImage" />
+        <meta itemprop="height" content="120">
+        <meta itemprop="width" content="120">
+    </div>
+    <div class="blog-post">
+        <div class="banner-section d-flex align-items-end" style="background-image: url('../../content/images/blog/@Model.BlogMainImage')">
+        </div>
+        <div class="post-main-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="post-content-section">
+                            <a href="/blog" class="back-to-list"> &lt; Back</a>
+                            @Html.Partial("_breadcrumb")
+                            <h1 itemprop="headline">@Html.Raw(@Model.BlogHeadline)</h1>
+                            @Html.Partial("_Citation_JodhvirSarai")
+
+                            <div itemprop="articleBody">
+                                <h5> Fact or Fiction?</h5>
+                                <p>
+                                    Old dogs can surely learn new tricks, so there’s no reason we can’t do the same. At least when it comes to satisfying our partners in bed, that is. Besides, the length of the show can easily be overlooked if the performance was amazing! Taking ED meds won’t suddenly make you a better lover, but it can throw off the covers and let you see the inner-workings of how to perform better.
+                                </p>
+
+
+                                <h5> Confidence is Key!</h5>
+                                <p>
+                                    Being great in bed is about feeling great in bed. Confidence helps fuel the pleasures we give and seek. Male enhancement drugs, like <a href="@Url.Action("ProductDetail",
+                                                                                                                                                                        "Product" ,
+                                                                                                                                                                        new {searchTerm="viagra" })" class="">
+                                        Viagra
+
+                                    </a> and  <a href="@Url.Action("ProductDetail",
+                                             "Product" ,
+                                             new {searchTerm="cialis" })" class="">
+                                        Cialis,
+
+                                    </a>  don’t improve your sex skills, but erectile dysfunction medication can give you the confidence to want to improve. Knowing you can perform better sexually when you and your partner feel ready, is such a confidence booster. No one wants to disappoint their lover because they can’t perform the way they both want.
+                                </p>
+                                <p>
+                                    Taking ED medication doesn’t suddenly improve your sexual experience or the way you maneuver your magic stick. Feeling like you can take ahold of the situation and pleasure everyone involved, helps drive the desire for even more sexual experiences. That, in turn, may fuel a desire to experience new and amazing things.
+                                </p>
+                                @Html.Partial("_blogButton")
+                                <h5> Communication is the Second Key!</h5>
+                                <p>
+                                    Understanding who you are and what you want will help you communicate with your partner. Open communication can help both of you explore new ideas and create more pleasurable experiences. The key is feeling like you can always be ready when you want to be.
+                                </p>
+                                <p>
+                                    Making someone else feel good can be a pleasurable reward in itself. Displaying confidence that you are looking and feeling your best, and putting your best self forward, gets noticed too. People want to be around other people that make them feel valuable, wanted, and desired. Knowing that you can deliver when the time comes certainly helps keep insecurities at bay.
+                                </p>
+                                <p>
+                                    Feeling confident that you can easily go out and experience what it’s like to be more than average is an amazing experience. It’s a gift older generations never had, and it’s one we can all take with us into the future. Most men are going to deal with performance issues in bed at some point throughout their lives. Enhance Club won’t necessarily make you a better lover. What it can do is help guide you on the right path, <a href="https://www.healthline.com/health/healthy-sex/improve-sex-life-couples#overnight-getaway"> with the right tools, to enhance you in the other ways you want</a> . That, in part, will help make you a better lover.
+                                </p>
+                                <h5>Lasting Longer Helps You Discover Unlocked Potential</h5>
+                                <p>
+                                    Taking Viagra and Cialis won’t improve your sexual techniques right off the bat. They will, however, give you the chance to spend as much time as you want on the “practice court”, so to speak. You need to give yourself a chance to discover ways that you can enhance your own pleasure, as you discover ways to enhance others'.
+                                </p>
+                                <p>
+                                    Using your head to figure out ways to keep your other head in the game is a winning way to do it. Once you figure out the ways that you would like to enhance your life, doing it for others and letting them reap the rewards as well will always be worth it!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="post-content-section d-flex align-items-center">
+                        <div class="blog-share-title">
+                            Share
+                        </div>
+                        <div class="blog-sharing">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <svg width="15" height="28" viewBox="0 0 15 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M11.6676 4.65434H14.2735V0.214219C13.8239 0.153714 12.2777 0.0175781 10.477 0.0175781C6.71986 0.0175781 4.1461 2.32956 4.1461 6.57886V10.4896H0V15.4533H4.1461V27.9429H9.22941V15.4544H13.2078L13.8394 10.4907H9.22822V7.07104C9.22941 5.63638 9.62427 4.65434 11.6676 4.65434Z" fill="#170000" />
+                                        </svg>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M29.4955 3.03762C28.4098 3.50805 27.2529 3.81987 26.0468 3.97128C27.2876 3.23949 28.2347 2.08954 28.6799 0.703466C27.523 1.38479 26.2457 1.86604 24.8844 2.1346C23.786 0.979238 22.2203 0.263672 20.5124 0.263672C17.1987 0.263672 14.5309 2.92046 14.5309 6.17746C14.5309 6.64609 14.571 7.0967 14.6696 7.52568C9.69353 7.28595 5.29045 4.93017 2.33256 1.34153C1.81616 2.22652 1.51325 3.23949 1.51325 4.32996C1.51325 6.37753 2.58072 8.19258 4.17189 9.2434C3.21025 9.22537 2.26687 8.9496 1.46763 8.51521C1.46763 8.53324 1.46763 8.55667 1.46763 8.5801C1.46763 11.4532 3.54236 13.8396 6.26303 14.3893C5.77583 14.5209 5.24483 14.584 4.69376 14.584C4.31057 14.584 3.92373 14.5624 3.5606 14.4831C4.33612 16.8244 6.53675 18.5458 9.15341 18.6016C7.11701 20.1752 4.53136 21.1232 1.73222 21.1232C1.24137 21.1232 0.770586 21.1016 0.299805 21.0421C2.95114 22.731 6.09333 23.6953 9.48186 23.6953C20.496 23.6953 26.5176 14.6831 26.5176 6.87139C26.5176 6.61004 26.5085 6.3577 26.4957 6.10716C27.6836 5.27444 28.6817 4.23443 29.4955 3.03762Z" fill="#170000" />
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+        <div class="post-bottom-section" style="background-image: url(@ViewBag.NextImageUrl)">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <a href="@Url.Action("BlogSelector", "Blog", new { BlogUrl = @ViewBag.NextBlogUrl })">Read Next</a>
+                        <h2>@ViewBag.NextBlogTitle</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,62 @@
+﻿@using EnhanceClub.WebUI.Models
+@using System.Web.Optimization
+@model EnhanceClub.WebUI.Models.CustomerProfileViewModel
+
+@section PageScripts {
+    @Scripts.Render("~/bundles/customer-profile-validation")
+}
+
+<div class="dashboard-page">
+    <!-- Start of the Top Clip Path -->
+    @*<div class="top-clip">
+            <div class="dash-top-clip">
+            </div>
+        </div>*@
+    <!-- End of the Top Clip Path -->
+
+    <div class="section top-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 hidden-md">
+                    <h1 class="heading text-uppercase">EDIT PROFILE</h1>
+                </div>
+            </div>
+            <div class="row">
+
+                <!-- Start of Sidebar -->
+                @Html.Partial("AccountOptions", "edit-patient-profile", new ViewDataDictionary { { "CustomerCreditAvaliable", ViewBag.CustomerCredit }, { "IsProfileShow", ViewBag.IsProfileShow } })
+                <!-- End of Sidebar -->
+                <!-- Start of Main Section -->
+                <div class="col-12 col-md-12 col-lg-9 col-xl-9 order-2 order-lg-1">
+                    <div class="row">
+                        <div class="col-12 col-md-12 col-lg-9 col-xs-9">
+                            <h1 class="heading visible-md text-uppercase">EDIT PROFILE</h1>
+                        </div>
+                        <div class="col-12 col-md-12 col-lg-3 col-xs-3">
+                            <!-- Blank Space -->
+                        </div>
+                    </div>
+                    <div class="form-container">
+
+                        <div class="row">
+                            <div class="col-12 col-xl-9">
+                                @using (Html.BeginForm("UpdateProfile", "Customer", null, FormMethod.Post, new { @class = "profile-form", @role = "form", @id = "edit", @name = "edit" }))
+                                {
+                                    @Html.Hidden("PatientProfileId", @Model.PatientProfile.PatientProfileId)
+                                    @Html.Hidden("PatientProfileActive", @Model.PatientProfile.PatientProfileActive)
+
+                                    @Html.Hidden("CustomerLastIp", "127.0.0.1")
+                                    <input type="hidden" value="@ViewBag.ReturnUrl" name="returnUrl" />
+                                    @Html.Partial("_PatientProfile")
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of Main Section -->
+
+            </div>
+        </div>
+    </div>
+</div>
