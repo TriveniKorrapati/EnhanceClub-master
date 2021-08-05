@@ -12,8 +12,6 @@
 *.sln.docstates
 *.sln
 *.csproj
-/**/web.config
-web.config
 web.Debug.config
 web.QA.config
 web.Production.config
